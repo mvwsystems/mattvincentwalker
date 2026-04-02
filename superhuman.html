@@ -578,62 +578,13 @@ section {
   position: relative;
   margin: 0 auto;
   width: 100%;
-  max-width: 860px;
+  max-width: 900px;
 }
 .loops-visual svg {
   width: 100%;
   height: auto;
   display: block;
   overflow: visible;
-}
-.loop-ring {
-  fill: none;
-  stroke-width: 1;
-  transition: stroke 0.3s, stroke-width 0.3s, opacity 0.3s;
-  cursor: pointer;
-}
-.loop-ring.outer { stroke: var(--stone); }
-.loop-ring.mid   { stroke: var(--stone-light); }
-.loop-ring.inner { stroke: var(--amber-dim); }
-.loop-ring:hover,
-.loop-ring.active { stroke-width: 1.5; }
-.loop-ring.outer:hover, .loop-ring.outer.active { stroke: var(--muted); }
-.loop-ring.mid:hover,   .loop-ring.mid.active   { stroke: var(--warm-gray); }
-.loop-ring.inner:hover, .loop-ring.inner.active  { stroke: var(--amber); }
-
-.loop-dot-el {
-  transition: r 0.3s, opacity 0.3s;
-}
-.loop-connector {
-  stroke-width: 1;
-  stroke-dasharray: 3 4;
-  opacity: 0.4;
-  transition: opacity 0.3s, stroke 0.3s;
-}
-.loop-label-group {
-  cursor: pointer;
-  transition: opacity 0.3s;
-}
-.loop-label-group:not(.active) { opacity: 0.55; }
-.loop-label-group.active       { opacity: 1; }
-.loop-label-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  fill: var(--amber);
-}
-.loop-label-name {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
-  fill: var(--cream);
-}
-.loop-label-time {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  fill: var(--muted);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -970,8 +921,7 @@ footer .footer-copy {
   .patterns-grid { grid-template-columns: repeat(2, 1fr); }
   .protocols-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .loop-label-name { font-size: 14px; }
-  .loop-label-tag  { font-size: 8px; }
+  .loops-visual { max-width: 100%; }
 
   .stack-row { grid-template-columns: 40px 1fr; gap: 16px; }
   .stack-row .row-label { display: none; }
@@ -1143,51 +1093,75 @@ footer .footer-copy {
       <h2>The Three-Loop <span class="amber">Hierarchy</span></h2>
       <p class="desc" style="margin-left: auto; margin-right: auto;">Three nested feedback loops with explicit inter-loop governance and reconfiguration cascade dynamics. Loop 3 sets the reference signal. Loop 2 configures the environment. Loop 1 stabilizes state. When Loop 3 updates, the cascade ripples down.</p>
     </div>
-    <div class="loops-visual reveal-scale" id="loopsVisual">
-      <svg id="loopsSvg" viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg">
-        <!-- Rings -->
-        <circle class="loop-ring outer" id="ringOuter" cx="430" cy="240" r="210"/>
-        <circle class="loop-ring mid"   id="ringMid"   cx="430" cy="240" r="136"/>
-        <circle class="loop-ring inner" id="ringInner" cx="430" cy="240" r="68"/>
-
-        <!-- Orbital dots -->
-        <circle class="loop-dot-el" id="dotOuter" r="5" fill="#c8935a" filter="url(#glow)"/>
-        <circle class="loop-dot-el" id="dotMid"   r="5" fill="#c8935a" filter="url(#glow)"/>
-        <circle class="loop-dot-el" id="dotInner" r="5" fill="#c8935a" filter="url(#glow)"/>
-
-        <!-- Connector lines -->
-        <line class="loop-connector" id="lineOuter" stroke="#c8935a"/>
-        <line class="loop-connector" id="lineMid"   stroke="#c8935a"/>
-        <line class="loop-connector" id="lineInner" stroke="#c8935a"/>
-
-        <!-- Outer label — right side -->
-        <g class="loop-label-group active" id="labelOuter" data-ring="outer">
-          <text class="loop-label-tag"  id="tagOuter"  x="670" y="148">Slow Loop</text>
-          <text class="loop-label-name" id="nameOuter" x="670" y="172">Consequence Feedback</text>
-          <text class="loop-label-time" id="timeOuter" x="670" y="188">Months to Years</text>
-        </g>
-
-        <!-- Mid label — left side -->
-        <g class="loop-label-group" id="labelMid" data-ring="mid">
-          <text class="loop-label-tag"  id="tagMid"  x="190" y="332" text-anchor="end">Mid Loop</text>
-          <text class="loop-label-name" id="nameMid" x="190" y="356" text-anchor="end">Structural Control</text>
-          <text class="loop-label-time" id="timeMid" x="190" y="372" text-anchor="end">Days to Weeks</text>
-        </g>
-
-        <!-- Inner label — right side -->
-        <g class="loop-label-group" id="labelInner" data-ring="inner">
-          <text class="loop-label-tag"  id="tagInner"  x="520" y="228">Fast Loop</text>
-          <text class="loop-label-name" id="nameInner" x="520" y="252">State Regulation</text>
-          <text class="loop-label-time" id="timeInner" x="520" y="268">Seconds to Hours</text>
-        </g>
-
-        <!-- Glow filter -->
+    <div class="loops-visual reveal-scale">
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
         <defs>
-          <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
+          <!-- Amber gradient for inner arc -->
+          <linearGradient id="arcGradInner" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6b4f2a" stop-opacity="0"/>
+            <stop offset="40%" stop-color="#c8935a" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#c8935a" stop-opacity="0.3"/>
+          </linearGradient>
+          <linearGradient id="arcGradMid" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2e2a22" stop-opacity="0"/>
+            <stop offset="40%" stop-color="#4a4640" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#4a4640" stop-opacity="0.3"/>
+          </linearGradient>
+          <linearGradient id="arcGradOuter" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#161412" stop-opacity="0"/>
+            <stop offset="40%" stop-color="#2e2a22" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#2e2a22" stop-opacity="0.3"/>
+          </linearGradient>
         </defs>
+
+        <!-- ── LOOP 3 — outer arc, bottom half ── -->
+        <!-- Arc: cx=450, cy=0, r=310 → bottom semicircle visible in viewBox -->
+        <path d="M 140 0 A 310 310 0 0 1 760 0" fill="none" stroke="url(#arcGradOuter)" stroke-width="1" opacity="0.6"/>
+        <!-- tick at apex -->
+        <line x1="450" y1="-310" x2="450" y2="-295" stroke="#2e2a22" stroke-width="1" transform="translate(0,310)"/>
+        <!-- left end cap dot -->
+        <circle cx="140" cy="0" r="3" fill="#2e2a22"/>
+        <!-- right end cap dot -->
+        <circle cx="760" cy="0" r="3" fill="#2e2a22"/>
+        <!-- horizontal baseline -->
+        <line x1="80" y1="0" x2="820" y2="0" stroke="#161412" stroke-width="1" opacity="0.4"/>
+        <!-- label block — left -->
+        <text x="80" y="-18" fill="#4a4640" font-size="8" letter-spacing="0.22em" text-anchor="start">LOOP 03</text>
+        <text x="80" y="20" fill="#d4cec4" font-size="20" font-family="'Cormorant Garamond',serif" font-weight="300" font-style="italic" text-anchor="start">Consequence Feedback</text>
+        <text x="80" y="38" fill="#7a756d" font-size="8" letter-spacing="0.14em" text-anchor="start">MONTHS — YEARS</text>
+        <!-- right index -->
+        <text x="820" y="20" fill="#2e2a22" font-size="48" font-family="'Cormorant Garamond',serif" font-weight="300" opacity="0.25" text-anchor="end">3</text>
+
+        <!-- ── LOOP 2 — mid arc ── -->
+        <path d="M 250 80 A 200 200 0 0 1 650 80" fill="none" stroke="url(#arcGradMid)" stroke-width="1" opacity="0.8"/>
+        <circle cx="250" cy="80" r="3" fill="#4a4640"/>
+        <circle cx="650" cy="80" r="3" fill="#4a4640"/>
+        <line x1="190" y1="80" x2="710" y2="80" stroke="#232019" stroke-width="1" opacity="0.35"/>
+        <text x="190" y="62" fill="#4a4640" font-size="8" letter-spacing="0.22em">LOOP 02</text>
+        <text x="190" y="100" fill="#d4cec4" font-size="20" font-family="'Cormorant Garamond',serif" font-weight="300" font-style="italic">Structural Control</text>
+        <text x="190" y="118" fill="#7a756d" font-size="8" letter-spacing="0.14em">DAYS — WEEKS</text>
+        <text x="710" y="100" fill="#232019" font-size="48" font-family="'Cormorant Garamond',serif" font-weight="300" opacity="0.3" text-anchor="end">2</text>
+
+        <!-- ── LOOP 1 — inner arc, amber ── -->
+        <path d="M 340 170 A 110 110 0 0 1 560 170" fill="none" stroke="url(#arcGradInner)" stroke-width="1.5"/>
+        <circle cx="340" cy="170" r="3" fill="#c8935a"/>
+        <circle cx="560" cy="170" r="3" fill="#c8935a"/>
+        <!-- amber glow line -->
+        <line x1="290" y1="170" x2="610" y2="170" stroke="#6b4f2a" stroke-width="1" opacity="0.3"/>
+        <text x="290" y="152" fill="#c8935a" font-size="8" letter-spacing="0.22em">LOOP 01</text>
+        <text x="290" y="192" fill="#eae4d8" font-size="20" font-family="'Cormorant Garamond',serif" font-weight="300" font-style="italic">State Regulation</text>
+        <text x="290" y="210" fill="#7a756d" font-size="8" letter-spacing="0.14em">SECONDS — HOURS</text>
+        <text x="612" y="192" fill="#6b4f2a" font-size="48" font-family="'Cormorant Garamond',serif" font-weight="300" opacity="0.45" text-anchor="start">1</text>
+
+        <!-- ── cascade arrow — vertical center ── -->
+        <line x1="450" y1="30" x2="450" y2="145" stroke="#4a4640" stroke-width="1" stroke-dasharray="2 4" opacity="0.4"/>
+        <polygon points="450,152 446,142 454,142" fill="#4a4640" opacity="0.4"/>
+        <text x="458" y="95" fill="#4a4640" font-size="7" letter-spacing="0.18em" opacity="0.6">CASCADE</text>
+
+        <!-- ── bottom rule ── -->
+        <line x1="80" y1="260" x2="820" y2="260" stroke="#161412" stroke-width="1" opacity="0.5"/>
+        <text x="80" y="278" fill="#4a4640" font-size="7" letter-spacing="0.3em">SUPERHUMAN OS — CYBERNETIC CONTROL ARCHITECTURE</text>
+        <text x="820" y="278" fill="#4a4640" font-size="7" letter-spacing="0.15em" text-anchor="end">MVW © 2026</text>
       </svg>
     </div>
   </div>
@@ -1505,64 +1479,6 @@ document.querySelectorAll('a, .level-card, .point-cell, .pattern-card, .proto-ca
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
 
-// ═══ THREE LOOPS — ORBITAL ANIMATION ═══
-(function() {
-  const cx = 430, cy = 240;
-  const radii   = { outer: 210, mid: 136, inner: 68 };
-  const speeds  = { outer: 0.00025, mid: 0.0009, inner: 0.0032 };
-  const angles  = { outer: -0.5, mid: 3.6, inner: 1.3 };
-
-  // Label anchor points (right-side x, y for outer/inner; left for mid)
-  const labelAnchors = {
-    outer: { x: 668, y: 168 },
-    mid:   { x: 192, y: 352 },
-    inner: { x: 518, y: 248 }
-  };
-
-  const dots  = { outer: document.getElementById('dotOuter'),  mid: document.getElementById('dotMid'),  inner: document.getElementById('dotInner') };
-  const lines = { outer: document.getElementById('lineOuter'), mid: document.getElementById('lineMid'), inner: document.getElementById('lineInner') };
-  const rings  = { outer: document.getElementById('ringOuter'), mid: document.getElementById('ringMid'), inner: document.getElementById('ringInner') };
-  const labels = { outer: document.getElementById('labelOuter'), mid: document.getElementById('labelMid'), inner: document.getElementById('labelInner') };
-
-  function setDot(key, angle) {
-    const x = cx + Math.cos(angle) * radii[key];
-    const y = cy + Math.sin(angle) * radii[key];
-    dots[key].setAttribute('cx', x);
-    dots[key].setAttribute('cy', y);
-    lines[key].setAttribute('x1', x);
-    lines[key].setAttribute('y1', y);
-    lines[key].setAttribute('x2', labelAnchors[key].x);
-    lines[key].setAttribute('y2', labelAnchors[key].y);
-  }
-
-  function animate() {
-    angles.outer += speeds.outer;
-    angles.mid   += speeds.mid;
-    angles.inner += speeds.inner;
-    setDot('outer', angles.outer);
-    setDot('mid',   angles.mid);
-    setDot('inner', angles.inner);
-    requestAnimationFrame(animate);
-  }
-
-  // Interaction — hover/click to highlight a loop
-  function activate(key) {
-    ['outer','mid','inner'].forEach(k => {
-      rings[k].classList.toggle('active', k === key);
-      labels[k].classList.toggle('active', k === key);
-    });
-  }
-
-  ['outer','mid','inner'].forEach(key => {
-    [rings[key], labels[key]].forEach(el => {
-      el.addEventListener('mouseenter', () => activate(key));
-      el.addEventListener('mouseleave', () => activate('outer'));
-      el.addEventListener('click',      () => activate(key));
-    });
-  });
-
-  requestAnimationFrame(animate);
-})();
 </script>
 
 </body>
