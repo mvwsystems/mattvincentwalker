@@ -587,6 +587,59 @@ section {
   overflow: visible;
 }
 
+.loops-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+.loop-card {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--stone);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.loop-card:last-child { border-bottom: none; }
+.loop-card-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--stone-light);
+  line-height: 1;
+  padding-top: 4px;
+}
+.loop-card-num.amber { color: var(--amber-dim); }
+.loop-card-arc {
+  width: 100%;
+  height: 32px;
+  display: block;
+  margin-bottom: 12px;
+}
+.loop-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+.loop-card-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.loop-card-time {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
 /* ═══════════════════════════════════════════════════════
    SHAME MODEL — LAYERED DEPTH BARS
    ═══════════════════════════════════════════════════════ */
@@ -922,6 +975,8 @@ footer .footer-copy {
   .protocols-grid { grid-template-columns: repeat(2, 1fr); }
 
   .loops-visual { max-width: 100%; }
+  .loops-visual svg { display: none; }
+  .loops-mobile { display: flex; }
 
   .stack-row { grid-template-columns: 40px 1fr; gap: 16px; }
   .stack-row .row-label { display: none; }
@@ -1163,6 +1218,48 @@ footer .footer-copy {
         <text x="80" y="278" fill="#4a4640" font-size="7" letter-spacing="0.3em">SUPERHUMAN OS — CYBERNETIC CONTROL ARCHITECTURE</text>
         <text x="820" y="278" fill="#4a4640" font-size="7" letter-spacing="0.15em" text-anchor="end">MVW © 2026</text>
       </svg>
+      <!-- Mobile fallback -->
+      <div class="loops-mobile">
+        <div class="loop-card">
+          <div class="loop-card-num">3</div>
+          <div>
+            <svg class="loop-card-arc" viewBox="0 0 260 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 10 32 A 120 120 0 0 1 250 32" fill="none" stroke="#2e2a22" stroke-width="1"/>
+              <circle cx="10"  cy="32" r="2.5" fill="#2e2a22"/>
+              <circle cx="250" cy="32" r="2.5" fill="#2e2a22"/>
+            </svg>
+            <div class="loop-card-tag">Slow Loop</div>
+            <div class="loop-card-name">Consequence Feedback</div>
+            <div class="loop-card-time">Months — Years</div>
+          </div>
+        </div>
+        <div class="loop-card">
+          <div class="loop-card-num">2</div>
+          <div>
+            <svg class="loop-card-arc" viewBox="0 0 260 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 10 32 A 120 120 0 0 1 250 32" fill="none" stroke="#4a4640" stroke-width="1"/>
+              <circle cx="10"  cy="32" r="2.5" fill="#4a4640"/>
+              <circle cx="250" cy="32" r="2.5" fill="#4a4640"/>
+            </svg>
+            <div class="loop-card-tag">Mid Loop</div>
+            <div class="loop-card-name">Structural Control</div>
+            <div class="loop-card-time">Days — Weeks</div>
+          </div>
+        </div>
+        <div class="loop-card">
+          <div class="loop-card-num amber">1</div>
+          <div>
+            <svg class="loop-card-arc" viewBox="0 0 260 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 10 32 A 120 120 0 0 1 250 32" fill="none" stroke="#c8935a" stroke-width="1.5"/>
+              <circle cx="10"  cy="32" r="2.5" fill="#c8935a"/>
+              <circle cx="250" cy="32" r="2.5" fill="#c8935a"/>
+            </svg>
+            <div class="loop-card-tag">Fast Loop</div>
+            <div class="loop-card-name">State Regulation</div>
+            <div class="loop-card-time">Seconds — Hours</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
