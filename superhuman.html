@@ -9,151 +9,78 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════════
-   CSS VARIABLES — MATT VINCENT WALKER BRAND SYSTEM
-   ═══════════════════════════════════════════════════════ */
-:root {
-  --black: #080808;
-  --black-warm: #0c0a09;
-  --charcoal: #161412;
-  --stone: #232019;
-  --stone-light: #2e2a22;
-  --ash: #4a4640;
-  --muted: #7a756d;
-  --warm-gray: #a09a90;
-  --light: #d4cec4;
-  --cream: #eae4d8;
-  --white: #f5f1e9;
-  --amber: #c8935a;
-  --amber-glow: #daa76a;
-  --amber-dim: #8a6a3e;
-  --amber-deep: #6b4f2a;
-  --ember: #b87333;
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Outfit', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--ash) var(--black); }
-
-body {
-  background: var(--black-warm);
-  color: var(--light);
-  font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.7;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection { background: var(--amber); color: var(--black); }
-a { color: inherit; text-decoration: none; }
-
-/* ═══ GRAIN OVERLAY ═══ */
-body::after {
-  content: '';
-  position: fixed; inset: 0; z-index: 9999;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-}
-
-/* ═══ CUSTOM CURSOR ═══ */
-.custom-cursor {
-  position: fixed; width: 36px; height: 36px;
-  border: 1px solid rgba(200,147,90,0.3); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
-  transition: width 0.4s var(--ease-expo), height 0.4s var(--ease-expo),
-              border-color 0.3s, background 0.3s;
-  transform: translate(-50%, -50%);
-}
-.custom-cursor.hovering {
-  width: 56px; height: 56px;
-  background: rgba(200,147,90,0.06);
-  border-color: var(--amber);
-}
-.cursor-dot {
-  position: fixed; width: 4px; height: 4px;
-  background: var(--amber); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%, -50%);
-}
-
-/* ═══════════════════════════════════════════════════════
-   NAVIGATION (matches mattvincentwalker.com)
-   ═══════════════════════════════════════════════════════ */
+/* ═══ NAVIGATION — SHARED ═══ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
   background: linear-gradient(to bottom, rgba(12,10,9,0.95) 0%, rgba(12,10,9,0.7) 70%, transparent 100%);
-  transition: background 0.5s ease;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
-nav.scrolled { background: rgba(12,10,9,0.98); backdrop-filter: blur(12px); }
-
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--cream);
-  cursor: pointer;
-}
-.nav-logo span { color: var(--amber); }
-
+.nav-logo { cursor: pointer; display: flex; align-items: center; }
 .nav-links {
-  display: flex; align-items: center; gap: 36px;
-  list-style: none;
+  list-style: none; display: flex; flex-direction: column;
+  position: fixed; top: 0; right: 0; height: 100vh; width: 340px;
+  background: rgba(14,12,10,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid var(--stone);
+  padding: 100px 48px 48px; gap: 0; margin: 0;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 999;
 }
-.nav-links a {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--warm-gray);
-  transition: color 0.3s;
-  position: relative;
+.nav-links.open { transform: translateX(0); }
+.nav-links li {
+  list-style: none; margin: 0; padding: 0;
+  opacity: 0; transform: translateX(20px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.nav-links a:hover { color: var(--cream); }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -2px; left: 0;
-  width: 100%; height: 1px; background: var(--amber);
-  transform: scaleX(0); transform-origin: right;
-  transition: transform 0.5s var(--ease-expo);
+.nav-links.open li { opacity: 1; transform: translateX(0); }
+.nav-links.open li:nth-child(1)  { transition-delay: 0.06s; }
+.nav-links.open li:nth-child(2)  { transition-delay: 0.10s; }
+.nav-links.open li:nth-child(3)  { transition-delay: 0.14s; }
+.nav-links.open li:nth-child(4)  { transition-delay: 0.18s; }
+.nav-links.open li:nth-child(5)  { transition-delay: 0.22s; }
+.nav-links.open li:nth-child(6)  { transition-delay: 0.26s; }
+.nav-links.open li:nth-child(7)  { transition-delay: 0.30s; }
+.nav-links.open li:nth-child(8)  { transition-delay: 0.34s; }
+.nav-links.open li:nth-child(9)  { transition-delay: 0.38s; }
+.nav-links li a {
+  font-family: var(--font-body); font-size: 14px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--warm-gray); transition: color 0.3s;
+  padding: 18px 0; display: block;
 }
-.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-.nav-links a.active { color: var(--amber); }
-.nav-links a.active::after { transform: scaleX(1); }
-
-.nav-cta {
-  padding: 8px 24px !important;
-  border: 1px solid var(--amber-dim) !important;
-  color: var(--amber) !important;
-  transition: all 0.3s !important;
+.nav-links li:not(:last-child) { border-bottom: 1px solid var(--stone); }
+.nav-links li a:hover { color: var(--white); }
+.nav-links li:last-child { margin-top: 24px; border-bottom: none; }
+.nav-links li:last-child a.nav-cta {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--black); background: var(--amber);
+  padding: 14px 0; display: block; text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.nav-cta:hover {
-  background: var(--amber) !important;
-  color: var(--black) !important;
+.nav-links li:last-child a.nav-cta:hover { background: #daa76a; }
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5s;
 }
-
+.nav-overlay.open { opacity: 1; visibility: visible; }
 .nav-toggle {
-  display: none;
-  flex-direction: column; gap: 5px;
-  cursor: pointer; padding: 8px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  width: 28px; height: 18px; cursor: pointer; z-index: 1001; position: relative;
 }
 .nav-toggle span {
-  width: 24px; height: 1px;
-  background: var(--cream);
-  transition: all 0.3s;
+  display: block; width: 100%; height: 1.5px; background: var(--white);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.nav-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
 
 /* ═══════════════════════════════════════════════════════
    SCROLL REVEAL SYSTEM
@@ -1004,18 +931,23 @@ footer .footer-copy {
 <div class="cursor-dot" id="cursorDot"></div>
 
 <!-- Navigation -->
-<nav id="mainNav">
+<nav>
   <a href="index.html" class="nav-logo"><img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"></a>
-  <div class="nav-toggle" onclick="toggleNav()">
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="/about">About</a></li>
-    <li><a href="/articles">Articles</a></li>
-    <li><a href="/newsletter">Newsletter</a></li>
-    <li><a href="/masterclass">Masterclass</a></li>
-    <li><a href="/speaking">Speaking</a></li>
-    <li><a href="/newsletter" class="nav-cta">Subscribe</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#articles">Articles</a></li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#masterclass">Masterclass</a></li>
+    <li><a href="index.html#speaking">Speaking</a></li>
+    <li><a href="index.html#sponsorships">Sponsorships</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="map.html">Systems Map</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Subscribe</a></li>
   </ul>
 </nav>
 
@@ -1545,9 +1477,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ═══ MOBILE NAV ═══
-function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
+
 
 // ═══ CUSTOM CURSOR ═══
 const cursor = document.getElementById('cursor');
