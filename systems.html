@@ -42,6 +42,25 @@ nav { position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-cont
 .nav-dropdown-item:hover { background:var(--stone); }
 .nav-dropdown-item-name { font-size:0.75rem;color:var(--light); }
 .nav-dropdown-item-count { font-family:var(--font-mono);font-size:0.65rem;color:var(--amber-dim); }
+/* Site nav panel (hamburger) */
+.nav-toggle { display:flex;cursor:pointer;flex-direction:column;gap:6px;width:28px;height:20px;justify-content:center;position:relative;z-index:1001; }
+.nav-toggle span { width:28px;height:1.5px;background:var(--white);transition:all 0.4s var(--ease-out-expo);transform-origin:center;display:block; }
+.nav-toggle.active span:nth-child(1) { transform:translateY(3.75px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity:0;transform:scaleX(0); }
+.nav-toggle.active span:nth-child(3) { transform:translateY(-3.75px) rotate(-45deg); }
+.nav-overlay { position:fixed;inset:0;z-index:998;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity 0.5s,visibility 0.5s; }
+.nav-overlay.open { opacity:1;visibility:visible; }
+.nav-links { list-style:none;display:flex;flex-direction:column;position:fixed;top:0;right:0;height:100vh;width:340px;background:rgba(14,12,10,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-left:1px solid var(--stone);padding:100px 48px 48px;gap:0;margin:0;transform:translateX(100%);transition:transform 0.6s var(--ease-out-expo);z-index:999; }
+.nav-links.open { transform:translateX(0); }
+.nav-links li { list-style:none;margin:0;padding:0;opacity:0;transform:translateX(20px);transition:opacity 0.4s var(--ease-out-expo),transform 0.4s var(--ease-out-expo); }
+.nav-links.open li { opacity:1;transform:translateX(0); }
+.nav-links.open li:nth-child(1){transition-delay:0.06s}.nav-links.open li:nth-child(2){transition-delay:0.10s}.nav-links.open li:nth-child(3){transition-delay:0.14s}.nav-links.open li:nth-child(4){transition-delay:0.18s}.nav-links.open li:nth-child(5){transition-delay:0.22s}.nav-links.open li:nth-child(6){transition-delay:0.26s}.nav-links.open li:nth-child(7){transition-delay:0.30s}.nav-links.open li:nth-child(8){transition-delay:0.34s}.nav-links.open li:nth-child(9){transition-delay:0.38s}
+.nav-links li a { font-family:var(--font-body);font-size:14px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--warm-gray);transition:color 0.3s;padding:18px 0;display:block; }
+.nav-links li:not(:last-child) { border-bottom:1px solid var(--stone); }
+.nav-links li a:hover { color:var(--white); }
+.nav-links li:last-child { margin-top:24px;border-bottom:none; }
+.nav-links li:last-child a.nav-cta { font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--black);background:var(--amber);padding:14px 0;display:block;text-align:center;transition:all 0.4s; }
+.nav-links li:last-child a.nav-cta:hover { background:var(--amber-glow); }
 
 .page { display:none;min-height:100vh; }
 .page.active { display:block;animation:fadeIn 0.5s var(--ease-out-expo); }
@@ -145,6 +164,22 @@ nav { position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-cont
 
 <nav>
   <a href="index.html" class="nav-logo" style="display:flex;align-items:center"><img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"></a>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#articles">Articles</a></li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#masterclass">Masterclass</a></li>
+    <li><a href="index.html#speaking">Speaking</a></li>
+    <li><a href="index.html#sponsorships">Sponsorships</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="map.html">Systems Map</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Subscribe</a></li>
+  </ul>
   <div class="nav-right">
     <span class="nav-back" id="navBack" onclick="navigate('')">&larr; All Categories</span>
     <div class="nav-dropdown">
@@ -201,6 +236,16 @@ function buildDropdown() {
 function toggleDropdown() { document.querySelector('.nav-dropdown').classList.toggle('open'); }
 function closeDropdown() { document.querySelector('.nav-dropdown').classList.remove('open'); }
 document.addEventListener('click', function(e) { if (!e.target.closest('.nav-dropdown')) closeDropdown(); });
+function toggleNav() {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  var overlay = document.getElementById('navOverlay');
+  var isOpen = links.classList.contains('open');
+  toggle.classList.toggle('active');
+  links.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
 
 function esc(s) { var d=document.createElement('div');d.textContent=s;return d.innerHTML; }
 
