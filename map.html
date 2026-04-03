@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems Thinkers Taxonomy — Superhuman Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --black-warm: #0f0d0b;
+    --charcoal: #1a1816;
+    --stone: #2a2725;
+    --ash: #4a4643;
+    --muted: #7a7572;
+    --warm-gray: #a09a94;
+    --light: #d4cec6;
+    --cream: #e8e2d8;
+    --white: #f5f1eb;
+    --amber: #c8935a;
+    --amber-glow: #d4a76a;
+    --amber-dim: #8a6a3e;
+    --ember: #b87333;
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ash) var(--black);
+  }
+
+  body {
+    background: var(--black-warm);
+    color: var(--light);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--amber); color: var(--black); }
+
+  /* GRAIN OVERLAY */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(200,147,90,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-overline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    max-width: 700px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .hero-sub {
+    font-family: var(--font-body);
+    font-weight: 200;
+    font-size: 1rem;
+    color: var(--warm-gray);
+    margin-top: 20px;
+    letter-spacing: 0.03em;
+    max-width: 520px;
+  }
+  .hero-count {
+    display: flex;
+    gap: 60px;
+    margin-top: 48px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .scroll-indicator span {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--amber-dim), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity:0.3; transform:scaleY(0.6); }
+    50% { opacity:1; transform:scaleY(1); }
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    padding: 0 48px 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .section-label-text {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+  }
+
+  /* TAXONOMY GRID */
+  .taxonomy {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  .category {
+    margin-bottom: 64px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  }
+  .category.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--stone);
+  }
+  .cat-num {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cat-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+  }
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--ash);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .entries-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .entry {
+    background: var(--charcoal);
+    border: 1px solid var(--stone);
+    border-radius: 4px;
+    padding: 20px 22px;
+    transition: border-color 0.3s, transform 0.3s var(--ease-out-expo), box-shadow 0.3s;
+    cursor: default;
+  }
+  .entry:hover {
+    border-color: var(--amber-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(200,147,90,0.06);
+  }
+  .entry-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  .entry-def {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 48px 20px;
+    border-top: 1px solid var(--stone);
+  }
+  .divider-inner {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+  .divider h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .divider h2 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .divider-sub {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  /* MIND MAP WRAPPER */
+  .mindmap-wrapper {
+    display: flex;
+    max-width: 100%;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+  }
+
+  .mindmap-container {
+    flex: 1;
+    height: 750px;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, rgba(26,24,22,1) 0%, var(--black-warm) 70%);
+    cursor: grab;
+  }
+  .mindmap-container:active { cursor: grabbing; }
+
+  .mindmap-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mindmap-controls button {
+    background: var(--charcoal);
+    border: 1px solid var(--ash);
+    color: var(--warm-gray);
+    padding: 7px 14px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .mindmap-controls button:hover {
+    border-color: var(--amber-dim);
+    color: var(--cream);
+  }
+  .mindmap-controls button.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--black);
+  }
+
+  canvas#mindmap { width: 100%; height: 100%; }
+
+  /* DETAIL PANEL */
+  .detail-panel {
+    width: 380px;
+    min-width: 380px;
+    height: 750px;
+    background: var(--charcoal);
+    border-left: 1px solid var(--stone);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ash) var(--charcoal);
+  }
+
+  .detail-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+    text-align: center;
+  }
+  .detail-empty .icon {
+    font-size: 2rem;
+    color: var(--ash);
+    margin-bottom: 16px;
+  }
+  .detail-empty p {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .detail-content { padding: 28px 24px; }
+
+  .detail-header {
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--stone);
+  }
+  .detail-cat-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .detail-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+  .detail-def {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+
+  .connections-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--amber);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+
+  .connection-card {
+    background: var(--stone);
+    border: 1px solid rgba(200,147,90,0.08);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.25s, transform 0.25s var(--ease-out-expo);
+  }
+  .connection-card:hover {
+    border-color: var(--amber-dim);
+    transform: translateY(-1px);
+  }
+  .connection-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .connection-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .connection-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--cream);
+  }
+  .connection-cat {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--ash);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .connection-type {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+  .connection-type.intra { background: rgba(200,147,90,0.08); color: var(--amber-dim); }
+  .connection-type.cross { background: rgba(200,147,90,0.15); color: var(--amber); }
+  .connection-reason {
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 64px 48px;
+    border-top: 1px solid var(--stone);
+  }
+  .footer-line {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 2;
+  }
+  .footer-brand {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+    margin-top: 24px;
+  }
+  .footer-author {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-top: 6px;
+  }
+
+  /* BACK TO TOP */
+  .back-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    border: 1px solid var(--ash);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.3s;
+    z-index: 100;
+  }
+  .back-top.show { opacity: 1; transform: translateY(0); }
+  .back-top:hover { border-color: var(--amber); background: rgba(200,147,90,0.12); }
+  .back-top svg { width: 16px; height: 16px; stroke: var(--warm-gray); fill: none; stroke-width: 2; }
+  .back-top:hover svg { stroke: var(--amber); }
+
+  @media (max-width: 900px) {
+    .hero { padding: 100px 24px 60px; }
+    .hero-count { gap: 36px; }
+    .taxonomy { padding: 0 24px 60px; }
+    .section-label { padding: 0 24px 24px; }
+    .entries-grid { grid-template-columns: 1fr; }
+    .mindmap-wrapper { flex-direction: column; }
+    .detail-panel { width: 100%; min-width: 100%; height: auto; max-height: 420px; border-left: none; border-top: 1px solid var(--stone); }
+    .mindmap-container { height: 500px; }
+    .divider { padding: 40px 24px 20px; }
+    .footer { padding: 48px 24px; }
+  }
+  @media (max-width: 600px) {
+    .hero-count { flex-direction: column; gap: 20px; }
+    .hero-stat-num { font-size: 3rem; }
+  }
+
+/* ═══ SHARED NAV ═══ */
+nav { position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(12,10,9,0.95) 0%,rgba(12,10,9,0.7) 70%,transparent 100%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px); }
+.nav-logo { cursor:pointer;display:flex;align-items:center; }
+.nav-overlay { position:fixed;inset:0;z-index:998;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity 0.5s,visibility 0.5s; }
+.nav-overlay.open { opacity:1;visibility:visible; }
+.nav-toggle { display:flex;flex-direction:column;justify-content:space-between;width:28px;height:18px;cursor:pointer;z-index:1001;position:relative; }
+.nav-toggle span { display:block;width:100%;height:1.5px;background:var(--white);transition:all 0.4s cubic-bezier(0.16,1,0.3,1); }
+.nav-toggle.active span:nth-child(1) { transform:translateY(8px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity:0; }
+.nav-toggle.active span:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
+.nav-links { list-style:none;display:flex;flex-direction:column;position:fixed;top:0;right:0;height:100vh;width:340px;background:rgba(14,12,10,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-left:1px solid var(--stone);padding:100px 48px 48px;gap:0;margin:0;transform:translateX(100%);transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);z-index:999; }
+.nav-links.open { transform:translateX(0); }
+.nav-links li { list-style:none;margin:0;padding:0;opacity:0;transform:translateX(20px);transition:opacity 0.4s cubic-bezier(0.16,1,0.3,1),transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+.nav-links.open li { opacity:1;transform:translateX(0); }
+.nav-links.open li:nth-child(1){transition-delay:0.06s}.nav-links.open li:nth-child(2){transition-delay:0.10s}.nav-links.open li:nth-child(3){transition-delay:0.14s}.nav-links.open li:nth-child(4){transition-delay:0.18s}.nav-links.open li:nth-child(5){transition-delay:0.22s}.nav-links.open li:nth-child(6){transition-delay:0.26s}.nav-links.open li:nth-child(7){transition-delay:0.30s}.nav-links.open li:nth-child(8){transition-delay:0.34s}.nav-links.open li:nth-child(9){transition-delay:0.38s}
+.nav-links li a { font-family:var(--font-body);font-size:14px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--warm-gray);transition:color 0.3s;padding:18px 0;display:block; }
+.nav-links li:not(:last-child) { border-bottom:1px solid var(--stone); }
+.nav-links li a:hover { color:var(--white); }
+.nav-links li:last-child { margin-top:24px;border-bottom:none; }
+.nav-links li:last-child a.nav-cta { font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--black);background:var(--amber);padding:14px 0;display:block;text-align:center;transition:all 0.4s; }
+.nav-links li:last-child a.nav-cta:hover { background:#daa76a; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="articles.html">Articles</a></li>
+    <li><a href="newsletter.html">Newsletter</a></li>
+    <li><a href="masterclass.html">Masterclass</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="sponsorships.html">Sponsorships</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="map.html" class="active">Systems Map</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overline">Superhuman Systems</div>
+  <h1>The Taxonomy of <em>Systems Thinkers</em></h1>
+  <p class="hero-sub">Every title, every definition, and how they connect to each other across six dimensions of systems practice.</p>
+  <div class="hero-count">
+    <div class="hero-stat">
+      <div class="hero-stat-num">37</div>
+      <div class="hero-stat-label">Titles</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">6</div>
+      <div class="hero-stat-label">Categories</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">69</div>
+      <div class="hero-stat-label">Connections</div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SECTION LABEL -->
+<div class="section-label">
+  <div class="section-label-text">The Taxonomy</div>
+</div>
+
+<!-- TAXONOMY -->
+<div class="taxonomy" id="taxonomyContainer"></div>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-inner">
+    <h2>The <em>Dimensional</em> Map</h2>
+    <p class="divider-sub">Click any node to see its connections &bull; Drag to rotate &bull; Scroll to zoom</p>
+  </div>
+</div>
+
+<!-- MIND MAP -->
+<div class="mindmap-wrapper">
+  <div class="mindmap-container">
+    <canvas id="mindmap"></canvas>
+    <div class="mindmap-controls">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="0">Academic</button>
+      <button data-filter="1">Strategic</button>
+      <button data-filter="2">Consulting</button>
+      <button data-filter="3">Design</button>
+      <button data-filter="4">Human Dev</button>
+      <button data-filter="5">Philosophical</button>
+    </div>
+  </div>
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-empty">
+      <div class="icon">&#9678;</div>
+      <p>Click any node on the map to reveal its connections and the reasoning behind each link.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-line">Every systems thinker is a node in a larger system.</div>
+  <div class="footer-line">The map is not the territory — but it reveals the territory.</div>
+  <div class="footer-brand">Superhuman Systems</div>
+  <div class="footer-author">Matt Vincent Walker</div>
+</div>
+
+<!-- BACK TO TOP -->
+<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const catData = [
+  { num:'I', name:'Academic & Theoretical', short:'Academic', entries:[
+    ['Systems Theorist','Studies the formal principles governing systems of all kinds — biological, social, mechanical — seeking universal laws of organization, feedback, and emergence.'],
+    ['Complexity Scientist','Researches how large numbers of interacting components produce emergent, often unpredictable behaviors. Works at the edge of chaos and order.'],
+    ['Cybernetics Researcher','Studies circular causal systems — how systems regulate themselves through feedback loops, self-correction, and communication between parts.'],
+    ['Systems Dynamicist','Models the behavior of complex systems over time using stocks, flows, delays, and feedback loops. Makes the invisible architecture of systems visible.'],
+    ['Complex Adaptive Systems Researcher','Studies systems composed of agents that learn, adapt, and co-evolve — markets, ecosystems, immune systems — where the whole is irreducible to its parts.'],
+    ['Computational Social Scientist','Uses simulation, network analysis, and agent-based modeling to study how social systems produce macro patterns from micro-level interactions.'],
+  ]},
+  { num:'II', name:'Strategic & Organizational', short:'Strategic', entries:[
+    ['Systems Strategist','Designs organizational strategy by mapping the system of forces — competitive, cultural, technological — that shape outcomes, rather than optimizing isolated variables.'],
+    ['Organizational Systems Designer','Architects the structures, incentives, communication flows, and feedback mechanisms that determine how an organization actually behaves.'],
+    ['Systems Architect','Designs the deep structure of complex systems — technical, organizational, or hybrid — ensuring coherence, scalability, and emergent capability across all subsystems.'],
+    ['Chief Systems Officer','An executive role responsible for ensuring the organization\u2019s operational, technological, and human systems are integrated, adaptive, and aligned with strategic intent.'],
+    ['Systemic Change Architect','Designs interventions at leverage points within complex systems to produce cascading, sustainable transformation rather than surface-level change.'],
+    ['Strategic Foresight Practitioner','Uses systems mapping, scenario planning, and weak-signal analysis to help organizations navigate uncertainty and position for multiple possible futures.'],
+    ['Futures Strategist','Combines trend analysis, systems thinking, and speculative design to help leaders make present-tense decisions informed by long-arc systemic trajectories.'],
+  ]},
+  { num:'III', name:'Consulting & Applied', short:'Consulting', entries:[
+    ['Systems Consultant','Diagnoses and resolves organizational problems by analyzing the whole system — not just symptoms — and recommending structural, process, or cultural interventions.'],
+    ['Management Cybernetics Consultant','Applies Stafford Beer\u2019s Viable System Model and related cybernetic frameworks to diagnose organizational pathology and design self-regulating management structures.'],
+    ['Systemic Design Consultant','Merges human-centered design with systems thinking to tackle wicked problems where solutions must account for interconnected stakeholders and feedback.'],
+    ['Complexity Consultant','Helps organizations distinguish between complicated and complex challenges, then applies appropriate sense-making frameworks (Cynefin, etc.) to each domain.'],
+    ['OD Practitioner','Facilitates planned change within organizations through systemic diagnosis, process consultation, team interventions, and culture-level transformation work.'],
+    ['Transformation Architect','Designs and orchestrates large-scale organizational transformations — digital, cultural, operational — treating the change itself as a complex adaptive process.'],
+  ]},
+  { num:'IV', name:'Design & Engineering', short:'Design', entries:[
+    ['Systems Engineer','Manages the integration of complex technical systems across their lifecycle — requirements, design, verification — ensuring subsystems cohere into a functioning whole.'],
+    ['Systems Designer','Designs interconnected products, services, and experiences as unified systems rather than isolated touchpoints.'],
+    ['Systemic Design Practitioner','Operates at the intersection of design thinking and systems science, using visual mapping, participatory methods, and causal-loop diagrams to redesign complex problems.'],
+    ['Service Systems Designer','Designs the end-to-end system behind a service — people, processes, technology, policies — ensuring every component works together to deliver consistent value.'],
+    ['Sociotechnical Systems Designer','Designs systems that account for the mutual shaping of technology and human behavior — recognizing that tools reshape people and people reshape tools.'],
+    ['Enterprise Architect','Maps and aligns an organization\u2019s business processes, information flows, applications, and infrastructure into a coherent, evolvable architecture.'],
+  ]},
+  { num:'V', name:'Human Development & Coaching', short:'Human Dev', entries:[
+    ['Systems-Informed Coach','Coaches individuals by attending to the systems they\u2019re embedded in — family, organization, culture — rather than treating challenges as purely individual problems.'],
+    ['Integral Coach','Uses Ken Wilber\u2019s AQAL framework (or similar integral models) to coach across all quadrants of human experience — inner/outer, individual/collective.'],
+    ['Developmental Systems Practitioner','Applies adult development theory (Kegan, Cook-Greuter) to understand how people\u2019s meaning-making systems evolve and how to catalyze vertical growth.'],
+    ['Systemic Leadership Coach','Develops leaders who can see, hold, and intervene in the systems around them — moving from reactive firefighting to structural, systemic leadership.'],
+    ['Human Systems Practitioner','Works at the intersection of psychology, sociology, and systems science to facilitate change in the living systems of teams, families, and communities.'],
+  ]},
+  { num:'VI', name:'Philosophical & Integrative', short:'Philosophical', entries:[
+    ['Systems Philosopher','Investigates the ontological and epistemological foundations of systems thinking itself — what is a system? How does wholeness emerge?'],
+    ['Systems Polymath','A cross-disciplinary thinker who applies systems principles across multiple unrelated domains — synthesizing insights inaccessible to specialists.'],
+    ['Systems Synthesist','Integrates knowledge from disparate fields into coherent meta-frameworks. The person who sees the pattern connecting the patterns.'],
+    ['Applied Cyberneticist','Translates cybernetic theory — feedback, self-regulation, requisite variety — into practical tools for designing organizations, technologies, and human systems.'],
+    ['Cybernetic Strategist','Uses cybernetic principles to design adaptive strategies — building systems that self-correct, learn, and evolve rather than requiring constant top-down direction.'],
+    ['Systemic Futurist','Reads the deep currents of systemic change — technological, social, ecological — and translates them into actionable foresight.'],
+    ['Integrative Systems Builder','Doesn\u2019t just theorize — builds real systems (businesses, platforms, communities) that embody systems principles, creating living proof-of-concept.'],
+  ]},
+];
+
+// Short names for map
+const mapNames = [
+  ['Systems Theorist','Complexity Scientist','Cybernetics Researcher','Systems Dynamicist','CAS Researcher','Computational Social Scientist'],
+  ['Systems Strategist','Org Systems Designer','Systems Architect','Chief Systems Officer','Systemic Change Architect','Foresight Practitioner','Futures Strategist'],
+  ['Systems Consultant','Mgmt Cybernetics Consultant','Systemic Design Consultant','Complexity Consultant','OD Practitioner','Transformation Architect'],
+  ['Systems Engineer','Systems Designer','Systemic Design Practitioner','Service Systems Designer','Sociotechnical Designer','Enterprise Architect'],
+  ['Systems-Informed Coach','Integral Coach','Dev Systems Practitioner','Systemic Leadership Coach','Human Systems Practitioner'],
+  ['Systems Philosopher','Systems Polymath','Systems Synthesist','Applied Cyberneticist','Cybernetic Strategist','Systemic Futurist','Integrative Systems Builder'],
+];
+
+const catColors = ['#7ba1c7','#c8935a','#c47a5a','#6db89e','#b87aad','#d4a76a'];
+const catShort = catData.map(c=>c.short);
+
+// Build node defs lookup
+const nodeDefs = {};
+catData.forEach(c => c.entries.forEach(([n,d]) => nodeDefs[n]=d));
+mapNames.forEach((cat,ci) => cat.forEach((n,ni) => {
+  if(!nodeDefs[n]) nodeDefs[n] = catData[ci].entries[ni]?.[1]||'';
+}));
+
+const typeLabels = {
+  'shared_theory':'Shared Theoretical Root',
+  'theory_to_practice':'Theory \u2192 Practice',
+  'method_overlap':'Methodological Overlap',
+  'scale_bridge':'Scale Bridge',
+  'complementary':'Complementary Functions',
+};
+
+const crossConnections = [
+  [0,2,5,3,"Both root their work in cybernetic theory \u2014 feedback, self-regulation, requisite variety \u2014 but the Researcher develops the science while the Applied Cyberneticist builds with it.","theory_to_practice"],
+  [0,0,5,0,"The Theorist seeks universal laws of systems; the Philosopher interrogates the epistemological foundations those laws rest on. One builds the map, the other questions the nature of mapping itself.","shared_theory"],
+  [1,2,3,0,"Both design coherent wholes from complex subsystems. The Systems Architect works at the organizational/hybrid level; the Engineer at the technical level. Same logic, different substrates.","scale_bridge"],
+  [1,5,5,5,"Both scan for emerging systemic patterns. Foresight Practitioner builds organizational scenarios; the Systemic Futurist reads civilizational-scale currents.","scale_bridge"],
+  [1,4,2,5,"Both design large-scale change. The Change Architect identifies leverage points; the Transformation Architect orchestrates the execution. One finds the fulcrum, the other moves the lever.","complementary"],
+  [2,2,3,2,"Both merge design thinking with systems science. The Consultant applies it to client problems; the Practitioner advances the methodology itself.","method_overlap"],
+  [2,3,1,0,"Both navigate complexity. The Complexity Consultant diagnoses which domain a challenge belongs to; the Systems Strategist designs the strategic response.","complementary"],
+  [3,4,4,4,"Both study the irreducible entanglement of people and their environments. The Sociotechnical Designer shapes tool-human interfaces; the Human Systems Practitioner facilitates change in the living system.","shared_theory"],
+  [4,1,5,1,"Both operate across multiple knowledge domains simultaneously. The Integral Coach applies it to human development; the Polymath applies it to any domain.","method_overlap"],
+  [4,3,1,4,"The Leadership Coach develops individual leaders' capacity to see systems; the Change Architect designs the systemic interventions those leaders will execute.","complementary"],
+  [5,6,1,2,"Both design coherent, scalable systems. The Integrative Systems Builder creates proof-of-concept in real businesses; the Systems Architect designs at scale.","theory_to_practice"],
+  [5,4,2,1,"Both apply cybernetic principles to organizational design. The Cybernetic Strategist designs adaptive strategies; the Mgmt Cybernetics Consultant applies Beer's VSM to diagnose pathology.","shared_theory"],
+  [0,1,2,3,"The Complexity Scientist develops theory about emergent behavior; the Complexity Consultant operationalizes it for organizations using frameworks like Cynefin.","theory_to_practice"],
+  [3,5,1,3,"Both oversee large-scale system integration. The Enterprise Architect maps technical/process architecture; the CSO ensures it aligns with strategic and human systems.","scale_bridge"],
+  [4,2,5,2,"Both track how meaning-making evolves. The Dev Systems Practitioner applies developmental theory to individuals; the Synthesist integrates knowledge systems at a meta level.","shared_theory"],
+  [0,3,3,0,"Both model system behavior quantitatively. The Dynamicist builds causal-loop and stock-flow models; the Engineer applies formal integration and verification methods.","method_overlap"],
+  [0,4,4,4,"CAS Researcher studies adaptive agents in theory; the Human Systems Practitioner works with real adaptive agents \u2014 people in teams and communities.","theory_to_practice"],
+  [0,5,4,0,"Computational Social Scientist simulates social dynamics; the Systems-Informed Coach reads those same dynamics in real client systems.","theory_to_practice"],
+  [1,1,3,1,"Both design how parts relate. Org Systems Designer works at the organizational structure level; Systems Designer works at the product/service level.","scale_bridge"],
+  [1,6,5,5,"Futures Strategist makes systemic foresight actionable for organizations; the Systemic Futurist reads broader civilizational patterns.","scale_bridge"],
+  [2,0,1,0,"Both diagnose and solve systemic problems. The Consultant works hands-on with clients; the Strategist designs at a higher abstraction layer.","complementary"],
+  [2,4,4,0,"Both facilitate systemic change in human groups. OD Practitioner works at organizational scale; Systems-Informed Coach works at individual/relational scale.","scale_bridge"],
+  [2,1,5,3,"Both draw from cybernetic theory. Mgmt Cybernetics Consultant applies it through Beer's VSM; Applied Cyberneticist translates it more broadly.","shared_theory"],
+  [3,2,5,2,"Both create visual maps of systemic relationships. The Design Practitioner uses participatory methods; the Synthesist integrates across knowledge domains.","method_overlap"],
+  [3,3,2,2,"Both design for multi-stakeholder systems. Service Systems Designer focuses on delivery architecture; Systemic Design Consultant tackles broader wicked problems.","method_overlap"],
+  [4,1,4,2,"Integral Coach uses AQAL to map all quadrants; Dev Systems Practitioner uses Kegan/Cook-Greuter to map vertical development. Two complementary lenses.","complementary"],
+  [5,0,0,0,"The Philosopher questions what a system IS; the Theorist builds formal models of HOW systems work. Ontology meets formalism.","shared_theory"],
+  [5,6,2,5,"Both execute transformation. The Builder creates new systemic realities; the Transformation Architect redesigns existing ones. Creation vs. renovation.","complementary"],
+  [5,1,0,1,"The Polymath synthesizes across domains; the Complexity Scientist studies emergent properties from cross-domain interactions. Both thrive at boundaries.","shared_theory"],
+  [1,0,5,4,"Systems Strategist maps forces shaping outcomes; Cybernetic Strategist designs self-correcting adaptive responses. One reads the system, the other makes it learn.","complementary"],
+  [4,3,5,4,"Systemic Leadership Coach develops leaders' systemic sight; the Cybernetic Strategist gives them the strategic framework to act on what they see.","complementary"],
+  [3,4,5,3,"Sociotechnical Designer recognizes technology reshapes behavior; Applied Cyberneticist provides the theoretical framework that explains why.","theory_to_practice"],
+];
+
+const intraReasons = [
+  ["Systems Theorist provides the universal framework; Complexity Scientist explores its emergent frontier.","Complexity Scientist studies emergence; Cybernetics Researcher studies regulation. Together: novelty and stability.","Cybernetics Researcher models feedback qualitatively; Systems Dynamicist quantifies it with stocks and flows.","Systems Dynamicist models temporal behavior; CAS Researcher adds agent adaptation.","CAS Researcher studies adaptive agents abstractly; Computational Social Scientist simulates them in social contexts.","Computational Social Scientist models social macro-patterns; Systems Theorist provides the general principles those patterns instantiate."],
+  ["Systems Strategist reads systemic forces; Org Systems Designer builds structures that respond to them.","Org Systems Designer architects internal structures; Systems Architect ensures they cohere across subsystems.","Systems Architect designs deep structure; Chief Systems Officer ensures executive alignment.","Chief Systems Officer oversees integration; Systemic Change Architect designs interventions that reshape what needs changing.","Systemic Change Architect identifies leverage points; Foresight Practitioner scans future scenarios to determine which matter most.","Foresight Practitioner builds scenarios; Futures Strategist translates them into actionable decisions.","Futures Strategist makes long-arc decisions; Systems Strategist maps the current force-field those decisions land in."],
+  ["Systems Consultant diagnoses whole-system problems; Mgmt Cybernetics Consultant applies a specific cybernetic lens.","Mgmt Cybernetics Consultant designs self-regulating structures; Systemic Design Consultant adds human-centered design.","Systemic Design Consultant tackles wicked problems; Complexity Consultant provides the sense-making framework.","Complexity Consultant diagnoses domain; OD Practitioner facilitates the human process of moving through it.","OD Practitioner facilitates planned culture change; Transformation Architect designs the full-scale transformation architecture.","Transformation Architect orchestrates large change; Systems Consultant grounds it in whole-system diagnosis."],
+  ["Systems Engineer integrates technical subsystems; Systems Designer extends integration to user experience and service layers.","Systems Designer creates unified product/service systems; Systemic Design Practitioner adds participatory and causal-loop methods.","Systemic Design Practitioner uses visual systemic mapping; Service Systems Designer applies it to end-to-end delivery.","Service Systems Designer orchestrates people/process/tech; Sociotechnical Designer examines mutual reshaping.","Sociotechnical Designer studies tech-human mutual shaping; Enterprise Architect maps the infrastructure where it happens.","Enterprise Architect maps org-wide systems; Systems Engineer ensures technical components actually integrate."],
+  ["Systems-Informed Coach reads the systems a client is embedded in; Integral Coach maps the full AQAL territory.","Integral Coach maps all quadrants of experience; Dev Systems Practitioner tracks how they evolve developmentally.","Dev Systems Practitioner catalyzes vertical growth; Systemic Leadership Coach channels it into organizational capacity.","Systemic Leadership Coach builds leaders who see systems; Human Systems Practitioner works with the systems those leaders are trying to change.","Human Systems Practitioner facilitates change in groups; Systems-Informed Coach brings systemic awareness to individual conversations."],
+  ["Systems Philosopher questions what systems ARE; Systems Polymath applies systems thinking across every domain.","Systems Polymath works across domains; Systems Synthesist integrates them into coherent meta-frameworks.","Systems Synthesist builds meta-frameworks; Applied Cyberneticist translates cybernetics into practical tools.","Applied Cyberneticist builds practical tools; Cybernetic Strategist deploys them as organizational strategy.","Cybernetic Strategist designs adaptive strategies; Systemic Futurist reads the long-arc patterns those strategies must navigate.","Systemic Futurist reads deep currents; Integrative Systems Builder creates real systems that ride those currents.","Integrative Systems Builder creates living proof-of-concept; Systems Philosopher examines what they reveal about the nature of systems."],
+];
+
+// ═══════════════════════════════════════════
+// BUILD TAXONOMY HTML
+// ═══════════════════════════════════════════
+const taxEl = document.getElementById('taxonomyContainer');
+catData.forEach((cat,ci) => {
+  let html = `<div class="category" data-reveal>
+    <div class="cat-header">
+      <span class="cat-num">${cat.num}</span>
+      <span class="cat-title">${cat.name}</span>
+      <span class="cat-count">${cat.entries.length} titles</span>
+    </div>
+    <div class="entries-grid">`;
+  cat.entries.forEach(([name,def]) => {
+    html += `<div class="entry"><div class="entry-name">${name}</div><div class="entry-def">${def}</div></div>`;
+  });
+  html += '</div></div>';
+  taxEl.innerHTML += html;
+});
+
+// ═══════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+  });
+}, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+// Back to top
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 500);
+});
+
+// ═══════════════════════════════════════════
+// 3D MIND MAP
+// ═══════════════════════════════════════════
+const canvas = document.getElementById('mindmap');
+const ctx = canvas.getContext('2d');
+const detailPanel = document.getElementById('detailPanel');
+
+let W, H;
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  W=rect.width; H=rect.height;
+  canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+}
+resize();
+window.addEventListener('resize', resize);
+
+const nodes = [];
+let nid = 0;
+const catRadius = 180;
+const sr = s => { let x=Math.sin(s)*10000; return x-Math.floor(x); };
+
+mapNames.forEach((cat,ci) => {
+  const a=(ci/mapNames.length)*Math.PI*2;
+  const cx=Math.cos(a)*catRadius, cz=Math.sin(a)*catRadius;
+  const cy=(ci%2===0?-1:1)*40+(ci-3)*15;
+  cat.forEach((name,ni) => {
+    const sa=(ni/cat.length)*Math.PI*2, subR=55+sr(ci*100+ni)*30;
+    const x=cx+Math.cos(sa)*subR, z=cz+Math.sin(sa)*subR;
+    const y=cy+Math.sin(sa*2)*30+(sr(ci*50+ni*7)-0.5)*20;
+    nodes.push({id:nid++,name,cat:ci,x,y,z,baseX:x,baseY:y,baseZ:z});
+  });
+});
+
+const catStartIndex=[];
+let running=0;
+mapNames.forEach(c=>{catStartIndex.push(running);running+=c.length;});
+
+const edges=[];
+mapNames.forEach((cat,ci)=>{
+  const start=catStartIndex[ci];
+  for(let i=0;i<cat.length;i++){
+    const next=(i+1)%cat.length;
+    edges.push({a:start+i,b:start+next,cross:false,reason:intraReasons[ci][i],type:null});
+  }
+});
+crossConnections.forEach(([ci,ni,cj,nj,reason,type])=>{
+  edges.push({a:catStartIndex[ci]+ni,b:catStartIndex[cj]+nj,cross:true,reason,type});
+});
+
+let rotX=0.3,rotY=0,zoom=1.8,autoRotate=true,activeFilter='all',selectedNode=null;
+let dragging=false,lastMX,lastMY,dragMoved=false;
+
+canvas.addEventListener('mousedown',e=>{dragging=true;dragMoved=false;lastMX=e.clientX;lastMY=e.clientY;});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  const dx=e.clientX-lastMX,dy=e.clientY-lastMY;
+  if(Math.abs(dx)>2||Math.abs(dy)>2){dragMoved=true;autoRotate=false;}
+  rotY+=dx*0.005;rotX+=dy*0.005;rotX=Math.max(-1.2,Math.min(1.2,rotX));
+  lastMX=e.clientX;lastMY=e.clientY;
+});
+window.addEventListener('mouseup',()=>{dragging=false;});
+canvas.addEventListener('wheel',e=>{e.preventDefault();zoom*=e.deltaY>0?0.95:1.05;zoom=Math.max(0.8,Math.min(4,zoom));},{passive:false});
+
+canvas.addEventListener('touchstart',e=>{if(e.touches.length===1){dragging=true;dragMoved=false;lastMX=e.touches[0].clientX;lastMY=e.touches[0].clientY;}},{passive:true});
+canvas.addEventListener('touchmove',e=>{if(!dragging||e.touches.length!==1)return;const dx=e.touches[0].clientX-lastMX,dy=e.touches[0].clientY-lastMY;if(Math.abs(dx)>3||Math.abs(dy)>3){dragMoved=true;autoRotate=false;}rotY+=dx*0.005;rotX+=dy*0.005;rotX=Math.max(-1.2,Math.min(1.2,rotX));lastMX=e.touches[0].clientX;lastMY=e.touches[0].clientY;},{passive:true});
+canvas.addEventListener('touchend',e=>{if(!dragMoved&&e.changedTouches.length===1)handleClick(e.changedTouches[0].clientX,e.changedTouches[0].clientY);dragging=false;});
+canvas.addEventListener('click',e=>{if(dragMoved)return;handleClick(e.clientX,e.clientY);});
+
+function handleClick(cx,cy){
+  const rect=canvas.getBoundingClientRect();
+  const mx=cx-rect.left,my=cy-rect.top;
+  let closest=null,closestDist=25;
+  nodes.forEach((n,i)=>{const p=project(n.x,n.y,n.z);const d=Math.hypot(p.sx-mx,p.sy-my);if(d<closestDist){closestDist=d;closest=i;}});
+  if(closest!==null){selectedNode=closest;showDetail(closest);}
+  else{selectedNode=null;showEmpty();}
+}
+
+function showEmpty(){
+  detailPanel.innerHTML='<div class="detail-empty"><div class="icon">&#9678;</div><p>Click any node on the map to reveal its connections and the reasoning behind each link.</p></div>';
+}
+
+function showDetail(idx){
+  const node=nodes[idx];
+  const conns=[];
+  edges.forEach(e=>{
+    if(e.a===idx||e.b===idx){
+      const other=e.a===idx?e.b:e.a;
+      conns.push({name:nodes[other].name,cat:nodes[other].cat,cross:e.cross,reason:e.reason,type:e.type,otherIdx:other});
+    }
+  });
+  const crossC=conns.filter(c=>c.cross), intraC=conns.filter(c=>!c.cross);
+  let html=`<div class="detail-content"><div class="detail-header"><div class="detail-cat-label" style="color:${catColors[node.cat]}">${catShort[node.cat]}</div><div class="detail-title">${node.name}</div><div class="detail-def">${nodeDefs[node.name]||''}</div></div><div class="connections-label">${conns.length} Connection${conns.length!==1?'s':''}</div>`;
+  [...crossC,...intraC].forEach(c=>{
+    html+=`<div class="connection-card" data-node="${c.otherIdx}"><div class="connection-card-header"><div class="connection-dot" style="background:${catColors[c.cat]}"></div><div class="connection-name">${c.name}</div><div class="connection-cat">${catShort[c.cat]}</div></div><div class="connection-type ${c.cross?'cross':'intra'}">${c.cross&&c.type?typeLabels[c.type]:(c.cross?'Cross-Category':'Within Category')}</div><div class="connection-reason">${c.reason}</div></div>`;
+  });
+  html+='</div>';
+  detailPanel.innerHTML=html;
+  detailPanel.scrollTop=0;
+  detailPanel.querySelectorAll('.connection-card').forEach(card=>{
+    card.addEventListener('click',()=>{const i=parseInt(card.dataset.node);selectedNode=i;showDetail(i);});
+  });
+}
+
+document.querySelectorAll('.mindmap-controls button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.mindmap-controls button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter=btn.dataset.filter;
+  });
+});
+
+function project(x,y,z){
+  let x1=x*Math.cos(rotY)-z*Math.sin(rotY),z1=x*Math.sin(rotY)+z*Math.cos(rotY);
+  let y1=y*Math.cos(rotX)-z1*Math.sin(rotX),z2=y*Math.sin(rotX)+z1*Math.cos(rotX);
+  const p=600,s=p/(p+z2)*zoom;
+  return{sx:W/2+x1*s,sy:H/2+y1*s,scale:s,z:z2};
+}
+
+function isVisible(ci){return activeFilter==='all'?1:(parseInt(activeFilter)===ci?1:0.08);}
+function hexToRgba(h,a){return`rgba(${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)},${a})`;}
+
+let time=0;
+function draw(){
+  time+=0.016;
+  if(autoRotate)rotY+=0.003;
+  ctx.clearRect(0,0,W,H);
+
+  nodes.forEach(n=>{n.x=n.baseX+Math.sin(time*0.5+n.id*0.7)*3;n.y=n.baseY+Math.cos(time*0.4+n.id*0.5)*2;n.z=n.baseZ+Math.sin(time*0.3+n.id*0.9)*3;});
+  const projected=nodes.map(n=>({...project(n.x,n.y,n.z),cat:n.cat,name:n.name}));
+
+  edges.forEach(e=>{
+    const a=projected[e.a],b=projected[e.b];
+    let alpha=Math.min(isVisible(nodes[e.a].cat),isVisible(nodes[e.b].cat));
+    const isConn=selectedNode!==null&&(e.a===selectedNode||e.b===selectedNode);
+    if(selectedNode!==null&&!isConn)alpha*=0.1;
+    if(e.cross){
+      ctx.strokeStyle=isConn?`rgba(200,147,90,${0.75*alpha})`:`rgba(200,147,90,${0.1*alpha})`;
+      ctx.lineWidth=isConn?2.5:0.5;ctx.setLineDash(isConn?[]:[4,6]);
+    }else{
+      const col=catColors[nodes[e.a].cat];
+      ctx.strokeStyle=hexToRgba(col,(isConn?0.85:0.3)*alpha);ctx.lineWidth=isConn?2:1;ctx.setLineDash([]);
+    }
+    ctx.beginPath();ctx.moveTo(a.sx,a.sy);ctx.lineTo(b.sx,b.sy);ctx.stroke();ctx.setLineDash([]);
+  });
+
+  const sorted=projected.map((p,i)=>({...p,i})).sort((a,b)=>b.z-a.z);
+  sorted.forEach(p=>{
+    let alpha=isVisible(p.cat);
+    const isSel=selectedNode===p.i;
+    const isConnNode=selectedNode!==null&&edges.some(e=>(e.a===selectedNode&&e.b===p.i)||(e.b===selectedNode&&e.a===p.i));
+    if(selectedNode!==null&&!isSel&&!isConnNode)alpha*=0.1;
+
+    const r=(isSel?7:4)*p.scale;const col=catColors[p.cat];
+    const gr=isSel?r*7:r*4;
+    const glow=ctx.createRadialGradient(p.sx,p.sy,0,p.sx,p.sy,gr);
+    glow.addColorStop(0,hexToRgba(col,(isSel?0.5:0.25)*alpha));glow.addColorStop(1,'transparent');
+    ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.sx,p.sy,gr,0,Math.PI*2);ctx.fill();
+
+    if(isSel){
+      ctx.strokeStyle=hexToRgba(col,0.9);ctx.lineWidth=2;
+      ctx.beginPath();ctx.arc(p.sx,p.sy,r+5,0,Math.PI*2);ctx.stroke();
+      const pulse=Math.sin(time*3)*0.15+0.85;
+      ctx.strokeStyle=hexToRgba(col,0.3*pulse);ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(p.sx,p.sy,r+12+Math.sin(time*2)*3,0,Math.PI*2);ctx.stroke();
+    }
+    if(isConnNode&&!isSel){
+      ctx.strokeStyle=hexToRgba(col,0.5);ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.arc(p.sx,p.sy,r+3,0,Math.PI*2);ctx.stroke();
+    }
+
+    ctx.fillStyle=hexToRgba(col,0.9*alpha);ctx.beginPath();ctx.arc(p.sx,p.sy,r,0,Math.PI*2);ctx.fill();
+
+    const fs=Math.max(9,Math.min(isSel?14:12,(isSel?13:11)*p.scale));
+    ctx.font=`${isSel?'600 ':''}${fs}px 'Outfit',sans-serif`;
+    ctx.textAlign='center';
+    ctx.fillStyle=`rgba(212,206,198,${(isSel||isConnNode?1:0.85)*alpha})`;
+    ctx.fillText(p.name,p.sx,p.sy-r-7);
+  });
+
+  // Legend
+  ctx.font="11px 'Outfit',sans-serif";ctx.textAlign='left';
+  catData.forEach((c,i)=>{
+    const alpha=isVisible(i);const ly=30+i*22;
+    ctx.fillStyle=hexToRgba(catColors[i],alpha);
+    ctx.beginPath();ctx.arc(24,ly-3,5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=`rgba(212,206,198,${0.7*alpha})`;
+    ctx.fillText(c.short,36,ly);
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+function toggleNav() {
+  var toggle = document.getElementById('navToggle');
+  var links  = document.getElementById('navLinks');
+  var overlay = document.getElementById('navOverlay');
+  var isOpen = links.classList.contains('open');
+  toggle.classList.toggle('active');
+  links.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+</script>
+</body>
+</html>
