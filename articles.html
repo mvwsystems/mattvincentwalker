@@ -42,80 +42,91 @@
   </div>
 
   <section class="section">
-    <div class="cards-grid">
-
-      <div class="article-card reveal">
-        <div class="article-img">Featured Image</div>
-        <div class="article-body">
-          <div class="article-date">March 2026</div>
-          <div class="article-title">The Order Effect: Why Sequence Determines Success</div>
-          <p class="article-excerpt">Most people fail not because they lack effort, but because they execute good moves in the wrong order. The Order Effect is the invisible architecture beneath every breakthrough.</p>
-          <span class="article-tag">Systems</span>
-          <span class="article-tag">Framework</span>
-        </div>
-      </div>
-
-      <div class="article-card reveal reveal-delay-1">
-        <div class="article-img">Featured Image</div>
-        <div class="article-body">
-          <div class="article-date">February 2026</div>
-          <div class="article-title">Shame Is Not a Motivator—It's a Saboteur</div>
-          <p class="article-excerpt">We've been told that shame keeps us honest. The neuroscience says otherwise. Shame hijacks the prefrontal cortex, collapses decision-making, and drives the very behaviors it claims to prevent.</p>
-          <span class="article-tag">Psychology</span>
-          <span class="article-tag">Formation</span>
-        </div>
-      </div>
-
-      <div class="article-card reveal reveal-delay-2">
-        <div class="article-img">Featured Image</div>
-        <div class="article-body">
-          <div class="article-date">February 2026</div>
-          <div class="article-title">The Superhuman OS: A Cybernetic Model for Human Flourishing</div>
-          <p class="article-excerpt">Three nested feedback loops. One operating system. A framework for building a life that can actually sustain love, work, responsibility, and meaning without slow erosion.</p>
-          <span class="article-tag">Framework</span>
-          <span class="article-tag">Neuroscience</span>
-        </div>
-      </div>
-
-      <div class="article-card reveal">
-        <div class="article-img">Featured Image</div>
-        <div class="article-body">
-          <div class="article-date">January 2026</div>
-          <div class="article-title">AI Won't Replace You. But It Will Expose Your Chaos.</div>
-          <p class="article-excerpt">The companies thriving with AI aren't the ones with the best tools. They're the ones who had internal order before the tools arrived. AI is an amplifier—of both competence and dysfunction.</p>
-          <span class="article-tag">AI</span>
-          <span class="article-tag">Business</span>
-        </div>
-      </div>
-
-      <div class="article-card reveal reveal-delay-1">
-        <div class="article-img">Featured Image</div>
-        <div class="article-body">
-          <div class="article-date">January 2026</div>
-          <div class="article-title">Formation Before Performance</div>
-          <p class="article-excerpt">We've optimized for output so long that we've forgotten what we're building. Performance without formation produces impressive ruins. This essay explores what it means to build from the inside out.</p>
-          <span class="article-tag">Formation</span>
-          <span class="article-tag">Faith</span>
-        </div>
-      </div>
-
-      <div class="article-card reveal reveal-delay-2">
-        <div class="article-img">Featured Image</div>
-        <div class="article-body">
-          <div class="article-date">December 2025</div>
-          <div class="article-title">The Leverage Letter: Building Systems That Outlast You</div>
-          <p class="article-excerpt">Your business shouldn't need you in every room. Here's how to architect operations, automations, and decision frameworks that create compounding leverage over time.</p>
-          <span class="article-tag">Leverage</span>
-          <span class="article-tag">Systems</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="text-align: center; margin-top: 48px;">
-      <a href="https://superhumansystems.io" target="_blank" class="btn-primary" style="display: inline-flex;">Read All on Substack →</a>
+    <div id="articles-container" class="cards-grid"></div>
+    <div id="articles-cta" style="text-align: center; margin-top: 48px; display: none;">
+      <a href="https://www.superhumansystems.io/" target="_blank" class="btn-primary" style="display: inline-flex;">Read All Articles →</a>
     </div>
   </section>
+
+  <script>
+  (function () {
+    const container = document.getElementById('articles-container');
+    const cta = document.getElementById('articles-cta');
+    const RSS_URL = 'https://www.superhumansystems.io/feed';
+    const PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+    const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      if (isNaN(d)) return '';
+      return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    function renderItems(items) {
+      container.innerHTML = items.map((item, i) => {
+        const delay = delays[i % delays.length];
+        const date = formatDate(item.pubDate || item.published);
+        const excerpt = stripHtml(item.description || item.content || '').slice(0, 220).trim();
+        const title = item.title || '';
+        const url = item.link || item.url || '#';
+        return `
+          <div class="article-card reveal ${delay}">
+            <div class="article-body">
+              <div class="article-date">${date}</div>
+              <div class="article-title">${title}</div>
+              <p class="article-excerpt">${excerpt}${excerpt.length >= 220 ? '…' : ''}</p>
+              <a href="${url}" target="_blank" rel="noopener" class="article-tag" style="text-decoration:none;">Read More →</a>
+            </div>
+          </div>`;
+      }).join('');
+      cta.style.display = 'block';
+      // Trigger reveal observers for newly added cards
+      if (window.observeReveals) window.observeReveals();
+      else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    function renderError() {
+      container.innerHTML = `
+        <div class="article-card" style="grid-column:1/-1;text-align:center;padding:48px 24px;">
+          <div class="article-body">
+            <div class="article-date">—</div>
+            <div class="article-title" style="opacity:0.5;">Could not load articles</div>
+            <p class="article-excerpt">Visit <a href="https://www.superhumansystems.io/" target="_blank" rel="noopener" style="color:var(--amber)">superhumansystems.io</a> to read the latest writing.</p>
+          </div>
+        </div>`;
+    }
+
+    function renderLoading() {
+      container.innerHTML = `
+        <div class="article-card" style="grid-column:1/-1;text-align:center;padding:48px 24px;">
+          <div class="article-body">
+            <div class="article-date" style="font-family:var(--font-mono);letter-spacing:0.15em;">Loading…</div>
+          </div>
+        </div>`;
+    }
+
+    async function loadFeed() {
+      renderLoading();
+      try {
+        const res = await fetch(PROXY + encodeURIComponent(RSS_URL));
+        if (!res.ok) throw new Error('proxy error');
+        const data = await res.json();
+        if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('no items');
+        renderItems(data.items);
+      } catch (e) {
+        renderError();
+      }
+    }
+
+    loadFeed();
+  })();
+  </script>
 
 <footer>
   <div class="footer-left">© 2026 Matt Vincent Walker</div>
