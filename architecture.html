@@ -10,19 +10,19 @@
 
 <style>
 :root {
-  --black:        #090806;
-  --deep:         #110e0b;
-  --surface:      #1a1410;
-  --border:       #2a211a;
-  --amber:        #c8860a;
-  --gold:         #e8a820;
-  --gold-bright:  #f5c842;
-  --gold-pale:    rgba(240,217,128,0.18);
+  --black:        #080808;
+  --deep:         #0c0a09;
+  --surface:      #1a1714;
+  --border:       #2a2725;
+  --amber:        #c8935a;
+  --gold:         #c8935a;
+  --gold-bright:  #daa76a;
+  --gold-pale:    rgba(200,147,90,0.15);
   --red:          #c0392b;
   --red-glow:     rgba(192,57,43,0.5);
-  --text:         #d4b896;
-  --text-dim:     #8a7060;
-  --text-bright:  #f0e4d0;
+  --text:         #d4cec6;
+  --text-dim:     #7a7572;
+  --text-bright:  #f5f1e9;
   --mono:         'JetBrains Mono', monospace;
   --serif:        'Cormorant Garamond', serif;
   --sans:         'Outfit', sans-serif;
@@ -151,12 +151,12 @@ body::after {
   text-transform: uppercase;
   color: var(--gold);
   text-decoration: none;
-  border: 1px solid rgba(232,168,32,0.35);
+  border: 1px solid rgba(200,147,90,0.35);
   padding: 5px 12px;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
   white-space: nowrap;
 }
-.chrome-download:hover { color: var(--gold-bright); border-color: var(--gold); background: rgba(232,168,32,0.07); }
+.chrome-download:hover { color: var(--gold-bright); border-color: var(--gold); background: rgba(200,147,90,0.07); }
 
 .chrome-back {
   font-family: var(--mono);
@@ -691,6 +691,7 @@ canvas { display: block; width: 100%; height: 100%; }
 
   .title-main { font-size: 1rem; }
 
+  #status-bar { display: none; }
   #chrome { padding: 14px 16px; }
   .chrome-logo img { height: 22px; }
   .chrome-download { display: none; }
@@ -733,15 +734,15 @@ canvas { display: block; width: 100%; height: 100%; }
 <!-- ════ LOOP LEGEND ════ -->
 <div id="loop-legend">
   <div class="ll-item">
-    <div class="ll-ring" style="border-color:#e8a820;background:rgba(232,168,32,0.08)"></div>
+    <div class="ll-ring" style="border-color:#c8935a;background:rgba(200,147,90,0.08)"></div>
     <span class="ll-text">Loop I — State (Fast)</span>
   </div>
   <div class="ll-item">
-    <div class="ll-ring" style="border-color:#c87820;background:rgba(200,120,32,0.08)"></div>
+    <div class="ll-ring" style="border-color:#b07840;background:rgba(176,120,64,0.08)"></div>
     <span class="ll-text">Loop II — Structural (Mid)</span>
   </div>
   <div class="ll-item">
-    <div class="ll-ring" style="border-color:#8b5525;background:rgba(139,85,37,0.08)"></div>
+    <div class="ll-ring" style="border-color:#8a6a3e;background:rgba(138,106,62,0.08)"></div>
     <span class="ll-text">Loop III — Consequence (Slow)</span>
   </div>
 </div>
@@ -803,7 +804,7 @@ canvas { display: block; width: 100%; height: 100%; }
     <!-- Node cards injected by JS -->
   </div>
   <div style="max-width:420px;margin:40px auto 0;padding:0 0 16px;">
-    <a href="Superhuman-OS-Research-Paper.pdf" download style="display:block;width:100%;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(232,168,32,0.35);padding:14px 0;transition:background 0.2s,border-color 0.2s;">// Download Research Paper</a>
+    <a href="Superhuman-OS-Research-Paper.pdf" download style="display:block;width:100%;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(200,147,90,0.35);padding:14px 0;transition:background 0.2s,border-color 0.2s;">// Download Research Paper</a>
   </div>
 </div>
 
@@ -815,7 +816,7 @@ const NODES = [
   {
     id:'shame', label:'Shame-Identity Nexus', type:'Comparator Core', loop:0,
     orbitalAngle:0, orbitalRadius:0, orbitalTilt:0, radius:22, isCentral:true,
-    baseColor:[200,134,10], shameColor:[192,57,43],
+    baseColor:[200,147,90], shameColor:[192,57,43],
     desc:'The central comparator evaluating error signals between identity and performance. When corrupted by shame, it injects phantom error signals into every connected node.',
     shameEffect:'All error signals become unreliable. Overcorrection and control abandonment emerge simultaneously. The harder you try, the worse the signal.',
     connections:['identity','emotion','cognition','physio','moral','relational']
@@ -823,7 +824,7 @@ const NODES = [
   {
     id:'identity', label:'Identity Coherence', type:'State Vector x₁', loop:1,
     orbitalAngle:0, orbitalRadius:160, orbitalTilt:0.2, radius:13,
-    baseColor:[232,168,32], shameColor:[180,80,30],
+    baseColor:[218,167,106], shameColor:[180,80,30],
     desc:'The reference signal anchor. Determines the system\'s sense of self independent of performance output.',
     shameEffect:'Shame attacks identity first. When x₁ destabilizes, all self-evaluation becomes performance-dependent — a self-terminating configuration.',
     connections:['emotion','moral','relational']
@@ -831,7 +832,7 @@ const NODES = [
   {
     id:'emotion', label:'Emotional Regulation', type:'State Vector x₂', loop:1,
     orbitalAngle:Math.PI/3, orbitalRadius:160, orbitalTilt:-0.15, radius:12,
-    baseColor:[220,150,20], shameColor:[160,60,20],
+    baseColor:[210,155,95], shameColor:[160,60,20],
     desc:'The affective regulation subsystem. Real-time feedback on system load, threat level, and coherence.',
     shameEffect:'Shame corrupts emotional signals — distress becomes indistinguishable from threat. The system runs in chronic alarm.',
     connections:['cognition','physio']
@@ -839,7 +840,7 @@ const NODES = [
   {
     id:'cognition', label:'Cognitive Clarity', type:'State Vector x₃', loop:1,
     orbitalAngle:2*Math.PI/3, orbitalRadius:160, orbitalTilt:0.3, radius:12,
-    baseColor:[210,140,15], shameColor:[150,50,15],
+    baseColor:[205,150,90], shameColor:[150,50,15],
     desc:'The information processing layer. Pattern recognition, decision quality, and accurate perception.',
     shameEffect:'Shame narrows the cognitive field. Threat-detection dominates. Strategic thinking and creativity collapse.',
     connections:['identity','moral']
@@ -847,7 +848,7 @@ const NODES = [
   {
     id:'physio', label:'Physiological Energy', type:'State Vector x₄', loop:1,
     orbitalAngle:Math.PI, orbitalRadius:160, orbitalTilt:-0.25, radius:11,
-    baseColor:[200,125,10], shameColor:[140,45,10],
+    baseColor:[195,140,82], shameColor:[140,45,10],
     desc:'The biological substrate — sleep, nervous system regulation, hormonal balance. The foundational viability constraint.',
     shameEffect:'Chronic shame activates prolonged stress responses. Cortisol dysregulation erodes the physical foundation of all other loops.',
     connections:['emotion','relational']
@@ -855,7 +856,7 @@ const NODES = [
   {
     id:'moral', label:'Moral Alignment', type:'State Vector x₅', loop:1,
     orbitalAngle:4*Math.PI/3, orbitalRadius:160, orbitalTilt:0.1, radius:11,
-    baseColor:[215,155,25], shameColor:[155,55,20],
+    baseColor:[208,152,90], shameColor:[155,55,20],
     desc:'Values-action coherence signal. When behavior aligns with values, the system receives integrity feedback.',
     shameEffect:'Shame collapses the distinction between moral failure and moral identity. One mistake becomes total condemnation.',
     connections:['identity','relational']
@@ -863,7 +864,7 @@ const NODES = [
   {
     id:'relational', label:'Relational Coherence', type:'State Vector x₆', loop:1,
     orbitalAngle:5*Math.PI/3, orbitalRadius:160, orbitalTilt:-0.35, radius:12,
-    baseColor:[228,162,28], shameColor:[168,68,25],
+    baseColor:[215,158,96], shameColor:[168,68,25],
     desc:'The external observability sensor. Human systems cannot self-diagnose without relational input — this is the co-regulation interface and repair pathway.',
     shameEffect:'Shame drives isolation — disabling the only mechanism capable of repairing shame. The self-sealing failure mode.',
     connections:['identity','physio']
@@ -871,7 +872,7 @@ const NODES = [
   {
     id:'environment', label:'Environment Design', type:'Structural Loop II', loop:2,
     orbitalAngle:Math.PI/6, orbitalRadius:260, orbitalTilt:0.15, radius:9,
-    baseColor:[180,110,8], shameColor:[120,40,8],
+    baseColor:[178,126,70], shameColor:[120,40,8],
     desc:'The structural architecture of time, space, and context that enables or degrades state regulation.',
     shameEffect:'When shame is high, environment becomes entropy. Chaos in the outer world amplifies inner signal noise.',
     connections:['identity','physio','cognition']
@@ -879,7 +880,7 @@ const NODES = [
   {
     id:'temporal', label:'Temporal Architecture', type:'Structural Loop II', loop:2,
     orbitalAngle:Math.PI/2, orbitalRadius:260, orbitalTilt:-0.2, radius:9,
-    baseColor:[175,105,6], shameColor:[115,38,6],
+    baseColor:[172,120,65], shameColor:[115,38,6],
     desc:'The rhythmic structure of effort, recovery, and renewal. Sustainable output requires oscillation, not just drive.',
     shameEffect:'Shame produces urgency that collapses temporal architecture. Rest becomes impossible. The system runs without recovery.',
     connections:['physio','emotion','environment']
@@ -887,7 +888,7 @@ const NODES = [
   {
     id:'narrative', label:'Narrative Identity', type:'Reference Signal Generator', loop:2,
     orbitalAngle:5*Math.PI/6, orbitalRadius:260, orbitalTilt:0.4, radius:10,
-    baseColor:[185,118,10], shameColor:[125,45,10],
+    baseColor:[180,130,72], shameColor:[125,45,10],
     desc:'The generative mechanism for the reference signal. The story you are living sets the target state.',
     shameEffect:'Shame rewrites narrative. Past becomes evidence of unworthiness. The reference signal shifts from aspiration to survival.',
     connections:['identity','moral','cognition']
@@ -895,7 +896,7 @@ const NODES = [
   {
     id:'legacy', label:'Legacy Signal', type:'Consequence Loop III', loop:3,
     orbitalAngle:3*Math.PI/4, orbitalRadius:340, orbitalTilt:-0.3, radius:8,
-    baseColor:[155,88,5], shameColor:[100,30,5],
+    baseColor:[158,110,58], shameColor:[100,30,5],
     desc:'The delayed consequence signal — the long arc of how choices compound across years and decades.',
     shameEffect:'Shame discounts the future. Chronic shame makes long-term consequence signals irrelevant. The consequence loop goes silent.',
     connections:['narrative','moral','identity']
@@ -903,7 +904,7 @@ const NODES = [
   {
     id:'viability', label:'Viability Constraint', type:'Consequence Loop III', loop:3,
     orbitalAngle:7*Math.PI/4, orbitalRadius:340, orbitalTilt:0.25, radius:8,
-    baseColor:[160,92,6], shameColor:[105,32,6],
+    baseColor:[162,115,60], shameColor:[105,32,6],
     desc:'V(x,E) ≥ 0 at all times. The constraint that prevents self-terminating trajectories. The system must survive to transform.',
     shameEffect:'Extreme shame generates trajectories that violate the viability constraint — paths toward self-termination.',
     connections:['physio','environment','legacy']
@@ -1014,7 +1015,7 @@ function drawRings(rX, rY, shame) {
     }
     ctx.beginPath();
     pts.forEach((p,i) => i===0 ? ctx.moveTo(p.sx,p.sy) : ctx.lineTo(p.sx,p.sy));
-    const [cr,cg,cb] = lerpColor([232,168,32],[192,57,43],shame*0.6);
+    const [cr,cg,cb] = lerpColor([200,147,90],[192,57,43],shame*0.6);
     ctx.strokeStyle = `rgba(${cr},${cg},${cb},${op*(1+shame*0.4)})`;
     ctx.lineWidth=1; ctx.setLineDash([4,8]); ctx.stroke(); ctx.setLineDash([]);
   });
@@ -1026,7 +1027,7 @@ function drawConnections(proj, shame, t) {
     const pA = proj[n.id];
     n.connections.forEach(cid => {
       const pB = proj[cid]; if(!pB) return;
-      const [r,g,b] = lerpColor([232,168,32],[192,57,43],shame);
+      const [r,g,b] = lerpColor([200,147,90],[192,57,43],shame);
       const alpha = 0.04 + (1-shame)*0.06;
       ctx.beginPath();
       ctx.moveTo(pA.sx,pA.sy); ctx.lineTo(pB.sx,pB.sy);
@@ -1176,7 +1177,7 @@ function applyShame(val) {
   document.getElementById('spThumb').style.left=pct;
 
   const labels = ['Coherent','Degrading','Corrupted','Collapsed'];
-  const colors = ['#e8a820','#c87020','#c0392b','#922b21'];
+  const colors = ['#c8935a','#c87020','#c0392b','#922b21'];
   const idx = val<20?0:val<50?1:val<80?2:3;
   const lbl=document.getElementById('shameLabel');
   lbl.textContent=labels[idx]; lbl.style.color=colors[idx];
@@ -1187,7 +1188,7 @@ function applyShame(val) {
   document.getElementById('statusDot').style.background=colors[idx];
 
   const thumb=document.getElementById('spThumb');
-  thumb.style.background=val<20?'#f5c842':colors[idx];
+  thumb.style.background=val<20?'#daa76a':colors[idx];
   thumb.style.boxShadow=`0 0 14px ${colors[idx]}`;
 
   if(hoveredNode) updateDetail(hoveredNode);
@@ -1204,7 +1205,7 @@ function buildArcSVG() {
   const H=280;
   const cx=W/2, cy=H-20;
   const arcs=[
-    {r:W*0.46,color:'#e8a820',label:'Loop I — State',opacity:0.5},
+    {r:W*0.46,color:'#c8935a',label:'Loop I — State',opacity:0.5},
     {r:W*0.32,color:'#c87820',label:'Loop II — Structural',opacity:0.4},
     {r:W*0.18,color:'#8b5525',label:'Loop III — Consequence',opacity:0.35},
   ];
@@ -1212,8 +1213,8 @@ function buildArcSVG() {
   let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible">
   <defs>
     <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f5c842" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#c8860a" stop-opacity="0.7"/>
+      <stop offset="0%" stop-color="#daa76a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c8935a" stop-opacity="0.7"/>
     </radialGradient>
   </defs>`;
 
@@ -1267,21 +1268,21 @@ function buildArcSVG() {
     const x=cx+r*Math.cos(Math.PI-a);
     const y=cy-r*Math.sin(a);
     svg+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"
-      stroke="#c8860a" stroke-width="0.5" stroke-opacity="0.12"/>`;
+      stroke="#c8935a" stroke-width="0.5" stroke-opacity="0.12"/>`;
   });
 
   // Central node
-  svg+=`<circle cx="${cx}" cy="${cy}" r="14" fill="url(#coreGrad)" stroke="#e8a820" stroke-width="1.5"/>`;
+  svg+=`<circle cx="${cx}" cy="${cy}" r="14" fill="url(#coreGrad)" stroke="#c8935a" stroke-width="1.5"/>`;
   svg+=`<text x="${cx}" y="${cy+3}" text-anchor="middle"
     font-family="'JetBrains Mono',monospace" font-size="6" fill="#09080600">SIN</text>`;
 
   // Baseline
   svg+=`<line x1="${cx-W*0.5}" y1="${cy}" x2="${cx+W*0.5}" y2="${cy}"
-    stroke="#2a211a" stroke-width="1"/>`;
+    stroke="#2a2725" stroke-width="1"/>`;
 
   // Center label
   svg+=`<text x="${cx}" y="${cy+24}" text-anchor="middle"
-    font-family="'JetBrains Mono',monospace" font-size="7" fill="#8a7060" letter-spacing="2">SHAME-IDENTITY NEXUS</text>`;
+    font-family="'JetBrains Mono',monospace" font-size="7" fill="#7a7572" letter-spacing="2">SHAME-IDENTITY NEXUS</text>`;
 
   svg+='</svg>';
   return svg;
@@ -1341,9 +1342,9 @@ if(mobileSlider) {
     const pct=val+'%';
     document.getElementById('msFill').style.height=pct;
     document.getElementById('msThumb').style.top=pct;
-    const colors=['#e8a820','#c87020','#c0392b','#922b21'];
+    const colors=['#c8935a','#c87020','#c0392b','#922b21'];
     const idx=val<20?0:val<50?1:val<80?2:3;
-    document.getElementById('msThumb').style.background=val<20?'#f5c842':colors[idx];
+    document.getElementById('msThumb').style.background=val<20?'#daa76a':colors[idx];
     document.getElementById('msThumb').style.boxShadow=`0 0 10px ${colors[idx]}`;
     // sync to global
     document.getElementById('shameSlider').value=val;
