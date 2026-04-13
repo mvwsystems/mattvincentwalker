@@ -889,6 +889,17 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════════
+   GHOST BUTTON
+   ═══════════════════════════════════════════════════════ */
+.btn-secondary {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--warm-gray);
+  border-bottom: 1px solid var(--ash); padding-bottom: 4px;
+  transition: all 0.3s; cursor: pointer; text-decoration: none;
+}
+.btn-secondary:hover { color: var(--white); border-color: var(--amber); }
+
+/* ═══════════════════════════════════════════════════════
    CLOSING CTA
    ═══════════════════════════════════════════════════════ */
 .closing {
@@ -1287,6 +1298,10 @@ footer {
     </div>
   </div>
 </section>
+
+<div style="text-align: center; padding: 56px 48px 0;">
+  <a href="/architecture" class="btn-secondary reveal">View the Architecture →</a>
+</div>
 
 <div class="divider"></div>
 
