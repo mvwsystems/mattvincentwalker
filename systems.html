@@ -64,6 +64,12 @@
   .custom-cursor.hovering { width:56px; height:56px; background:rgba(200,147,90,0.06); border-color:#c8935a; }
   .cursor-dot { position:fixed; width:4px; height:4px; background:#c8935a; border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); }
   @media (max-width:900px) { .nav-links{width:100%} .custom-cursor,.cursor-dot{display:none!important} }
+  .site-footer{display:flex;justify-content:space-between;align-items:center;padding:48px;border-top:1px solid #232019;}
+  .footer-left{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#7a7572;}
+  .footer-links{display:flex;gap:24px;}
+  .footer-links a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7a7572;transition:color 0.3s;position:relative;text-decoration:none;}
+  .footer-links a:hover{color:#c8935a;}
+  @media(max-width:600px){.site-footer{flex-direction:column;gap:20px;text-align:center;padding:32px 24px;}}
 </style>
 </head>
 <body class="bg-[#0f0d0b] text-[#d4cec6] font-body font-light leading-relaxed overflow-x-hidden antialiased selection:bg-[#c8935a] selection:text-[#0a0a0a]">
@@ -314,5 +320,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+<footer class="site-footer">
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+</footer>
 </body>
 </html>
