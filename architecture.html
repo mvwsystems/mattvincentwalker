@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Superhuman OS — Architecture</title>
+<meta name="description" content="The living architecture of Superhuman OS — a cybernetic field model for human transformation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --black:        #090806;
+  --deep:         #110e0b;
+  --surface:      #1a1410;
+  --border:       #2a211a;
+  --amber:        #c8860a;
+  --gold:         #e8a820;
+  --gold-bright:  #f5c842;
+  --gold-pale:    rgba(240,217,128,0.18);
+  --red:          #c0392b;
+  --red-glow:     rgba(192,57,43,0.5);
+  --text:         #d4b896;
+  --text-dim:     #8a7060;
+  --text-bright:  #f0e4d0;
+  --mono:         'JetBrains Mono', monospace;
+  --serif:        'Cormorant Garamond', serif;
+  --sans:         'Outfit', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.6;
+}
+
+/* ════════════════════════════════════════════
+   CINEMATIC LOADER
+════════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-sig {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--text-bright);
+  opacity: 0;
+  animation: loaderFadeIn 0.8s 0.3s forwards;
+}
+
+.loader-sig span { color: var(--gold); font-style: italic; }
+
+.loader-sub {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 10px;
+  opacity: 0;
+  animation: loaderFadeIn 0.8s 0.7s forwards;
+}
+
+.loader-line {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin-top: 28px;
+  animation: loaderLine 1.2s 0.9s forwards;
+}
+
+.loader-status {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--amber);
+  margin-top: 16px;
+  opacity: 0;
+  animation: loaderFadeIn 0.5s 1.4s forwards;
+}
+
+@keyframes loaderFadeIn { to { opacity: 1; } }
+@keyframes loaderLine { to { width: 200px; } }
+
+/* ════════════════════════════════════════════
+   CHROME — LOGO + BACK LINK
+════════════════════════════════════════════ */
+#chrome {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s 0.2s;
+}
+
+#chrome.visible { opacity: 1; pointer-events: all; }
+
+.chrome-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+
+.chrome-logo img {
+  height: 28px;
+  opacity: 0.85;
+  filter: brightness(1.1);
+}
+
+.chrome-logo-text {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-bright);
+  opacity: 0.7;
+}
+
+.chrome-back {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s;
+}
+
+.chrome-back:hover { color: var(--gold); }
+.chrome-back::before { content: '←'; font-size: 0.7rem; }
+
+/* ════════════════════════════════════════════
+   TITLE BLOCK
+════════════════════════════════════════════ */
+#title-block {
+  position: fixed;
+  top: 68px; left: 28px;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s 0.4s;
+}
+
+#title-block.visible { opacity: 1; }
+
+.title-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.title-main {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--text-bright);
+  line-height: 1.1;
+}
+
+.title-main em { color: var(--gold); font-style: italic; }
+
+/* ════════════════════════════════════════════
+   STATUS
+════════════════════════════════════════════ */
+#status-bar {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex; align-items: center; gap: 7px;
+  opacity: 0;
+  transition: opacity 0.6s 0.5s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#status-bar.visible { opacity: 1; }
+
+.status-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: statusPulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+  transition: background 0.4s;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+
+.status-text {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: color 0.4s;
+}
+
+/* ════════════════════════════════════════════
+   SHAME PANEL
+════════════════════════════════════════════ */
+#shame-panel {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(380px, 90vw);
+  opacity: 0;
+  transition: opacity 0.6s 0.6s;
+}
+
+#shame-panel.visible { opacity: 1; }
+
+.sp-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.sp-label strong {
+  color: var(--gold);
+  font-weight: 400;
+  transition: color 0.4s;
+}
+
+.sp-track-wrap {
+  position: relative;
+  height: 24px;
+  display: flex; align-items: center;
+}
+
+.sp-track {
+  position: absolute;
+  left: 0; right: 0;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.sp-fill {
+  position: absolute;
+  left: 0; top: 0; height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--red));
+  width: 10%;
+  transition: width 0.04s;
+}
+
+.sp-input {
+  position: absolute;
+  left: 0; right: 0;
+  width: 100%;
+  height: 24px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: none;
+}
+
+.sp-thumb {
+  position: absolute;
+  width: 16px; height: 16px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 10%;
+  pointer-events: none;
+  box-shadow: 0 0 14px var(--gold);
+  transition: left 0.04s, background 0.3s, box-shadow 0.3s;
+  z-index: 1;
+}
+
+.sp-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.sp-end {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sp-end.restored { color: var(--gold); }
+.sp-end.corrupted { color: var(--red); }
+
+/* ════════════════════════════════════════════
+   LOOP LEGEND
+════════════════════════════════════════════ */
+#loop-legend {
+  position: fixed;
+  top: 68px; right: 28px;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.6s 0.6s;
+  pointer-events: none;
+}
+
+#loop-legend.visible { opacity: 1; }
+
+.ll-item {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 9px;
+}
+
+.ll-ring {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.ll-text {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ════════════════════════════════════════════
+   INSTRUCTIONS
+════════════════════════════════════════════ */
+#instructions {
+  position: fixed;
+  bottom: 90px; left: 28px;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.6s 0.8s;
+  pointer-events: none;
+}
+
+#instructions.visible { opacity: 1; }
+
+.inst-line {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 2;
+  opacity: 0.6;
+}
+
+/* ════════════════════════════════════════════
+   DETAIL PANEL
+════════════════════════════════════════════ */
+#detail {
+  position: fixed;
+  top: 50%; right: 28px;
+  transform: translateY(-50%);
+  z-index: 100;
+  width: 230px;
+  background: linear-gradient(135deg, rgba(26,20,15,0.97), rgba(17,14,10,0.97));
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  padding: 18px 16px;
+  opacity: 0;
+  transition: opacity 0.3s, border-color 0.4s;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+
+#detail.visible { opacity: 1; }
+
+.d-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+.d-type {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  transition: color 0.4s;
+}
+
+.d-desc {
+  font-size: 0.74rem;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.d-shame-text {
+  font-size: 0.68rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.6;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.d-health {
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.d-health-fill {
+  height: 100%;
+  border-radius: 1px;
+  background: var(--gold);
+  transition: width 0.6s cubic-bezier(.4,0,.2,1), background 0.6s;
+}
+
+/* ════════════════════════════════════════════
+   CANVAS (DESKTOP 3D)
+════════════════════════════════════════════ */
+#canvas-wrap {
+  position: fixed; inset: 0;
+}
+
+canvas { display: block; width: 100%; height: 100%; }
+
+/* ════════════════════════════════════════════
+   MOBILE ARC VIEW
+════════════════════════════════════════════ */
+#arc-view {
+  display: none;
+  position: fixed; inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 80px 20px 140px;
+}
+
+/* ARC SVG container */
+#arc-svg-wrap {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 32px;
+  position: relative;
+}
+
+/* Mobile node cards */
+.arc-nodes {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.arc-section-label {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+.arc-node-card {
+  background: linear-gradient(135deg, var(--deep), var(--surface));
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--amber);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.4s, background 0.4s;
+  border-radius: 1px;
+}
+
+.arc-node-card.shame-corrupted {
+  border-left-color: var(--red);
+  background: linear-gradient(135deg, #1a0c0a, #130908);
+}
+
+.arc-node-name {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-bright);
+  margin-bottom: 2px;
+}
+
+.arc-node-type {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  transition: color 0.4s;
+}
+
+.arc-node-desc {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.arc-shame-note {
+  font-size: 0.68rem;
+  font-style: italic;
+  color: var(--red);
+  line-height: 1.55;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(192,57,43,0.2);
+  display: none;
+}
+
+.arc-node-card.shame-corrupted .arc-shame-note { display: block; }
+.arc-node-card.shame-corrupted .arc-node-type { color: var(--red); }
+
+.arc-loop-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 20px 0 14px;
+}
+
+.arc-loop-divider-line { flex: 1; height: 1px; background: var(--border); }
+
+.arc-loop-divider-label {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* MOBILE SHAME PANEL — vertical side slider */
+#mobile-shame {
+  display: none;
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 200px;
+}
+
+.ms-label-top, .ms-label-bot {
+  font-family: var(--mono);
+  font-size: 0.46rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.ms-label-top { color: var(--gold); transform: rotate(180deg); }
+.ms-label-bot { color: var(--red); }
+
+.ms-track-wrap {
+  flex: 1;
+  position: relative;
+  width: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.ms-track {
+  width: 3px;
+  height: 100%;
+  background: var(--border);
+  border-radius: 2px;
+  position: relative;
+}
+
+.ms-fill {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--red));
+  height: 10%;
+  transition: height 0.04s;
+}
+
+.ms-input {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  transform: translateX(-50%);
+  writing-mode: vertical-lr;
+  direction: rtl;
+}
+
+.ms-thumb {
+  position: absolute;
+  width: 14px; height: 14px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-shadow: 0 0 10px var(--gold);
+  transition: top 0.04s, background 0.3s, box-shadow 0.3s;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE BREAKPOINT
+════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  #canvas-wrap { display: none; }
+  #arc-view { display: block; }
+  #mobile-shame { display: flex; }
+  #instructions { display: none; }
+  #loop-legend { display: none; }
+  #detail { display: none; }
+  #shame-panel { display: none; }
+
+  #title-block {
+    top: 58px;
+    left: 16px;
+  }
+
+  .title-main { font-size: 1rem; }
+
+  #chrome { padding: 14px 16px; }
+  .chrome-logo img { height: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ LOADER ════ -->
+<div id="loader">
+  <div class="loader-sig">Matt Vincent <span>Walker</span></div>
+  <div class="loader-sub">Superhuman OS — Architecture</div>
+  <div class="loader-line"></div>
+  <div class="loader-status">// Initializing field model</div>
+</div>
+
+<!-- ════ CHROME ════ -->
+<div id="chrome">
+  <a href="https://mattvincentwalker.com/superhuman" class="chrome-logo">
+    <img src="https://mattvincentwalker.com/MV Signature small.png" alt="Matt Vincent Walker" onerror="this.style.display='none'">
+    <span class="chrome-logo-text">MVW</span>
+  </a>
+  <a href="https://mattvincentwalker.com/superhuman" class="chrome-back">Back to Superhuman OS</a>
+</div>
+
+<!-- ════ TITLE ════ -->
+<div id="title-block">
+  <div class="title-eyebrow">// Field Architecture</div>
+  <div class="title-main">Superhuman <em>OS</em></div>
+</div>
+
+<!-- ════ STATUS ════ -->
+<div id="status-bar">
+  <div class="status-dot" id="statusDot"></div>
+  <span class="status-text" id="statusText">System Coherent</span>
+</div>
+
+<!-- ════ LOOP LEGEND ════ -->
+<div id="loop-legend">
+  <div class="ll-item">
+    <div class="ll-ring" style="border-color:#e8a820;background:rgba(232,168,32,0.08)"></div>
+    <span class="ll-text">Loop I — State (Fast)</span>
+  </div>
+  <div class="ll-item">
+    <div class="ll-ring" style="border-color:#c87820;background:rgba(200,120,32,0.08)"></div>
+    <span class="ll-text">Loop II — Structural (Mid)</span>
+  </div>
+  <div class="ll-item">
+    <div class="ll-ring" style="border-color:#8b5525;background:rgba(139,85,37,0.08)"></div>
+    <span class="ll-text">Loop III — Consequence (Slow)</span>
+  </div>
+</div>
+
+<!-- ════ INSTRUCTIONS (desktop) ════ -->
+<div id="instructions">
+  <div class="inst-line">// Hover nodes to inspect</div>
+  <div class="inst-line">// Drag to rotate</div>
+  <div class="inst-line">// Scroll to zoom</div>
+</div>
+
+<!-- ════ DESKTOP CANVAS ════ -->
+<div id="canvas-wrap">
+  <canvas id="c"></canvas>
+</div>
+
+<!-- ════ DETAIL PANEL ════ -->
+<div id="detail">
+  <div class="d-name" id="dName">—</div>
+  <div class="d-type" id="dType">—</div>
+  <div class="d-desc" id="dDesc">—</div>
+  <div class="d-shame-text" id="dShame">—</div>
+  <div class="d-health"><div class="d-health-fill" id="dHealthFill" style="width:80%"></div></div>
+</div>
+
+<!-- ════ DESKTOP SHAME PANEL ════ -->
+<div id="shame-panel">
+  <div class="sp-label">Comparator Integrity — <strong id="shameLabel">Coherent</strong></div>
+  <div class="sp-track-wrap">
+    <div class="sp-track"><div class="sp-fill" id="spFill"></div></div>
+    <input type="range" class="sp-input" id="shameSlider" min="0" max="100" value="10">
+    <div class="sp-thumb" id="spThumb"></div>
+  </div>
+  <div class="sp-ends">
+    <span class="sp-end restored">▲ Restored</span>
+    <span class="sp-end corrupted">Corrupted ▲</span>
+  </div>
+</div>
+
+<!-- ════ MOBILE SHAME SLIDER ════ -->
+<div id="mobile-shame">
+  <span class="ms-label-top">Restored</span>
+  <div class="ms-track-wrap">
+    <div class="ms-track">
+      <div class="ms-fill" id="msFill"></div>
+    </div>
+    <input type="range" class="ms-input" id="mobileShameSlider" min="0" max="100" value="10" orient="vertical">
+    <div class="ms-thumb" id="msThumb"></div>
+  </div>
+  <span class="ms-label-bot">Corrupted</span>
+</div>
+
+<!-- ════ MOBILE ARC VIEW ════ -->
+<div id="arc-view">
+  <div id="arc-svg-wrap">
+    <!-- SVG arc diagram injected by JS -->
+  </div>
+  <div class="arc-nodes" id="arcNodes">
+    <!-- Node cards injected by JS -->
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════
+const NODES = [
+  {
+    id:'shame', label:'Shame-Identity Nexus', type:'Comparator Core', loop:0,
+    orbitalAngle:0, orbitalRadius:0, orbitalTilt:0, radius:22, isCentral:true,
+    baseColor:[200,134,10], shameColor:[192,57,43],
+    desc:'The central comparator evaluating error signals between identity and performance. When corrupted by shame, it injects phantom error signals into every connected node.',
+    shameEffect:'All error signals become unreliable. Overcorrection and control abandonment emerge simultaneously. The harder you try, the worse the signal.',
+    connections:['identity','emotion','cognition','physio','moral','relational']
+  },
+  {
+    id:'identity', label:'Identity Coherence', type:'State Vector x₁', loop:1,
+    orbitalAngle:0, orbitalRadius:160, orbitalTilt:0.2, radius:13,
+    baseColor:[232,168,32], shameColor:[180,80,30],
+    desc:'The reference signal anchor. Determines the system\'s sense of self independent of performance output.',
+    shameEffect:'Shame attacks identity first. When x₁ destabilizes, all self-evaluation becomes performance-dependent — a self-terminating configuration.',
+    connections:['emotion','moral','relational']
+  },
+  {
+    id:'emotion', label:'Emotional Regulation', type:'State Vector x₂', loop:1,
+    orbitalAngle:Math.PI/3, orbitalRadius:160, orbitalTilt:-0.15, radius:12,
+    baseColor:[220,150,20], shameColor:[160,60,20],
+    desc:'The affective regulation subsystem. Real-time feedback on system load, threat level, and coherence.',
+    shameEffect:'Shame corrupts emotional signals — distress becomes indistinguishable from threat. The system runs in chronic alarm.',
+    connections:['cognition','physio']
+  },
+  {
+    id:'cognition', label:'Cognitive Clarity', type:'State Vector x₃', loop:1,
+    orbitalAngle:2*Math.PI/3, orbitalRadius:160, orbitalTilt:0.3, radius:12,
+    baseColor:[210,140,15], shameColor:[150,50,15],
+    desc:'The information processing layer. Pattern recognition, decision quality, and accurate perception.',
+    shameEffect:'Shame narrows the cognitive field. Threat-detection dominates. Strategic thinking and creativity collapse.',
+    connections:['identity','moral']
+  },
+  {
+    id:'physio', label:'Physiological Energy', type:'State Vector x₄', loop:1,
+    orbitalAngle:Math.PI, orbitalRadius:160, orbitalTilt:-0.25, radius:11,
+    baseColor:[200,125,10], shameColor:[140,45,10],
+    desc:'The biological substrate — sleep, nervous system regulation, hormonal balance. The foundational viability constraint.',
+    shameEffect:'Chronic shame activates prolonged stress responses. Cortisol dysregulation erodes the physical foundation of all other loops.',
+    connections:['emotion','relational']
+  },
+  {
+    id:'moral', label:'Moral Alignment', type:'State Vector x₅', loop:1,
+    orbitalAngle:4*Math.PI/3, orbitalRadius:160, orbitalTilt:0.1, radius:11,
+    baseColor:[215,155,25], shameColor:[155,55,20],
+    desc:'Values-action coherence signal. When behavior aligns with values, the system receives integrity feedback.',
+    shameEffect:'Shame collapses the distinction between moral failure and moral identity. One mistake becomes total condemnation.',
+    connections:['identity','relational']
+  },
+  {
+    id:'relational', label:'Relational Coherence', type:'State Vector x₆', loop:1,
+    orbitalAngle:5*Math.PI/3, orbitalRadius:160, orbitalTilt:-0.35, radius:12,
+    baseColor:[228,162,28], shameColor:[168,68,25],
+    desc:'The external observability sensor. Human systems cannot self-diagnose without relational input — this is the co-regulation interface and repair pathway.',
+    shameEffect:'Shame drives isolation — disabling the only mechanism capable of repairing shame. The self-sealing failure mode.',
+    connections:['identity','physio']
+  },
+  {
+    id:'environment', label:'Environment Design', type:'Structural Loop II', loop:2,
+    orbitalAngle:Math.PI/6, orbitalRadius:260, orbitalTilt:0.15, radius:9,
+    baseColor:[180,110,8], shameColor:[120,40,8],
+    desc:'The structural architecture of time, space, and context that enables or degrades state regulation.',
+    shameEffect:'When shame is high, environment becomes entropy. Chaos in the outer world amplifies inner signal noise.',
+    connections:['identity','physio','cognition']
+  },
+  {
+    id:'temporal', label:'Temporal Architecture', type:'Structural Loop II', loop:2,
+    orbitalAngle:Math.PI/2, orbitalRadius:260, orbitalTilt:-0.2, radius:9,
+    baseColor:[175,105,6], shameColor:[115,38,6],
+    desc:'The rhythmic structure of effort, recovery, and renewal. Sustainable output requires oscillation, not just drive.',
+    shameEffect:'Shame produces urgency that collapses temporal architecture. Rest becomes impossible. The system runs without recovery.',
+    connections:['physio','emotion','environment']
+  },
+  {
+    id:'narrative', label:'Narrative Identity', type:'Reference Signal Generator', loop:2,
+    orbitalAngle:5*Math.PI/6, orbitalRadius:260, orbitalTilt:0.4, radius:10,
+    baseColor:[185,118,10], shameColor:[125,45,10],
+    desc:'The generative mechanism for the reference signal. The story you are living sets the target state.',
+    shameEffect:'Shame rewrites narrative. Past becomes evidence of unworthiness. The reference signal shifts from aspiration to survival.',
+    connections:['identity','moral','cognition']
+  },
+  {
+    id:'legacy', label:'Legacy Signal', type:'Consequence Loop III', loop:3,
+    orbitalAngle:3*Math.PI/4, orbitalRadius:340, orbitalTilt:-0.3, radius:8,
+    baseColor:[155,88,5], shameColor:[100,30,5],
+    desc:'The delayed consequence signal — the long arc of how choices compound across years and decades.',
+    shameEffect:'Shame discounts the future. Chronic shame makes long-term consequence signals irrelevant. The consequence loop goes silent.',
+    connections:['narrative','moral','identity']
+  },
+  {
+    id:'viability', label:'Viability Constraint', type:'Consequence Loop III', loop:3,
+    orbitalAngle:7*Math.PI/4, orbitalRadius:340, orbitalTilt:0.25, radius:8,
+    baseColor:[160,92,6], shameColor:[105,32,6],
+    desc:'V(x,E) ≥ 0 at all times. The constraint that prevents self-terminating trajectories. The system must survive to transform.',
+    shameEffect:'Extreme shame generates trajectories that violate the viability constraint — paths toward self-termination.',
+    connections:['physio','environment','legacy']
+  }
+];
+
+const nodeMap = {};
+NODES.forEach(n => nodeMap[n.id] = n);
+
+// ════════════════════════════════════════════
+// GLOBAL STATE
+// ════════════════════════════════════════════
+let shameLevel = 0.1;
+let rotX = 0.28, rotY = 0.0;
+let targetRotX = 0.28, targetRotY = 0.15;
+let isDragging = false, lastMX = 0, lastMY = 0;
+let zoom = 1.0;
+let hoveredNode = null;
+let animTime = 0;
+let isMobile = window.innerWidth <= 640;
+
+// ════════════════════════════════════════════
+// LOADER
+// ════════════════════════════════════════════
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    document.getElementById('chrome').classList.add('visible');
+    document.getElementById('title-block').classList.add('visible');
+    document.getElementById('status-bar').classList.add('visible');
+    document.getElementById('loop-legend').classList.add('visible');
+    document.getElementById('instructions').classList.add('visible');
+    document.getElementById('shame-panel').classList.add('visible');
+    if (isMobile) buildArcView();
+  }, 2200);
+});
+
+// ════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════
+function lerp(a, b, t) { return a + (b - a) * t; }
+function lerpColor(a, b, t) {
+  return [
+    Math.round(a[0] + (b[0]-a[0])*t),
+    Math.round(a[1] + (b[1]-a[1])*t),
+    Math.round(a[2] + (b[2]-a[2])*t)
+  ];
+}
+function nodeColor(n, shame, alpha=1) {
+  const t = n.isCentral ? shame : Math.min(1, shame * 1.3);
+  const [r,g,b] = lerpColor(n.baseColor, n.shameColor, t);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+function nodeHealth(n, shame) {
+  if (n.isCentral) return 1 - shame;
+  const impact = n.loop===1?0.85:n.loop===2?0.65:0.45;
+  return 1 - shame * impact;
+}
+
+// ════════════════════════════════════════════
+// 3D DESKTOP
+// ════════════════════════════════════════════
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H, cx, cy;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  cx = W/2; cy = H/2;
+  isMobile = window.innerWidth <= 640;
+}
+resize();
+window.addEventListener('resize', () => { resize(); if(isMobile) buildArcView(); });
+
+function project(x,y,z,rX,rY) {
+  const x1 = x*Math.cos(rY) - z*Math.sin(rY);
+  const z1 = x*Math.sin(rY) + z*Math.cos(rY);
+  const y2 = y*Math.cos(rX) - z1*Math.sin(rX);
+  const z2 = y*Math.sin(rX) + z1*Math.cos(rX);
+  const fov = 900*zoom;
+  const d = fov/(fov+z2+200);
+  return { sx: cx+x1*d, sy: cy+y2*d, scale:d, depth:z2 };
+}
+
+function computePositions(t, shame) {
+  NODES.forEach(n => {
+    if (n.isCentral) { n.pos=[0,0,0]; return; }
+    const speed = n.loop===1?0.14:n.loop===2?0.06:0.025;
+    const angle = n.orbitalAngle + t*speed;
+    const r = n.orbitalRadius;
+    const tilt = n.orbitalTilt;
+    const jitter = shame * 10;
+    n.pos = [
+      r*Math.cos(angle) + Math.sin(t*1.7+n.orbitalAngle*3)*jitter*0.5,
+      r*Math.sin(angle)*Math.sin(tilt) + Math.cos(t*1.3+n.orbitalAngle*2)*jitter*0.3,
+      r*Math.sin(angle)*Math.cos(tilt) + Math.sin(t*0.9+n.orbitalAngle)*jitter*0.4
+    ];
+  });
+}
+
+function drawRings(rX, rY, shame) {
+  [[160,0.35,0.12],[260,0.3,0.08],[340,0.28,0.055]].forEach(([r, yScale, op]) => {
+    const pts = [];
+    for (let i=0; i<=64; i++) {
+      const a = (i/64)*Math.PI*2;
+      pts.push(project(r*Math.cos(a), r*Math.sin(a)*0.12, r*Math.sin(a)*yScale, rX, rY));
+    }
+    ctx.beginPath();
+    pts.forEach((p,i) => i===0 ? ctx.moveTo(p.sx,p.sy) : ctx.lineTo(p.sx,p.sy));
+    const [cr,cg,cb] = lerpColor([232,168,32],[192,57,43],shame*0.6);
+    ctx.strokeStyle = `rgba(${cr},${cg},${cb},${op*(1+shame*0.4)})`;
+    ctx.lineWidth=1; ctx.setLineDash([4,8]); ctx.stroke(); ctx.setLineDash([]);
+  });
+}
+
+function drawConnections(proj, shame, t) {
+  NODES.forEach(n => {
+    if (!n.connections) return;
+    const pA = proj[n.id];
+    n.connections.forEach(cid => {
+      const pB = proj[cid]; if(!pB) return;
+      const [r,g,b] = lerpColor([232,168,32],[192,57,43],shame);
+      const alpha = 0.04 + (1-shame)*0.06;
+      ctx.beginPath();
+      ctx.moveTo(pA.sx,pA.sy); ctx.lineTo(pB.sx,pB.sy);
+      ctx.strokeStyle=`rgba(${r},${g},${b},${alpha*12})`;
+      ctx.lineWidth=0.5; ctx.stroke();
+      // pulse
+      const pt = ((t*0.7+n.orbitalAngle*0.3)%1);
+      const px = pA.sx+(pB.sx-pA.sx)*pt;
+      const py = pA.sy+(pB.sy-pA.sy)*pt;
+      ctx.beginPath();
+      ctx.arc(px,py,2*pA.scale,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${r},${g},${b},${0.35+0.35*Math.sin(t*3+n.orbitalAngle)})`;
+      ctx.fill();
+    });
+  });
+}
+
+function drawNode(n, p, shame, hovered, t) {
+  const {sx,sy,scale} = p;
+  const r = n.radius*scale;
+  const [cr,cg,cb] = lerpColor(n.baseColor, n.shameColor, n.isCentral?shame:Math.min(1,shame*1.3));
+  // glow
+  const glowR = r*(n.isCentral?4:3);
+  const grad = ctx.createRadialGradient(sx,sy,0,sx,sy,glowR);
+  grad.addColorStop(0,`rgba(${cr},${cg},${cb},${hovered?0.22:0.1})`);
+  grad.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+  ctx.beginPath(); ctx.arc(sx,sy,glowR,0,Math.PI*2);
+  ctx.fillStyle=grad; ctx.fill();
+  // core
+  const cg2 = ctx.createRadialGradient(sx-r*0.3,sy-r*0.3,0,sx,sy,r);
+  cg2.addColorStop(0,`rgba(${Math.min(255,cr+40)},${Math.min(255,cg+30)},${Math.min(255,cb+20)},0.95)`);
+  cg2.addColorStop(1,`rgba(${cr},${cg},${cb},0.8)`);
+  ctx.beginPath(); ctx.arc(sx,sy,r,0,Math.PI*2);
+  ctx.fillStyle=cg2; ctx.fill();
+  ctx.strokeStyle=`rgba(${cr},${cg},${cb},0.9)`;
+  ctx.lineWidth=hovered?2*scale:1*scale; ctx.stroke();
+  // central fractures
+  if (n.isCentral && shame>0.1) {
+    for(let i=0;i<6;i++) {
+      const angle = (i/6)*Math.PI*2 + t*0.3;
+      const len = r*(0.5+shame*1.2)*(0.8+0.4*Math.sin(t*2+i));
+      ctx.beginPath();
+      ctx.moveTo(sx+Math.cos(angle)*r*0.7,sy+Math.sin(angle)*r*0.7);
+      ctx.lineTo(sx+Math.cos(angle)*(r+len),sy+Math.sin(angle)*(r+len));
+      ctx.strokeStyle=`rgba(192,57,43,${shame*0.3})`; ctx.lineWidth=0.5; ctx.stroke();
+    }
+  }
+  // label
+  if (scale>0.5) {
+    const fs = Math.max(8,Math.min(11,10*scale));
+    ctx.font=`300 ${fs}px 'Outfit',sans-serif`;
+    ctx.textAlign='center';
+    ctx.fillStyle=`rgba(${cr},${cg},${cb},${hovered?1:0.75})`;
+    const short = n.isCentral?'SHAME NEXUS':n.label.split(' ').slice(0,2).join(' ').toUpperCase();
+    ctx.fillText(short, sx, sy+r+13*scale);
+  }
+}
+
+function renderDesktop() {
+  if (isMobile) { requestAnimationFrame(renderDesktop); return; }
+  ctx.clearRect(0,0,W,H);
+  const bg = ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*0.8);
+  bg.addColorStop(0,'#1a1209'); bg.addColorStop(0.5,'#0f0b07'); bg.addColorStop(1,'#080604');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  rotX += (targetRotX-rotX)*0.05;
+  rotY += (targetRotY-rotY)*0.05;
+
+  computePositions(animTime, shameLevel);
+  const proj = {};
+  NODES.forEach(n => { proj[n.id]=project(n.pos[0],n.pos[1],n.pos[2],rotX,rotY); });
+  const sorted = [...NODES].sort((a,b)=>proj[a.id].depth-proj[b.id].depth);
+
+  drawRings(rotX,rotY,shameLevel);
+  drawConnections(proj,shameLevel,animTime);
+  sorted.forEach(n=>drawNode(n,proj[n.id],shameLevel,hoveredNode===n.id,animTime));
+
+  animTime+=0.008;
+  requestAnimationFrame(renderDesktop);
+}
+renderDesktop();
+
+// Mouse interactions
+canvas.addEventListener('mousemove', e=>{
+  if(isMobile) return;
+  if(isDragging) {
+    targetRotY+=(e.clientX-lastMX)*0.006;
+    targetRotX+=(e.clientY-lastMY)*0.006;
+    lastMX=e.clientX; lastMY=e.clientY;
+  }
+  let closest=null, closestD=Infinity;
+  NODES.forEach(n=>{
+    const p=project(n.pos[0],n.pos[1],n.pos[2],rotX,rotY);
+    const d=Math.hypot(e.clientX-p.sx,e.clientY-p.sy);
+    if(d<n.radius*p.scale*2.5&&d<closestD){closest=n.id;closestD=d;}
+  });
+  if(closest!==hoveredNode){hoveredNode=closest;updateDetail(closest);}
+  canvas.style.cursor=closest?'pointer':'default';
+});
+canvas.addEventListener('mousedown',e=>{isDragging=true;lastMX=e.clientX;lastMY=e.clientY;});
+canvas.addEventListener('mouseup',()=>isDragging=false);
+canvas.addEventListener('mouseleave',()=>isDragging=false);
+canvas.addEventListener('wheel',e=>{
+  zoom*=e.deltaY>0?0.93:1.07;
+  zoom=Math.max(0.4,Math.min(2.5,zoom));
+  e.preventDefault();
+},{passive:false});
+
+// Touch rotation on canvas
+let lastTX=0,lastTY=0;
+canvas.addEventListener('touchstart',e=>{lastTX=e.touches[0].clientX;lastTY=e.touches[0].clientY;});
+canvas.addEventListener('touchmove',e=>{
+  if(isMobile)return;
+  targetRotY+=(e.touches[0].clientX-lastTX)*0.006;
+  targetRotX+=(e.touches[0].clientY-lastTY)*0.006;
+  lastTX=e.touches[0].clientX;lastTY=e.touches[0].clientY;
+  e.preventDefault();
+},{passive:false});
+
+// ════════════════════════════════════════════
+// DETAIL PANEL
+// ════════════════════════════════════════════
+function updateDetail(nodeId) {
+  const panel=document.getElementById('detail');
+  if(!nodeId){panel.classList.remove('visible');return;}
+  const n=nodeMap[nodeId];
+  const health=nodeHealth(n,shameLevel);
+  const [r,g,b]=lerpColor(n.baseColor,n.shameColor,shameLevel*0.8);
+  document.getElementById('dName').textContent=n.label;
+  document.getElementById('dType').textContent=n.type;
+  document.getElementById('dDesc').textContent=n.desc;
+  document.getElementById('dShame').textContent=n.shameEffect;
+  const hf=document.getElementById('dHealthFill');
+  hf.style.width=Math.round(health*100)+'%';
+  hf.style.background=`rgb(${r},${g},${b})`;
+  panel.style.borderLeftColor=`rgb(${r},${g},${b})`;
+  panel.classList.add('visible');
+}
+
+// ════════════════════════════════════════════
+// SHAME SLIDER — DESKTOP
+// ════════════════════════════════════════════
+function applyShame(val) {
+  shameLevel = val/100;
+  const pct = val+'%';
+  document.getElementById('spFill').style.width=pct;
+  document.getElementById('spThumb').style.left=pct;
+
+  const labels = ['Coherent','Degrading','Corrupted','Collapsed'];
+  const colors = ['#e8a820','#c87020','#c0392b','#922b21'];
+  const idx = val<20?0:val<50?1:val<80?2:3;
+  const lbl=document.getElementById('shameLabel');
+  lbl.textContent=labels[idx]; lbl.style.color=colors[idx];
+
+  const statuses = ['System Coherent','Comparator Degrading','Comparator Corrupted','⚠ Viability Constraint'];
+  document.getElementById('statusText').textContent=statuses[idx];
+  document.getElementById('statusText').style.color=colors[idx];
+  document.getElementById('statusDot').style.background=colors[idx];
+
+  const thumb=document.getElementById('spThumb');
+  thumb.style.background=val<20?'#f5c842':colors[idx];
+  thumb.style.boxShadow=`0 0 14px ${colors[idx]}`;
+
+  if(hoveredNode) updateDetail(hoveredNode);
+  if(isMobile) updateArcShame();
+}
+
+document.getElementById('shameSlider').addEventListener('input',e=>applyShame(+e.target.value));
+
+// ════════════════════════════════════════════
+// MOBILE ARC VIEW
+// ════════════════════════════════════════════
+function buildArcSVG() {
+  const W=Math.min(window.innerWidth-40, 380);
+  const H=280;
+  const cx=W/2, cy=H-20;
+  const arcs=[
+    {r:W*0.46,color:'#e8a820',label:'Loop I — State',opacity:0.5},
+    {r:W*0.32,color:'#c87820',label:'Loop II — Structural',opacity:0.4},
+    {r:W*0.18,color:'#8b5525',label:'Loop III — Consequence',opacity:0.35},
+  ];
+
+  let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible">
+  <defs>
+    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f5c842" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c8860a" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>`;
+
+  // Draw arcs (upper semicircles)
+  arcs.forEach(arc=>{
+    svg+=`<path d="M ${cx-arc.r},${cy} A ${arc.r},${arc.r} 0 0 1 ${cx+arc.r},${cy}"
+      fill="none" stroke="${arc.color}" stroke-width="1.5" stroke-opacity="${arc.opacity}"
+      stroke-dasharray="4 7"/>`;
+    // Arc label
+    const lx=cx-arc.r-4;
+    svg+=`<text x="${lx}" y="${cy+2}" text-anchor="end"
+      font-family="'JetBrains Mono',monospace" font-size="7" fill="${arc.color}" opacity="0.7">${arc.arc}</text>`;
+  });
+
+  // Nodes on arcs
+  const arcNodes=[
+    // Loop 1 — 6 nodes on outer arc
+    {id:'identity',angle:160},{id:'emotion',angle:140},{id:'cognition',angle:120},
+    {id:'physio',angle:60},{id:'moral',angle:40},{id:'relational',angle:20}
+  ];
+  const loop2Nodes=[
+    {id:'environment',angle:150},{id:'temporal',angle:90},{id:'narrative',angle:30}
+  ];
+  const loop3Nodes=[
+    {id:'legacy',angle:140},{id:'viability',angle:40}
+  ];
+
+  function placeNode(id, angle, r) {
+    const a = angle*(Math.PI/180);
+    const x = cx + r*Math.cos(Math.PI-a);
+    const y = cy - r*Math.sin(a);
+    const n = nodeMap[id];
+    const [cr,cg,cb]=n.baseColor;
+    svg+=`<circle cx="${x}" cy="${y}" r="6" fill="rgba(${cr},${cg},${cb},0.85)"
+      stroke="rgba(${cr},${cg},${cb},0.9)" stroke-width="1"/>`;
+    const textAnchor = angle>90?'end':'start';
+    const tx = angle>90?x-9:x+9;
+    svg+=`<text x="${tx}" y="${y+3}" text-anchor="${textAnchor}"
+      font-family="'Outfit',sans-serif" font-size="8" font-weight="300"
+      fill="rgba(${cr},${cg},${cb},0.85)">${n.label.split(' ')[0]}</text>`;
+  }
+
+  arcNodes.forEach(an=>placeNode(an.id, an.angle, W*0.46));
+  loop2Nodes.forEach(an=>placeNode(an.id, an.angle, W*0.32));
+  loop3Nodes.forEach(an=>placeNode(an.id, an.angle, W*0.18));
+
+  // Connection lines from center
+  [...arcNodes,...loop2Nodes,...loop3Nodes].forEach(an=>{
+    const a=an.angle*(Math.PI/180);
+    const r=arcNodes.find(x=>x.id===an.id)?W*0.46:loop2Nodes.find(x=>x.id===an.id)?W*0.32:W*0.18;
+    const x=cx+r*Math.cos(Math.PI-a);
+    const y=cy-r*Math.sin(a);
+    svg+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"
+      stroke="#c8860a" stroke-width="0.5" stroke-opacity="0.12"/>`;
+  });
+
+  // Central node
+  svg+=`<circle cx="${cx}" cy="${cy}" r="14" fill="url(#coreGrad)" stroke="#e8a820" stroke-width="1.5"/>`;
+  svg+=`<text x="${cx}" y="${cy+3}" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="6" fill="#09080600">SIN</text>`;
+
+  // Baseline
+  svg+=`<line x1="${cx-W*0.5}" y1="${cy}" x2="${cx+W*0.5}" y2="${cy}"
+    stroke="#2a211a" stroke-width="1"/>`;
+
+  // Center label
+  svg+=`<text x="${cx}" y="${cy+24}" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="7" fill="#8a7060" letter-spacing="2">SHAME-IDENTITY NEXUS</text>`;
+
+  svg+='</svg>';
+  return svg;
+}
+
+function buildArcView() {
+  document.getElementById('arc-svg-wrap').innerHTML = buildArcSVG();
+
+  const groups = [
+    { label: 'Loop I — State Regulation (Fast)', ids:['identity','emotion','cognition','physio','moral','relational'] },
+    { label: 'Loop II — Structural Control (Mid)', ids:['environment','temporal','narrative'] },
+    { label: 'Loop III — Consequence Feedback (Slow)', ids:['legacy','viability'] },
+    { label: 'Core', ids:['shame'] },
+  ];
+
+  let html='';
+  groups.forEach((g,gi)=>{
+    if(gi>0) html+=`<div class="arc-loop-divider"><div class="arc-loop-divider-line"></div><span class="arc-loop-divider-label">${g.label}</span><div class="arc-loop-divider-line"></div></div>`;
+    else html+=`<div class="arc-section-label">${g.label}</div>`;
+    g.ids.forEach(id=>{
+      const n=nodeMap[id];
+      html+=`<div class="arc-node-card" data-id="${id}">
+        <div class="arc-node-name">${n.label}</div>
+        <div class="arc-node-type">${n.type}</div>
+        <div class="arc-node-desc">${n.desc}</div>
+        <div class="arc-shame-note">${n.shameEffect}</div>
+      </div>`;
+    });
+  });
+
+  document.getElementById('arcNodes').innerHTML=html;
+}
+
+function updateArcShame() {
+  const threshold=0.35;
+  document.querySelectorAll('.arc-node-card').forEach(card=>{
+    if(shameLevel>threshold) card.classList.add('shame-corrupted');
+    else card.classList.remove('shame-corrupted');
+  });
+  // Update SVG node colors
+  const svg=document.querySelector('#arc-svg-wrap svg');
+  if(!svg) return;
+  const circles=svg.querySelectorAll('circle:not(:last-child)');
+  // Rebuild SVG with new colors on significant shame change
+  if(shameLevel>0.5||shameLevel<0.15) {
+    document.getElementById('arc-svg-wrap').innerHTML=buildArcSVG();
+  }
+}
+
+// ════════════════════════════════════════════
+// MOBILE SHAME SLIDER
+// ════════════════════════════════════════════
+const mobileSlider=document.getElementById('mobileShameSlider');
+if(mobileSlider) {
+  mobileSlider.addEventListener('input',e=>{
+    const val=+e.target.value;
+    const pct=val+'%';
+    document.getElementById('msFill').style.height=pct;
+    document.getElementById('msThumb').style.top=pct;
+    const colors=['#e8a820','#c87020','#c0392b','#922b21'];
+    const idx=val<20?0:val<50?1:val<80?2:3;
+    document.getElementById('msThumb').style.background=val<20?'#f5c842':colors[idx];
+    document.getElementById('msThumb').style.boxShadow=`0 0 10px ${colors[idx]}`;
+    // sync to global
+    document.getElementById('shameSlider').value=val;
+    applyShame(val);
+  });
+}
+</script>
+</body>
+</html>
