@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Internal Audit — Matt Vincent Walker</title>
+  <meta name="description" content="Five questions that have stopped CEOs mid-sentence. Read them slowly. Alone." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── AUDIT PAGE LAYOUT ── */
+    .audit-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    .audit-hero {
+      padding: 9rem 0 4rem;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 1s var(--ease-expo) forwards 0.2s;
+    }
+
+    .audit-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .audit-eyebrow::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--amber-dim);
+    }
+
+    .audit-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .audit-hero h1 em {
+      font-style: italic;
+      color: var(--amber-glow);
+    }
+
+    .audit-hero-sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.04em;
+      margin-top: 1.5rem;
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ── DIVIDER ── */
+    .audit-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--stone) 30%, var(--stone) 70%, transparent);
+      margin: 3rem 0;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-expo) forwards 0.6s;
+    }
+
+    /* ── INTRO ── */
+    .audit-intro {
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) forwards 0.7s;
+    }
+
+    .audit-intro p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+      line-height: 1.75;
+      color: rgba(245, 241, 233, 0.78);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── GOLD RULE ── */
+    .gold-rule {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(to right, var(--amber), transparent);
+      margin: 2rem 0;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-expo) forwards 1s;
+    }
+
+    /* ── QUESTIONS ── */
+    .audit-questions {
+      padding: 4rem 0;
+    }
+
+    .question {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .question.visible {
+      animation: fadeUp 0.8s var(--ease-expo) forwards;
+    }
+
+    .q-number {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--amber-dim);
+      padding-top: 0.35rem;
+      min-width: 2rem;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .q-content {
+      border-left: 1px solid var(--stone);
+      padding-left: 2rem;
+      flex: 1;
+      transition: border-color 0.4s var(--ease-expo);
+    }
+
+    .question:hover .q-content {
+      border-color: var(--amber-dim);
+    }
+
+    .q-text {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(1.25rem, 3vw, 1.65rem);
+      line-height: 1.45;
+      color: var(--cream);
+      letter-spacing: 0.005em;
+    }
+
+    .q-note {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.06em;
+      margin-top: 0.75rem;
+    }
+
+    /* ── CLOSING ── */
+    .audit-closing {
+      border-top: 1px solid var(--stone);
+      padding: 4rem 0 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .audit-closing.visible {
+      animation: fadeUp 0.8s var(--ease-expo) forwards;
+    }
+
+    .closing-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      line-height: 1.75;
+      color: rgba(245, 241, 233, 0.72);
+      margin-bottom: 2.5rem;
+    }
+
+    .closing-text strong {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .cta-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .cta-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--amber-dim);
+      text-transform: uppercase;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      color: var(--amber-glow);
+      text-decoration: none;
+      border-bottom: 1px solid var(--amber-dim);
+      padding-bottom: 0.25rem;
+      transition: color 0.3s var(--ease-expo), border-color 0.3s var(--ease-expo), gap 0.3s var(--ease-expo);
+    }
+
+    .cta-link:hover {
+      color: var(--cream);
+      border-color: var(--amber-glow);
+      gap: 1.4rem;
+    }
+
+    .cta-link .arrow {
+      font-size: 0.9rem;
+      transition: transform 0.3s var(--ease-expo);
+    }
+
+    .cta-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .audit-hero { padding: 7rem 0 3rem; }
+      .q-number { display: none; }
+      .q-content { padding-left: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="articles.html">Articles</a></li>
+    <li><a href="newsletter.html">Newsletter</a></li>
+    <li><a href="masterclass.html">Masterclass</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="sponsorships.html">Sponsorships</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="map.html">Systems Map</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+  <div class="audit-wrap">
+
+    <section class="audit-hero">
+      <div class="audit-eyebrow">The Internal Audit</div>
+      <h1>You've fixed<br>the problem before.<br>It came back.<br><em>That's not a business problem.</em></h1>
+      <p class="audit-hero-sub">Five questions that have stopped CEOs mid-sentence. Read them slowly. Alone.</p>
+    </section>
+
+    <div class="audit-divider"></div>
+
+    <section class="audit-intro">
+      <div class="gold-rule"></div>
+      <p>Most leaders can tell you exactly what's wrong with their business. Their team. Their systems. Their market. Their time. What they almost never do is ask the question underneath the question — the one that's been running the whole operation from a room they haven't visited in years. These five questions open that door.</p>
+    </section>
+
+    <section class="audit-questions">
+
+      <div class="question" data-delay="0">
+        <div class="q-number">01</div>
+        <div class="q-content">
+          <p class="q-text">What problem in your business or life keeps coming back no matter what you do about it?</p>
+        </div>
+      </div>
+
+      <div class="question" data-delay="1">
+        <div class="q-number">02</div>
+        <div class="q-content">
+          <p class="q-text">What does it mean about you that it's still there?</p>
+        </div>
+      </div>
+
+      <div class="question" data-delay="2">
+        <div class="q-number">03</div>
+        <div class="q-content">
+          <p class="q-text">If it disappeared tomorrow — what are you afraid would still be true?</p>
+          <p class="q-note">Sit with this one.</p>
+        </div>
+      </div>
+
+      <div class="question" data-delay="3">
+        <div class="q-number">04</div>
+        <div class="q-content">
+          <p class="q-text">When's the first time in your life you felt exactly that way? What happened?</p>
+        </div>
+      </div>
+
+      <div class="question" data-delay="4">
+        <div class="q-number">05</div>
+        <div class="q-content">
+          <p class="q-text">How much of your current decision-making is a response to that moment?</p>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="audit-closing">
+      <p class="closing-text">If something shifted reading this — even slightly — <strong>that wasn't the questions.</strong> That was you, finally letting yourself see it. That's the beginning of everything. The next step is a conversation.</p>
+      <div class="cta-block">
+        <span class="cta-label">Next step</span>
+        <a href="newsletter.html" class="cta-link">
+          Enter the system <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Scroll-triggered question reveals
+  const questions = document.querySelectorAll('.question');
+  const closing = document.querySelector('.audit-closing');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.delay || 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  questions.forEach(q => observer.observe(q));
+
+  const closingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        closingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  if (closing) closingObserver.observe(closing);
+</script>
+
+</body>
+</html>
