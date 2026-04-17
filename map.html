@@ -11,16 +11,16 @@
   :root {
     --black: #0a0a0a;
     --black-warm: #0f0d0b;
-    --charcoal: #1a1816;
+    --charcoal: #1a1714;
     --stone: #2a2725;
     --ash: #4a4643;
     --muted: #7a7572;
-    --warm-gray: #a09a94;
+    --warm-gray: #a09a90;
     --light: #d4cec6;
     --cream: #e8e2d8;
-    --white: #f5f1eb;
+    --white: #f5f1e9;
     --amber: #c8935a;
-    --amber-glow: #d4a76a;
+    --amber-glow: #daa76a;
     --amber-dim: #8a6a3e;
     --ember: #b87333;
 
@@ -32,6 +32,8 @@
   }
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  ::selection { background: var(--amber); color: var(--black); }
 
   html {
     scroll-behavior: smooth;
@@ -48,8 +50,6 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-
-  ::selection { background: var(--amber); color: var(--black); }
 
   /* GRAIN OVERLAY */
   body::after {
@@ -468,35 +468,46 @@
     line-height: 1.6;
   }
 
-  /* FOOTER */
+  /* CLOSING SECTION */
   .footer {
     text-align: center;
-    padding: 64px 48px;
+    padding: 80px 48px;
     border-top: 1px solid var(--stone);
+    position: relative;
+  }
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(200,147,90,0.03) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
   }
   .footer-line {
     font-family: var(--font-display);
     font-weight: 300;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     font-style: italic;
     color: var(--muted);
     line-height: 2;
+    letter-spacing: 0.01em;
   }
   .footer-brand {
     font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 1.3rem;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
     color: var(--amber);
     letter-spacing: 0.04em;
-    margin-top: 24px;
+    margin-top: 32px;
   }
   .footer-author {
     font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--ash);
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   /* BACK TO TOP */
