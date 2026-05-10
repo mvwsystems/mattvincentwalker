@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Synthesis — Matt Vincent Walker</title>
+  <meta name="description" content="Where AI, identity, and human performance converge. A podcast for the man being rebuilt into something greater." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── PODCAST HERO ── */
+    .podcast-hero {
+      padding: 160px 48px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .podcast-hero-left {}
+
+    .podcast-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) forwards 0.2s;
+    }
+
+    .podcast-eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--amber-dim);
+    }
+
+    .podcast-hero-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-expo) forwards 0.4s;
+    }
+
+    .podcast-hero-title em {
+      font-style: italic;
+      color: var(--amber-glow);
+      display: block;
+    }
+
+    .podcast-hero-sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: var(--warm-gray);
+      line-height: 1.8;
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-expo) forwards 0.55s;
+    }
+
+    .podcast-hero-form {
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) forwards 0.7s;
+    }
+
+    .podcast-hero-form .subscribe-form {
+      margin: 0;
+      max-width: 400px;
+    }
+
+    .podcast-form-note {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    .podcast-platforms {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) forwards 0.85s;
+    }
+
+    .platform-badge {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      border: 1px solid var(--stone-light);
+      padding: 7px 14px;
+      transition: all 0.3s var(--ease-expo);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .platform-badge:hover {
+      color: var(--amber-glow);
+      border-color: var(--amber-dim);
+    }
+
+    /* ── WAVEFORM ── */
+    .podcast-hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1.2s var(--ease-expo) forwards 0.9s;
+    }
+
+    .waveform-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 20px;
+      align-self: flex-start;
+    }
+
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 72px;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .wave-bar {
+      flex: 1;
+      background: var(--amber);
+      border-radius: 1px;
+      opacity: 0.5;
+      animation: wave 1.8s ease-in-out infinite;
+    }
+
+    .wave-bar:nth-child(odd)  { animation-direction: alternate; }
+    .wave-bar:nth-child(1)  { height: 18%; animation-delay: 0s; }
+    .wave-bar:nth-child(2)  { height: 42%; animation-delay: 0.08s; }
+    .wave-bar:nth-child(3)  { height: 68%; animation-delay: 0.16s; }
+    .wave-bar:nth-child(4)  { height: 52%; animation-delay: 0.24s; }
+    .wave-bar:nth-child(5)  { height: 88%; animation-delay: 0.32s; }
+    .wave-bar:nth-child(6)  { height: 62%; animation-delay: 0.40s; }
+    .wave-bar:nth-child(7)  { height: 100%; animation-delay: 0.48s; }
+    .wave-bar:nth-child(8)  { height: 72%; animation-delay: 0.56s; }
+    .wave-bar:nth-child(9)  { height: 84%; animation-delay: 0.64s; }
+    .wave-bar:nth-child(10) { height: 48%; animation-delay: 0.72s; }
+    .wave-bar:nth-child(11) { height: 66%; animation-delay: 0.80s; }
+    .wave-bar:nth-child(12) { height: 38%; animation-delay: 0.88s; }
+    .wave-bar:nth-child(13) { height: 58%; animation-delay: 0.96s; }
+    .wave-bar:nth-child(14) { height: 78%; animation-delay: 1.04s; }
+    .wave-bar:nth-child(15) { height: 50%; animation-delay: 1.12s; }
+    .wave-bar:nth-child(16) { height: 32%; animation-delay: 1.20s; }
+    .wave-bar:nth-child(17) { height: 68%; animation-delay: 1.28s; }
+    .wave-bar:nth-child(18) { height: 86%; animation-delay: 1.36s; }
+    .wave-bar:nth-child(19) { height: 56%; animation-delay: 1.44s; }
+    .wave-bar:nth-child(20) { height: 22%; animation-delay: 1.52s; }
+    .wave-bar:nth-child(21) { height: 46%; animation-delay: 1.60s; }
+    .wave-bar:nth-child(22) { height: 76%; animation-delay: 1.68s; }
+    .wave-bar:nth-child(23) { height: 42%; animation-delay: 1.76s; }
+    .wave-bar:nth-child(24) { height: 62%; animation-delay: 1.84s; }
+    .wave-bar:nth-child(25) { height: 28%; animation-delay: 1.92s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.35); opacity: 0.35; }
+      50%       { transform: scaleY(1);    opacity: 0.80; }
+    }
+
+    .now-playing-card {
+      background: var(--charcoal);
+      border: 1px solid var(--stone);
+      padding: 28px 32px;
+      width: 100%;
+      position: relative;
+    }
+
+    .now-playing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+    }
+
+    .now-playing-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 12px;
+    }
+
+    .now-playing-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .now-playing-meta {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .now-playing-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      transition: opacity 0.3s var(--ease-expo);
+    }
+
+    .now-playing-play:hover { opacity: 0.7; }
+
+    .play-circle {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--stone-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .play-circle::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid var(--amber);
+      margin-left: 2px;
+    }
+
+    /* ── BLURB ── */
+    .blurb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 48px;
+    }
+
+    .blurb-symbol {
+      font-family: var(--font-display);
+      font-size: 8rem;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1;
+      margin-bottom: -24px;
+      display: block;
+    }
+
+    .blurb-body p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: var(--warm-gray);
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+
+    .blurb-body p:last-child { margin-bottom: 0; }
+
+    /* ── ARC GRID ── */
+    .arc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    /* ── TERRITORIES ── */
+    .territories-section {
+      background: linear-gradient(180deg, var(--black-warm) 0%, var(--charcoal) 50%, var(--black-warm) 100%);
+    }
+
+    .territories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .territory-item {
+      background: var(--charcoal);
+      border: 1px solid var(--stone);
+      padding: 36px 32px;
+      transition: border-color 0.4s var(--ease-expo), background 0.4s var(--ease-expo);
+    }
+
+    .territory-item:hover {
+      border-color: var(--stone-light);
+      background: var(--stone);
+    }
+
+    .territory-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      color: var(--amber-dim);
+      margin-bottom: 16px;
+    }
+
+    .territory-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .territory-body {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── GUESTS ── */
+    .guests-list {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .guest-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 32px;
+      align-items: center;
+      background: var(--charcoal);
+      border: 1px solid var(--stone);
+      padding: 28px 36px;
+      transition: border-color 0.4s var(--ease-expo), background 0.4s var(--ease-expo);
+    }
+
+    .guest-row:hover {
+      border-color: var(--stone-light);
+      background: var(--stone);
+    }
+
+    .guest-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: var(--ash);
+    }
+
+    .guest-info {}
+
+    .guest-domain {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 6px;
+    }
+
+    .guest-name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .guest-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .guest-tag {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone-light);
+      border: 1px solid var(--stone-light);
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .podcast-hero {
+        grid-template-columns: 1fr;
+        padding: 140px 24px 60px;
+        gap: 48px;
+      }
+      .podcast-hero-right { order: -1; }
+      .blurb-grid { grid-template-columns: 1fr; gap: 32px; }
+      .blurb-symbol { font-size: 5rem; }
+      .arc-grid { grid-template-columns: 1fr; }
+      .territories-grid { grid-template-columns: 1fr; }
+      .guest-row { grid-template-columns: 1fr; gap: 12px; }
+      .guest-num { display: none; }
+      .guest-tag { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .territories-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="articles.html">Articles</a></li>
+    <li><a href="masterclass.html">Coaching</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="map.html">Systems Map</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="podcast.html" class="active">Podcast</a></li>
+    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="podcast-hero">
+
+  <div class="podcast-hero-left">
+    <p class="podcast-eyebrow">A Podcast by Matt Vincent Walker</p>
+    <h1 class="podcast-hero-title">The<br><em>Synthesis</em></h1>
+    <p class="podcast-hero-sub">Where AI, identity, and human performance converge. For the man being rebuilt into something greater — one conversation at a time.</p>
+
+    <div class="podcast-hero-form">
+      <div class="subscribe-form">
+        <input type="email" class="subscribe-input" placeholder="Your email address">
+        <button class="btn-primary">Get Episodes</button>
+      </div>
+      <p class="podcast-form-note">Free · No spam · Unsubscribe anytime</p>
+    </div>
+
+    <div class="podcast-platforms">
+      <a href="#" class="platform-badge">Spotify</a>
+      <a href="#" class="platform-badge">Apple Podcasts</a>
+      <a href="#" class="platform-badge">YouTube</a>
+      <a href="#" class="platform-badge">RSS</a>
+    </div>
+  </div>
+
+  <div class="podcast-hero-right">
+    <p class="waveform-label">Now Airing</p>
+    <div class="waveform">
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+    <div class="now-playing-card">
+      <p class="now-playing-label">Latest Episode</p>
+      <p class="now-playing-title">The Operating System Underneath Your Ambition</p>
+      <p class="now-playing-meta">Episode 01 &nbsp;·&nbsp; 52 min</p>
+      <a class="now-playing-play" href="#">
+        <span class="play-circle"></span>
+        Listen Now
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── THE BLURB ── -->
+<section class="section">
+
+  <div class="section-label reveal">What Is The Synthesis</div>
+  <div class="section-title reveal" style="max-width: 600px;">Where the hard questions<br>get <em style="font-style:italic;color:var(--amber-glow);">real answers</em>.</div>
+
+  <div class="blurb-grid">
+    <div class="reveal">
+      <span class="blurb-symbol">∑</span>
+    </div>
+    <div class="blurb-body reveal reveal-delay-1">
+      <p>Most podcasts pick a lane. Business or personal development. AI or mindset. Faith or strategy. The Synthesis refuses that false choice — because the man who's serious about his life doesn't live in lanes.</p>
+      <p>Every episode brings together threads that don't usually appear in the same room: artificial intelligence and ancient wisdom, performance psychology and theological formation, systems thinking and the interior life.</p>
+      <p>This isn't content. It's a conversation you've been trying to have for years — with someone who can actually hold every part of it at once.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── THE ARC ── -->
+<section class="section">
+
+  <div class="section-label reveal">The Arc</div>
+  <div class="section-title reveal">Four threads.<br><em style="font-style:italic;color:var(--amber-glow);">One conversation</em>.</div>
+  <div class="section-subtitle reveal">Every episode draws from at least one of these veins. Most pull from all four at once.</div>
+
+  <div class="arc-grid">
+    <div class="card reveal">
+      <div class="card-label">01 — Leverage</div>
+      <div class="card-title">AI & Leverage</div>
+      <p class="card-text">How to use artificial intelligence to compound your output, eliminate your bottlenecks, and build systems that work while you're doing the thing only you can do.</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div class="card-label">02 — Formation</div>
+      <div class="card-title">Identity & Formation</div>
+      <p class="card-text">The operating system running underneath your performance. Shame, achievement patterns, the Nexus — what's driving you and what it's costing you.</p>
+    </div>
+    <div class="card reveal reveal-delay-2">
+      <div class="card-label">03 — Meaning</div>
+      <div class="card-title">Faith & Meaning</div>
+      <p class="card-text">The questions beneath the questions. Theology, purpose, suffering, redemption — brought into the same room as business, ambition, and the refusal to stay small.</p>
+    </div>
+    <div class="card reveal reveal-delay-3">
+      <div class="card-label">04 — Architecture</div>
+      <div class="card-title">Performance & Systems</div>
+      <p class="card-text">Practical architecture for the life and business you're building. Not motivation. Not hacks. Actual systems for compounding your effort into outcomes that last.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── THE TERRITORIES ── -->
+<section class="section-full territories-section">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 48px;">
+
+    <div class="section-label reveal">The Territories</div>
+    <div class="section-title reveal">The ground we cover.</div>
+    <div class="section-subtitle reveal">Six recurring territories — each one a room most podcasts avoid.</div>
+
+    <div class="territories-grid">
+
+      <div class="territory-item reveal">
+        <p class="territory-num">01</p>
+        <p class="territory-title">Shame & Identity</p>
+        <p class="territory-body">The mechanism behind your highest drive and your most self-destructive patterns. The Shame-Identity Nexus, unpacked in real time.</p>
+      </div>
+
+      <div class="territory-item reveal reveal-delay-1">
+        <p class="territory-num">02</p>
+        <p class="territory-title">AI & Automation</p>
+        <p class="territory-body">Practical AI deployment for operators. How real businesses — from trades contractors to executive coaches — are rebuilding their operations with AI.</p>
+      </div>
+
+      <div class="territory-item reveal reveal-delay-2">
+        <p class="territory-num">03</p>
+        <p class="territory-title">Business Architecture</p>
+        <p class="territory-body">The systems layer underneath the strategy. Revenue, operations, team structure, and the invisible design choices that determine whether scale compounds or collapses.</p>
+      </div>
+
+      <div class="territory-item reveal">
+        <p class="territory-num">04</p>
+        <p class="territory-title">Theological Formation</p>
+        <p class="territory-body">Scripture, philosophy, and the deep questions of meaning — not as escape from ambition, but as the ground on which sustainable ambition is built.</p>
+      </div>
+
+      <div class="territory-item reveal reveal-delay-1">
+        <p class="territory-num">05</p>
+        <p class="territory-title">High Performance</p>
+        <p class="territory-body">Neuroscience, psychology, and embodied practice. How the body and mind conspire to either compound your capacity or slowly drain it.</p>
+      </div>
+
+      <div class="territory-item reveal reveal-delay-2">
+        <p class="territory-num">06</p>
+        <p class="territory-title">Relational Leadership</p>
+        <p class="territory-body">The leadership no one teaches. Marriage, fatherhood, team dynamics, and the relational field that either amplifies or undermines everything else you build.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ── THE GUESTS ── -->
+<section class="section">
+
+  <div class="section-label reveal">The Guests</div>
+  <div class="section-title reveal">Who sits across the table.</div>
+  <div class="section-subtitle reveal">Leaders who've paid the tuition for what they know — in business, in faith, in failure, and in reconstruction.</div>
+
+  <div class="guests-list">
+
+    <div class="guest-row reveal">
+      <span class="guest-num">01</span>
+      <div class="guest-info">
+        <p class="guest-domain">Apologetics · Faith</p>
+        <p class="guest-name">J. Warner Wallace</p>
+        <p class="guest-desc">Homicide detective turned Christian case-maker. Author of <em>Cold-Case Christianity</em>. On the evidence for faith and the courage to follow it under pressure.</p>
+      </div>
+      <span class="guest-tag">Season 1</span>
+    </div>
+
+    <div class="guest-row reveal">
+      <span class="guest-num">02</span>
+      <div class="guest-info">
+        <p class="guest-domain">Executive Coaching · Performance</p>
+        <p class="guest-name">The High-Output Operator</p>
+        <p class="guest-desc">A $3M founder who rebuilt his business in 18 months after a burnout collapse. On what real recovery looks like and what he built differently the second time.</p>
+      </div>
+      <span class="guest-tag">Season 1</span>
+    </div>
+
+    <div class="guest-row reveal">
+      <span class="guest-num">03</span>
+      <div class="guest-info">
+        <p class="guest-domain">AI · Business Systems</p>
+        <p class="guest-name">The AI Practitioner</p>
+        <p class="guest-desc">An operator who deployed AI systems into a trades business with no technical staff. On what actually works, what doesn't, and the implementation gap no one talks about.</p>
+      </div>
+      <span class="guest-tag">Season 1</span>
+    </div>
+
+    <div class="guest-row reveal">
+      <span class="guest-num">04</span>
+      <div class="guest-info">
+        <p class="guest-domain">Theology · Formation</p>
+        <p class="guest-name">The Theological Practitioner</p>
+        <p class="guest-desc">A seminary-trained leader who left the pulpit for corporate consulting. On what theology actually has to say to the man who builds things for a living.</p>
+      </div>
+      <span class="guest-tag">Season 1</span>
+    </div>
+
+    <div class="guest-row reveal">
+      <span class="guest-num">05</span>
+      <div class="guest-info">
+        <p class="guest-domain">Psychology · Shame Research</p>
+        <p class="guest-name">The Shame Researcher</p>
+        <p class="guest-desc">A clinician who has worked with high-achieving men in private practice for over a decade. On the shame patterns that run the most successful rooms — and what it takes to interrupt them.</p>
+      </div>
+      <span class="guest-tag">Season 1</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ── CLOSING CTA ── -->
+<section class="section">
+
+  <div class="subscribe-block reveal">
+    <div class="section-label" style="justify-content:center;">New Episodes Weekly</div>
+    <div class="section-title">Listen.<br><em style="font-style:italic;color:var(--amber-glow);">Be rebuilt.</em></div>
+    <p class="section-subtitle">Available wherever you listen to podcasts. Drop your email and get new episodes — plus frameworks you won't find anywhere else — delivered directly.</p>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" placeholder="Your email address">
+      <button class="btn-primary">Get Episodes</button>
+    </div>
+    <p style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:16px;">FREE · NO SPAM · UNSUBSCRIBE ANYTIME</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px;">
+      <a href="#" class="platform-badge">Spotify</a>
+      <a href="#" class="platform-badge">Apple Podcasts</a>
+      <a href="#" class="platform-badge">YouTube</a>
+      <a href="#" class="platform-badge">Overcast</a>
+      <a href="#" class="platform-badge">RSS Feed</a>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
