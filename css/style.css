@@ -544,7 +544,7 @@ footer {
 
 /* ═══ PAGE HEADER (inner pages) ═══ */
 .page-header {
-  padding: 160px 48px 80px; max-width: 1200px; margin: 0 auto;
+  padding: 140px 48px 32px; max-width: 1200px; margin: 0 auto;
 }
 .page-header .section-title { font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 16px; }
 
