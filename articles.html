@@ -120,7 +120,7 @@
     async function loadFeed() {
       renderLoading();
       try {
-        const res = await fetch(PROXY + encodeURIComponent(RSS_URL) + '&count=12');
+        const res = await fetch(PROXY + encodeURIComponent(RSS_URL));
         if (!res.ok) throw new Error('proxy error');
         const data = await res.json();
         if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('no items');
