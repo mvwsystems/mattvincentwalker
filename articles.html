@@ -124,7 +124,7 @@
         if (!res.ok) throw new Error('proxy error');
         const data = await res.json();
         if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('no items');
-        renderItems(data.items);
+        renderItems(data.items.slice(0, 9));
       } catch (e) {
         renderError();
       }
