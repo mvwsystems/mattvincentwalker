@@ -953,13 +953,15 @@
           </div>
         </div>
         <div class="apply-form-row">
-          <div class="apply-form-field">
+          <div class="apply-form-field full">
             <label for="email">Email Address</label>
             <input id="email" type="email" placeholder="your@email.com" required>
           </div>
-          <div class="apply-form-field">
-            <label for="instagram">Instagram Handle</label>
-            <input id="instagram" type="text" placeholder="@yourhandle">
+        </div>
+        <div class="apply-form-row">
+          <div class="apply-form-field full">
+            <label for="onlinePresence">Website &amp; social profiles</label>
+            <textarea id="onlinePresence" rows="2" placeholder="Paste your URLs — website, LinkedIn, Instagram, YouTube, etc."></textarea>
           </div>
         </div>
         <div class="apply-form-row">
@@ -972,6 +974,12 @@
           <div class="apply-form-field full">
             <label for="aiProblem">What is the #1 thing you want AI to solve in your business?</label>
             <textarea id="aiProblem" rows="3" placeholder="Be specific. What's costing you the most time, money, or energy right now?"></textarea>
+          </div>
+        </div>
+        <div class="apply-form-row">
+          <div class="apply-form-field full">
+            <label for="whyNow">What brought you here — and why now?</label>
+            <textarea id="whyNow" rows="2" placeholder="What's the specific situation, shift, or realization that made this feel like the right move?"></textarea>
           </div>
         </div>
         <div class="apply-form-row">
@@ -1022,13 +1030,14 @@
     errorBox.style.display = 'none';
 
     const payload = {
-      firstName:  document.getElementById('firstName').value.trim(),
-      lastName:   document.getElementById('lastName').value.trim(),
-      email:      document.getElementById('email').value.trim(),
-      instagram:  document.getElementById('instagram').value.trim(),
-      business:   document.getElementById('business').value.trim(),
-      aiProblem:  document.getElementById('aiProblem').value.trim(),
-      investment: document.getElementById('investment').value
+      firstName:      document.getElementById('firstName').value.trim(),
+      lastName:       document.getElementById('lastName').value.trim(),
+      email:          document.getElementById('email').value.trim(),
+      onlinePresence: document.getElementById('onlinePresence').value.trim(),
+      business:       document.getElementById('business').value.trim(),
+      aiProblem:      document.getElementById('aiProblem').value.trim(),
+      whyNow:         document.getElementById('whyNow').value.trim(),
+      investment:     document.getElementById('investment').value
     };
 
     try {
