@@ -156,6 +156,17 @@
       z-index: 1;
     }
 
+    .testimonials-grid-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
     .pullquote-attr {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -657,7 +668,8 @@
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .apply-hero         { padding: 120px 24px 80px; }
-      .pullquote-wrap     { padding: 72px 24px; }
+      .pullquote-wrap          { padding: 72px 24px; }
+      .testimonials-grid-inner { grid-template-columns: 1fr; }
       .apply-section      { padding: 72px 24px; }
       .problem-grid       { grid-template-columns: 1fr; }
       .pillars-grid       { grid-template-columns: 1fr; }
@@ -713,10 +725,20 @@
 
 <hr class="divider">
 
-<!-- ═══ PULLQUOTE 1 ═══ -->
+<!-- ═══ TESTIMONIALS ═══ -->
 <div class="pullquote-wrap">
-  <p class="pullquote reveal">"When your inner world is ordered, power compounds.<br>When it isn't, weakness compounds."</p>
-  <p class="pullquote-attr reveal">— Matt Vincent Walker</p>
+  <div class="testimonials-grid-inner">
+    <div class="testimonial reveal">
+      <p class="testimonial-text">Matt has a rare ability to engage complex ideas with clarity, humility, and genuine care for the person in front of him. He brings conviction without hostility and depth without alienation—earning trust across real differences.</p>
+      <div class="testimonial-author">S. Michael Craven</div>
+      <div class="testimonial-role">National Director, Colson Fellows</div>
+    </div>
+    <div class="testimonial reveal">
+      <p class="testimonial-text">Matt doesn't offer surface-level encouragement. He helped me see what was actually driving my patterns—and gave me language, tools, and confidence to move forward with integrity and purpose.</p>
+      <div class="testimonial-author">Lauren Harless</div>
+      <div class="testimonial-role">Wellness Coach &amp; Founder, Healthy Living Hive</div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ PROBLEM ═══ -->
