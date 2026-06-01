@@ -50,7 +50,7 @@
   <section class="section">
     <div id="articles-container" class="cards-grid"></div>
     <div id="articles-cta" style="text-align: center; margin-top: 48px; display: none;">
-      <a href="https://www.superhumansystems.io/" target="_blank" class="btn-primary" style="display: inline-flex;">Read All Articles →</a>
+      <a href="newsletter.html" class="btn-primary" style="display: inline-flex;">Subscribe to Superhuman Systems →</a>
     </div>
   </section>
 
@@ -58,23 +58,8 @@
   (function () {
     const container = document.getElementById('articles-container');
     const cta = document.getElementById('articles-cta');
-    const RSS_URL = 'https://www.superhumansystems.io/feed';
-    const PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
     const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
 
-    function formatDate(dateStr) {
-      const d = new Date(dateStr);
-      if (isNaN(d)) return '';
-      return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-    }
-
-    function stripHtml(html) {
-      const tmp = document.createElement('div');
-      tmp.innerHTML = html;
-      return tmp.textContent || tmp.innerText || '';
-    }
-
-    // Render local posts from posts/index.json
     function renderLocalPosts(posts) {
       container.innerHTML = posts.map((post, i) => {
         const delay = delays[i % delays.length];
@@ -93,36 +78,13 @@
       else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
 
-    // Render RSS feed items (fallback)
-    function renderRssItems(items) {
-      container.innerHTML = items.map((item, i) => {
-        const delay = delays[i % delays.length];
-        const date = formatDate(item.pubDate || item.published);
-        const excerpt = stripHtml(item.description || item.content || '').slice(0, 220).trim();
-        const title = item.title || '';
-        const url = item.link || item.url || '#';
-        return `
-          <div class="article-card reveal ${delay}">
-            <div class="article-body">
-              <div class="article-date">${date}</div>
-              <div class="article-title">${title}</div>
-              <p class="article-excerpt">${excerpt}${excerpt.length >= 220 ? '…' : ''}</p>
-              <a href="${url}" target="_blank" rel="noopener" class="article-tag" style="text-decoration:none;">Read More →</a>
-            </div>
-          </div>`;
-      }).join('');
-      cta.style.display = 'block';
-      if (window.observeReveals) window.observeReveals();
-      else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    }
-
     function renderError() {
       container.innerHTML = `
         <div class="article-card" style="grid-column:1/-1;text-align:center;padding:48px 24px;">
           <div class="article-body">
             <div class="article-date">—</div>
             <div class="article-title" style="opacity:0.5;">Could not load articles</div>
-            <p class="article-excerpt">Visit <a href="https://www.superhumansystems.io/" target="_blank" rel="noopener" style="color:var(--amber)">superhumansystems.io</a> to read the latest writing.</p>
+            <p class="article-excerpt">New essays coming soon.</p>
           </div>
         </div>`;
     }
@@ -138,25 +100,12 @@
 
     async function loadFeed() {
       renderLoading();
-      // 1. Try local posts/index.json first
       try {
-        const localRes = await fetch('posts/index.json');
-        if (localRes.ok) {
-          const localPosts = await localRes.json();
-          if (Array.isArray(localPosts) && localPosts.length > 0) {
-            renderLocalPosts(localPosts);
-            return;
-          }
-        }
-      } catch (e) { /* fall through to RSS */ }
-
-      // 2. Fall back to Substack RSS
-      try {
-        const res = await fetch(PROXY + encodeURIComponent(RSS_URL));
-        if (!res.ok) throw new Error('proxy error');
-        const data = await res.json();
-        if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('no items');
-        renderRssItems(data.items.slice(0, 9));
+        const res = await fetch('posts/index.json');
+        if (!res.ok) throw new Error('index not found');
+        const posts = await res.json();
+        if (!Array.isArray(posts) || !posts.length) throw new Error('no posts');
+        renderLocalPosts(posts);
       } catch (e) {
         renderError();
       }
