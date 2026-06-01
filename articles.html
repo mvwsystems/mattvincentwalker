@@ -74,7 +74,27 @@
       return tmp.textContent || tmp.innerText || '';
     }
 
-    function renderItems(items) {
+    // Render local posts from posts/index.json
+    function renderLocalPosts(posts) {
+      container.innerHTML = posts.map((post, i) => {
+        const delay = delays[i % delays.length];
+        return `
+          <div class="article-card reveal ${delay}">
+            <div class="article-body">
+              <div class="article-date">${post.date || ''}</div>
+              <div class="article-title">${post.title || ''}</div>
+              <p class="article-excerpt">${post.excerpt || ''}</p>
+              <a href="posts/${post.slug}.html" class="article-tag" style="text-decoration:none;">Read More →</a>
+            </div>
+          </div>`;
+      }).join('');
+      cta.style.display = 'block';
+      if (window.observeReveals) window.observeReveals();
+      else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    // Render RSS feed items (fallback)
+    function renderRssItems(items) {
       container.innerHTML = items.map((item, i) => {
         const delay = delays[i % delays.length];
         const date = formatDate(item.pubDate || item.published);
@@ -92,7 +112,6 @@
           </div>`;
       }).join('');
       cta.style.display = 'block';
-      // Trigger reveal observers for newly added cards
       if (window.observeReveals) window.observeReveals();
       else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
@@ -119,12 +138,25 @@
 
     async function loadFeed() {
       renderLoading();
+      // 1. Try local posts/index.json first
+      try {
+        const localRes = await fetch('posts/index.json');
+        if (localRes.ok) {
+          const localPosts = await localRes.json();
+          if (Array.isArray(localPosts) && localPosts.length > 0) {
+            renderLocalPosts(localPosts);
+            return;
+          }
+        }
+      } catch (e) { /* fall through to RSS */ }
+
+      // 2. Fall back to Substack RSS
       try {
         const res = await fetch(PROXY + encodeURIComponent(RSS_URL));
         if (!res.ok) throw new Error('proxy error');
         const data = await res.json();
         if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('no items');
-        renderItems(data.items.slice(0, 9));
+        renderRssItems(data.items.slice(0, 9));
       } catch (e) {
         renderError();
       }
