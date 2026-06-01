@@ -10,6 +10,7 @@
   <meta property="og:title" content="POST TITLE">
   <meta property="og:description" content="POST EXCERPT">
   <meta property="og:type" content="article">
+  <meta name="publish-date" content="YYYY-MM-DD">
   <!-- ═══════════════════════════════════════ -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -404,6 +405,59 @@
       .post-body p.lead::first-letter { font-size: 3.8em; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Matt Vincent Walker",
+    "url": "https://mattvincentwalker.com",
+    "jobTitle": "Executive Coach and AI Consultant",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Concordia University Irvine"
+    },
+    "knowsAbout": [
+      "Executive Coaching",
+      "AI Systems",
+      "Leadership Formation",
+      "Cybernetic Performance Frameworks"
+    ],
+    "sameAs": [
+      "https://6signal.co",
+      "https://superhumansystems.io",
+      "https://www.linkedin.com/in/mattvwalker/",
+      "https://www.youtube.com/@MattVincentWalker"
+    ]
+  }
+  </script>
+  <script>
+  // Article schema — reads headline and date from this page's meta tags
+  (function () {
+    var headline = document.querySelector('meta[property="og:title"]')?.content
+      || document.title.replace(' — Matt Vincent Walker', '').trim();
+    var datePublished = document.querySelector('meta[name="publish-date"]')?.content || '';
+    var schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": headline,
+      "datePublished": datePublished,
+      "author": {
+        "@type": "Person",
+        "name": "Matt Vincent Walker",
+        "url": "https://mattvincentwalker.com"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Matt Vincent Walker",
+        "url": "https://mattvincentwalker.com"
+      }
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+  })();
+  </script>
 </head>
 <body>
 
