@@ -6,43 +6,58 @@
 <title>Superhuman OS — Field Architecture</title>
 <meta name="description" content="The living architecture of Superhuman OS — a cybernetic field model for human transformation. Three nested feedback loops. One governing architecture.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=JetBrains+Mono:wght@300;400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 /* ════════════════════════════════════════════
    DESIGN TOKENS
 ════════════════════════════════════════════ */
 :root {
-  --black:        #0A0908;
-  --deep:         #0d0b0a;
-  --surface:      #151210;
-  --surface-2:    #1c1916;
-  --border:       #272220;
-  --border-light: #332e29;
-  --cinnabar:     #C84B1D;
-  --cinnabar-dim: rgba(200,75,29,0.45);
-  --cinnabar-pale:#7a2e11;
-  --text:         #EDE6D2;
-  --text-dim:     #8a847c;
-  --text-muted:   #5a5550;
-  --mono:         'IBM Plex Mono', monospace;
-  --sans:         'IBM Plex Sans', sans-serif;
-  /* Legacy names kept for canvas overlay JS compat */
-  --gold:         #C84B1D;
-  --gold-bright:  #d85c2a;
-  --gold-pale:    rgba(200,75,29,0.1);
-  --amber:        #C84B1D;
-  --red:          #C84B1D;
-  --red-glow:     rgba(200,75,29,0.35);
-  --text-bright:  #EDE6D2;
+  --black:        #080808;
+  --black-warm:   #0c0a09;
+  --deep:         #0c0a09;
+  --charcoal:     #161412;
+  --surface:      #161412;
+  --surface-2:    #1e1c18;
+  --stone:        #232019;
+  --stone-light:  #2e2a22;
+  --border:       #232019;
+  --border-light: #2e2a22;
+  --ash:          #4a4640;
+  --muted:        #7a756d;
+  --warm-gray:    #a09a90;
+  --light:        #d4cec4;
+  --cream:        #eae4d8;
+  --white:        #f5f1e9;
+  --amber:        #c8935a;
+  --amber-glow:   #daa76a;
+  --amber-dim:    #8a6a3e;
+  --amber-deep:   #6b4f2a;
+  --ember:        #b87333;
+  --display:      'Cormorant Garamond', Georgia, serif;
+  --mono:         'JetBrains Mono', monospace;
+  --sans:         'Outfit', sans-serif;
+  /* Canvas overlay JS compat aliases */
+  --cinnabar:     #c8935a;
+  --cinnabar-dim: rgba(200,147,90,0.45);
+  --cinnabar-pale:#6b4f2a;
+  --text:         #d4cec4;
+  --text-dim:     #a09a90;
+  --text-muted:   #7a756d;
+  --gold:         #c8935a;
+  --gold-bright:  #daa76a;
+  --gold-pale:    rgba(200,147,90,0.1);
+  --red:          #c0392b;
+  --red-glow:     rgba(200,147,90,0.2);
+  --text-bright:  #f5f1e9;
   --text-mid:     #a09a90;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--black);
-  color: var(--text);
+  background: var(--black-warm);
+  color: var(--light);
   font-family: var(--sans);
   font-weight: 300;
   line-height: 1.7;
@@ -65,7 +80,7 @@ body::after {
 ════════════════════════════════════════════ */
 #loader {
   position: fixed; inset: 0;
-  background: var(--black);
+  background: var(--black-warm);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   z-index: 2000;
@@ -125,9 +140,9 @@ body::after {
   z-index: 500;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 32px;
-  background: linear-gradient(to bottom, rgba(10,9,8,0.96) 0%, rgba(10,9,8,0.6) 70%, transparent 100%);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(39,34,32,0.4);
+  background: linear-gradient(to bottom, rgba(12,10,9,0.96) 0%, rgba(12,10,9,0.6) 70%, transparent 100%);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(35,32,25,0.4);
   opacity: 0;
   transition: opacity 0.6s 0.3s;
 }
@@ -224,12 +239,12 @@ body::after {
   content: '';
   position: absolute; top: 0; right: 0;
   width: 40%; height: 100%;
-  background: radial-gradient(ellipse at 80% 40%, rgba(200,75,29,0.03) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 80% 40%, rgba(200,147,90,0.03) 0%, transparent 65%);
   pointer-events: none;
 }
 
 .diag-headline {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: clamp(2rem, 4.5vw, 3.8rem);
   font-weight: 200;
   line-height: 1.15;
@@ -264,7 +279,7 @@ body::after {
 }
 
 .diag-col {
-  background: var(--black);
+  background: var(--black-warm);
   padding: 36px 32px;
   transition: background 0.3s;
 }
@@ -343,7 +358,7 @@ body::after {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: var(--black);
+  background: var(--black-warm);
 }
 
 /* ── CANVAS ── */
@@ -704,7 +719,7 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 
 .loop-card {
-  background: var(--black);
+  background: var(--black-warm);
   padding: 44px 36px;
   position: relative;
   transition: background 0.35s;
@@ -732,7 +747,7 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 
 .loop-card-name {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: 1.15rem;
   font-weight: 300;
   color: var(--text);
@@ -773,6 +788,7 @@ canvas { display: block; width: 100%; height: 100%; }
 ════════════════════════════════════════════ */
 #s-patterns {
   padding: 120px 48px;
+  background: var(--black-warm);
 }
 
 .patterns-intro {
@@ -795,13 +811,13 @@ canvas { display: block; width: 100%; height: 100%; }
   cursor: default;
 }
 .pattern-row:last-child { border-bottom: 1px solid var(--border); }
-.pattern-row:hover { background: rgba(200,75,29,0.02); }
+.pattern-row:hover { background: rgba(200,147,90,0.02); }
 
 .pr-identity {
   padding-right: 32px;
 }
 .pr-name {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: 1.2rem;
   font-weight: 400;
   color: var(--text);
@@ -863,7 +879,7 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 
 .comp-headline {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: clamp(1.6rem, 3vw, 2.6rem);
   font-weight: 200;
   color: var(--text);
@@ -900,7 +916,7 @@ canvas { display: block; width: 100%; height: 100%; }
   transition: border-color 0.4s, background 0.4s;
   cursor: default;
 }
-.failure-row:hover { background: rgba(200,75,29,0.02); border-left-color: var(--cinnabar-dim); }
+.failure-row:hover { background: rgba(200,147,90,0.02); border-left-color: var(--cinnabar-dim); }
 
 .failure-pattern {
   font-family: var(--sans);
@@ -914,7 +930,7 @@ canvas { display: block; width: 100%; height: 100%; }
 .failure-row:hover .failure-pattern { color: var(--cinnabar-dim); }
 
 .failure-row h3 {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 1.05rem;
   color: var(--text);
@@ -933,19 +949,20 @@ canvas { display: block; width: 100%; height: 100%; }
 #s-cta {
   padding: 120px 48px 140px;
   text-align: center;
+  background: var(--black-warm);
   position: relative;
 }
 #s-cta::before {
   content: '';
   position: absolute; top: 50%; left: 50%;
   width: 600px; height: 600px;
-  background: radial-gradient(ellipse, rgba(200,75,29,0.04) 0%, transparent 65%);
+  background: radial-gradient(ellipse, rgba(200,147,90,0.04) 0%, transparent 65%);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .cta-headline {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 200;
   color: var(--text);
@@ -1004,6 +1021,7 @@ canvas { display: block; width: 100%; height: 100%; }
    FOOTER
 ════════════════════════════════════════════ */
 #site-footer {
+  background: var(--black-warm);
   display: flex;
   justify-content: space-between; align-items: center;
   padding: 40px 48px;
@@ -1230,7 +1248,7 @@ canvas { display: block; width: 100%; height: 100%; }
       <div id="arc-svg-wrap"></div>
       <div class="arc-nodes" id="arcNodes"></div>
       <div style="max-width:420px;margin:40px auto 0;padding:0 0 16px;">
-        <a href="Superhuman-OS-Research-Paper.pdf" download style="display:block;width:100%;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cinnabar);text-decoration:none;border:1px solid rgba(200,75,29,0.3);padding:14px 0;">// Download Research Paper</a>
+        <a href="Superhuman-OS-Research-Paper.pdf" download style="display:block;width:100%;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);text-decoration:none;border:1px solid rgba(200,147,90,0.3);padding:14px 0;">// Download Research Paper</a>
       </div>
     </div>
 
