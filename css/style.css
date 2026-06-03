@@ -29,7 +29,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--ash) var(--black); }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--ash) var(--black); overflow-x: hidden; }
 
 body {
   background: var(--black-warm);
