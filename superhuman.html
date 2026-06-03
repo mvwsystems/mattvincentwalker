@@ -1103,6 +1103,40 @@ footer {
 
 <div class="divider"></div>
 
+<!-- ═══ TWO-PROBLEM FRAME ═══ -->
+<section>
+  <div class="page-container-narrow">
+    <div class="section-header reveal">
+      <div class="label">The Double Bind</div>
+      <h2>Two Problems.<br>One <span class="amber">Root.</span></h2>
+    </div>
+    <div class="problem-prose reveal">
+      <p>Most high-performers arrive with two problems that look separate but aren't. The first is internal: the shame wound driving the pattern, corrupting the comparator, producing the ceiling. The second is external: the systems, structures, and strategies that keep breaking down or plateauing regardless of effort or intelligence.</p>
+      <p>Most solutions address one and ignore the other. Therapy heals the wound but doesn't build the machine. Strategy builds the machine but can't explain why you keep sabotaging it.</p>
+      <p>Superhuman OS addresses both — because in a complex adaptive system, you cannot solve the output layer without stabilizing the reference signal. The internal disorder and the external dysfunction are the same problem at different altitudes.</p>
+    </div>
+    <div class="problem-nodes reveal" style="transition-delay: 0.15s">
+      <div class="problem-node">
+        <div class="problem-node-label">Internal Disorder</div>
+        <p class="problem-node-desc">Shame wound · corrupted comparator · identity ceiling</p>
+      </div>
+      <div class="problem-node-arrow">→</div>
+      <div class="problem-node">
+        <div class="problem-node-label">External Dysfunction</div>
+        <p class="problem-node-desc">Systems breakdown · plateau under load · effort without compound</p>
+      </div>
+      <div class="problem-node-arrow">→</div>
+      <div class="problem-node">
+        <div class="problem-node-label">Feedback Loop</div>
+        <p class="problem-node-desc">Each sustains the other · neither resolves in isolation</p>
+      </div>
+    </div>
+    <p class="problem-intervention reveal" style="transition-delay: 0.25s">Superhuman OS intervenes at the root.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ═══ TWO LEVELS ═══ -->
 <section>
   <div class="page-container">
@@ -1146,7 +1180,7 @@ footer {
     <div class="section-header reveal">
       <div class="label">Integrated Framework</div>
       <h2>The Superhuman <span class="amber">Stack</span></h2>
-      <p class="desc">Five interlocking layers — from root cause to output. Together with a 624-system component library from 31 disciplines, this constitutes not merely a framework but a field.</p>
+      <p class="desc">Six interlocking layers — from root cause to output. Together with a 624-system component library from 31 disciplines, this constitutes not merely a framework but a field.</p>
     </div>
     <div>
       <div class="stack-row reveal" style="transition-delay: 0.05s">
@@ -1174,7 +1208,13 @@ footer {
         <div class="row-desc">Inner Healing → Outer Systems → Automate the Rest</div>
       </div>
       <div class="stack-row reveal" style="transition-delay: 0.25s">
-        <div class="row-num">05</div>
+        <div class="row-num">06</div>
+        <div class="row-label">Expression</div>
+        <h3>Domain Expression</h3>
+        <div class="row-desc">Business · Creative · Relational · Financial</div>
+      </div>
+      <div class="stack-row reveal" style="transition-delay: 0.3s">
+        <div class="row-num">07</div>
         <div class="row-label">Output</div>
         <h3>Higher-Order Coherence</h3>
         <div class="row-desc">Clarity, consistency, peace, and compounding power</div>
@@ -1412,6 +1452,33 @@ footer {
         <p>Converts the wound into aggression. Builds armor from conflict and control. Strength as a substitute for healing.</p>
       </div>
     </div>
+
+    <div class="pattern-map reveal" style="transition-delay: 0.1s">
+      <div class="pattern-map-header">
+        <div class="pattern-map-header-label">How the Pattern Shows Up in Business</div>
+      </div>
+      <div class="pattern-map-row">
+        <div class="pmr-pattern">The Runner</div>
+        <div class="pmr-arrow">→</div>
+        <div class="pmr-expression">Revenue without profit; always launching, never consolidating</div>
+      </div>
+      <div class="pattern-map-row">
+        <div class="pmr-pattern">The Fixer</div>
+        <div class="pmr-arrow">→</div>
+        <div class="pmr-expression">Can't delegate; becomes the org chart bottleneck; client dependency</div>
+      </div>
+      <div class="pattern-map-row">
+        <div class="pmr-pattern">The Fader</div>
+        <div class="pmr-arrow">→</div>
+        <div class="pmr-expression">Underpricing; inconsistent visibility; offer apologetics</div>
+      </div>
+      <div class="pattern-map-row">
+        <div class="pmr-pattern">The Fighter</div>
+        <div class="pmr-arrow">→</div>
+        <div class="pmr-expression">Team turnover; adversarial sales; control without systems</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1546,6 +1613,153 @@ footer {
     <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
   </div>
 </footer>
+
+<!-- ═══ ADDITION STYLES ═══ -->
+<style>
+/* ── TWO-PROBLEM FRAME ── */
+.problem-prose p {
+  font-size: 0.95rem;
+  color: var(--warm-gray);
+  line-height: 1.85;
+  margin-bottom: 24px;
+}
+
+.problem-nodes {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  margin: 56px 0 20px;
+}
+
+.problem-node {
+  padding: 36px 28px;
+  background: var(--charcoal);
+  border: 1px solid var(--stone);
+  text-align: center;
+  transition: border-color 0.4s, box-shadow 0.4s;
+  cursor: default;
+}
+
+.problem-node:hover {
+  border-color: var(--stone-light);
+  box-shadow: 0 0 40px rgba(200,147,90,0.03);
+}
+
+.problem-node-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+  margin-bottom: 10px;
+}
+
+.problem-node-desc {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.problem-node-arrow {
+  font-size: 1.2rem;
+  color: var(--amber-dim);
+  opacity: 0.4;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.problem-intervention {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--amber-dim);
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+/* ── PATTERN BUSINESS MAP ── */
+.pattern-map {
+  margin-top: 72px;
+  border: 1px solid var(--stone);
+}
+
+.pattern-map-header {
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--stone);
+  background: rgba(200,147,90,0.012);
+}
+
+.pattern-map-header-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+}
+
+.pattern-map-row {
+  display: grid;
+  grid-template-columns: 160px 32px 1fr;
+  align-items: baseline;
+  gap: 0;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--stone);
+  transition: background 0.3s;
+  cursor: default;
+}
+
+.pattern-map-row:last-child { border-bottom: none; }
+.pattern-map-row:hover { background: rgba(200,147,90,0.018); }
+
+.pmr-pattern {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+}
+
+.pmr-arrow {
+  font-size: 0.85rem;
+  color: var(--stone-light);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.pmr-expression {
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+  line-height: 1.65;
+}
+
+/* ── RESPONSIVE ADDITIONS ── */
+@media (max-width: 768px) {
+  .problem-nodes {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .problem-node-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+  .pattern-map-row {
+    grid-template-columns: 120px 24px 1fr;
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .pattern-map-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 20px;
+  }
+  .pmr-arrow { display: none; }
+}
+</style>
 
 <!-- ═══════════════════════════════════════════════════════
      JAVASCRIPT
