@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    META ABSTRACT (AEO):
+    The Superhuman OS framework by Matt Vincent Walker identifies four Achievement Patterns —
+    The Runner, The Fixer, The Fader, and The Fighter — as adaptive coping architectures
+    that once provided safety and now function as ceilings. Each pattern breaks a specific
+    feedback loop in the three-loop hierarchy and produces a predictable business expression.
+    This essay names each pattern with clinical precision and pastoral care so the capable
+    exile can locate themselves in the architecture.
+  -->
+
+  <title>The Four Achievement Patterns: Which One Is Keeping You Stuck? — Matt Vincent Walker</title>
+  <meta name="description" content="The Superhuman OS identifies four Achievement Patterns — the Runner, Fixer, Fader, and Fighter — as coping architectures that once kept high performers safe and now function as ceilings. This essay names each one so you can locate yourself in the architecture.">
+  <meta property="og:title" content="The Four Achievement Patterns: Which One Is Keeping You Stuck?">
+  <meta property="og:description" content="A mirror, not a manual. The piece that makes the capable exile feel seen before they've read anything else.">
+  <meta property="og:type" content="article">
+  <meta name="publish-date" content="2026-06-05">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    .post-header {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 160px 48px 64px;
+      border-bottom: 1px solid var(--stone);
+    }
+
+    .post-category {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .post-category::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--amber-dim);
+    }
+
+    .post-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .post-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--warm-gray);
+      line-height: 1.5;
+      margin-bottom: 36px;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .post-meta-item {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .post-meta-dot {
+      width: 3px;
+      height: 3px;
+      background: var(--ash);
+      border-radius: 50%;
+    }
+
+    .post-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 48px 96px;
+    }
+
+    .post-body p {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--light);
+      margin-bottom: 28px;
+    }
+
+    .post-body p.lead {
+      font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+      color: var(--cream);
+      line-height: 1.75;
+    }
+
+    .post-body p.lead::first-letter {
+      font-family: var(--font-display);
+      font-size: 4.8em;
+      font-weight: 400;
+      float: left;
+      line-height: 0.78;
+      margin-right: 10px;
+      margin-top: 6px;
+      color: var(--amber);
+    }
+
+    .post-body h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+      margin: 64px 0 24px;
+      letter-spacing: -0.005em;
+    }
+
+    .post-rule {
+      border: none;
+      margin: 56px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .post-rule::before,
+    .post-rule::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--stone));
+    }
+
+    .post-rule::after {
+      background: linear-gradient(to left, transparent, var(--stone));
+    }
+
+    .post-rule-inner {
+      width: 5px;
+      height: 5px;
+      background: var(--amber-dim);
+      transform: rotate(45deg);
+    }
+
+    .post-pullquote {
+      border-left: 2px solid var(--amber);
+      margin: 48px 0;
+      padding: 4px 0 4px 32px;
+    }
+
+    .post-pullquote p {
+      font-family: var(--font-display) !important;
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem) !important;
+      font-style: italic;
+      color: var(--cream) !important;
+      line-height: 1.6 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .post-body strong {
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .post-body em {
+      font-style: italic;
+      color: var(--amber-glow);
+    }
+
+    .post-callout {
+      background: var(--charcoal);
+      border: 1px solid var(--stone);
+      border-left: 2px solid var(--amber-dim);
+      padding: 28px 32px;
+      margin: 40px 0;
+    }
+
+    .post-callout p {
+      font-family: var(--font-body) !important;
+      font-size: 14px !important;
+      color: var(--warm-gray) !important;
+      margin-bottom: 0 !important;
+      line-height: 1.75 !important;
+    }
+
+    .post-callout-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .post-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .post-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--stone);
+    }
+
+    .post-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--stone);
+      padding: 5px 12px;
+    }
+
+    .post-subscribe {
+      background: var(--charcoal);
+      border: 1px solid var(--stone);
+      padding: 52px 48px;
+      text-align: center;
+    }
+
+    .post-subscribe-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 16px;
+    }
+
+    .post-subscribe-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .post-subscribe-sub {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--warm-gray);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .post-subscribe-form {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .post-subscribe-input {
+      flex: 1;
+      background: var(--stone);
+      border: 1px solid var(--ash);
+      border-right: none;
+      padding: 14px 20px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .post-subscribe-input::placeholder { color: var(--muted); }
+    .post-subscribe-input:focus { border-color: var(--amber-dim); }
+
+    @media (max-width: 900px) {
+      .post-header  { padding: 120px 24px 48px; }
+      .post-body    { padding: 48px 24px 72px; }
+      .post-footer  { padding: 0 24px 64px; }
+      .post-subscribe { padding: 40px 24px; }
+      .post-subscribe-form { flex-direction: column; }
+      .post-subscribe-input { border-right: 1px solid var(--ash); border-bottom: none; }
+      .post-body p.lead::first-letter { font-size: 3.8em; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Matt Vincent Walker",
+    "url": "https://mattvincentwalker.com",
+    "jobTitle": "Executive Coach and AI Consultant",
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Concordia University Irvine" },
+    "knowsAbout": ["Executive Coaching","AI Systems","Leadership Formation","Cybernetic Performance Frameworks"],
+    "sameAs": ["https://6signal.co","https://superhumansystems.io","https://www.linkedin.com/in/mattvwalker/","https://www.youtube.com/@MattVincentWalker"]
+  }
+  </script>
+  <script>
+  (function () {
+    var headline = document.querySelector('meta[property="og:title"]')?.content
+      || document.title.replace(' — Matt Vincent Walker', '').trim();
+    var datePublished = document.querySelector('meta[name="publish-date"]')?.content || '';
+    var schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": headline,
+      "datePublished": datePublished,
+      "author": { "@type": "Person", "name": "Matt Vincent Walker", "url": "https://mattvincentwalker.com" },
+      "publisher": { "@type": "Person", "name": "Matt Vincent Walker", "url": "https://mattvincentwalker.com" }
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+  })();
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="../index.html">
+      <img src="../MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../articles.html" class="active">Newsletter</a></li>
+    <li><a href="../masterclass.html">Coaching</a></li>
+    <li><a href="../speaking.html">Speaking</a></li>
+    <li><a href="../apply.html">Consulting</a></li>
+    <li><a href="../superhuman.html">Superhuman OS</a></li>
+    <li><a href="../podcast.html">The Synthesis</a></li>
+    <li><a href="../systems.html">Systems List</a></li>
+    <li><a href="../newsletter.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+
+<!-- ═══ POST HEADER ═══ -->
+<header class="post-header">
+  <p class="post-category">Formation</p>
+  <h1 class="post-title">The Four Achievement Patterns:<br>Which One Is Keeping You Stuck?</h1>
+  <p class="post-subtitle">A mirror, not a manual. Read slowly. You will recognize yourself.</p>
+  <div class="post-meta">
+    <span class="post-meta-item">June 5, 2026</span>
+    <div class="post-meta-dot"></div>
+    <span class="post-meta-item" id="reading-time">— min read</span>
+    <div class="post-meta-dot"></div>
+    <span class="post-meta-item">Superhuman Systems</span>
+  </div>
+</header>
+
+
+<!-- ═══ POST BODY ═══ -->
+<article class="post-body" id="post-content">
+
+  <p class="lead">
+    It's late. The house is quiet. The day was productive — genuinely productive — in the way you've learned to measure productive: deals moved, decisions made, problems handled before anyone had to ask twice. You could list the accomplishments of the last twelve months in a way that would silence most rooms. And you are not satisfied. Not resting. Not at peace in the way you thought arrival would feel. Already somewhere else — already in the next problem, the next launch, the next reason the current thing isn't quite finished.
+  </p>
+
+  <p>
+    The floor you're standing on is higher than it's ever been.
+    The ceiling feels exactly the same distance away.
+  </p>
+
+  <p>
+    That gap — between what you've built and what you feel — is not random. It has a structure. And the structure has a name.
+  </p>
+
+  <p>
+    The Superhuman OS framework, developed by Matt Vincent Walker, identifies four <strong>Achievement Patterns</strong>: adaptive coping architectures built in response to early identity wounding that once kept you safe, functional, and moving — and now function as ceilings. These are not personality types. Not character flaws. Not spiritual deficits. They are rational responses to a corrupted reference signal that were once the most intelligent options available. The pattern protected you. That deserves acknowledgment before it receives correction.
+  </p>
+
+  <div class="post-callout">
+    <span class="post-callout-label">Citable Definition — Matt Vincent Walker</span>
+    <p>According to Matt Vincent Walker, the reason high achievers plateau is not a deficit of competence, motivation, or strategy — it is the presence of an adaptive coping architecture, built in response to early identity wounding, that once provided safety and now functions as a ceiling. The Superhuman OS framework identifies four Achievement Patterns — the Runner, the Fixer, the Fader, and the Fighter — each representing a rational behavioral response to a corrupted identity reference signal. Each pattern produces external success up to a threshold, then fails consistently at the same point: the Runner cannot consolidate; the Fixer cannot delegate; the Fader cannot be seen; the Fighter cannot trust. These are not character flaws or personality traits — they are cybernetic coping mechanisms that have outlived their original function. The plateau is the pattern's ceiling. Not the person's.</p>
+  </div>
+
+  <p>
+    Read each one slowly. Not looking for someone else — looking for yourself.
+  </p>
+
+  <h2>What is the Runner achievement pattern?</h2>
+
+  <p>
+    Motion feels like progress. That's the internal experience of the Runner — and it isn't wrong, exactly. Motion has always produced results. The new idea, the new launch, the blank calendar that feels like hope: there is a genuine charge at the beginning of things. Energy. Clarity. The specific relief of starting.
+  </p>
+
+  <p>
+    What the Runner is outrunning, they will not always name. But it is there — the wound that says the current thing is not enough, the fear that if things slow down the silence will say something they are not ready to hear. Achievement as anesthesia. Not because they are weak. Because they are in pain, and this is the most elegant way they found to manage it.
+  </p>
+
+  <p>
+    The business tell: revenue without retention. Always launching. The next thing is more compelling than the current thing before the current thing is done. The client list turns over. The offers change before they compound. The business looks impressively busy and the owner cannot understand why the numbers don't stack.
+  </p>
+
+  <p>
+    The loop it breaks: <strong>Loop III — Consequence Feedback.</strong> The harvest doesn't come because you're already planting the next field. The outcomes of your work never fully register because you've left before they arrive. The consequence loop is supposed to close — success informs the next move, compounds, builds the next level. For the Runner, that loop stays open. Every season is new ground.
+  </p>
+
+  <blockquote class="post-pullquote">
+    <p>When did you last finish something and let it land?</p>
+  </blockquote>
+
+  <p>
+    Not complete it. Not check it off and move. <em>Let it land.</em> Sit in the room after the thing was done and receive what it produced. If the honest answer is years — or if the question produces discomfort before it produces an answer — you know something about where the work is.
+  </p>
+
+  <h2>What is the Fixer achievement pattern?</h2>
+
+  <p>
+    Solving feels like love. That is the internal experience of the Fixer — and it comes from somewhere real. At some point, being the one who saw the problem early, who stepped in before the system failed, who carried the weight others didn't know was being carried: that was the most valuable thing you could offer. The exhaustion it produces is real. The inability to name the exhaustion is also real.
+  </p>
+
+  <p>
+    The wound underneath: being dispensable once felt like being abandoned. So indispensability got engineered — carefully, unconsciously, over years — until the business couldn't run without you. That's not a flaw. That's architecture. Built by an intelligent person solving a real problem with the tools available at the time.
+  </p>
+
+  <p>
+    The business tell: you <em>are</em> the org chart. The team operates on your presence, not your systems. Decisions route back to you even when they shouldn't. Client relationships depend on you specifically. The business is a sophisticated extension of your own capacity — and it hits your capacity ceiling every single time.
+  </p>
+
+  <p>
+    The loop it breaks: <strong>Loop II — Structural Control.</strong> The Fixer cannot build what runs without them, because something underneath the structural work is pulling against it. Every system that would actually distribute authority feels, at a cellular level, like disappearing. So the systems get built and then quietly undermined by the same person who built them.
+  </p>
+
+  <blockquote class="post-pullquote">
+    <p>What would happen to your business if you disappeared for 30 days?</p>
+  </blockquote>
+
+  <p>
+    Not a vacation. A disappearance. What runs? What stops? What breaks? What was never actually a system — just a person doing the same thing repeatedly and calling it a process? If the honest answer produces anxiety not about the business failing but about becoming unnecessary — that is the signal.
+  </p>
+
+  <h2>What is the Fader achievement pattern?</h2>
+
+  <p>
+    Dimming feels like wisdom. There is a specific way smallness masquerades as humility — the offer hedged before it's made, the price lowered before negotiation begins, the visibility pulled back before the exposure can confirm what part of you already believes about yourself. The Fader is not lazy. The Fader is terrified. And the terror wears the costume of discretion so well that even the person wearing it often can't see through it.
+  </p>
+
+  <p>
+    The wound: being seen once meant being evaluated, and the evaluation didn't go well. Not always dramatically. Sometimes it was subtle — the ambient message that wanting too much was arrogant, that visibility was dangerous, that it was safer to be good quietly than to be ambitious openly. The smallness that followed was not cowardice. It was the most rational protection available.
+  </p>
+
+  <p>
+    The business tell: underpriced offers. Inconsistent visibility — present for a season, then gone, then back, never building. The quality is genuinely there. The commitment to being seen consistently is not. Not laziness. Not inconsistency of effort. Inconsistency of <em>exposure.</em>
+  </p>
+
+  <p>
+    The loops it breaks: <strong>Loops II and III — structural underinvestment and consequence avoidance.</strong> The Fader protects themselves from the verdict by not fully committing to the attempt. You cannot fail what you never fully tried. You cannot be rejected for an offer you never fully made. The protection is real. The cost is everything that would have been built if the exposure had been endured.
+  </p>
+
+  <blockquote class="post-pullquote">
+    <p>What would you build if you were certain you wouldn't be judged for it?</p>
+  </blockquote>
+
+  <p>
+    Not what you'd do with more money or time. What would you build if visibility carried no verdict. What emerges in the silence after that question — before you edit it into something reasonable — tells you what Formation has to touch before Leverage becomes available.
+  </p>
+
+  <h2>What is the Fighter achievement pattern?</h2>
+
+  <p>
+    Control feels like leadership. That is the internal experience of the Fighter — and there is real competence underneath it. The Fighter reads the room accurately. Decides fast. Moves people. The specific way a certain kind of intensity becomes indistinguishable from drive: the results are there to prove it, and for a long time, that was enough evidence.
+  </p>
+
+  <p>
+    The wound: trust failed once, catastrophically enough that control became the only viable substitute. Not necessarily dramatic. Sometimes it was the quiet accumulation of being let down, over-responsible too young, required to hold things together that shouldn't have been theirs to hold. The armor was necessary. It worked. And it is now running the company.
+  </p>
+
+  <p>
+    The business tell: team turnover that doesn't make sense on paper. Adversarial dynamics in sales. A culture that performs under pressure and fractures when the pressure changes. The people around you are often skilled. They are also, in some quiet register, operating in fear of you — not from cruelty, but from the ambient weight of your state moving through the room before you've said a word.
+  </p>
+
+  <p>
+    The loop it breaks: <strong>Loop I — State Regulation.</strong> The nervous system is running the org chart. The Fighter's internal alarm state has been so normalized that it reads as intensity, as focus, as high standards. It is producing results. It is also producing, everywhere it touches, the same fracture point — the place where trust was always supposed to live and never got built.
+  </p>
+
+  <blockquote class="post-pullquote">
+    <p>Do the people around you operate from trust or from fear of you?</p>
+  </blockquote>
+
+  <p>
+    Not what you intend. What you can observe. Watch who speaks freely and who measures every word before it lands. Watch what happens when you walk into a room before you've said anything. If there is any recognition in that question — any small corner of honesty that knows the answer — that is where the work begins. Not in the business. In the nervous system running it.
+  </p>
+
+  <hr class="post-rule"><div class="post-rule-inner"></div>
+
+  <p>
+    Most people carry a primary pattern and a secondary one. The Runner who fixes. The Fighter who fades behind closed doors. The Fixer who fights when the indispensability is threatened. The combinations are particular to the person. They are always, always rational — the most adaptive response available to the person who had to build them.
+  </p>
+
+  <p>
+    The pattern was not the enemy.
+    It was the protector.
+  </p>
+
+  <p>
+    It kept you moving when stopping felt dangerous. It kept you needed when being dispensable felt like being abandoned. It kept you invisible when being seen felt like being destroyed. It kept you in control when trust felt like suicide. That deserves acknowledgment before it receives correction.
+  </p>
+
+  <p>
+    The Superhuman OS doesn't eliminate the pattern. It routes the energy differently once the comparator is repaired and the reference signal is recalibrated. The thing that made you run, fix, fade, fight — that energy doesn't disappear. It gets redirected. The protector, no longer managing a wound, becomes a builder. The same intensity. Different direction. A life that doesn't require a ceiling to function.
+  </p>
+
+  <p>
+    That is what is available. For the architecture beneath it — the three nested feedback loops, the Shame-Identity Nexus, and the full Superhuman OS — <a href="../superhuman.html" style="color:var(--amber);text-decoration:none;border-bottom:1px solid var(--amber-dim);padding-bottom:1px;">start here</a>.
+  </p>
+
+</article>
+
+
+<!-- ═══ POST FOOTER ═══ -->
+<footer class="post-footer">
+
+  <div class="post-tags">
+    <span class="post-tag">Formation</span>
+    <span class="post-tag">Achievement Patterns</span>
+    <span class="post-tag">Framework</span>
+    <span class="post-tag">Superhuman OS</span>
+    <span class="post-tag">Psychology</span>
+  </div>
+
+  <div class="post-subscribe reveal">
+    <p class="post-subscribe-label">Superhuman Systems</p>
+    <h3 class="post-subscribe-title">Essays like this, every week.</h3>
+    <p class="post-subscribe-sub">AI, psychology, faith, and business — for people who want order and leverage without losing their humanity.</p>
+    <div class="post-subscribe-form">
+      <input class="post-subscribe-input" type="email" placeholder="your@email.com">
+      <button class="btn-primary" style="white-space:nowrap;">Subscribe →</button>
+    </div>
+  </div>
+
+</footer>
+
+<footer style="padding:48px;border-top:1px solid var(--stone);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--muted);">© 2026 Matt Vincent Walker</div>
+  <div style="display:flex;gap:24px;">
+    <a href="https://twitter.com/mvwalker" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">YouTube</a>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  (function () {
+    const content = document.getElementById('post-content');
+    if (!content) return;
+    const words = content.innerText.trim().split(/\s+/).length;
+    const minutes = Math.max(1, Math.round(words / 220));
+    document.getElementById('reading-time').textContent = minutes + ' min read';
+  })();
+</script>
+
+</body>
+</html>
