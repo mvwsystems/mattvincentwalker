@@ -11,3 +11,18 @@
   from = "/apply"
   to = "/apply.html"
   status = 200
+
+[[redirects]]
+  from = "/break-point"
+  to = "/break-point/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/break-point/results"
+  to = "/break-point/results/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/break-point/book"
+  to = "/break-point/book/index.html"
+  status = 200

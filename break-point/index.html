@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Break Point — A Superhuman OS Shame Audit | The Vincere Society</title>
+  <meta name="description" content="Every man breaks somewhere. The Break Point is a Superhuman OS shame audit for men — 7 parts, scored, honest. From The Vincere Society.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://vinceresociety.com/break-point/">
+  <meta property="og:title" content="The Break Point — A Superhuman OS Shame Audit">
+  <meta property="og:description" content="Every man breaks somewhere. This tells you where — before the pressure does.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vinceresociety.com/break-point/">
+  <meta property="og:image" content="TODO_OG_IMAGE_URL">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "The Break Point — A Superhuman OS Shame Audit",
+    "description": "A seven-part shame audit for men, built on Superhuman OS methodology. Find where you break before the pressure does.",
+    "provider": {
+      "@type": "Organization",
+      "name": "The Vincere Society",
+      "url": "https://vinceresociety.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Matt Vincent Walker",
+        "url": "https://mattvincentwalker.com"
+      }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "The Vincere Society", "item": "https://vinceresociety.com" },
+      { "@type": "ListItem", "position": 2, "name": "The Break Point", "item": "https://vinceresociety.com/break-point/" }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg:        #0D0B09;
+      --surface:   #14110E;
+      --text:      #EDE6DC;
+      --text-sec:  #9C948A;
+      --gold:      #C49A6C;
+      --gold-dim:  rgba(196,154,108,0.30);
+      --gold-glow: rgba(196,154,108,0.15);
+      --rule:      rgba(196,154,108,0.30);
+      --font-d:    'Cormorant Garamond', serif;
+      --font-b:    'Outfit', sans-serif;
+      --font-m:    'JetBrains Mono', monospace;
+      --max:       640px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-rail {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(196,154,108,0.12);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #progress-rail.visible { opacity: 1; }
+    #progress-fill {
+      height: 100%;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(13,11,9,0.96) 0%, transparent 100%);
+    }
+    .nav-wordmark {
+      font-family: var(--font-b);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: var(--font-m);
+      font-size: 11px;
+      color: var(--text-sec);
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .nav-back.visible { opacity: 1; pointer-events: auto; }
+
+    /* ── SCREENS ── */
+    .screen {
+      display: none;
+      min-height: 100vh;
+    }
+    .screen.active { display: block; }
+
+    /* ── INTRO SCREEN ── */
+    #screen-intro {
+      display: block; /* default active */
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-b);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: var(--font-d);
+      font-size: clamp(52px, 12vw, 96px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 0.95;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-d);
+      font-style: italic;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 400;
+      color: var(--text-sec);
+      max-width: 480px;
+      line-height: 1.5;
+      margin-bottom: 56px;
+    }
+
+    .hero-scroll-hint {
+      font-family: var(--font-m);
+      font-size: 11px;
+      color: var(--text-sec);
+      opacity: 0.5;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 24px;
+    }
+
+    /* ── HAIRLINE RULE ── */
+    .rule {
+      width: 100%;
+      max-width: var(--max);
+      height: 1px;
+      background: var(--rule);
+      margin: 48px auto;
+    }
+    .rule-short {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 32px;
+    }
+
+    /* ── PREAMBLE ── */
+    .preamble-section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    .preamble-label {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .preamble-heading {
+      font-family: var(--font-d);
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .preamble-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-sec);
+      margin-bottom: 20px;
+    }
+
+    .preamble-body strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .rules-list {
+      list-style: none;
+      margin: 32px 0;
+      border-left: 1px solid var(--rule);
+      padding-left: 24px;
+    }
+    .rules-list li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-sec);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .rules-list li strong { color: var(--text); font-weight: 500; }
+    .rules-list li::before {
+      content: attr(data-num);
+      font-family: var(--font-m);
+      font-size: 10px;
+      color: var(--gold);
+      position: absolute;
+      left: -36px;
+      top: 5px;
+    }
+
+    .distinction-block {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 28px 24px;
+      margin: 32px 0;
+    }
+    .distinction-block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-sec);
+      margin-bottom: 12px;
+    }
+    .distinction-block p:last-child { margin-bottom: 0; }
+    .distinction-block strong { color: var(--text); font-weight: 500; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 40px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      min-height: 56px;
+      min-width: 200px;
+    }
+    .btn-primary:hover {
+      background: var(--gold-glow);
+      box-shadow: 0 0 24px var(--gold-glow);
+    }
+    .btn-primary:active { opacity: 0.8; }
+
+    .btn-full { width: 100%; }
+
+    /* ── QUIZ SCREEN ── */
+    #screen-quiz {
+      padding: 0;
+    }
+
+    .quiz-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px 24px 120px;
+      position: relative;
+    }
+
+    /* Ghost watermark */
+    .quiz-container::before {
+      content: attr(data-roman);
+      position: fixed;
+      top: 50%;
+      right: -0.05em;
+      transform: translateY(-50%);
+      font-family: var(--font-d);
+      font-size: clamp(200px, 45vw, 340px);
+      font-weight: 600;
+      color: var(--gold);
+      opacity: 0.06;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .part-indicator {
+      font-family: var(--font-m);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .part-title {
+      font-family: var(--font-d);
+      font-size: clamp(32px, 8vw, 52px);
+      font-weight: 600;
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .part-subtitle {
+      font-size: 14px;
+      color: var(--text-sec);
+      font-style: italic;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .part-intro {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── LIKERT QUESTIONS ── */
+    .question-block {
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .question-block.unanswered .scale-row {
+      outline: 1px solid rgba(196,154,108,0.5);
+      outline-offset: 4px;
+    }
+
+    .question-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .question-text em { font-style: italic; color: var(--gold); }
+
+    .question-num {
+      font-family: var(--font-m);
+      font-size: 10px;
+      color: var(--text-sec);
+      letter-spacing: 0.2em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .scale-row {
+      display: flex;
+      gap: 6px;
+      border-radius: 2px;
+      transition: outline 0.2s ease;
+    }
+
+    .scale-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      background: var(--surface);
+      border: 1px solid rgba(196,154,108,0.15);
+      color: var(--text-sec);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 8px 4px 6px;
+      gap: 4px;
+    }
+    .scale-btn:hover {
+      border-color: var(--gold-dim);
+      background: rgba(196,154,108,0.06);
+    }
+    .scale-btn.selected {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .scale-num {
+      font-family: var(--font-m);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .scale-label {
+      font-family: var(--font-b);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* ── SCENARIO CARDS (Part VI) ── */
+    .scenario-block {
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scenario-prompt {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .scenario-prompt em { font-style: italic; }
+
+    .scenario-label {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .scenario-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid rgba(196,154,108,0.15);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      min-height: 56px;
+    }
+    .option-card:hover {
+      border-color: var(--gold-dim);
+      background: rgba(196,154,108,0.04);
+    }
+    .option-card.selected {
+      background: rgba(196,154,108,0.10);
+      border-color: var(--gold);
+    }
+
+    .option-letter {
+      font-family: var(--font-m);
+      font-size: 12px;
+      color: var(--gold);
+      min-width: 16px;
+      padding-top: 2px;
+    }
+    .option-card.selected .option-letter {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .option-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-sec);
+    }
+    .option-card.selected .option-text {
+      color: var(--text);
+    }
+    .option-text em { font-style: italic; }
+
+    /* ── WRITTEN QUESTIONS (Part VII) ── */
+    .written-privacy-notice {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-left: 2px solid var(--gold);
+      padding: 16px 20px;
+      margin-bottom: 40px;
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .written-privacy-notice strong { color: var(--text); font-weight: 500; }
+
+    .written-block {
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .written-q-num {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .written-q-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .written-q-text em { font-style: italic; color: var(--text-sec); }
+    .written-q-text strong { font-weight: 500; }
+
+    .written-textarea {
+      width: 100%;
+      min-height: 100px;
+      background: var(--surface);
+      border: 1px solid rgba(196,154,108,0.20);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      padding: 16px;
+      resize: vertical;
+      transition: border-color 0.2s ease;
+      /* Part VII answers are never read programmatically — privacy by architecture */
+    }
+    .written-textarea:focus {
+      outline: none;
+      border-color: var(--gold-dim);
+    }
+    .written-textarea::placeholder { color: rgba(156,148,138,0.5); }
+
+    .written-handwriting-note {
+      font-size: 12px;
+      color: var(--text-sec);
+      font-style: italic;
+      margin-top: 6px;
+      opacity: 0.7;
+    }
+
+    /* ── PART INTRO (Part VI) ── */
+    .part-intro-block {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      padding: 24px;
+      margin-bottom: 40px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-sec);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── NAVIGATION BUTTONS ── */
+    .quiz-nav {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quiz-error {
+      font-family: var(--font-m);
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      display: none;
+      padding: 12px 0;
+    }
+    .quiz-error.visible { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 768px) {
+      .quiz-container { padding: 120px 48px 140px; }
+      .preamble-section { padding: 100px 48px 140px; }
+      .hero { padding: 140px 48px 100px; }
+    }
+
+    @media (max-width: 460px) {
+      .scale-label { display: none; }
+      .scale-num { font-size: 13px; }
+      .scale-btn { min-height: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-rail"><div id="progress-fill"></div></div>
+
+  <nav>
+    <a href="https://vinceresociety.com" class="nav-wordmark">The Vincere Society</a>
+    <a href="#" class="nav-back" id="nav-back-btn" onclick="handleNavBack(event)">← Back</a>
+  </nav>
+
+  <!-- ══ INTRO SCREEN ══ -->
+  <div id="screen-intro">
+
+    <section class="hero" id="hero-top">
+      <p class="hero-eyebrow">The Vincere Society</p>
+      <h1 class="hero-title">THE BREAK<br>POINT</h1>
+      <p class="hero-subtitle">A Superhuman OS Shame Audit for Men</p>
+      <p class="hero-tagline"><em>Every man breaks somewhere. This tells you where — before the pressure does.</em></p>
+      <button class="btn-primary" onclick="scrollToPreamble()">Begin the Audit</button>
+      <p class="hero-scroll-hint">↓ Read This First</p>
+    </section>
+
+    <section class="preamble-section" id="preamble-start">
+      <p class="preamble-label">Read This First — Or Don't Take the Quiz</p>
+      <div class="rule-short"></div>
+
+      <p class="preamble-body">This is not a personality quiz. There is no result that makes you look good.</p>
+      <p class="preamble-body">This assessment is built on one premise: <strong>shame is a load-bearing failure in a man's operating system.</strong> You can out-earn it, out-train it, out-spiritualize it, and out-perform it — for a while. Then pressure arrives that exceeds your compensations, and you break exactly where the shame lives.</p>
+      <p class="preamble-body">The men who break in their 40s didn't break in their 40s. They broke twenty years earlier and spent two decades building a life on top of the crack.</p>
+
+      <p class="preamble-body" style="margin-top:28px;color:var(--text);font-weight:400;">Three rules:</p>
+      <ol class="rules-list">
+        <li data-num="1"><strong>Answer as you actually behave, not as you intend to behave.</strong> Your intentions are irrelevant to this instrument. Your last 90 days of actual conduct are the only admissible evidence.</li>
+        <li data-num="2"><strong>If two answers feel true, pick the uglier one.</strong> The flattering answer is almost always the defended one.</li>
+        <li data-num="3"><strong>Do not skip Part Seven.</strong> Men skip the written questions because writing it down makes it real. That instinct — <em>don't make it real</em> — is the exact thing we're auditing.</li>
+      </ol>
+
+      <p class="preamble-body" style="margin-top:28px;">One distinction before you start, because everything hangs on it:</p>
+      <div class="distinction-block">
+        <p><strong>Guilt says: "I did something bad."</strong> Guilt is data. It's correctable. It produces repair.</p>
+        <p><strong>Shame says: "I am something bad."</strong> Shame is a verdict. It's not correctable by effort — which is why you've been trying so hard for so long and the feeling hasn't moved.</p>
+        <p>This quiz finds where the verdict is running your life while you thought you were just "being disciplined," "being a provider," or "being fine."</p>
+      </div>
+
+      <div style="text-align:center; margin-top:56px;">
+        <button class="btn-primary" onclick="startQuiz()">I Understand — Begin Part I</button>
+      </div>
+    </section>
+
+  </div><!-- /screen-intro -->
+
+  <!-- ══ QUIZ SCREEN ══ -->
+  <div id="screen-quiz" class="screen">
+    <div class="quiz-container" id="quiz-container" data-roman="I">
+      <!-- Content rendered by JS -->
+    </div>
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════
+  // QUIZ DATA — All copy verbatim from the diagnostic document
+  // ═══════════════════════════════════════════════
+
+  const PARTS = [
+    {
+      num: 1,
+      roman: 'I',
+      title: 'THE SHAME SIGNAL',
+      subtitle: 'Where failure fuses to identity',
+      intro: null,
+      type: 'likert',
+      questions: [
+        { id: 'p1q1', text: 'When something I built fails, my first internal sentence is about what\'s wrong with <em>me</em>, not what went wrong with <em>it</em>.' },
+        { id: 'p1q2', text: 'I replay old failures — some of them years old — and feel the heat of them in my body like they happened this morning.' },
+        { id: 'p1q3', text: 'When someone criticizes my work, it takes me hours or days to separate the criticism from my worth.' },
+        { id: 'p1q4', text: 'There are moments from my past I have decided no one will ever know about.' },
+        { id: 'p1q5', text: 'I feel like a fraud who hasn\'t been found out yet, and success makes that feeling worse, not better.' },
+        { id: 'p1q6', text: 'When I apologize, I either grovel (too much) or defend (too little) — clean ownership without self-attack is rare for me.' },
+        { id: 'p1q7', text: 'I would rather be seen as angry, busy, or difficult than be seen as hurt.' },
+        { id: 'p1q8', text: 'Compliments make me uncomfortable. I deflect them, discount them, or immediately distrust the person giving them.' }
+      ]
+    },
+    {
+      num: 2,
+      roman: 'II',
+      title: 'THE ARMOR CHECK',
+      subtitle: 'How you hide, and what the hiding costs',
+      intro: 'Shame doesn\'t sit still. It arms itself. Brené Brown documented three shields men reach for — moving <strong>away</strong> (hide, withdraw, keep secrets), moving <strong>toward</strong> (please, appease, earn approval), and moving <strong>against</strong> (dominate, blame, use anger as anesthesia). You use all three. One of them is your primary weapon.',
+      type: 'likert',
+      questions: [
+        { id: 'p2q1', text: 'When I\'m struggling, my instinct is to disappear — go quiet, get busy, stop returning texts — until I\'ve "handled it."' },
+        { id: 'p2q2', text: 'I have edited the truth about how I\'m actually doing — to my wife, my friends, or my mentor — within the last 30 days.' },
+        { id: 'p2q3', text: 'I say yes to things I resent saying yes to, because the momentary approval feels better than the conflict.' },
+        { id: 'p2q4', text: 'I perform a version of myself in rooms where the real version feels insufficient.' },
+        { id: 'p2q5', text: 'When I feel exposed or embarrassed, anger arrives within seconds — and it feels <em>better</em> than what it\'s covering.' },
+        { id: 'p2q6', text: 'I have made someone smaller — with sarcasm, criticism, or coldness — in a moment when I was actually feeling small myself.' },
+        { id: 'p2q7', text: 'My drive to achieve accelerates noticeably after moments of failure, rejection, or exposure.' },
+        { id: 'p2q8', text: 'If my hidden coping behaviors (what I scroll, drink, watch, eat, spend, or numb with at night) were projected on a screen in front of the men I respect, I would want to leave the room.' }
+      ]
+    },
+    {
+      num: 3,
+      roman: 'III',
+      title: 'THE APPROVAL LEDGER',
+      subtitle: 'Whose voice is actually running you',
+      intro: 'David Powlison asked the X-ray questions: not "do you have an idol?" but <em>what do you fear, what do you crave, and whose approval functions as oxygen?</em> Whatever answers those questions is what you actually worship — regardless of what you say you believe.',
+      type: 'likert',
+      questions: [
+        { id: 'p3q1', text: 'There is a specific person — living or dead — whose imagined disapproval can still change my decisions.' },
+        { id: 'p3q2', text: 'I make choices based on how they\'ll be perceived before I evaluate whether they\'re right.' },
+        { id: 'p3q3', text: 'When I picture disappointing the people who believe in me, the feeling is closer to <em>dread</em> than to healthy responsibility.' },
+        { id: 'p3q4', text: 'My sense of being okay today rises and falls with metrics — revenue, followers, PRs, wins — more than I admit out loud.' },
+        { id: 'p3q5', text: 'I need to be needed. When no one requires anything of me, I feel unsettled rather than at rest.' },
+        { id: 'p3q6', text: 'I crave a moment of <em>arrival</em> — a level of success after which I\'ll finally feel like enough — and I\'ve been chasing it for years while it keeps moving.' },
+        { id: 'p3q7', text: 'I fear being ordinary more than I fear being wrong.' },
+        { id: 'p3q8', text: 'If I\'m honest, some of what I call "purpose" or "calling" is actually a shame-repayment plan — an attempt to earn back a verdict against me.' }
+      ]
+    },
+    {
+      num: 4,
+      roman: 'IV',
+      title: 'THE OWNERSHIP AUDIT',
+      subtitle: 'Boundaries, or the absence of them',
+      intro: 'Henry Cloud defines integrity as character equal to the demands of reality. Boundaries define what you own: your choices, your consequences, your yard. Shame scrambles ownership in both directions — you carry loads that were never yours, and you drop loads that were always yours.',
+      type: 'likert',
+      questions: [
+        { id: 'p4q1', text: 'I carry responsibility for other people\'s emotions, outcomes, or failures that were never mine to carry.' },
+        { id: 'p4q2', text: 'I avoid necessary confrontations — with clients, family, or partners — long past the point where avoidance is costing me.' },
+        { id: 'p4q3', text: 'There is a "necessary ending" in my life right now — a project, relationship, commitment, or dead venture — that I know needs to end, and I have not ended it.' },
+        { id: 'p4q4', text: 'I say "it\'s fine" when it is not fine, and I\'ve done it so long that I sometimes don\'t know what I actually feel.' },
+        { id: 'p4q5', text: 'When something goes wrong that IS my fault, I reach for context, excuses, or blame before I reach for ownership.' },
+        { id: 'p4q6', text: 'I confuse being harsh with myself for holding myself accountable — my self-talk after failure is language I would never permit anyone to use on my son.' },
+        { id: 'p4q7', text: 'My commitments exceed my capacity, and I keep adding more because saying no feels like a character flaw.' },
+        { id: 'p4q8', text: 'I let people cross lines with me — my time, my dignity, my money — and then punish them silently instead of addressing it directly.' }
+      ]
+    },
+    {
+      num: 5,
+      roman: 'V',
+      title: 'THE ISOLATION INDEX',
+      subtitle: 'Who actually knows you',
+      intro: 'John Townsend\'s research is unambiguous: character does not grow in isolation. Grace and truth over time, delivered through <em>people</em>, is the only mechanism that changes men. Shame\'s first and most effective move is to convince you that you are the exception — that you\'ll handle it alone. Isolation is not a personality trait. It is a symptom.',
+      type: 'likert',
+      questions: [
+        { id: 'p5q1', text: 'No living person knows the full, unedited truth about my inner life right now.' },
+        { id: 'p5q2', text: 'When I hit a genuine crisis, my instinct is to tell people <em>after</em> I\'ve resolved it — I present outcomes, never open wounds.' },
+        { id: 'p5q3', text: 'My friendships operate at the level of logistics, sports, and business — men I like, but who couldn\'t name my deepest fear.' },
+        { id: 'p5q4', text: 'I am the strong one in every relationship I\'m in, and I have arranged my life so that no other role is available to me.' },
+        { id: 'p5q5', text: 'I confuse my wife knowing my <em>schedule</em> with my wife knowing <em>me</em>.' },
+        { id: 'p5q6', text: 'Asking for help feels like withdrawing from an account I\'m not sure has funds — like I\'ll owe something I can\'t repay.' },
+        { id: 'p5q7', text: 'I have felt profoundly alone in a room full of people who love me — recently.' },
+        { id: 'p5q8', text: 'If I broke down tomorrow, I genuinely do not know who I would call first, and the question itself makes me uncomfortable.' }
+      ]
+    },
+    {
+      num: 6,
+      roman: 'VI',
+      title: 'THE PRESSURE SCENARIOS',
+      subtitle: 'How you break: your Achievement Pattern under load',
+      intro: 'Superhuman OS identifies four patterns men default to when pressure exceeds capacity. These aren\'t personality types — they\'re <strong>failure signatures</strong>. Each one is a shame-management strategy that masquerades as a strength right up until it detonates.<br><br>For each scenario, choose the answer closest to what you <em>actually do</em> — not what you\'d coach someone else to do.',
+      type: 'scenarios',
+      scenarios: [
+        {
+          id: 's1',
+          prompt: 'A project you staked your reputation on is publicly falling apart. Your first 48 hours look like:',
+          options: {
+            A: 'I immediately launch the next thing. Momentum is the answer. Standing still with this is not an option.',
+            B: 'I work around the clock to fix it personally — I don\'t delegate the rescue, I <em>am</em> the rescue.',
+            C: 'I go quiet. I minimize the stakes to others and to myself: "It wasn\'t that important anyway."',
+            D: 'I find who or what is responsible and I go at it hard — the vendor, the market, the partner, the critic.'
+          }
+        },
+        {
+          id: 's2',
+          prompt: 'Someone you respect gives you direct, accurate criticism in front of others:',
+          options: {
+            A: 'I pivot fast — change the subject to what I\'m building next, where I\'m strong.',
+            B: 'I over-correct instantly and publicly, working overtime to repair how I\'m seen.',
+            C: 'I take it politely, then withdraw from that person and that room — sometimes for good.',
+            D: 'I counterattack. Their flaws, their record, their tone. The best defense has never been defense.'
+          }
+        },
+        {
+          id: 's3',
+          prompt: 'Your marriage (or closest relationship) hits a cold stretch:',
+          options: {
+            A: 'I bury myself in the business. I tell myself I\'m providing. The distance is "a season."',
+            B: 'I try to fix her — solve the feelings, schedule the date nights, engineer the repair — without ever getting honest about my own contribution.',
+            C: 'I match the coldness. If she\'s distant, I can be more distant. I can outlast anyone.',
+            D: 'Small things become fights. The dishwasher, the tone, the schedule. Everything is suddenly a hill.'
+          }
+        },
+        {
+          id: 's4',
+          prompt: 'You fail at something everyone watched you attempt:',
+          options: {
+            A: 'Announce the next venture within days. The story must keep moving.',
+            B: 'Personally make it right for every person affected, at unsustainable cost to myself.',
+            C: 'Decide the arena itself was beneath me and quietly exit it forever.',
+            D: 'Build a case for why the failure wasn\'t a real failure — and fight anyone who says otherwise.'
+          }
+        },
+        {
+          id: 's5',
+          prompt: 'It\'s 11:40pm. The house is quiet. The feeling you\'ve outrun all day catches up. You:',
+          options: {
+            A: 'Open the laptop. There\'s always work. The grind is the most respectable anesthetic ever invented.',
+            B: 'Mentally cycle through everyone who might be upset with me and draft the repairs.',
+            C: 'Scroll, stream, snack, numb — anything that lowers the volume until sleep takes it.',
+            D: 'Rehearse arguments. Replay conflicts. Win fights in my head that ended years ago.'
+          }
+        },
+        {
+          id: 's6',
+          prompt: 'A younger man asks you, sincerely: "How are you actually doing?"',
+          options: {
+            A: 'I give him the vision. The roadmap. Where we\'re headed. (Notice: that wasn\'t the question.)',
+            B: 'I flip it — within 90 seconds we\'re talking about <em>his</em> life and how I can help.',
+            C: '"Good, man. Busy. You know how it is." Full stop. Wall intact.',
+            D: 'I\'m honest about frustrations — but only the ones where I\'m the wronged party.'
+          }
+        },
+        {
+          id: 's7',
+          prompt: 'You\'re forced into two weeks of genuine rest. No work possible. By day four:',
+          options: {
+            A: 'I\'ve invented work. New plans, new projects, "just thinking on paper." I cannot not build.',
+            B: 'I\'ve found people to serve, problems to manage, needs to meet. Rest becomes a service opportunity.',
+            C: 'I\'ve gone flat. Not rested — <em>dimmed</em>. Low motivation, low presence, vaguely gone.',
+            D: 'I\'m irritable. Everyone around me can feel the static coming off me.'
+          }
+        },
+        {
+          id: 's8',
+          prompt: 'The thought "you\'re not enough" surfaces with full force. Your system\'s automatic response:',
+          options: {
+            A: '<em>Then do more.</em> Achievement is the only argument shame has ever pretended to listen to.',
+            B: '<em>Then be more for others.</em> If I\'m indispensable, the verdict can\'t be true.',
+            C: '<em>Then want less.</em> If I shrink the ambition, I shrink the exposure.',
+            D: '<em>Then someone will pay.</em> The verdict gets converted to voltage and discharged at a target.'
+          }
+        }
+      ]
+    },
+    {
+      num: 7,
+      roman: 'VII',
+      title: 'THE NO-EXIT QUESTIONS',
+      subtitle: 'Written. By hand. No exceptions.',
+      intro: 'You\'ve been scoring numbers. Numbers are still a hiding place. These require sentences, and sentences require the truth. Powlison built questions like these to X-ray the heart. Write your answers where you can\'t delete them.',
+      type: 'written',
+      questions: [
+        {
+          id: 'p7q1',
+          text: 'What is the thing about you that, if the men you most respect knew it, you believe would change how they see you? <em>(You thought of it before you finished the sentence. Write that one — not the second, safer one you\'re negotiating toward right now.)</em>'
+        },
+        {
+          id: 'p7q2',
+          text: 'Whose voice delivers the verdict when you fail? Name the person. Quote the sentence. <em>(Most men are still standing trial in a courtroom that adjourned twenty years ago.)</em>'
+        },
+        {
+          id: 'p7q3',
+          text: 'What are you building right now — company, physique, reputation, ministry — that is at least partly a case for the defense? Finish this sentence honestly: <em>"If ______ succeeds, it will finally prove that I am not ______."</em>'
+        },
+        {
+          id: 'p7q4',
+          text: 'What is the necessary ending you are refusing to execute, and what is the real reason? Not the logistical reason. The one about what ending it would say about you.'
+        },
+        {
+          id: 'p7q5',
+          text: 'When did you last cry — actually — and who saw it? If the answer is "years" and "no one," don\'t write an explanation. Write what you\'re afraid would happen if someone did.'
+        },
+        {
+          id: 'p7q6',
+          text: 'Read your six answers back. Now the final question: <strong>Who will see this page within 72 hours?</strong> Name the man. If your reflex is "no one needs to see this — the insight was the point": that reflex is shame, speaking in your voice, protecting itself. Insight that stays private changes nothing. That\'s not a motivational line; it\'s the mechanism. Shame\'s entire power supply is secrecy. You cut the power by being fully known by someone safe — a real friend, a mentor, a counselor, a pastor — and there is no workaround, no matter how disciplined you are.'
+        }
+      ]
+    }
+  ];
+
+  const SCALE_LABELS = ['Never', 'Rarely', 'Sometimes', 'Often', 'Almost Always'];
+
+  // ═══════════════════════════════════════════════
+  // STATE
+  // ═══════════════════════════════════════════════
+
+  let currentPart = 0; // 0 = not started, 1-7 = part number
+
+  // answers[0] = part 1 (array of 8 values, 1-5 or null)
+  // answers[5] = part 6 (array of 8 values, 'A'|'B'|'C'|'D' or null)
+  // answers[6] = part 7 (not stored — privacy)
+  let answers = [
+    new Array(8).fill(null), // Part 1
+    new Array(8).fill(null), // Part 2
+    new Array(8).fill(null), // Part 3
+    new Array(8).fill(null), // Part 4
+    new Array(8).fill(null), // Part 5
+    new Array(8).fill(null), // Part 6
+    // Part 7 intentionally omitted from state storage
+  ];
+
+  // Track selection order for Part VI tie-breaking
+  let p6SelectionOrder = [];
+
+  function saveProgress() {
+    // Part VII answers are NEVER included — privacy by architecture
+    sessionStorage.setItem('breakpoint_progress', JSON.stringify({
+      currentPart,
+      answers: answers.slice(0, 6), // Only Parts 1-6
+      p6SelectionOrder
+    }));
+  }
+
+  function loadProgress() {
+    const saved = sessionStorage.getItem('breakpoint_progress');
+    if (!saved) return false;
+    try {
+      const d = JSON.parse(saved);
+      if (d.currentPart && d.answers) {
+        currentPart = d.currentPart;
+        answers = d.answers.concat([new Array(8).fill(null)]); // re-add blank Part 7 slot
+        p6SelectionOrder = d.p6SelectionOrder || [];
+        return true;
+      }
+    } catch(e) {}
+    return false;
+  }
+
+  // ═══════════════════════════════════════════════
+  // NAVIGATION
+  // ═══════════════════════════════════════════════
+
+  function scrollToPreamble() {
+    document.getElementById('preamble-start').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleNavBack(e) {
+    e.preventDefault();
+    if (currentPart > 1) {
+      currentPart--;
+      renderQuizPart(currentPart);
+    } else {
+      // Back to intro
+      document.getElementById('screen-quiz').classList.remove('active');
+      document.getElementById('screen-intro').style.display = '';
+      document.getElementById('nav-back-btn').classList.remove('visible');
+      document.getElementById('progress-rail').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function startQuiz() {
+    const hadProgress = loadProgress();
+    document.getElementById('screen-intro').style.display = 'none';
+    document.getElementById('screen-quiz').classList.add('active');
+    document.getElementById('nav-back-btn').classList.add('visible');
+    document.getElementById('progress-rail').classList.add('visible');
+
+    if (!hadProgress || currentPart < 1) {
+      currentPart = 1;
+    }
+
+    renderQuizPart(currentPart);
+    window.scrollTo({ top: 0 });
+  }
+
+  // ═══════════════════════════════════════════════
+  // RENDERING
+  // ═══════════════════════════════════════════════
+
+  function updateProgress(partNum) {
+    // Parts 1-7: each part = ~14.28%
+    const pct = Math.round(((partNum - 1) / 7) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }
+
+  function renderQuizPart(partNum) {
+    const part = PARTS[partNum - 1];
+    const container = document.getElementById('quiz-container');
+    container.setAttribute('data-roman', part.roman);
+    updateProgress(partNum);
+    window.scrollTo({ top: 0 });
+
+    let html = `
+      <p class="part-indicator">Part ${part.roman} of VII — ${part.title}</p>
+      <h2 class="part-title">${part.title}</h2>
+      <p class="part-subtitle">${part.subtitle}</p>
+    `;
+
+    if (part.type === 'likert') {
+      if (part.intro) {
+        html += `<div class="part-intro">${part.intro}</div>`;
+      } else {
+        html += `<div class="rule"></div>`;
+      }
+      html += renderLikertPart(part, partNum);
+    } else if (part.type === 'scenarios') {
+      html += `<div class="part-intro-block">${part.intro}</div>`;
+      html += renderScenariosPart(part);
+    } else if (part.type === 'written') {
+      html += `<div class="part-intro">${part.intro}</div>`;
+      html += renderWrittenPart(part);
+    }
+
+    // Navigation
+    const isLast = partNum === 7;
+    html += `
+      <div class="quiz-nav">
+        <p class="quiz-error" id="quiz-error"></p>
+        <button class="btn-primary btn-full" onclick="advancePart()">
+          ${isLast ? 'See Where You Break' : (partNum === 6 ? 'Continue to Part VII' : `Continue to Part ${PARTS[partNum].roman}`)}
+        </button>
+      </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Restore previously saved answers for this part
+    restoreAnswers(partNum);
+  }
+
+  function renderLikertPart(part, partNum) {
+    let html = '';
+    part.questions.forEach((q, qi) => {
+      const globalNum = (partNum - 1) * 8 + qi + 1;
+      html += `
+        <div class="question-block" id="qblock-${partNum}-${qi}">
+          <span class="question-num">${globalNum}.</span>
+          <p class="question-text">${q.text}</p>
+          <div class="scale-row" id="scale-${partNum}-${qi}">
+            ${[1,2,3,4,5].map(v => `
+              <button class="scale-btn" data-part="${partNum}" data-qi="${qi}" data-val="${v}" onclick="selectLikert(this)">
+                <span class="scale-num">${v}</span>
+                <span class="scale-label">${SCALE_LABELS[v-1]}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    });
+    return html;
+  }
+
+  function renderScenariosPart(part) {
+    let html = '';
+    part.scenarios.forEach((s, si) => {
+      html += `
+        <div class="scenario-block" id="sblock-${si}">
+          <span class="scenario-label">S${si+1} of 8</span>
+          <p class="scenario-prompt">${s.prompt}</p>
+          <div class="scenario-options">
+            ${Object.entries(s.options).map(([letter, text]) => `
+              <button class="option-card" data-si="${si}" data-letter="${letter}" onclick="selectScenario(this)">
+                <span class="option-letter">${letter}</span>
+                <span class="option-text">${text}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    });
+    return html;
+  }
+
+  function renderWrittenPart(part) {
+    let html = `
+      <div class="written-privacy-notice">
+        <strong>Your written answers never leave this device.</strong> Nothing you type here is stored, transmitted, or included in any report. This is a trust feature, not a disclaimer. We recommend writing by hand — the act of writing matters as much as what you write.
+      </div>
+    `;
+    part.questions.forEach((q, qi) => {
+      html += `
+        <div class="written-block">
+          <span class="written-q-num">Q${qi+1}</span>
+          <p class="written-q-text">${q.text}</p>
+          <textarea
+            class="written-textarea"
+            placeholder="Write here, or in a notebook."
+            rows="4"
+            aria-label="Question ${qi+1} written answer"
+            autocomplete="off"
+            data-private="true"
+          ></textarea>
+          <p class="written-handwriting-note">Consider writing this by hand first.</p>
+        </div>
+      `;
+    });
+    return html;
+  }
+
+  // ═══════════════════════════════════════════════
+  // ANSWER SELECTION
+  // ═══════════════════════════════════════════════
+
+  function selectLikert(btn) {
+    const partNum = parseInt(btn.dataset.part);
+    const qi = parseInt(btn.dataset.qi);
+    const val = parseInt(btn.dataset.val);
+
+    // Update visual state
+    const scaleRow = document.getElementById(`scale-${partNum}-${qi}`);
+    scaleRow.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    // Remove unanswered highlight
+    const block = document.getElementById(`qblock-${partNum}-${qi}`);
+    if (block) block.classList.remove('unanswered');
+
+    // Store answer (Part 7 is index 6 but not stored — only Parts 1-6 at indices 0-5)
+    if (partNum <= 6) {
+      answers[partNum - 1][qi] = val;
+      saveProgress();
+    }
+  }
+
+  function selectScenario(card) {
+    const si = parseInt(card.dataset.si);
+    const letter = card.dataset.letter;
+
+    // Visual state
+    const block = document.getElementById(`sblock-${si}`);
+    block.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    block.classList.remove('unanswered');
+
+    // Record previous answer for selection order tracking
+    const prev = answers[5][si];
+    if (prev) {
+      // Remove previous selection from order tracking
+      const prevIdx = p6SelectionOrder.lastIndexOf(prev);
+      if (prevIdx !== -1) p6SelectionOrder.splice(prevIdx, 1);
+    }
+
+    answers[5][si] = letter;
+    p6SelectionOrder.push(letter);
+    saveProgress();
+  }
+
+  function restoreAnswers(partNum) {
+    if (partNum <= 5) {
+      // Likert parts
+      const partAnswers = answers[partNum - 1];
+      partAnswers.forEach((val, qi) => {
+        if (val !== null) {
+          const btn = document.querySelector(`.scale-btn[data-part="${partNum}"][data-qi="${qi}"][data-val="${val}"]`);
+          if (btn) btn.classList.add('selected');
+        }
+      });
+    } else if (partNum === 6) {
+      // Scenarios
+      answers[5].forEach((letter, si) => {
+        if (letter !== null) {
+          const card = document.querySelector(`.option-card[data-si="${si}"][data-letter="${letter}"]`);
+          if (card) card.classList.add('selected');
+        }
+      });
+    }
+    // Part 7: never restores — privacy
+  }
+
+  // ═══════════════════════════════════════════════
+  // VALIDATION & ADVANCEMENT
+  // ═══════════════════════════════════════════════
+
+  function advancePart() {
+    const valid = validateCurrentPart();
+    if (!valid) return;
+
+    if (currentPart === 7) {
+      computeAndNavigate();
+    } else {
+      currentPart++;
+      renderQuizPart(currentPart);
+      saveProgress();
+    }
+  }
+
+  function validateCurrentPart() {
+    const errEl = document.getElementById('quiz-error');
+
+    if (currentPart <= 5) {
+      const partAnswers = answers[currentPart - 1];
+      const firstUnanswered = partAnswers.indexOf(null);
+      if (firstUnanswered !== -1) {
+        // Highlight unanswered
+        const block = document.getElementById(`qblock-${currentPart}-${firstUnanswered}`);
+        if (block) {
+          block.classList.add('unanswered');
+          block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        errEl.textContent = 'Answer all statements before continuing.';
+        errEl.classList.add('visible');
+        return false;
+      }
+    } else if (currentPart === 6) {
+      const partAnswers = answers[5];
+      const firstUnanswered = partAnswers.indexOf(null);
+      if (firstUnanswered !== -1) {
+        const block = document.getElementById(`sblock-${firstUnanswered}`);
+        if (block) {
+          block.classList.add('unanswered');
+          block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        errEl.textContent = 'Select a response for each scenario before continuing.';
+        errEl.classList.add('visible');
+        return false;
+      }
+    }
+    // Part 7: written questions are optional — no validation required
+
+    errEl.classList.remove('visible');
+    return true;
+  }
+
+  // ═══════════════════════════════════════════════
+  // SCORING ENGINE (implement exactly per spec)
+  // ═══════════════════════════════════════════════
+
+  function computeAndNavigate() {
+    const part1 = answers[0].reduce((a,b) => a + b, 0);
+    const part2 = answers[1].reduce((a,b) => a + b, 0);
+    const part3 = answers[2].reduce((a,b) => a + b, 0);
+    const part4 = answers[3].reduce((a,b) => a + b, 0);
+    const part5 = answers[4].reduce((a,b) => a + b, 0);
+    const shameLoad = part1 + part2 + part3 + part4 + part5;
+
+    // Band
+    let band;
+    if      (shameLoad >= 160) band = 'CRITICAL LOAD';
+    else if (shameLoad >= 120) band = 'STRUCTURAL LOAD';
+    else if (shameLoad >= 80)  band = 'FUNCTIONAL LOAD';
+    else                       band = 'LIGHT LOAD';
+
+    // Pattern: count A/B/C/D across S1-S8
+    const patternCounts = { A: 0, B: 0, C: 0, D: 0 };
+    answers[5].forEach(letter => { if (letter) patternCounts[letter]++; });
+
+    // Primary: highest count, tie broken by order of first selection
+    const PATTERN_MAP = { A: 'RUNNER', B: 'FIXER', C: 'FADER', D: 'FIGHTER' };
+    const letters = ['A','B','C','D'];
+    const maxCount = Math.max(...letters.map(l => patternCounts[l]));
+    const topLetters = letters.filter(l => patternCounts[l] === maxCount);
+
+    let primaryLetter;
+    if (topLetters.length === 1) {
+      primaryLetter = topLetters[0];
+    } else {
+      // Tie: first selection in order wins
+      primaryLetter = topLetters[0]; // default
+      for (const sel of p6SelectionOrder) {
+        if (topLetters.includes(sel)) { primaryLetter = sel; break; }
+      }
+    }
+    const primaryPattern = PATTERN_MAP[primaryLetter];
+
+    // Secondary: second-highest if within 2 of primary
+    const remaining = letters.filter(l => l !== primaryLetter);
+    const secondMax = Math.max(...remaining.map(l => patternCounts[l]));
+    const splitPattern = (maxCount - secondMax) <= 2;
+
+    let secondaryPattern = null;
+    if (splitPattern) {
+      const secondTopLetters = remaining.filter(l => patternCounts[l] === secondMax);
+      let secondaryLetter = secondTopLetters[0];
+      for (const sel of p6SelectionOrder) {
+        if (secondTopLetters.includes(sel)) { secondaryLetter = sel; break; }
+      }
+      secondaryPattern = PATTERN_MAP[secondaryLetter];
+    }
+
+    // Breach: Part with highest score; tie → later part; Part V outranks all in ties
+    const partScores = { 1: part1, 2: part2, 3: part3, 4: part4, 5: part5 };
+    const maxPartScore = Math.max(part1, part2, part3, part4, part5);
+    const tiedParts = [1,2,3,4,5].filter(n => partScores[n] === maxPartScore);
+    let breach;
+    if (tiedParts.includes(5)) {
+      breach = 5;
+    } else {
+      breach = Math.max(...tiedParts);
+    }
+
+    // Store results — Part VII data is explicitly NOT included
+    const results = {
+      part1, part2, part3, part4, part5,
+      shameLoad, band,
+      patternCounts, primaryPattern, secondaryPattern, splitPattern,
+      breach
+    };
+
+    sessionStorage.setItem('breakpoint_results', JSON.stringify(results));
+    // Clear in-progress state since we're done
+    sessionStorage.removeItem('breakpoint_progress');
+
+    window.location.href = '/break-point/results/';
+  }
+
+  // ═══════════════════════════════════════════════
+  // INIT
+  // ═══════════════════════════════════════════════
+
+  // Mirror answers to sessionStorage on page load for persistence across refreshes
+  window.addEventListener('load', () => {
+    // Check if we were mid-quiz (progress saved but not on quiz screen)
+    const saved = sessionStorage.getItem('breakpoint_progress');
+    if (saved) {
+      try {
+        const d = JSON.parse(saved);
+        if (d.currentPart >= 1) {
+          // Show a "resume" prompt — optional: auto-resume
+          // Decision: auto-resume to reduce friction on mobile
+          // Assumption: user refreshed accidentally, not intentionally
+          startQuiz();
+        }
+      } catch(e) {}
+    }
+  });
+
+  // ═══════════════════════════════════════════════
+  // DEBUG MODE
+  // DEV ONLY: ?debug=SCORE,PATTERN forces states on results page
+  // Usage: /break-point/?debug=150,A  → shameLoad=150, primaryPattern=RUNNER
+  // This param is parsed on the results page, not here.
+  // ═══════════════════════════════════════════════
+
+  </script>
+</body>
+</html>

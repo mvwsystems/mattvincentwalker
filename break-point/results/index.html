@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Break Point Results | The Vincere Society</title>
+  <meta name="description" content="Your personalized Shame Load results from The Break Point audit.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://vinceresociety.com/break-point/results/">
+  <meta property="og:title" content="Your Break Point Results — The Vincere Society">
+  <meta property="og:description" content="Your Superhuman OS shame audit results.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="TODO_OG_IMAGE_URL">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #0D0B09;
+      --surface:   #14110E;
+      --text:      #EDE6DC;
+      --text-sec:  #9C948A;
+      --gold:      #C49A6C;
+      --gold-dim:  rgba(196,154,108,0.30);
+      --gold-glow: rgba(196,154,108,0.15);
+      --rule:      rgba(196,154,108,0.30);
+      --font-d:    'Cormorant Garamond', serif;
+      --font-b:    'Outfit', sans-serif;
+      --font-m:    'JetBrains Mono', monospace;
+      --max:       640px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 24px;
+      background: linear-gradient(to bottom, rgba(13,11,9,0.96) 0%, transparent 100%);
+    }
+    .nav-wordmark {
+      font-family: var(--font-b);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px 24px 120px;
+    }
+
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin: 48px 0;
+    }
+    .rule-short {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 0 32px;
+    }
+
+    /* ── THE NUMBER ── */
+    .score-section { text-align: center; padding: 60px 0 40px; }
+
+    .score-label {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      margin-bottom: 16px;
+    }
+
+    .score-display {
+      font-family: var(--font-m);
+      font-size: clamp(72px, 20vw, 120px);
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .score-denom {
+      font-family: var(--font-m);
+      font-size: clamp(18px, 4vw, 24px);
+      color: var(--text-sec);
+    }
+
+    .band-name {
+      font-family: var(--font-d);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.05em;
+      margin-top: 16px;
+    }
+
+    /* Score meter */
+    .score-meter {
+      margin: 32px auto 0;
+      max-width: 400px;
+    }
+    .meter-track {
+      height: 3px;
+      background: rgba(196,154,108,0.15);
+      border-radius: 2px;
+      position: relative;
+    }
+    .meter-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    .meter-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .meter-label {
+      font-family: var(--font-m);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--text-sec);
+      opacity: 0.6;
+    }
+
+    /* ── VERDICT / PATTERN / BREACH SECTIONS ── */
+    .section-eyebrow {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: var(--font-d);
+      font-size: clamp(28px, 7vw, 42px);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .verdict-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-sec);
+    }
+    .verdict-body strong { color: var(--text); font-weight: 500; }
+    .verdict-body em { font-style: italic; }
+
+    .pattern-block {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-left: 2px solid var(--gold);
+      padding: 28px 24px;
+      margin-top: 24px;
+    }
+    .pattern-label {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .pattern-name {
+      font-family: var(--font-d);
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .split-note {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-size: 13px;
+      color: var(--text-sec);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .breach-block {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .breach-label {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .breach-title {
+      font-family: var(--font-d);
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .breach-interp {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── SECTION CHART ── */
+    .chart-section { margin-top: 0; }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .bar-part-label {
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      width: 80px;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(196,154,108,0.10);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 1px;
+      width: 0%;
+      transition: width 0.8s ease;
+    }
+    .bar-fill.breach-bar { background: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+
+    .bar-score {
+      font-family: var(--font-m);
+      font-size: 11px;
+      color: var(--text-sec);
+      width: 36px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── EMAIL GATE ── */
+    .gate-section {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      padding: 40px 28px;
+      margin-top: 0;
+    }
+
+    .gate-heading {
+      font-family: var(--font-d);
+      font-size: clamp(24px, 6vw, 36px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .gate-body {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .form-field {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid rgba(196,154,108,0.25);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-size: 15px;
+      font-weight: 300;
+      transition: border-color 0.2s ease;
+      min-height: 52px;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--gold-dim);
+    }
+    .form-input::placeholder { color: rgba(156,148,138,0.5); }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 56px;
+      margin-top: 8px;
+    }
+    .btn-primary:hover {
+      background: var(--gold-glow);
+      box-shadow: 0 0 24px var(--gold-glow);
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .gate-subline {
+      font-size: 12px;
+      color: var(--text-sec);
+      margin-top: 14px;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .form-success.visible { display: block; }
+    .form-success p {
+      font-family: var(--font-d);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .form-success small {
+      font-size: 13px;
+      color: var(--text-sec);
+    }
+
+    .form-error {
+      display: none;
+      font-family: var(--font-m);
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+    .form-error.visible { display: block; }
+
+    @media (min-width: 768px) {
+      .container { padding: 120px 48px 140px; }
+      .gate-section { padding: 48px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://vinceresociety.com" class="nav-wordmark">The Vincere Society</a>
+  </nav>
+
+  <div class="container" id="main-content">
+    <!-- Rendered by JS after reading sessionStorage -->
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════
+  // COPY DATA — verbatim from diagnostic document
+  // ═══════════════════════════════════════════════
+
+  const BAND_COPY = {
+    'LIGHT LOAD': 'Either you carry genuinely little shame — or you defended against this quiz the way you defend against everything else. One check: did anything in Part Seven make your chest tighten? If yes, retake Parts One and Two using Rule #2. Defended men score low. Free men score honest.',
+    'FUNCTIONAL LOAD': 'You\'re carrying real weight, and you\'re strong enough that no one can see it — which is exactly the problem, because the strength delays the reckoning without canceling it. You have margin right now. Margin is when men do this work voluntarily. The alternative is doing it later, involuntarily, publicly.',
+    'STRUCTURAL LOAD': 'Shame is not a feeling you have; it\'s a floor you\'re standing on. It\'s shaping your ambition, your marriage, your anger, your isolation — and calling itself your personality. Under sustained pressure, your Achievement Pattern will fire at full strength, and the people you love will absorb the recoil. This is the score band where men still get to choose the timing of their turnaround.',
+    'CRITICAL LOAD': 'The verdict is running the operating system. You are likely exhausted in a way sleep doesn\'t fix, alone in a way marriage hasn\'t fixed, and driven in a way achievement has never once satisfied. Hear this precisely: <strong>this score is not who you are — it is what you\'re carrying, and loads can be set down.</strong> But not alone, and not by trying harder. Trying harder is how the load got this heavy. Take Part Seven, Question 6 seriously, this week, and let the man you name help you find the right next step — including professional counsel, which is not weakness; it\'s a man finally fighting the actual enemy.'
+  };
+
+  const PATTERN_COPY = {
+    'RUNNER': {
+      display: 'THE RUNNER',
+      body: 'Your shame-management strategy is velocity. You are not driven; you are <em>pursued</em>, and you\'ve renamed the pursuit "ambition." How you break: you will outrun every warning light until the engine seizes — health, marriage, or judgment — because stopping means the feeling catches you. Your first move: schedule stillness like it\'s a board meeting, and sit in what surfaces without opening a laptop. What surfaces is the actual work.'
+    },
+    'FIXER': {
+      display: 'THE FIXER',
+      body: 'Your strategy is indispensability. You\'ve made an unspoken deal: <em>if I carry everyone, no one will ever weigh me.</em> How you break: quiet collapse — resentment metastasizing under the servant\'s heart, followed by burnout or a blowup that shocks everyone, including you. Your first move: let one thing you could fix stay broken this week, and tell one person a need of yours before you meet a need of theirs.'
+    },
+    'FADER': {
+      display: 'THE FADER',
+      body: 'Your strategy is disappearance. You lower the stakes, mute the wants, thin the presence — because a man who wants nothing can\'t be denied anything. How you break: you don\'t detonate, you <em>evaporate</em> — and one day the people who love you realize they\'ve been living with a photograph. Your first move: name one desire out loud, to another human, this week — something you actually want — and do not walk it back.'
+    },
+    'FIGHTER': {
+      display: 'THE FIGHTER',
+      body: 'Your strategy is conversion: shame in, anger out. Rage is the only emotion that ever made you feel powerful instead of small, so your system reaches for it automatically. How you break: you win arguments and lose decades. The people closest to you learn to manage you instead of know you. Your first move: the next time heat spikes, say the sentence underneath it — "that made me feel small" — instead of the attack it was about to become.'
+    }
+  };
+
+  const PART_NAMES = {
+    1: 'The Shame Signal',
+    2: 'The Armor Check',
+    3: 'The Approval Ledger',
+    4: 'The Ownership Audit',
+    5: 'The Isolation Index'
+  };
+
+  const BREACH_INTERP = {
+    1: 'failure is fused to identity; guilt-to-shame conversion is automatic',
+    2: 'the armor is now heavier than the threat it was built for',
+    3: 'a functional idol holds your verdict; identify whose approval is oxygen',
+    4: 'ownership is scrambled; boundaries and a necessary ending are overdue',
+    5: 'isolation is the load-bearing symptom; nothing else improves until this does'
+  };
+
+  const ROMAN = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V' };
+
+  // ═══════════════════════════════════════════════
+  // INIT
+  // ═══════════════════════════════════════════════
+
+  window.addEventListener('load', () => {
+    // Debug mode: ?debug=SCORE,LETTER forces specific results for testing
+    // e.g. ?debug=150,A → STRUCTURAL LOAD + RUNNER + Part 3 breach
+    const params = new URLSearchParams(window.location.search);
+    const debugParam = params.get('debug');
+
+    let results;
+
+    if (debugParam) {
+      // DEV ONLY — debug query param to force test states
+      const [scoreStr, patternLetter] = debugParam.split(',');
+      const score = parseInt(scoreStr) || 120;
+      const letter = (patternLetter || 'A').toUpperCase();
+      const PATTERN_MAP = { A: 'RUNNER', B: 'FIXER', C: 'FADER', D: 'FIGHTER' };
+      let band;
+      if (score >= 160) band = 'CRITICAL LOAD';
+      else if (score >= 120) band = 'STRUCTURAL LOAD';
+      else if (score >= 80) band = 'FUNCTIONAL LOAD';
+      else band = 'LIGHT LOAD';
+      const baseScore = Math.round(score / 5);
+      results = {
+        part1: baseScore, part2: baseScore, part3: baseScore + 4, part4: baseScore, part5: baseScore - 2,
+        shameLoad: score, band,
+        patternCounts: { A: 0, B: 0, C: 0, D: 0 },
+        primaryPattern: PATTERN_MAP[letter] || 'RUNNER',
+        secondaryPattern: null, splitPattern: false,
+        breach: 3
+      };
+      results.patternCounts[letter] = 6;
+    } else {
+      const stored = sessionStorage.getItem('breakpoint_results');
+      if (!stored) {
+        // No results — redirect to quiz
+        window.location.href = '/break-point/?redirected=1';
+        return;
+      }
+      try {
+        results = JSON.parse(stored);
+      } catch(e) {
+        window.location.href = '/break-point/?redirected=1';
+        return;
+      }
+    }
+
+    renderResults(results);
+  });
+
+  // ═══════════════════════════════════════════════
+  // RENDER
+  // ═══════════════════════════════════════════════
+
+  function renderResults(r) {
+    const container = document.getElementById('main-content');
+    const meterPct = Math.round(((r.shameLoad - 40) / 160) * 100);
+    const meterClamped = Math.max(2, Math.min(100, meterPct));
+
+    const patternData = PATTERN_COPY[r.primaryPattern] || PATTERN_COPY['RUNNER'];
+    const bandText = BAND_COPY[r.band] || '';
+    const breachName = PART_NAMES[r.breach] || '';
+    const breachInterp = BREACH_INTERP[r.breach] || '';
+
+    const partScores = [r.part1, r.part2, r.part3, r.part4, r.part5];
+
+    let html = `
+      <!-- THE NUMBER -->
+      <div class="score-section">
+        <p class="score-label">Your Shame Load Index</p>
+        <div>
+          <span class="score-display">${r.shameLoad}</span>
+          <span class="score-denom"> / 200</span>
+        </div>
+        <p class="band-name">${r.band}</p>
+        <div class="score-meter">
+          <div class="meter-track">
+            <div class="meter-fill" id="meter-fill" style="width: 0%"></div>
+          </div>
+          <div class="meter-labels">
+            <span class="meter-label">40</span>
+            <span class="meter-label">LIGHT</span>
+            <span class="meter-label">FUNCTIONAL</span>
+            <span class="meter-label">STRUCTURAL</span>
+            <span class="meter-label">200</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- THE BAND VERDICT -->
+      <div>
+        <span class="section-eyebrow">The Verdict</span>
+        <div class="rule-short"></div>
+        <h2 class="section-heading">${r.band}</h2>
+        <p class="verdict-body">${bandText}</p>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- THE PATTERN -->
+      <div>
+        <span class="section-eyebrow">Your Achievement Pattern</span>
+        <div class="rule-short"></div>
+        <h2 class="section-heading">Under pressure, you are</h2>
+        <div class="pattern-block">
+          <p class="pattern-label">Primary Pattern</p>
+          <p class="pattern-name">${patternData.display}</p>
+          <p class="verdict-body">${patternData.body}</p>
+          ${r.splitPattern && r.secondaryPattern ? `
+            <div class="split-note">
+              <strong>Split pattern: ${r.primaryPattern} / ${r.secondaryPattern}.</strong> Most men run a primary under normal pressure and a secondary under extreme pressure. The secondary is the one that shows up at home.
+            </div>
+          ` : ''}
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- THE PRIMARY BREACH -->
+      <div>
+        <span class="section-eyebrow">Primary Breach</span>
+        <div class="rule-short"></div>
+        <h2 class="section-heading">Where the load is heaviest</h2>
+        <div class="breach-block">
+          <p class="breach-label">Part ${ROMAN[r.breach]} — Highest Section</p>
+          <p class="breach-title">${breachName}</p>
+          <p class="breach-interp">${breachInterp}</p>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- SECTION CHART -->
+      <div class="chart-section">
+        <span class="section-eyebrow">Section Breakdown</span>
+        <div class="rule-short"></div>
+        ${[1,2,3,4,5].map(n => {
+          const score = partScores[n-1];
+          const pct = Math.round((score / 40) * 100);
+          const isBreach = n === r.breach;
+          return `
+            <div class="bar-row">
+              <span class="bar-part-label">Part ${ROMAN[n]}<br>${PART_NAMES[n].split(' ').slice(1).join(' ')}</span>
+              <div class="bar-track">
+                <div class="bar-fill ${isBreach ? 'breach-bar' : ''}" data-pct="${pct}"></div>
+              </div>
+              <span class="bar-score">${score}<span style="opacity:0.5">/40</span></span>
+            </div>
+          `;
+        }).join('')}
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- EMAIL GATE -->
+      <div class="gate-section" id="gate-section">
+        <h2 class="gate-heading">This page disappears.<br>The full report doesn't.</h2>
+        <p class="gate-body">Enter your email and the complete written report — your number, your band, your pattern, your breach, and a seven-day first-moves protocol — lands in your inbox. A short series follows that walks you through the first moves. This is the work beginning, not ending.</p>
+
+        <form id="gate-form" onsubmit="handleSubmit(event)">
+          <div class="form-field">
+            <label class="form-label" for="firstName">First Name</label>
+            <input class="form-input" type="text" id="firstName" name="firstName" placeholder="Your first name" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="Your email address" autocomplete="email" required>
+          </div>
+          <button class="btn-primary" type="submit" id="submit-btn">Send My Full Report</button>
+          <p class="form-error" id="form-error"></p>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <p>Report is on its way.</p>
+          <small>Check your inbox. The work begins there.</small>
+        </div>
+
+        <p class="gate-subline">No spam. Unsubscribe anytime. Your written answers from Part VII were never transmitted.</p>
+      </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Animate meter and bars after render
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const fill = document.getElementById('meter-fill');
+        if (fill) fill.style.width = meterClamped + '%';
+
+        document.querySelectorAll('.bar-fill[data-pct]').forEach(el => {
+          el.style.width = el.dataset.pct + '%';
+        });
+      }, 200);
+    });
+  }
+
+  // ═══════════════════════════════════════════════
+  // EMAIL FORM SUBMISSION
+  // ═══════════════════════════════════════════════
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const errEl = document.getElementById('form-error');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (!firstName || !email) {
+      errEl.textContent = 'Please enter your name and email.';
+      errEl.classList.add('visible');
+      return;
+    }
+
+    // Basic email format check client-side
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid email address.';
+      errEl.classList.add('visible');
+      return;
+    }
+
+    errEl.classList.remove('visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    // Gather results from sessionStorage
+    let results = {};
+    try {
+      const stored = sessionStorage.getItem('breakpoint_results');
+      if (stored) results = JSON.parse(stored);
+    } catch(ex) {}
+
+    // Build payload — Part VII data is NEVER included (it was never stored)
+    const payload = {
+      firstName,
+      email,
+      shameLoad:        results.shameLoad        || 0,
+      band:             results.band             || '',
+      primaryPattern:   results.primaryPattern   || '',
+      secondaryPattern: results.secondaryPattern || '',
+      breach:           results.breach           || 0,
+      part1:            results.part1            || 0,
+      part2:            results.part2            || 0,
+      part3:            results.part3            || 0,
+      part4:            results.part4            || 0,
+      part5:            results.part5            || 0
+    };
+
+    // Save firstName to sessionStorage for booking page
+    sessionStorage.setItem('breakpoint_firstName', firstName);
+
+    try {
+      const res = await fetch('/.netlify/functions/kit-subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        // Navigate to booking page
+        window.location.href = '/break-point/book/';
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
+    } catch(err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send My Full Report';
+      errEl.textContent = 'Something broke on our end — your results are still on this screen. Screenshot them and try again in a minute.';
+      errEl.classList.add('visible');
+    }
+  }
+  </script>
+</body>
+</html>
