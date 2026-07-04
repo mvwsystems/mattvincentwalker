@@ -3,398 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book a Laser Coaching Session | The Vincere Society</title>
-  <meta name="description" content="Book a 45-minute Laser Coaching Session with Matt Vincent Walker. One session. Built around your Break Point results.">
+  <title>Book Your Session — The Break Point | Matt Vincent Walker</title>
+  <meta name="description" content="Your Break Point results are in your inbox. Now book your session.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://vinceresociety.com/break-point/book/">
-  <meta property="og:title" content="Book a Laser Coaching Session — The Vincere Society">
-  <meta property="og:description" content="You know where you break. The next 45 minutes decide what you do about it.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="TODO_OG_IMAGE_URL">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Laser Coaching Session",
-    "description": "A 45-minute coaching session with Matt Vincent Walker, built around your Break Point shame audit results. One session that turns your score, pattern, and breach into a first 30 days.",
-    "provider": {
-      "@type": "Organization",
-      "name": "The Vincere Society",
-      "url": "https://vinceresociety.com",
-      "founder": {
-        "@type": "Person",
-        "name": "Matt Vincent Walker",
-        "url": "https://mattvincentwalker.com"
-      }
-    },
-    "serviceType": "Executive Coaching",
-    "areaServed": "Worldwide"
-  }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
 
   <style>
-    :root {
-      --bg:        #0D0B09;
-      --surface:   #14110E;
-      --text:      #EDE6DC;
-      --text-sec:  #9C948A;
-      --gold:      #C49A6C;
-      --gold-dim:  rgba(196,154,108,0.30);
-      --gold-glow: rgba(196,154,108,0.15);
-      --rule:      rgba(196,154,108,0.30);
-      --font-d:    'Cormorant Garamond', serif;
-      --font-b:    'Outfit', sans-serif;
-      --font-m:    'JetBrains Mono', monospace;
-      --max:       640px;
+    .book-wrap {
+      max-width: 720px; margin: 0 auto; padding: 140px 48px 120px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { overflow-x: hidden; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-b);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
+    .book-eyebrow {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--amber-dim); margin-bottom: 24px;
+    }
+    .book-title {
+      font-family: var(--font-display); font-size: clamp(36px, 8vw, 64px);
+      font-weight: 300; color: var(--white); line-height: 1.0;
+      margin-bottom: 20px; letter-spacing: -0.01em;
+    }
+    .book-confirm {
+      font-family: var(--font-mono); font-size: 12px; color: var(--amber);
+      letter-spacing: 2px; margin-bottom: 40px;
     }
 
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 20px 24px;
-      background: linear-gradient(to bottom, rgba(13,11,9,0.96) 0%, transparent 100%);
+    .result-callout {
+      background: var(--charcoal); border: 1px solid var(--stone);
+      border-left: 3px solid var(--amber-dim); padding: 24px 28px; margin-bottom: 40px;
     }
-    .nav-wordmark {
-      font-family: var(--font-b);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-sec);
-      text-decoration: none;
+    .result-callout-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--amber-dim); display: block; margin-bottom: 10px;
     }
+    .result-callout-text {
+      font-family: var(--font-mono); font-size: 14px; color: var(--light); line-height: 1.6;
+    }
+    .result-callout-text strong { color: var(--amber); font-weight: 400; }
 
-    .container {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 100px 24px 80px;
+    .book-body {
+      font-size: 15px; line-height: 1.85; color: var(--light); margin-bottom: 48px;
     }
+    .book-body p { margin-bottom: 20px; }
+    .book-body p:last-child { margin-bottom: 0; }
+    .book-body strong { color: var(--white); font-weight: 500; }
+    .book-body em { font-style: italic; color: var(--cream); }
 
-    .rule {
-      width: 100%;
-      height: 1px;
-      background: var(--rule);
-      margin: 48px 0;
-    }
-    .rule-short {
-      width: 48px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 0 32px;
-    }
-
-    /* ── CONFIRMATION ── */
-    .confirmation-line {
-      font-family: var(--font-m);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 56px;
-      padding: 14px 16px;
-      border: 1px solid var(--rule);
-      border-left: 2px solid var(--gold);
-    }
-
-    /* ── HERO ── */
-    .eyebrow {
-      font-family: var(--font-b);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-sec);
-      margin-bottom: 20px;
-    }
-
-    .main-heading {
-      font-family: var(--font-d);
-      font-size: clamp(36px, 9vw, 64px);
-      font-weight: 600;
-      line-height: 1.0;
-      color: var(--text);
-      margin-bottom: 32px;
-    }
-
-    .body-text {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-sec);
-      margin-bottom: 16px;
-    }
-    .body-text strong { color: var(--text); font-weight: 500; }
-
-    /* ── RESULT QUOTE BLOCK ── */
-    .result-quote {
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      padding: 28px 0;
-      margin: 40px 0;
-    }
-
-    .result-quote-label {
-      font-family: var(--font-m);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-
-    .result-quote-text {
-      font-family: var(--font-d);
-      font-style: italic;
-      font-size: clamp(17px, 4vw, 22px);
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--text);
-    }
-
-    .result-quote-text span {
-      font-style: normal;
-      font-weight: 600;
-      color: var(--gold);
-    }
-
-    /* ── BOOKING SHELL ── */
-    .booking-shell {
-      background: var(--surface);
-      border: 1px solid var(--rule);
-      padding: 32px 24px;
-      margin-top: 48px;
-    }
-
-    .booking-shell-label {
-      font-family: var(--font-m);
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-sec);
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    /* TODO: paste your Calendly / TidyCal / Stripe embed code inside .booking-embed-container */
     .booking-embed-container {
-      min-height: 400px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed rgba(196,154,108,0.25);
-      margin-bottom: 20px;
+      background: var(--charcoal); border: 1px solid var(--stone);
+      min-height: 160px; display: flex; align-items: center; justify-content: center;
+      margin: 48px 0; padding: 40px 24px; text-align: center;
     }
-
     .booking-embed-placeholder {
+      font-family: var(--font-mono); font-size: 11px; color: var(--ash);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .book-cta-block { text-align: center; margin-bottom: 48px; }
+    .book-cta-note {
+      font-size: 13px; color: var(--muted); margin-top: 16px; font-style: italic;
+    }
+
+    .divider-with-label {
+      display: flex; align-items: center; gap: 16px; margin: 56px 0;
+    }
+    .divider-with-label::before,
+    .divider-with-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--stone);
+    }
+    .divider-with-label span {
+      font-family: var(--font-mono); font-size: 9px; color: var(--ash);
+      letter-spacing: 3px; text-transform: uppercase; white-space: nowrap;
+    }
+
+    .community-block {
+      background: var(--charcoal); border: 1px solid var(--stone); padding: 32px;
+      margin-bottom: 48px;
+    }
+    .community-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--amber-dim); display: block; margin-bottom: 12px;
+    }
+    .community-heading {
+      font-family: var(--font-display); font-size: clamp(22px, 4vw, 32px);
+      font-weight: 300; color: var(--white); margin-bottom: 16px; line-height: 1.1;
+    }
+    .community-body {
+      font-size: 15px; line-height: 1.8; color: var(--light); margin-bottom: 24px;
+    }
+    .community-body strong { color: var(--white); font-weight: 500; }
+
+    .vincere-footer {
+      margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--stone);
       text-align: center;
-      padding: 40px 20px;
     }
-    .booking-embed-placeholder p {
-      font-family: var(--font-m);
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--text-sec);
-      opacity: 0.5;
-      margin-bottom: 8px;
+    .vincere-wordmark {
+      font-family: var(--font-display); font-size: clamp(16px, 3vw, 22px);
+      font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--warm-gray); margin-bottom: 8px;
     }
+    .vincere-tagline {
+      font-family: var(--font-mono); font-size: 10px; color: var(--ash);
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .vincere-built {
+      font-family: var(--font-mono); font-size: 10px; color: var(--ash);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .vincere-built a { color: var(--muted); text-decoration: none; }
+    .vincere-built a:hover { color: var(--amber); }
 
-    .btn-primary {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: var(--font-b);
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      min-height: 56px;
-      text-align: center;
-    }
-    .btn-primary:hover {
-      background: var(--gold-glow);
-      box-shadow: 0 0 24px var(--gold-glow);
-    }
-
-    /* ── SECONDARY PATH ── */
-    .secondary-path {
-      margin-top: 40px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(196,154,108,0.12);
-      text-align: center;
-    }
-
-    .secondary-path p {
-      font-size: 13px;
-      color: var(--text-sec);
-      line-height: 1.7;
-      opacity: 0.7;
-    }
-
-    .secondary-path a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-    .secondary-path a:hover {
-      text-decoration: underline;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 48px 24px 60px;
-      border-top: 1px solid rgba(196,154,108,0.12);
-    }
-
-    .footer-wordmark {
-      font-family: var(--font-b);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-sec);
-      margin-bottom: 8px;
-    }
-
-    .footer-tagline {
-      font-family: var(--font-d);
-      font-style: italic;
-      font-size: 16px;
-      color: var(--text-sec);
-      opacity: 0.7;
-      margin-bottom: 12px;
-    }
-
-    .footer-os-link {
-      font-family: var(--font-m);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--text-sec);
-      opacity: 0.4;
-    }
-    .footer-os-link a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .footer-os-link a:hover { opacity: 0.8; }
-
-    @media (min-width: 768px) {
-      .container { padding: 120px 48px 80px; }
-      .booking-shell { padding: 40px 40px; }
-      footer { padding: 48px 48px 60px; }
+    @media (max-width: 900px) {
+      .book-wrap { padding: 140px 24px 100px; }
+      .community-block { padding: 24px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="https://vinceresociety.com" class="nav-wordmark">The Vincere Society</a>
-  </nav>
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">
+    <a href="../../index.html">
+      <img src="../../MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../../about.html">About</a></li>
+    <li><a href="../../articles.html">Newsletter</a></li>
+    <li><a href="../../masterclass.html">Coaching</a></li>
+    <li><a href="../../speaking.html">Speaking</a></li>
+    <li><a href="../../apply.html">Consulting</a></li>
+    <li><a href="../../superhuman.html">Superhuman OS</a></li>
+    <li><a href="../../podcast.html">The Synthesis</a></li>
+    <li><a href="../../systems.html">Systems List</a></li>
+    <li><a href="../../newsletter.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
 
-  <div class="container">
+<div class="book-wrap">
+  <p class="book-eyebrow">The Break Point — Next Step</p>
+  <h1 class="book-title">Now we<br>work with it.</h1>
+  <p class="book-confirm" id="book-confirm">Your full report is on its way to your inbox.</p>
 
-    <!-- Confirmation line — reads from sessionStorage -->
-    <div class="confirmation-line" id="confirmation-line" style="display:none">
-      <!-- Populated by JS -->
-    </div>
+  <div class="result-callout" id="result-callout" style="display:none;">
+    <span class="result-callout-label">Your Result</span>
+    <p class="result-callout-text" id="result-callout-text"></p>
+  </div>
 
-    <!-- Hero -->
-    <p class="eyebrow">Laser Coaching Session</p>
-    <h1 class="main-heading">You now know where you break.<br>The next 45 minutes decide what you do about it.</h1>
+  <div class="book-body">
+    <p>The audit is done. The score is real. And the number on that page means exactly nothing if it stays on a screen.</p>
+    <p>The Break Point is built on one premise: <strong>shame's entire power supply is secrecy.</strong> The scoring engine just told you where the load lives. What it can't do — what no instrument can do — is close the gap between knowing and changing.</p>
+    <p>That gap closes in one place: in the presence of a person who can hold the truth about you without flinching, and deliver it without contempt.</p>
+    <p>The next step is a single conversation. No commitment beyond showing up. <em>Bring your score. Bring your pattern. Bring the answer from Question 1 in Part VII — the first thing you thought of.</em></p>
+  </div>
 
-    <p class="body-text">The Laser Coaching Session takes your number, your pattern, and your breach — and turns them into a first 30 days. Not a roadmap. Not a framework presentation. A conversation between a man who has been where you are and a man who is ready to move.</p>
-    <p class="body-text">One session. One clear next step. No pitch. No upsell. Just the work.</p>
-    <p class="body-text"><strong>Bring your results. Everything else is already in the room.</strong></p>
+  <!-- Booking CTA -->
+  <div class="book-cta-block">
+    <a href="TODO_BOOKING_URL" class="btn-primary" target="_blank" rel="noopener">Book a Session →</a>
+    <p class="book-cta-note">One conversation. No pressure beyond showing up honest.</p>
+  </div>
 
-    <!-- Personalized result quote — populated by JS -->
-    <div class="result-quote" id="result-quote" style="display:none">
-      <p class="result-quote-label">Your Results</p>
-      <p class="result-quote-text" id="result-quote-text"></p>
-    </div>
+  <!-- Booking embed (optional) -->
+  <div class="booking-embed-container" id="booking-embed-container">
+    <!-- Paste your Calendly / TidyCal embed here and remove the placeholder below -->
+    <p class="booking-embed-placeholder">Booking calendar loads here</p>
+  </div>
 
-    <!-- Booking shell -->
-    <div class="booking-shell">
-      <p class="booking-shell-label">Schedule Your Session</p>
+  <div class="divider-with-label"><span>or</span></div>
 
-      <!--
-        TODO: Paste your booking embed code (Calendly / TidyCal / Stripe payment link + scheduler) here.
-        Remove the .booking-embed-placeholder div below when you do.
-        The surrounding .booking-embed-container provides the branded shell.
-      -->
-      <div class="booking-embed-container">
-        <div class="booking-embed-placeholder">
-          <p>TODO — BOOKING EMBED</p>
-          <p>Paste Calendly, TidyCal, or Stripe link here</p>
-        </div>
-      </div>
+  <!-- Community block -->
+  <div class="community-block">
+    <span class="community-label">The Vincere Society</span>
+    <h2 class="community-heading">The room where men do this work together.</h2>
+    <p class="community-body">
+      The Break Point is one instrument inside a larger formation. The Vincere Society is where men who've done the audit — and decided to act on it — gather to do the ongoing work: frameworks, accountability, and the kind of honest company that makes the inner life survivable.
+      <br><br>
+      <strong>Formation first. Everything else second.</strong>
+    </p>
+    <a href="TODO_VINCERE_SOCIETY_URL" class="btn-secondary" target="_blank" rel="noopener">Enter The Vincere Society →</a>
+  </div>
 
-      <!--
-        Fallback button for users with blocked embeds.
-        Replace TODO_BOOKING_URL with your actual booking link.
-      -->
-      <a href="TODO_BOOKING_URL" class="btn-primary" target="_blank" rel="noopener">Book the Session</a>
-    </div>
+  <!-- Vincere footer mark -->
+  <div class="vincere-footer">
+    <p class="vincere-wordmark">The Vincere Society</p>
+    <p class="vincere-tagline">Renatus Vincere — Reborn to Overcome</p>
+    <p class="vincere-built">Built on <a href="../../superhuman.html">Superhuman OS</a> — <a href="../../index.html">mattvincentwalker.com</a></p>
+  </div>
+</div>
 
-    <!-- Secondary path -->
-    <div class="secondary-path">
-      <p>Not ready? The email series will meet you where you are — and so will <a href="TODO_VINCERE_SOCIETY_URL" target="_blank" rel="noopener">the Society</a>.</p>
-    </div>
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+  </div>
+</footer>
 
-  </div><!-- /container -->
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const firstName = sessionStorage.getItem('breakpoint_firstName');
+  const raw = sessionStorage.getItem('breakpoint_results');
 
-  <footer>
-    <p class="footer-wordmark">The Vincere Society</p>
-    <p class="footer-tagline">Renatus Vincere — Reborn to Overcome</p>
-    <p class="footer-os-link">Built on <a href="https://mattvincentwalker.com/superhuman" target="_blank" rel="noopener">Superhuman OS</a></p>
-  </footer>
+  if (firstName) {
+    document.getElementById('book-confirm').textContent =
+      `Your full report is on its way to ${firstName}'s inbox.`;
+  }
 
-  <script>
-  window.addEventListener('load', () => {
-    // Read firstName from sessionStorage (set on results page after form submit)
-    const firstName = sessionStorage.getItem('breakpoint_firstName') || '';
-    const confLine = document.getElementById('confirmation-line');
-    if (firstName) {
-      confLine.textContent = `Your full report is on its way to ${firstName}'s inbox.`;
-      confLine.style.display = '';
-    }
-
-    // Read results for the personalized quote block
-    const stored = sessionStorage.getItem('breakpoint_results');
-    if (stored) {
-      try {
-        const r = JSON.parse(stored);
-        if (r.shameLoad && r.primaryPattern) {
-          const quoteEl = document.getElementById('result-quote');
-          const quoteText = document.getElementById('result-quote-text');
-          quoteText.innerHTML = `You scored <span>${r.shameLoad}</span>. Your pattern is <span>THE ${r.primaryPattern}</span>. Bring both.`;
-          quoteEl.style.display = '';
-        }
-      } catch(e) {}
-    }
-  });
-  </script>
-
+  if (raw) {
+    try {
+      const d = JSON.parse(raw);
+      const callout = document.getElementById('result-callout');
+      const text = document.getElementById('result-callout-text');
+      text.innerHTML = `You scored <strong>${d.shameLoad}/200</strong>. Your pattern is <strong>THE ${d.primaryPattern}</strong>. Bring both.`;
+      callout.style.display = 'block';
+    } catch(e) {}
+  }
+});
+</script>
+<script src="../../js/main.js"></script>
 </body>
 </html>
