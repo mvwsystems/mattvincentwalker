@@ -85,34 +85,68 @@
 
     /* ── PREAMBLE ── */
     .bp-preamble {
-      max-width: 720px; margin: 0 auto; padding: 80px 48px 120px;
+      max-width: 680px; margin: 0 auto; padding: 80px 48px 140px;
     }
-    .bp-preamble .prose p { color: var(--light); }
-    .bp-preamble .prose p strong { color: var(--white); font-weight: 500; }
-    .bp-rules {
-      list-style: none; margin: 32px 0;
-      border-left: 2px solid var(--stone); padding-left: 28px;
+    .bp-opening {
+      font-family: var(--font-display); font-size: clamp(28px, 5vw, 44px);
+      font-weight: 300; color: var(--white); line-height: 1.2; font-style: italic;
+      margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--stone);
     }
-    .bp-rules li {
-      font-size: 15px; line-height: 1.8; color: var(--light);
-      margin-bottom: 16px; position: relative;
+    .bp-body {
+      font-size: 16px; line-height: 2; color: var(--light); margin-bottom: 24px;
     }
-    .bp-rules li strong { color: var(--white); font-weight: 500; }
-    .bp-rules li::before {
-      content: attr(data-num); font-family: var(--font-mono); font-size: 10px;
-      color: var(--amber-dim); position: absolute; left: -42px; top: 5px;
-      letter-spacing: 2px;
+    .bp-body strong { color: var(--white); font-weight: 500; }
+
+    /* Rules — numbered row pattern */
+    .bp-rules-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--amber-dim); margin: 56px 0 0;
+      display: block;
     }
-    .bp-distinction {
-      background: var(--charcoal); border: 1px solid var(--stone);
-      border-left: 2px solid var(--amber-dim); padding: 28px;
-      margin: 32px 0;
+    .bp-rule-item {
+      display: flex; gap: 28px; padding: 28px 0; border-bottom: 1px solid var(--stone);
+      align-items: flex-start; border-top: 1px solid var(--stone); margin-top: -1px;
     }
-    .bp-distinction p {
-      font-size: 15px; line-height: 1.8; color: var(--light); margin-bottom: 12px;
+    .bp-rule-num {
+      font-family: var(--font-display); font-size: clamp(42px, 8vw, 64px);
+      font-weight: 300; color: var(--ash); line-height: 0.9;
+      flex-shrink: 0; min-width: 56px; transition: color 0.4s var(--ease-quart);
     }
-    .bp-distinction p:last-child { margin-bottom: 0; }
-    .bp-distinction strong { color: var(--white); font-weight: 500; }
+    .bp-rule-item:hover .bp-rule-num { color: var(--amber-dim); }
+    .bp-rule-text { flex: 1; padding-top: 6px; }
+    .bp-rule-title {
+      font-size: 15px; font-weight: 500; color: var(--white);
+      margin-bottom: 8px; line-height: 1.4;
+    }
+    .bp-rule-body { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .bp-rule-body em { font-style: italic; color: var(--light); }
+
+    /* Distinction — typographic treatment */
+    .bp-distinction { margin: 64px 0 0; }
+    .bp-distinction-intro {
+      font-size: 15px; color: var(--muted); margin-bottom: 32px; line-height: 1.85;
+    }
+    .bp-distinction-item {
+      padding: 28px 0; border-top: 1px solid var(--stone);
+    }
+    .bp-distinction-item:last-of-type { border-bottom: 1px solid var(--stone); }
+    .bp-distinction-tag {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--amber-dim); display: block; margin-bottom: 10px;
+    }
+    .bp-distinction-quote {
+      font-family: var(--font-display); font-size: clamp(22px, 4vw, 32px);
+      font-weight: 300; color: var(--white); font-style: italic;
+      margin-bottom: 10px; line-height: 1.2;
+    }
+    .bp-distinction-item:last-of-type .bp-distinction-quote { color: var(--amber); }
+    .bp-distinction-explanation { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .bp-distinction-explanation strong { color: var(--light); font-weight: 400; }
+    .bp-distinction-final {
+      margin-top: 32px; font-size: 15px; color: var(--light); line-height: 1.9;
+      font-style: italic; color: var(--muted);
+    }
+    .bp-distinction-final em { font-style: normal; color: var(--warm-gray); }
 
     /* ── QUIZ CONTAINER ── */
     .quiz-wrap {
@@ -308,33 +342,57 @@
   </div>
 
   <div class="bp-preamble" id="preamble-start">
-    <div class="section-label">Read This First — Or Don't Take the Quiz</div>
-    <div class="divider" style="margin: 16px 0 32px;"></div>
+    <p class="bp-eyebrow">Read This First — Or Don't Take the Quiz</p>
 
-    <div class="prose">
-      <p>This is not a personality quiz. There is no result that makes you look good.</p>
-      <p>This assessment is built on one premise: <strong>shame is a load-bearing failure in a man's operating system.</strong> You can out-earn it, out-train it, out-spiritualize it, and out-perform it — for a while. Then pressure arrives that exceeds your compensations, and you break exactly where the shame lives.</p>
-      <p>The men who break in their 40s didn't break in their 40s. They broke twenty years earlier and spent two decades building a life on top of the crack.</p>
-      <p style="color:var(--white);font-weight:400;">Three rules:</p>
+    <p class="bp-opening">This is not a personality quiz.<br>There is no result that makes you look good.</p>
+
+    <p class="bp-body">This assessment is built on one premise: <strong>shame is a load-bearing failure in a man's operating system.</strong> You can out-earn it, out-train it, out-spiritualize it, and out-perform it — for a while. Then pressure arrives that exceeds your compensations, and you break exactly where the shame lives.</p>
+
+    <p class="bp-body">The men who break in their 40s didn't break in their 40s. They broke twenty years earlier and spent two decades building a life on top of the crack.</p>
+
+    <span class="bp-rules-label">Three Rules</span>
+
+    <div class="bp-rule-item">
+      <span class="bp-rule-num">01</span>
+      <div class="bp-rule-text">
+        <p class="bp-rule-title">Answer as you actually behave, not as you intend to behave.</p>
+        <p class="bp-rule-body">Your intentions are irrelevant to this instrument. Your last 90 days of actual conduct are the only admissible evidence.</p>
+      </div>
     </div>
-
-    <ol class="bp-rules">
-      <li data-num="01"><strong>Answer as you actually behave, not as you intend to behave.</strong> Your intentions are irrelevant to this instrument. Your last 90 days of actual conduct are the only admissible evidence.</li>
-      <li data-num="02"><strong>If two answers feel true, pick the uglier one.</strong> The flattering answer is almost always the defended one.</li>
-      <li data-num="03"><strong>Do not skip Part Seven.</strong> Men skip the written questions because writing it down makes it real. That instinct — <em>don't make it real</em> — is the exact thing we're auditing.</li>
-    </ol>
-
-    <div class="prose" style="margin-top: 28px;">
-      <p>One distinction before you start, because everything hangs on it:</p>
+    <div class="bp-rule-item">
+      <span class="bp-rule-num">02</span>
+      <div class="bp-rule-text">
+        <p class="bp-rule-title">If two answers feel true, pick the uglier one.</p>
+        <p class="bp-rule-body">The flattering answer is almost always the defended one.</p>
+      </div>
+    </div>
+    <div class="bp-rule-item">
+      <span class="bp-rule-num">03</span>
+      <div class="bp-rule-text">
+        <p class="bp-rule-title">Do not skip Part Seven.</p>
+        <p class="bp-rule-body">Men skip the written questions because writing it down makes it real. That instinct — <em>don't make it real</em> — is the exact thing we're auditing.</p>
+      </div>
     </div>
 
     <div class="bp-distinction">
-      <p><strong>Guilt says: "I did something bad."</strong> Guilt is data. It's correctable. It produces repair.</p>
-      <p><strong>Shame says: "I am something bad."</strong> Shame is a verdict. It's not correctable by effort — which is why you've been trying so hard for so long and the feeling hasn't moved.</p>
-      <p>This quiz finds where the verdict is running your life while you thought you were just "being disciplined," "being a provider," or "being fine."</p>
+      <p class="bp-distinction-intro">One distinction before you start, because everything hangs on it:</p>
+
+      <div class="bp-distinction-item">
+        <span class="bp-distinction-tag">Guilt</span>
+        <p class="bp-distinction-quote">"I did something bad."</p>
+        <p class="bp-distinction-explanation">Guilt is <strong>data</strong>. It's correctable. It produces repair.</p>
+      </div>
+
+      <div class="bp-distinction-item">
+        <span class="bp-distinction-tag">Shame</span>
+        <p class="bp-distinction-quote">"I am something bad."</p>
+        <p class="bp-distinction-explanation">Shame is a <strong>verdict</strong>. It's not correctable by effort — which is why you've been trying so hard for so long and the feeling hasn't moved.</p>
+      </div>
+
+      <p class="bp-distinction-final">This quiz finds where the verdict is running your life — while you thought you were just <em>"being disciplined," "being a provider," or "being fine."</em></p>
     </div>
 
-    <div style="text-align:center; margin-top: 56px;">
+    <div style="text-align:center; margin-top: 64px;">
       <button class="btn-primary" onclick="startQuiz()">I Understand — Begin Part I</button>
     </div>
   </div>
