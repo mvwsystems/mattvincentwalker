@@ -93,10 +93,11 @@
     <div class="subscribe-block reveal">
       <div class="section-title">Start receiving clarity, weekly.</div>
       <p class="section-subtitle">Join founders, leaders, coaches, and builders who subscribe to The Vincere Letter for frameworks they can't find anywhere else.</p>
-      <div class="subscribe-form">
+      <div class="subscribe-form" data-subscribe-form data-source="newsletter">
         <input type="email" class="subscribe-input" placeholder="Your email address">
         <button class="btn-primary">Subscribe</button>
       </div>
+      <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
       <p style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:16px;">FREE · NO SPAM · UNSUBSCRIBE ANYTIME</p>
     </div>
 
@@ -129,5 +130,38 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Subscribing…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = 'Subscribed'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in. First issue coming your way."; status.style.display = 'block'; }
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

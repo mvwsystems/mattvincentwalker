@@ -596,10 +596,11 @@
     <p class="post-subscribe-label">The Vincere Letter</p>
     <h3 class="post-subscribe-title">Essays like this, every week.</h3>
     <p class="post-subscribe-sub">AI, psychology, faith, and business — for people who want order and leverage without losing their humanity.</p>
-    <div class="post-subscribe-form">
+    <div class="post-subscribe-form" data-subscribe-form data-source="post">
       <input class="post-subscribe-input" type="email" placeholder="your@email.com">
       <button class="btn-primary" style="white-space:nowrap;">Subscribe →</button>
     </div>
+    <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
   </div>
 
 </footer>
@@ -617,7 +618,6 @@
 
 <script src="../js/main.js"></script>
 <script>
-  // ── READING TIME ──────────────────────────────────────────────────────────
   (function () {
     const content = document.getElementById('post-content');
     if (!content) return;
@@ -625,6 +625,39 @@
     const minutes = Math.max(1, Math.round(words / 220));
     document.getElementById('reading-time').textContent = minutes + ' min read';
   })();
+</script>
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Subscribing…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = 'Subscribed'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in. First issue coming your way."; status.style.display = 'block'; }
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
 </script>
 
 </body>
