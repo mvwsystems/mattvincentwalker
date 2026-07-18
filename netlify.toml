@@ -13,6 +13,16 @@
   status = 200
 
 [[redirects]]
+  from = "/superhuman"
+  to = "/superhuman.html"
+  status = 200
+
+[[redirects]]
+  from = "/architecture"
+  to = "/architecture.html"
+  status = 200
+
+[[redirects]]
   from = "/break-point"
   to = "/break-point/index.html"
   status = 200

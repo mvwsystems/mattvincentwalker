@@ -158,19 +158,19 @@
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label">Full Name</label>
-          <input type="text" class="form-input" placeholder="Your name">
+          <input type="text" id="sp-name" class="form-input" placeholder="Your name">
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input type="email" class="form-input" placeholder="you@company.com">
+          <input type="email" id="sp-email" class="form-input" placeholder="you@company.com">
         </div>
         <div class="form-group">
           <label class="form-label">Organization</label>
-          <input type="text" class="form-input" placeholder="Organization name">
+          <input type="text" id="sp-org" class="form-input" placeholder="Organization name">
         </div>
         <div class="form-group">
           <label class="form-label">Speaking Type</label>
-          <select class="form-select">
+          <select id="sp-type" class="form-select">
             <option>Keynote / Main Stage</option>
             <option>Breakout Session</option>
             <option>Virtual</option>
@@ -180,7 +180,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">Audience Size</label>
-          <select class="form-select">
+          <select id="sp-size" class="form-select">
             <option>1–100</option>
             <option>101–350</option>
             <option>351–500</option>
@@ -190,7 +190,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">Organization Type</label>
-          <select class="form-select">
+          <select id="sp-orgtype" class="form-select">
             <option>Church / Non-Profit</option>
             <option>For-Profit Business</option>
             <option>University / Academic</option>
@@ -199,10 +199,11 @@
         </div>
         <div class="form-group full">
           <label class="form-label">Additional Details</label>
-          <textarea class="form-textarea" placeholder="Tell me about the event, audience, and what you're hoping to accomplish."></textarea>
+          <textarea id="sp-details" class="form-textarea" placeholder="Tell me about the event, audience, and what you're hoping to accomplish."></textarea>
         </div>
         <div class="form-group">
-          <button class="btn-primary">Submit Inquiry</button>
+          <button id="sp-submit" class="btn-primary">Submit Inquiry</button>
+          <p id="sp-status" style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
         </div>
       </div>
     </div>
@@ -241,5 +242,54 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  (function () {
+    var btn = document.getElementById('sp-submit');
+    var status = document.getElementById('sp-status');
+    if (!btn) return;
+
+    function show(msg) {
+      status.textContent = msg;
+      status.style.display = 'block';
+    }
+
+    btn.addEventListener('click', function () {
+      var name = document.getElementById('sp-name').value.trim();
+      var email = document.getElementById('sp-email').value.trim();
+
+      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        show('Please enter your name and a valid email.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      fetch('/.netlify/functions/speaking-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: name,
+          email: email,
+          organization: document.getElementById('sp-org').value.trim(),
+          speakingType: document.getElementById('sp-type').value,
+          audienceSize: document.getElementById('sp-size').value,
+          orgType: document.getElementById('sp-orgtype').value,
+          details: document.getElementById('sp-details').value.trim()
+        })
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          btn.textContent = 'Inquiry Sent';
+          show('Received. I read every inquiry personally — expect a reply within 48 hours.');
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Submit Inquiry';
+          show('Something went wrong. Email me directly at mvw@mattvincentwalker.com.');
+        });
+    });
+  })();
+</script>
 </body>
 </html>
