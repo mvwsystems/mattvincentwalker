@@ -6,89 +6,24 @@
 <title>The Synthesis — Matt Vincent Walker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 <style>
+  /* Page-local tokens derived from the canonical palette */
   :root {
-    --black: #111111;
-    --charcoal: #1b1818;
-    --charcoal-mid: #201d1d;
-    --charcoal-light: #272323;
-    --off-white: #edede9;
-    --warm-white: #f5f2ee;
-    --gold: #c8935a;
-    --gold-muted: #a87a45;
-    --gold-hover: #e8a96e;
-    --gold-dim: rgba(200,147,90,0.08);
     --gold-border: rgba(200,147,90,0.22);
-    --text-primary: #edede9;
-    --text-secondary: rgba(237,237,233,0.62);
-    --text-tertiary: rgba(237,237,233,0.35);
+    --gold-soft: rgba(200,147,90,0.08);
+    --text-secondary: rgba(234,228,216,0.62);
+    --text-tertiary: rgba(234,228,216,0.35);
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background-color: var(--charcoal);
-    color: var(--text-primary);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* GRAIN */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.55;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to bottom, rgba(27,24,24,0.96) 0%, transparent 100%);
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-
-  .nav-links a {
-    font-family: 'Outfit', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* HERO — asymmetric layout */
+  /* HERO — asymmetric layout (overrides canonical .hero single-column) */
   .hero {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    padding: 0;
     position: relative;
     overflow: hidden;
   }
@@ -108,6 +43,7 @@
     justify-content: center;
     padding: 140px 80px 80px 40px;
     position: relative;
+    z-index: 2;
   }
 
   /* Waveform visual */
@@ -118,10 +54,10 @@
   }
 
   .waveform-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.25em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
     margin-bottom: 20px;
     opacity: 0;
@@ -140,7 +76,7 @@
 
   .wave-bar {
     flex: 1;
-    background: var(--gold);
+    background: var(--amber);
     border-radius: 1px;
     opacity: 0.6;
     animation: wave 1.8s ease-in-out infinite;
@@ -180,25 +116,25 @@
   .episode-card {
     border: 1px solid var(--gold-border);
     padding: 28px 32px;
-    background: rgba(27,24,24,0.7);
+    background: rgba(12,10,9,0.7);
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 1.6s;
   }
 
   .ep-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.28em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
     margin-bottom: 12px;
   }
 
   .ep-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 18px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--cream);
     margin-bottom: 8px;
     line-height: 1.3;
   }
@@ -214,10 +150,10 @@
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
@@ -242,7 +178,7 @@
     height: 0;
     border-top: 6px solid transparent;
     border-bottom: 6px solid transparent;
-    border-left: 9px solid var(--gold);
+    border-left: 9px solid var(--amber);
     margin-left: 2px;
   }
 
@@ -259,23 +195,23 @@
   }
 
   .hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: 28px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
   .hero-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(56px, 8vw, 100px);
     font-weight: 300;
     line-height: 0.95;
     letter-spacing: -0.02em;
-    color: var(--off-white);
+    color: var(--cream);
     margin-bottom: 32px;
     opacity: 0;
     animation: fadeUp 0.9s ease forwards 0.4s;
@@ -283,7 +219,7 @@
 
   .hero-title em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
     display: block;
   }
 
@@ -306,12 +242,12 @@
   }
 
   .platform-badge {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-tertiary);
-    border: 1px solid rgba(237,237,233,0.12);
+    border: 1px solid rgba(234,228,216,0.12);
     padding: 8px 16px;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -319,7 +255,7 @@
   }
 
   .platform-badge:hover {
-    color: var(--gold);
+    color: var(--amber);
     border-color: var(--gold-border);
   }
 
@@ -344,36 +280,37 @@
   .about-left { }
 
   .about-number {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 160px;
     font-weight: 300;
-    color: var(--gold-dim);
+    color: var(--gold-soft);
     line-height: 1;
     margin-bottom: -40px;
     display: block;
   }
 
   .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 300;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: 20px;
     display: block;
   }
 
+  /* Page-local heading scale (layout only; fonts/colors from canonical tokens) */
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(34px, 4vw, 52px);
     font-weight: 300;
     line-height: 1.1;
-    color: var(--off-white);
+    color: var(--cream);
     margin-bottom: 24px;
   }
 
-  .section-title em { font-style: italic; color: var(--gold); }
+  .section-title em { font-style: italic; color: var(--amber); }
 
   .section-body {
     font-size: 15px;
@@ -405,29 +342,29 @@
   }
 
   .theme-card {
-    background: var(--charcoal);
+    background: var(--black-warm);
     padding: 40px 32px;
     transition: background 0.3s ease;
     cursor: default;
   }
 
-  .theme-card:hover { background: var(--charcoal-light); }
+  .theme-card:hover { background: var(--charcoal); }
 
   .theme-icon {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 36px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: 16px;
     display: block;
     opacity: 0.7;
   }
 
   .theme-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 21px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--cream);
     margin-bottom: 12px;
   }
 
@@ -462,7 +399,7 @@
   }
 
   .episode-row {
-    background: var(--charcoal);
+    background: var(--black-warm);
     padding: 32px 40px;
     display: grid;
     grid-template-columns: 80px 1fr auto;
@@ -473,10 +410,10 @@
     text-decoration: none;
   }
 
-  .episode-row:hover { background: var(--charcoal-light); }
+  .episode-row:hover { background: var(--charcoal); }
 
   .ep-num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 12px;
     color: var(--text-tertiary);
     letter-spacing: 0.1em;
@@ -485,19 +422,19 @@
   .ep-info { }
 
   .ep-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
     margin-bottom: 6px;
   }
 
   .ep-name {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 20px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--cream);
     margin-bottom: 6px;
   }
 
@@ -508,7 +445,7 @@
   }
 
   .ep-duration {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     color: var(--text-tertiary);
     white-space: nowrap;
@@ -531,7 +468,7 @@
 
   .host-visual {
     aspect-ratio: 3/4;
-    background: var(--charcoal-mid);
+    background: var(--charcoal);
     border: 1px solid var(--gold-border);
     display: flex;
     align-items: center;
@@ -541,10 +478,10 @@
   }
 
   .host-monogram {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 120px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--amber);
     opacity: 0.3;
     line-height: 1;
   }
@@ -557,17 +494,17 @@
   }
 
   .host-name-overlay p {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 22px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--cream);
   }
 
   .host-name-overlay span {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
   }
 
@@ -598,7 +535,7 @@
     content: '';
     width: 24px;
     height: 1px;
-    background: var(--gold);
+    background: var(--amber);
     flex-shrink: 0;
   }
 
@@ -619,15 +556,15 @@
   }
 
   .subscribe-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(40px, 6vw, 72px);
     font-weight: 300;
     line-height: 1.1;
-    color: var(--off-white);
+    color: var(--cream);
     margin-bottom: 20px;
   }
 
-  .subscribe-title em { font-style: italic; color: var(--gold); }
+  .subscribe-title em { font-style: italic; color: var(--amber); }
 
   .subscribe-sub {
     font-size: 16px;
@@ -645,103 +582,8 @@
     margin-top: 32px;
   }
 
-  .btn-primary {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    background: var(--gold);
-    border: none;
-    padding: 16px 48px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-
-  .btn-primary:hover {
-    background: var(--gold-hover);
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    background: transparent;
-    border: 1px solid var(--gold-border);
-    padding: 16px 40px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-
-  .btn-ghost:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 40px 48px;
-    border-top: 1px solid var(--gold-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    color: var(--text-tertiary);
-    letter-spacing: 0.08em;
-  }
-
-  .footer-links { display: flex; gap: 28px; list-style: none; }
-
-  .footer-links a {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* MOBILE */
+  /* MOBILE (layout only — nav/footer handled by canonical styles) */
   @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero::after { display: none; }
     .hero-left { padding: 120px 24px 48px; }
@@ -753,7 +595,6 @@
     .ep-duration { display: none; }
     .host-inner { grid-template-columns: 1fr; }
     .host-visual { max-width: 280px; }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
   }
 </style>
   <script type="application/ld+json">
@@ -784,14 +625,26 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="https://mattvincentwalker.com" class="nav-logo">Matt Vincent Walker</a>
-  <ul class="nav-links">
-    <li><a href="https://mattvincentwalker.com/about">About</a></li>
-    <li><a href="#episodes">Episodes</a></li>
-    <li><a href="https://mattvincentwalker.com/newsletter">Newsletter</a></li>
-    <li><a href="https://mattvincentwalker.com/speaking">Speaking</a></li>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="articles.html">Newsletter</a></li>
+    <li><a href="masterclass.html">Coaching</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="apply.html">Consulting</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="podcast.html" class="active">The Synthesis</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
   </ul>
 </nav>
 
@@ -903,7 +756,7 @@
         <span class="section-eyebrow">Episodes</span>
         <h2 class="section-title">The <em>Conversations</em>.</h2>
       </div>
-      <a href="#" class="btn-ghost">All Episodes</a>
+      <a href="#" class="btn-secondary">All Episodes</a>
     </div>
     <div class="episodes-list reveal">
       <a class="episode-row" href="#">
@@ -993,24 +846,17 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p class="footer-brand">© 2026 Matt Vincent Walker</p>
-  <ul class="footer-links">
-    <li><a href="https://mattvincentwalker.com">Home</a></li>
-    <li><a href="https://mattvincentwalker.com/newsletter">Newsletter</a></li>
-    <li><a href="https://mattvincentwalker.com/speaking">Speaking</a></li>
-  </ul>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>

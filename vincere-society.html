@@ -6,91 +6,23 @@
 <title>The Vincere Society — Matt Vincent Walker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 <style>
+  /* Page-local aliases mapped onto canonical tokens */
   :root {
-    --black: #111111;
-    --charcoal: #1b1818;
-    --charcoal-mid: #222020;
-    --off-white: #edede9;
-    --warm-white: #f5f2ee;
-    --gold: #c8935a;
-    --gold-muted: #a87a45;
-    --gold-hover: #e8a96e;
+    --gold: var(--amber);
+    --gold-muted: var(--amber-dim);
+    --gold-hover: var(--amber-glow);
     --gold-dim: rgba(200,147,90,0.12);
     --gold-border: rgba(200,147,90,0.25);
-    --text-primary: #edede9;
-    --text-secondary: rgba(237,237,233,0.65);
-    --text-tertiary: rgba(237,237,233,0.38);
+    --off-white: var(--cream);
+    --warm-white: var(--white);
+    --charcoal-mid: var(--stone);
+    --text-primary: var(--cream);
+    --text-secondary: rgba(234,228,216,0.65);
+    --text-tertiary: rgba(234,228,216,0.38);
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background-color: var(--charcoal);
-    color: var(--text-primary);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* GRAIN OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.6;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    padding: 24px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to bottom, rgba(27,24,24,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(2px);
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'Outfit', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
 
   /* HERO */
   .hero {
@@ -114,24 +46,24 @@
   }
 
   .hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 300;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: 32px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
   .hero-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(64px, 10vw, 120px);
     font-weight: 300;
     line-height: 0.95;
     letter-spacing: -0.02em;
-    color: var(--off-white);
+    color: var(--white);
     margin-bottom: 16px;
     opacity: 0;
     animation: fadeUp 0.9s ease forwards 0.4s;
@@ -139,11 +71,11 @@
 
   .hero-title em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
   }
 
   .hero-subtitle {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(18px, 2.5vw, 26px);
     font-weight: 300;
     font-style: italic;
@@ -172,46 +104,28 @@
     animation: fadeUp 0.9s ease forwards 1s;
   }
 
-  .btn-primary {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    background: var(--gold);
-    border: none;
-    padding: 16px 40px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-
-  .btn-primary:hover {
-    background: var(--gold-hover);
-    transform: translateY(-1px);
-  }
-
+  /* Ghost button — companion to style.css .btn-primary, same mono-uppercase idiom */
   .btn-ghost {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.16em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: var(--warm-gray);
     background: transparent;
     border: 1px solid var(--gold-border);
-    padding: 16px 40px;
+    padding: 14px 32px;
     cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
+    transition: all 0.4s var(--ease-expo);
   }
 
   .btn-ghost:hover {
-    color: var(--gold);
-    border-color: var(--gold);
+    color: var(--amber);
+    border-color: var(--amber);
+    transform: translateY(-2px);
   }
 
   .hero-divider {
@@ -223,36 +137,30 @@
     animation: fadeIn 1s ease forwards 1.4s;
   }
 
-  /* SECTION BASE */
-  section {
-    padding: 100px 48px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
+  /* SECTION TYPOGRAPHY (page-local variants) */
   .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 300;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: 20px;
     display: block;
   }
 
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(36px, 5vw, 58px);
     font-weight: 300;
     line-height: 1.1;
-    color: var(--off-white);
+    color: var(--white);
     margin-bottom: 24px;
   }
 
   .section-title em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
   }
 
   .section-body {
@@ -313,23 +221,23 @@
   .for-list li:last-child { border-bottom: none; }
 
   .for-list .marker {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
-    color: var(--gold);
+    color: var(--amber);
     margin-top: 5px;
     flex-shrink: 0;
     letter-spacing: 0.1em;
   }
 
   .not-for {
-    background: rgba(27,24,24,0.6);
+    background: var(--charcoal);
     border: 1px solid var(--gold-border);
     padding: 40px;
     margin-top: 0;
   }
 
   .not-for-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 22px;
     font-weight: 400;
     font-style: italic;
@@ -378,35 +286,36 @@
   .pillars-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: var(--gold-border);
+    gap: 24px;
   }
 
   .pillar {
     background: var(--charcoal);
+    border: 1px solid var(--stone);
     padding: 48px 40px;
     position: relative;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .pillar:hover {
     background: var(--charcoal-mid);
+    border-color: var(--stone-light);
   }
 
   .pillar-number {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: 24px;
     display: block;
   }
 
   .pillar-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 26px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--white);
     margin-bottom: 16px;
     line-height: 1.2;
   }
@@ -426,7 +335,7 @@
 
   .quote-break::before {
     content: '\201C';
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 200px;
     color: var(--gold-dim);
     position: absolute;
@@ -438,11 +347,11 @@
   }
 
   .quote-text {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(24px, 3.5vw, 42px);
     font-weight: 300;
     font-style: italic;
-    color: var(--off-white);
+    color: var(--white);
     line-height: 1.4;
     max-width: 800px;
     margin: 0 auto 24px;
@@ -451,10 +360,10 @@
   }
 
   .quote-attr {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
   }
 
@@ -476,57 +385,58 @@
   .pricing-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: var(--gold-border);
+    gap: 24px;
     max-width: 800px;
     margin: 0 auto;
   }
 
   .pricing-card {
     background: var(--charcoal);
+    border: 1px solid var(--stone);
     padding: 56px 48px;
   }
 
   .pricing-card.featured {
     background: var(--charcoal-mid);
+    border-color: var(--amber-dim);
     position: relative;
   }
 
   .featured-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--charcoal);
-    background: var(--gold);
+    color: var(--black);
+    background: var(--amber);
     padding: 6px 14px;
     display: inline-block;
     margin-bottom: 32px;
   }
 
   .pricing-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--amber);
     text-transform: uppercase;
     margin-bottom: 16px;
     display: block;
   }
 
   .pricing-name {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 32px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--white);
     margin-bottom: 8px;
   }
 
   .pricing-price {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 52px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--amber);
     line-height: 1;
     margin-bottom: 4px;
   }
@@ -563,7 +473,7 @@
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--gold);
+    color: var(--amber);
     font-size: 12px;
   }
 
@@ -584,10 +494,8 @@
   }
 
   .testimonials-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    background: var(--gold-border);
+    gap: 24px;
   }
 
   .testimonial {
@@ -596,20 +504,20 @@
   }
 
   .testimonial-text {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: 19px;
     font-weight: 300;
     font-style: italic;
-    color: var(--off-white);
+    color: var(--cream);
     line-height: 1.6;
     margin-bottom: 28px;
   }
 
   .testimonial-name {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
-    color: var(--gold);
+    color: var(--amber);
     letter-spacing: 0.08em;
   }
 
@@ -636,17 +544,17 @@
   }
 
   .final-cta-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-display);
     font-size: clamp(42px, 7vw, 84px);
     font-weight: 300;
     line-height: 1.05;
-    color: var(--off-white);
+    color: var(--white);
     margin-bottom: 24px;
   }
 
   .final-cta-title em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
   }
 
   .final-cta-sub {
@@ -657,66 +565,8 @@
     line-height: 1.75;
   }
 
-  /* FOOTER */
-  footer {
-    padding: 40px 48px;
-    border-top: 1px solid var(--gold-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    color: var(--text-tertiary);
-    letter-spacing: 0.08em;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
-
-  .footer-links a {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* MOBILE */
+  /* MOBILE (layout only — nav & footer handled by style.css) */
   @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    .nav-links { display: none; }
-    section { padding: 72px 24px; }
     .for-section, .pillars-section, .pricing-section,
     .testimonials-section, .quote-break, .final-cta { padding: 72px 24px; }
     .for-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -725,8 +575,7 @@
     .testimonials-grid { grid-template-columns: 1fr; }
     .hero { padding: 100px 24px 60px; }
     .hero-cta-group { flex-direction: column; width: 100%; }
-    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .btn-primary, .btn-ghost { width: 100%; justify-content: center; text-align: center; }
   }
 </style>
   <script type="application/ld+json">
@@ -757,13 +606,26 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="https://mattvincentwalker.com" class="nav-logo">Matt Vincent Walker</a>
-  <ul class="nav-links">
-    <li><a href="https://mattvincentwalker.com/about">About</a></li>
-    <li><a href="https://mattvincentwalker.com/newsletter">Newsletter</a></li>
-    <li><a href="https://mattvincentwalker.com/speaking">Speaking</a></li>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="articles.html">Newsletter</a></li>
+    <li><a href="masterclass.html">Coaching</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="apply.html">Consulting</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="podcast.html">The Synthesis</a></li>
+    <li><a href="systems.html">Systems List</a></li>
+    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
   </ul>
 </nav>
 
@@ -811,10 +673,10 @@
         </ul>
       </div>
       <div style="margin-top:32px; padding:36px; border:1px solid var(--gold-border);">
-        <p style="font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:var(--off-white); line-height:1.5; margin-bottom:16px;">
+        <p style="font-family:var(--font-display); font-size:20px; font-style:italic; color:var(--off-white); line-height:1.5; margin-bottom:16px;">
           "When your inner world is ordered, power compounds. When it isn't, weakness compounds."
         </p>
-        <p style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase;">— Matt Vincent Walker</p>
+        <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase;">— Matt Vincent Walker</p>
       </div>
     </div>
   </div>
@@ -895,7 +757,7 @@
           <li>Superhuman Systems archive</li>
           <li>AI leverage workshops</li>
         </ul>
-        <a href="mailto:mvw@mattvincentwalker.com?subject=Vincere%20Society%20%E2%80%94%20Standard%20Membership%20(%2497%2Fmo)" class="btn-ghost" style="width:100%; text-align:center; display:block;">Request Membership</a>
+        <a href="mailto:mvw@mattvincentwalker.com?subject=Vincere%20Society%20%E2%80%94%20Standard%20Membership%20(%2497%2Fmo)" class="btn-ghost" style="width:100%; justify-content:center;">Request Membership</a>
       </div>
       <div class="pricing-card featured">
         <span class="featured-tag">Founding Member</span>
@@ -910,7 +772,7 @@
           <li>Priority consideration for The Order</li>
           <li>Rate locked — never increases</li>
         </ul>
-        <a href="mailto:mvw@mattvincentwalker.com?subject=Vincere%20Society%20%E2%80%94%20Founding%20Membership%20(%2467%2Fmo%2C%20First%2025)" class="btn-primary" style="width:100%; text-align:center; display:block;">Request Founding Membership</a>
+        <a href="mailto:mvw@mattvincentwalker.com?subject=Vincere%20Society%20%E2%80%94%20Founding%20Membership%20(%2467%2Fmo%2C%20First%2025)" class="btn-primary" style="width:100%; justify-content:center;">Request Founding Membership</a>
       </div>
     </div>
   </div>
@@ -942,8 +804,8 @@
         <p class="testimonial-role">AVP, Frost Bank</p>
       </div>
       <div class="testimonial" style="background:var(--charcoal-mid); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:48px;">
-        <p style="font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:300; color:var(--gold); line-height:1; margin-bottom:12px;">Vincere.</p>
-        <p style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.25em; color:var(--text-tertiary); text-transform:uppercase;">Reborn to Overcome</p>
+        <p style="font-family:var(--font-display); font-size:48px; font-weight:300; color:var(--gold); line-height:1; margin-bottom:12px;">Vincere.</p>
+        <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.25em; color:var(--text-tertiary); text-transform:uppercase;">Reborn to Overcome</p>
       </div>
     </div>
   </div>
@@ -958,27 +820,17 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p class="footer-brand">© 2026 Matt Vincent Walker</p>
-  <ul class="footer-links">
-    <li><a href="https://mattvincentwalker.com">Home</a></li>
-    <li><a href="https://mattvincentwalker.com/newsletter">Newsletter</a></li>
-    <li><a href="https://mattvincentwalker.com/speaking">Speaking</a></li>
-  </ul>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
 </footer>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
