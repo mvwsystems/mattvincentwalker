@@ -354,73 +354,6 @@
       line-height: 1.7;
     }
 
-    /* ── GUESTS ── */
-    .guests-list {
-      margin-top: 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .guest-row {
-      display: grid;
-      grid-template-columns: 48px 1fr auto;
-      gap: 32px;
-      align-items: center;
-      background: var(--charcoal);
-      border: 1px solid var(--stone);
-      padding: 28px 36px;
-      transition: border-color 0.4s var(--ease-expo), background 0.4s var(--ease-expo);
-    }
-
-    .guest-row:hover {
-      border-color: var(--stone-light);
-      background: var(--stone);
-    }
-
-    .guest-num {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      color: var(--ash);
-    }
-
-    .guest-info {}
-
-    .guest-domain {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--amber-dim);
-      margin-bottom: 6px;
-    }
-
-    .guest-name {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 1.2rem;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-
-    .guest-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .guest-tag {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--stone-light);
-      border: 1px solid var(--stone-light);
-      padding: 6px 12px;
-      white-space: nowrap;
-    }
-
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -444,9 +377,6 @@
       .blurb-symbol { font-size: 5rem; }
       .arc-grid { grid-template-columns: 1fr; }
       .territories-grid { grid-template-columns: 1fr; }
-      .guest-row { grid-template-columns: 1fr; gap: 12px; }
-      .guest-num { display: none; }
-      .guest-tag { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -655,69 +585,6 @@
     </div>
 
   </div>
-</section>
-
-<!-- ── THE GUESTS ── -->
-<section class="section">
-
-  <div class="section-label reveal">The Guests</div>
-  <div class="section-title reveal">Who sits across the table.</div>
-  <div class="section-subtitle reveal">Leaders who've paid the tuition for what they know — in business, in faith, in failure, and in reconstruction.</div>
-
-  <div class="guests-list">
-
-    <div class="guest-row reveal">
-      <span class="guest-num">01</span>
-      <div class="guest-info">
-        <p class="guest-domain">Apologetics · Faith</p>
-        <p class="guest-name">J. Warner Wallace</p>
-        <p class="guest-desc">Homicide detective turned Christian case-maker. Author of <em>Cold-Case Christianity</em>. On the evidence for faith and the courage to follow it under pressure.</p>
-      </div>
-      <span class="guest-tag">Season 1</span>
-    </div>
-
-    <div class="guest-row reveal">
-      <span class="guest-num">02</span>
-      <div class="guest-info">
-        <p class="guest-domain">Executive Coaching · Performance</p>
-        <p class="guest-name">The High-Output Operator</p>
-        <p class="guest-desc">A $3M founder who rebuilt his business in 18 months after a burnout collapse. On what real recovery looks like and what he built differently the second time.</p>
-      </div>
-      <span class="guest-tag">Season 1</span>
-    </div>
-
-    <div class="guest-row reveal">
-      <span class="guest-num">03</span>
-      <div class="guest-info">
-        <p class="guest-domain">AI · Business Systems</p>
-        <p class="guest-name">The AI Practitioner</p>
-        <p class="guest-desc">An operator who deployed AI systems into a trades business with no technical staff. On what actually works, what doesn't, and the implementation gap no one talks about.</p>
-      </div>
-      <span class="guest-tag">Season 1</span>
-    </div>
-
-    <div class="guest-row reveal">
-      <span class="guest-num">04</span>
-      <div class="guest-info">
-        <p class="guest-domain">Theology · Formation</p>
-        <p class="guest-name">The Theological Practitioner</p>
-        <p class="guest-desc">A seminary-trained leader who left the pulpit for corporate consulting. On what theology actually has to say to the man who builds things for a living.</p>
-      </div>
-      <span class="guest-tag">Season 1</span>
-    </div>
-
-    <div class="guest-row reveal">
-      <span class="guest-num">05</span>
-      <div class="guest-info">
-        <p class="guest-domain">Psychology · Shame Research</p>
-        <p class="guest-name">The Shame Researcher</p>
-        <p class="guest-desc">A clinician who has worked with high-achieving men in private practice for over a decade. On the shame patterns that run the most successful rooms — and what it takes to interrupt them.</p>
-      </div>
-      <span class="guest-tag">Season 1</span>
-    </div>
-
-  </div>
-
 </section>
 
 <!-- ── CLOSING CTA ── -->
