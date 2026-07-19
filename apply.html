@@ -532,32 +532,46 @@
 
     .apply-form {
       text-align: left;
-      border: 1px solid var(--stone);
-      overflow: hidden;
       margin-bottom: 20px;
+      border-top: 1px solid rgba(74,70,67,0.25);
     }
 
     .apply-form-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--stone);
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(74,70,67,0.25);
+      transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo);
     }
 
-    .apply-form-row:last-of-type { border-bottom: none; }
+    .apply-form-row:focus-within {
+      background: rgba(200,147,90,0.04);
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .apply-form-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #4a4643;
+      padding-top: 3px;
+      user-select: none;
+    }
+
+    .apply-form-pair {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 40px;
+    }
 
     .apply-form-field {
       display: flex;
       flex-direction: column;
-      border-right: 1px solid var(--stone);
-      transition: background 0.3s var(--ease-expo);
+      min-width: 0;
     }
-
-    .apply-form-field:last-child,
-    .apply-form-field.full { border-right: none; }
-
-    .apply-form-field.full { grid-column: 1 / -1; }
-
-    .apply-form-field:focus-within { background: rgba(200,147,90,0.025); }
 
     .apply-form-field label {
       font-family: var(--font-mono);
@@ -565,7 +579,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--amber);
-      padding: 14px 20px 0;
+      padding-bottom: 8px;
     }
 
     .apply-form-field input,
@@ -577,12 +591,14 @@
       font-family: var(--font-body);
       font-size: 14px;
       font-weight: 300;
-      padding: 6px 20px 16px;
+      padding: 2px 0 4px;
       outline: none;
       resize: none;
       -webkit-appearance: none;
       appearance: none;
       line-height: 1.6;
+      width: 100%;
+      min-width: 0;
     }
 
     .apply-form-field input::placeholder,
@@ -677,8 +693,8 @@
       .pillars-grid       { grid-template-columns: 1fr; }
       .fit-grid           { grid-template-columns: 1fr; }
       .bio-grid           { grid-template-columns: 1fr; gap: 40px; }
-      .apply-form-row     { grid-template-columns: 1fr; }
-      .apply-form-field   { border-right: none; }
+      .apply-form-row     { grid-template-columns: 28px minmax(0, 1fr); gap: 14px; }
+      .apply-form-pair    { grid-template-columns: minmax(0, 1fr); gap: 24px; }
       .process-step       { grid-template-columns: 1fr; gap: 4px; }
       .step-num           { font-family: var(--font-mono); font-size: 10px; font-style: normal; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); opacity: 1; padding-top: 0; }
       .apply-hero-cta     { flex-direction: column; align-items: center; gap: 16px; }
@@ -969,46 +985,55 @@
 
       <form class="apply-form reveal" id="application-form" onsubmit="handleApply(event)">
         <div class="apply-form-row">
-          <div class="apply-form-field">
-            <label for="firstName">First Name</label>
-            <input id="firstName" type="text" placeholder="Your first name" required>
-          </div>
-          <div class="apply-form-field">
-            <label for="lastName">Last Name</label>
-            <input id="lastName" type="text" placeholder="Your last name">
+          <span class="apply-form-num">01</span>
+          <div class="apply-form-pair">
+            <div class="apply-form-field">
+              <label for="firstName">First Name</label>
+              <input id="firstName" type="text" placeholder="Your first name" required>
+            </div>
+            <div class="apply-form-field">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" type="text" placeholder="Your last name">
+            </div>
           </div>
         </div>
         <div class="apply-form-row">
+          <span class="apply-form-num">02</span>
           <div class="apply-form-field full">
             <label for="email">Email Address</label>
             <input id="email" type="email" placeholder="your@email.com" required>
           </div>
         </div>
         <div class="apply-form-row">
+          <span class="apply-form-num">03</span>
           <div class="apply-form-field full">
             <label for="onlinePresence">Website &amp; social profiles</label>
             <textarea id="onlinePresence" rows="2" placeholder="Paste your URLs — website, LinkedIn, Instagram, YouTube, etc."></textarea>
           </div>
         </div>
         <div class="apply-form-row">
+          <span class="apply-form-num">04</span>
           <div class="apply-form-field full">
             <label for="business">What's your business — what do you do?</label>
             <input id="business" type="text" placeholder="Founder, consultant, contractor, expert, coach...">
           </div>
         </div>
         <div class="apply-form-row">
+          <span class="apply-form-num">05</span>
           <div class="apply-form-field full">
             <label for="aiProblem">What is the #1 thing you want AI to solve in your business?</label>
             <textarea id="aiProblem" rows="3" placeholder="Be specific. What's costing you the most time, money, or energy right now?"></textarea>
           </div>
         </div>
         <div class="apply-form-row">
+          <span class="apply-form-num">06</span>
           <div class="apply-form-field full">
             <label for="whyNow">What brought you here — and why now?</label>
             <textarea id="whyNow" rows="2" placeholder="What's the specific situation, shift, or realization that made this feel like the right move?"></textarea>
           </div>
         </div>
         <div class="apply-form-row">
+          <span class="apply-form-num">07</span>
           <div class="apply-form-field full">
             <label for="investment">Where are you right now? (be honest)</label>
             <select id="investment">
