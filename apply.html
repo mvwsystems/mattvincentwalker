@@ -609,31 +609,10 @@
       color: var(--light);
     }
 
-    .apply-submit {
-      width: 100%;
-      background: var(--amber);
-      color: var(--black);
-      border: none;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      padding: 22px;
-      cursor: pointer;
-      transition: all 0.4s var(--ease-expo);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .apply-submit:hover {
-      background: var(--amber-glow);
-      box-shadow: 0 8px 40px rgba(200,147,90,0.18);
-    }
-
-    .apply-submit:disabled {
-      background: var(--stone-light);
-      color: var(--muted);
-      box-shadow: none;
+    #apply-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
     }
 
     .apply-form-note {
@@ -1045,9 +1024,11 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="apply-submit" id="apply-btn">
-          Submit Application — Apply to Work With Me
-        </button>
+        <div style="text-align:center; margin-top: 36px;">
+          <button type="submit" class="btn-primary" id="apply-btn">
+            Submit Application — Apply to Work With Me
+          </button>
+        </div>
       </form>
 
       <p class="apply-form-note reveal">Applications reviewed personally · Response within 48 hours · Serious inquiries only</p>
