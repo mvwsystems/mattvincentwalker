@@ -152,59 +152,80 @@
     </div>
 
     <!-- Inquiry Form -->
-    <div class="subscribe-block reveal" style="text-align: left;">
+    <div class="reveal" style="text-align: left; max-width: 720px;">
       <div class="section-title" style="text-align: left; margin-bottom: 8px;">Speaking Inquiry</div>
-      <p class="section-subtitle" style="text-align: left; margin-bottom: 32px;">Each talk is shaped to the audience, context, and moment—never recycled or delivered on autopilot.</p>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Full Name</label>
-          <input type="text" id="sp-name" class="form-input" placeholder="Your name">
+      <p class="section-subtitle" style="text-align: left; margin-bottom: 40px;">Each talk is shaped to the audience, context, and moment—never recycled or delivered on autopilot.</p>
+      <div class="apply-form">
+        <div class="apply-form-row">
+          <span class="apply-form-num">01</span>
+          <div class="apply-form-field">
+            <label for="sp-name">Full Name</label>
+            <input type="text" id="sp-name" placeholder="Your name">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" id="sp-email" class="form-input" placeholder="you@company.com">
+        <div class="apply-form-row">
+          <span class="apply-form-num">02</span>
+          <div class="apply-form-field">
+            <label for="sp-email">Email</label>
+            <input type="email" id="sp-email" placeholder="you@company.com">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Organization</label>
-          <input type="text" id="sp-org" class="form-input" placeholder="Organization name">
+        <div class="apply-form-row">
+          <span class="apply-form-num">03</span>
+          <div class="apply-form-field">
+            <label for="sp-org">Organization</label>
+            <input type="text" id="sp-org" placeholder="Organization name">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Speaking Type</label>
-          <select id="sp-type" class="form-select">
-            <option>Keynote / Main Stage</option>
-            <option>Breakout Session</option>
-            <option>Virtual</option>
-            <option>Panel Discussion</option>
-            <option>Other</option>
-          </select>
+        <div class="apply-form-row">
+          <span class="apply-form-num">04</span>
+          <div class="apply-form-field">
+            <label for="sp-type">Speaking Type</label>
+            <select id="sp-type">
+              <option>Keynote / Main Stage</option>
+              <option>Breakout Session</option>
+              <option>Virtual</option>
+              <option>Panel Discussion</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Audience Size</label>
-          <select id="sp-size" class="form-select">
-            <option>1–100</option>
-            <option>101–350</option>
-            <option>351–500</option>
-            <option>501–1000</option>
-            <option>1000+</option>
-          </select>
+        <div class="apply-form-row">
+          <span class="apply-form-num">05</span>
+          <div class="apply-form-field">
+            <label for="sp-size">Audience Size</label>
+            <select id="sp-size">
+              <option>1–100</option>
+              <option>101–350</option>
+              <option>351–500</option>
+              <option>501–1000</option>
+              <option>1000+</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Organization Type</label>
-          <select id="sp-orgtype" class="form-select">
-            <option>Church / Non-Profit</option>
-            <option>For-Profit Business</option>
-            <option>University / Academic</option>
-            <option>Other</option>
-          </select>
+        <div class="apply-form-row">
+          <span class="apply-form-num">06</span>
+          <div class="apply-form-field">
+            <label for="sp-orgtype">Organization Type</label>
+            <select id="sp-orgtype">
+              <option>Church / Non-Profit</option>
+              <option>For-Profit Business</option>
+              <option>University / Academic</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group full">
-          <label class="form-label">Additional Details</label>
-          <textarea id="sp-details" class="form-textarea" placeholder="Tell me about the event, audience, and what you're hoping to accomplish."></textarea>
+        <div class="apply-form-row">
+          <span class="apply-form-num">07</span>
+          <div class="apply-form-field">
+            <label for="sp-details">Additional Details</label>
+            <textarea id="sp-details" rows="3" placeholder="Tell me about the event, audience, and what you're hoping to accomplish."></textarea>
+          </div>
         </div>
-        <div class="form-group">
-          <button id="sp-submit" class="btn-primary">Submit Inquiry</button>
-          <p id="sp-status" style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
-        </div>
+      </div>
+      <div style="text-align:center; margin-top: 36px;">
+        <button id="sp-submit" class="btn-primary">Submit Inquiry</button>
+        <p id="sp-status" style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
       </div>
     </div>
 
