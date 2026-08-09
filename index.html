@@ -3,11 +3,334 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matt Vincent Walker — Formation, Systems, Leverage</title>
+  <title>Matt Vincent Walker — The Notebook</title>
+  <meta name="description" content="Artificial intelligence, systems, and inner alignment — worked in the same dotted Moleskine notebooks since 2006, published as I go.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── HOMEPAGE (notebook concept) — all values from style.css tokens ── */
+
+    /* ── HERO — split with portrait ── */
+    .hero-split {
+      position: relative; min-height: 94vh;
+      display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      align-items: center; overflow: hidden;
+    }
+    .hero-copy {
+      position: relative; z-index: 2;
+      padding: 140px 24px 90px 48px; max-width: 720px;
+    }
+    .hero-overline {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--amber-dim); margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.8s 0.15s var(--ease-expo) forwards;
+    }
+    .hero-headline {
+      font-family: var(--font-display); font-size: clamp(2.6rem, 4.6vw, 4.4rem);
+      font-weight: 300; line-height: 1.12; color: var(--white);
+      margin-bottom: 36px; letter-spacing: -0.01em;
+      opacity: 0; animation: fadeUp 0.9s 0.35s var(--ease-expo) forwards;
+    }
+    .hero-headline em { font-style: italic; color: var(--white); }
+    .hero-lede {
+      font-family: var(--font-display); font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+      font-weight: 300; line-height: 1.75; color: var(--warm-gray);
+      max-width: 480px; margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.9s 0.55s var(--ease-expo) forwards;
+    }
+    .hero-links {
+      display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 0.75s var(--ease-expo) forwards;
+    }
+    .hero-link {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--cream);
+      padding-bottom: 8px; border-bottom: 1px solid var(--amber-dim);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .hero-link:hover { color: var(--amber); border-color: var(--amber); }
+    .hero-link.secondary { color: var(--warm-gray); border-color: var(--stone-light); }
+    .hero-link.secondary:hover { color: var(--cream); border-color: var(--warm-gray); }
+    .hero-stats {
+      position: absolute; left: 48px; bottom: 44px; z-index: 2;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; animation: fadeIn 1.2s 1.1s var(--ease-expo) forwards;
+    }
+    .hero-stats span.dot { color: var(--amber-dim); }
+
+    .hero-portrait {
+      position: relative; z-index: 1; height: 100%; min-height: 94vh;
+    }
+    .hero-portrait img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 22%;
+      filter: grayscale(1) contrast(1.03) brightness(0.9);
+      -webkit-mask-image: radial-gradient(ellipse 88% 92% at 62% 42%, #000 48%, transparent 76%);
+      mask-image: radial-gradient(ellipse 88% 92% at 62% 42%, #000 48%, transparent 76%);
+      opacity: 0; animation: fadeIn 1.6s 0.3s var(--ease-expo) forwards;
+    }
+
+    /* ── OPEN QUESTION BAND ── */
+    .question-band {
+      display: grid; grid-template-columns: 220px minmax(0, 1fr) auto;
+      gap: 48px; align-items: center;
+      padding: 64px 48px;
+      border-top: 1px solid rgba(74,70,67,0.25);
+      border-bottom: 1px solid rgba(74,70,67,0.25);
+      background: var(--black);
+    }
+    .question-meta {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--amber-dim); line-height: 2;
+    }
+    .question-text {
+      font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 2rem);
+      font-weight: 300; line-height: 1.4; color: var(--cream); max-width: 720px;
+    }
+    .question-prev {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--warm-gray);
+      padding-bottom: 8px; border-bottom: 1px solid var(--stone-light);
+      transition: color 0.3s, border-color 0.3s; white-space: nowrap;
+    }
+    .question-prev:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* ── THE INDEX ── */
+    .index-section { padding: 110px 48px 90px; max-width: 1240px; margin: 0 auto; }
+    .index-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 10px;
+    }
+    .index-title {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--white);
+    }
+    .index-meta {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .index-sub {
+      font-size: 14px; font-weight: 300; color: var(--muted);
+      max-width: 560px; line-height: 1.8; margin-bottom: 48px;
+    }
+    .index-cols {
+      display: grid; grid-template-columns: 56px 96px 130px minmax(0,1fr) auto;
+      gap: 28px; align-items: baseline; padding-bottom: 14px;
+      border-bottom: 1px solid rgba(74,70,67,0.4);
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .index-row {
+      display: grid; grid-template-columns: 56px 96px 130px minmax(0,1fr) auto;
+      gap: 28px; align-items: baseline; padding: 26px 0;
+      border-bottom: 1px solid rgba(74,70,67,0.2);
+      text-decoration: none; color: inherit;
+      transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo);
+    }
+    .index-row:hover { background: rgba(200,147,90,0.04); padding-left: 10px; padding-right: 10px; }
+    .index-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; color: #4a4643; }
+    .index-date { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+    .index-form { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px; color: var(--muted); text-transform: uppercase; }
+    .index-form.gold { color: var(--amber-dim); }
+    .index-name {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 400;
+      color: var(--cream); line-height: 1.3; transition: color 0.3s;
+    }
+    .index-row:hover .index-name { color: var(--amber); }
+    .index-territory {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+      color: var(--muted); text-transform: uppercase; text-align: right; white-space: nowrap;
+    }
+    .index-more {
+      display: inline-block; margin-top: 44px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--cream);
+      padding-bottom: 8px; border-bottom: 1px solid var(--amber-dim);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .index-more:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* ── FEATURED LETTER ── */
+    .feature-section { padding: 110px 48px; max-width: 1240px; margin: 0 auto; }
+    .feature-head {
+      display: flex; align-items: center; gap: 28px; margin-bottom: 56px;
+    }
+    .feature-label {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--white); white-space: nowrap;
+    }
+    .feature-rule { flex: 1; height: 1px; background: rgba(74,70,67,0.4); }
+    .feature-meta {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted); white-space: nowrap;
+    }
+    .feature-grid {
+      display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.7fr);
+      gap: 90px; align-items: start;
+    }
+    .feature-title {
+      font-family: var(--font-display); font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 400; line-height: 1.15; color: var(--cream);
+      margin-bottom: 36px; letter-spacing: -0.01em;
+    }
+    .feature-lede {
+      font-family: var(--font-display); font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+      font-weight: 300; line-height: 1.75; color: var(--warm-gray);
+      max-width: 620px; margin-bottom: 48px;
+    }
+    .feature-side { border-left: 1px solid rgba(74,70,67,0.3); padding-left: 40px; }
+    .plate { margin-bottom: 36px; }
+    .plate-art {
+      aspect-ratio: 4 / 3; margin-bottom: 12px;
+      background:
+        radial-gradient(ellipse 130% 80% at 28% -5%, rgba(234,228,216,0.34) 0%, rgba(234,228,216,0.08) 40%, transparent 62%),
+        radial-gradient(ellipse 90% 60% at 80% 100%, rgba(200,147,90,0.10) 0%, transparent 60%),
+        linear-gradient(155deg, var(--stone-light) 0%, var(--charcoal) 50%, var(--black) 100%);
+      border: 1px solid var(--stone);
+    }
+    .plate-caption {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .side-block { padding: 22px 0; border-bottom: 1px solid rgba(74,70,67,0.2); }
+    .side-block:last-child { border-bottom: none; }
+    .side-label {
+      display: block; font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim);
+      margin-bottom: 10px;
+    }
+    .side-value {
+      display: block; font-family: var(--font-display); font-size: 1.15rem;
+      font-weight: 400; color: var(--cream); line-height: 1.6;
+    }
+    a.side-value:hover { color: var(--amber); }
+
+    /* ── NOTEBOOK CATALOGUE ── */
+    .catalogue-section {
+      display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 90px; padding: 110px 48px; max-width: 1240px; margin: 0 auto;
+      align-items: start;
+    }
+    .catalogue-title {
+      font-family: var(--font-display); font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+      font-weight: 400; line-height: 1.2; color: var(--cream); margin: 18px 0 28px;
+    }
+    .catalogue-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 44px; }
+    .catalogue-stats {
+      display: flex; gap: 48px; padding-top: 32px; margin-bottom: 40px;
+      border-top: 1px solid rgba(74,70,67,0.3);
+    }
+    .stat-label {
+      display: block; font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .stat-num { font-family: var(--font-body); font-size: 1.7rem; font-weight: 500; color: var(--white); }
+    .cat-row {
+      display: grid; grid-template-columns: 56px minmax(0,1fr) auto;
+      gap: 28px; align-items: baseline; padding: 24px 0;
+      border-bottom: 1px solid rgba(74,70,67,0.2); border-top: 1px solid transparent;
+      text-decoration: none; color: inherit;
+      transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo);
+    }
+    .cat-row:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
+    .cat-row:hover { background: rgba(200,147,90,0.04); padding-left: 10px; padding-right: 10px; }
+    .cat-row .index-name { font-size: 1.25rem; }
+    .cat-row:hover .index-name { color: var(--amber); }
+
+    /* ── SUPERHUMAN OS BAND ── */
+    .os-band {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 90px; align-items: center;
+      padding: 120px 48px; background: var(--black);
+      border-top: 1px solid rgba(74,70,67,0.25);
+      border-bottom: 1px solid rgba(74,70,67,0.25);
+    }
+    .os-inner { max-width: 1240px; margin: 0 auto; }
+    .os-title {
+      font-family: var(--font-display); font-size: clamp(2.6rem, 4.4vw, 4rem);
+      font-weight: 400; color: var(--white); margin: 18px 0 28px; letter-spacing: -0.01em;
+    }
+    .os-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 560px; margin-bottom: 44px; }
+    .os-quote {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 300; font-style: italic; line-height: 1.5; color: var(--cream);
+      border-left: 1px solid var(--amber-dim); padding-left: 40px;
+    }
+
+    /* ── WORK WITH ME ── */
+    .work-section {
+      display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 90px; padding: 110px 48px; max-width: 1240px; margin: 0 auto;
+      align-items: start;
+    }
+    .work-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; margin: 18px 0 44px; }
+    .work-quote { border-top: 1px solid rgba(74,70,67,0.3); padding-top: 36px; }
+    .work-quote p {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 300;
+      font-style: italic; line-height: 1.6; color: var(--cream); margin-bottom: 18px;
+    }
+    .work-quote span {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .work-row {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+      padding: 30px 0; border-bottom: 1px solid rgba(74,70,67,0.2); border-top: 1px solid transparent;
+      text-decoration: none; color: inherit;
+      transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo);
+    }
+    .work-row:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
+    .work-row:hover { background: rgba(200,147,90,0.04); padding-left: 10px; padding-right: 10px; }
+    .work-row .index-name { font-size: 1.3rem; }
+    .work-row:hover .index-name { color: var(--amber); }
+    .work-row .arrow { color: var(--amber-dim); font-size: 1rem; }
+
+    /* ── SUBSCRIBE BAND ── */
+    .subscribe-band {
+      display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 90px; align-items: center;
+      padding: 120px 48px 130px; max-width: 1240px; margin: 0 auto;
+    }
+    .subscribe-title {
+      font-family: var(--font-display); font-size: clamp(2rem, 3.4vw, 3.1rem);
+      font-weight: 400; line-height: 1.2; color: var(--white); margin-bottom: 24px; letter-spacing: -0.01em;
+    }
+    .subscribe-sub { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 480px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .feature-section, .catalogue-section, .work-section { padding: 80px 24px; }
+      .feature-grid, .catalogue-section, .os-band, .work-section, .subscribe-band { grid-template-columns: 1fr; gap: 56px; }
+      .os-band { padding: 80px 24px; }
+      .subscribe-band { padding: 80px 24px 100px; }
+      .feature-side { border-left: none; padding-left: 0; border-top: 1px solid rgba(74,70,67,0.3); padding-top: 40px; }
+      .os-quote { padding-left: 24px; }
+    }
+    @media (max-width: 900px) {
+      .hero-split { grid-template-columns: 1fr; min-height: 0; }
+      .hero-portrait { order: -1; min-height: 46vh; }
+      .hero-portrait img {
+        object-position: center 18%;
+        -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+        mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+      }
+      .hero-copy { padding: 12px 24px 60px; }
+      .hero-stats { position: static; padding: 0 24px 56px; }
+      .question-band { grid-template-columns: 1fr; gap: 24px; padding: 56px 24px; }
+      .index-section { padding: 80px 24px 70px; }
+      .index-cols { display: none; }
+      .index-row { grid-template-columns: 44px minmax(0,1fr); grid-template-rows: auto auto; row-gap: 8px; }
+      .index-date, .index-territory { display: none; }
+      .index-form { grid-column: 2; }
+      .index-name { grid-column: 2; grid-row: 2; }
+      .index-num { grid-row: 2; }
+    }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -15,28 +338,12 @@
     "name": "Matt Vincent Walker",
     "url": "https://mattvincentwalker.com",
     "jobTitle": "Executive Coach and AI Consultant",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "Concordia University Irvine"
-    },
-    "knowsAbout": [
-      "Executive Coaching",
-      "AI Systems",
-      "Leadership Formation",
-      "Cybernetic Performance Frameworks"
-    ],
-    "sameAs": [
-      "https://6signal.co",
-      "https://superhumansystems.io",
-      "https://www.linkedin.com/in/mattvwalker/",
-      "https://www.youtube.com/@MattVincentWalker"
-    ]
+    "sameAs": ["https://6signal.co","https://superhumansystems.io","https://superhumansystems.substack.com","https://www.linkedin.com/in/mattvwalker/","https://www.youtube.com/@MattVincentWalker"]
   }
   </script>
 </head>
 <body>
 
-<!-- ═══ LOADER ═══ -->
 <!-- ═══ NAVIGATION ═══ -->
 <nav>
   <div class="nav-logo">
@@ -61,105 +368,197 @@
   </ul>
 </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="pulse"></span>
-        Available for speaking & consulting
-      </div>
-      <h1 class="hero-name">
-        <span class="line-1" style="font-family:var(--font-mono);font-size:clamp(0.58rem,0.9vw,0.72rem);letter-spacing:0.3em;text-transform:uppercase;color:var(--white);font-weight:400;margin-bottom:18px;">Matt Vincent Walker</span>
-        <span class="line-3">Formation. Systems. Leverage.</span>
-      </h1>
-      <p class="hero-subtitle">
-        I work with high-capacity men — founders, fathers, and leaders who are performing at the surface while something underneath is fracturing. The external leverage matters. So does what's running it. Formation first. Systems second. That order is not negotiable.
-      </p>
-      <div class="hero-actions">
-        <a href="newsletter.html" class="btn-primary">Join Superhuman Systems</a>
-        <a href="about.html" class="btn-secondary">Learn More</a>
-      </div>
+<!-- ═══ HERO ═══ -->
+<section class="hero-split">
+  <div class="hero-copy">
+    <div class="hero-overline">Notebook 014 · Page 001</div>
+    <h1 class="hero-headline">I’m working out how a person stays <em>whole</em> while building something at speed.</h1>
+    <p class="hero-lede">Three territories — artificial intelligence, systems, and inner alignment — worked in the same dotted Moleskine notebooks since 2006, published as I go, before it’s finished.</p>
+    <div class="hero-links">
+      <a class="hero-link" href="https://superhumansystems.substack.com/p/why-ambition-can-quietly-replace" target="_blank" rel="noopener">Read the Latest Letter</a>
+      <a class="hero-link secondary" href="articles.html">Enter the Notebook</a>
     </div>
-  </section>
+  </div>
+  <div class="hero-portrait">
+    <img src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+  </div>
+  <div class="hero-stats">
+    <span>Same notebooks since 2006</span><span class="dot">·</span><span>624 systems catalogued</span><span class="dot">·</span><span>Published as I go</span>
+  </div>
+</section>
 
-  <!-- What I Do — Numbered Rows -->
-  <section class="section-wide">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; align-items: end;">
-      <div>
-        <div class="section-label">What I Do</div>
-        <div class="section-title">Clarity before strategy.<br>Order before scale.</div>
-      </div>
-      <div class="section-subtitle" style="margin-bottom: 0;">
-        Most men don't break because they're weak. They break because they've been carrying more than anyone ever taught them how to handle — and the performance keeps covering the crack until it doesn't. My work exists at the intersection of formation and leverage.
-      </div>
+<!-- ═══ OPEN QUESTION ═══ -->
+<section class="question-band reveal">
+  <div class="question-meta">Open Question № 037<br>Posted 21 Jul 2026</div>
+  <div class="question-text">What does a man owe the people who live downstream of his ambition?</div>
+  <a class="question-prev" href="articles.html">36 before it →</a>
+</section>
+
+<!-- ═══ THE INDEX ═══ -->
+<section class="index-section">
+  <div class="index-header reveal">
+    <div class="index-title">The Index</div>
+    <div class="index-meta">28 entries · 624 systems catalogued</div>
+  </div>
+  <p class="index-sub reveal">Signals are caught in passing and published the same week. Letters take a season. Everything is dated and kept.</p>
+
+  <div class="index-cols reveal"><span>№</span><span>Date</span><span>Form</span><span>Title</span><span>Territory</span></div>
+
+  <a class="index-row reveal" href="systems.html">
+    <span class="index-num">267</span>
+    <span class="index-date">10 Jul</span>
+    <span class="index-form">System</span>
+    <span class="index-name">Requisite Variety</span>
+    <span class="index-territory">Systems</span>
+  </a>
+  <a class="index-row reveal" href="posts/formation-and-leverage.html">
+    <span class="index-num">003</span>
+    <span class="index-date">05 Jun</span>
+    <span class="index-form">The Notebook</span>
+    <span class="index-name">Formation and Leverage: The Two Axes of the Superhuman OS</span>
+    <span class="index-territory">Inner Alignment</span>
+  </a>
+  <a class="index-row reveal" href="posts/four-achievement-patterns.html">
+    <span class="index-num">002</span>
+    <span class="index-date">05 Jun</span>
+    <span class="index-form">The Notebook</span>
+    <span class="index-name">The Four Achievement Patterns: Which One Is Keeping You Stuck?</span>
+    <span class="index-territory">Inner Alignment</span>
+  </a>
+  <a class="index-row reveal" href="https://superhumansystems.substack.com/p/why-ambition-can-quietly-replace" target="_blank" rel="noopener">
+    <span class="index-num">006</span>
+    <span class="index-date">05 Mar</span>
+    <span class="index-form gold">The Letter</span>
+    <span class="index-name">Why Ambition Can Quietly Replace Meaning</span>
+    <span class="index-territory">Inner Alignment</span>
+  </a>
+  <a class="index-row reveal" href="https://superhumansystems.substack.com/p/install-one-constraint-on-your-own" target="_blank" rel="noopener">
+    <span class="index-num">017</span>
+    <span class="index-date">04 Mar</span>
+    <span class="index-form">Signal</span>
+    <span class="index-name">Install One Constraint on Your Own Power</span>
+    <span class="index-territory">Inner Alignment</span>
+  </a>
+  <a class="index-row reveal" href="https://superhumansystems.substack.com/p/when-god-feels-silent-and-the-bills" target="_blank" rel="noopener">
+    <span class="index-num">016</span>
+    <span class="index-date">01 Mar</span>
+    <span class="index-form">Signal</span>
+    <span class="index-name">When God Feels Silent and the Bills Don’t</span>
+    <span class="index-territory">Inner Alignment</span>
+  </a>
+  <a class="index-row reveal" href="https://superhumansystems.substack.com/p/the-leverage-letter-the-continuity" target="_blank" rel="noopener">
+    <span class="index-num">005</span>
+    <span class="index-date">28 Feb</span>
+    <span class="index-form gold">The Letter</span>
+    <span class="index-name">The Continuity Framework</span>
+    <span class="index-territory">Systems</span>
+  </a>
+
+  <a class="index-more reveal" href="articles.html">Open the Complete Index</a>
+</section>
+
+<!-- ═══ FEATURED LETTER ═══ -->
+<section class="feature-section">
+  <div class="feature-head reveal">
+    <span class="feature-label">The Letter</span>
+    <span class="feature-rule"></span>
+    <span class="feature-meta">№ 006 · March 2026</span>
+  </div>
+  <div class="feature-grid">
+    <div>
+      <h2 class="feature-title reveal">Why Ambition Can Quietly Replace Meaning</h2>
+      <p class="feature-lede reveal">The subtle drift most high performers miss. Ambition and meaning feel identical from the inside — both wake you early, both order your days. The difference only shows up in what happens when you arrive.</p>
+      <a class="hero-link reveal" href="https://superhumansystems.substack.com/p/why-ambition-can-quietly-replace" target="_blank" rel="noopener">Continue Reading</a>
     </div>
-    <div class="numbered-rows">
-      <a class="numbered-row reveal" href="articles.html" style="text-decoration:none;color:inherit;">
-        <div class="row-num">01</div>
-        <div class="row-title">Newsletter<br><span style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--muted);">Superhuman Systems</span></div>
-        <div class="row-desc">A weekly synthesis of AI, psychology, faith, and business for men who want order and leverage — without losing what made them worth building in the first place.</div>
-        <div class="row-arrow">→</div>
-      </a>
-      <a class="numbered-row reveal reveal-delay-1" href="masterclass.html" style="text-decoration:none;color:inherit;">
-        <div class="row-num">02</div>
-        <div class="row-title">Coaching<br><span style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--muted);">Formation & Strategy</span></div>
-        <div class="row-desc">One-on-one work with men who are carrying more than they've named. Founders, fathers, leaders navigating growth, transition, or the kind of slow fracture that looks like success from the outside. Not motivational. Orientational.</div>
-        <div class="row-arrow">→</div>
-      </a>
-      <a class="numbered-row reveal reveal-delay-2" href="speaking.html" style="text-decoration:none;color:inherit;">
-        <div class="row-num">03</div>
-        <div class="row-title">Speaking<br><span style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--muted);">Conferences, Retreats, Organizations</span></div>
-        <div class="row-desc">Thoughtful engagement for rooms where the questions are real, the stakes are high, and easy answers no longer work. Shame, formation, leadership, systems, and faith.</div>
-        <div class="row-arrow">→</div>
-      </a>
-      <a class="numbered-row reveal reveal-delay-3" href="apply.html" style="text-decoration:none;color:inherit;">
-        <div class="row-num">04</div>
-        <div class="row-title">Consulting<br><span style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--muted);">AI Visibility, Applications, and Automation</span></div>
-        <div class="row-desc">AI infrastructure, automation architecture, and visibility systems for founders and service businesses ready to build at a different altitude. From AI readiness audits to full-stack automation buildouts.</div>
-        <div class="row-arrow">→</div>
-      </a>
+    <aside class="feature-side reveal">
+      <div class="plate">
+        <div class="plate-art"></div>
+        <div class="plate-caption"><span>Plate II</span><span>Letter 006</span></div>
+      </div>
+      <div class="side-block">
+        <span class="side-label">Territory</span>
+        <span class="side-value">Inner Alignment</span>
+      </div>
+      <div class="side-block">
+        <span class="side-label">Related</span>
+        <a class="side-value" href="https://superhumansystems.substack.com/p/install-one-constraint-on-your-own" target="_blank" rel="noopener">Signal 017 · Install One Constraint</a>
+        <a class="side-value" href="systems.html">System 267 · Requisite Variety</a>
+      </div>
+      <div class="side-block">
+        <span class="side-label">From</span>
+        <span class="side-value">Superhuman Systems</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══ THE NOTEBOOK — CATALOGUE ═══ -->
+<section class="catalogue-section">
+  <div>
+    <div class="section-label reveal">The Notebook</div>
+    <h2 class="catalogue-title reveal">One system a week, worked through properly.</h2>
+    <p class="catalogue-body reveal">A running catalogue of the frameworks and mental models I actually use — pulled from whatever discipline had already solved the problem. Applied to life and business, one at a time, in order.</p>
+    <div class="catalogue-stats reveal">
+      <div><span class="stat-label">Catalogued</span><span class="stat-num">624</span></div>
+      <div><span class="stat-label">Disciplines</span><span class="stat-num">31</span></div>
+      <div><span class="stat-label">Since</span><span class="stat-num">2006</span></div>
     </div>
-  </section>
+    <a class="index-more reveal" href="systems.html" style="margin-top:0;">Open the Catalogue</a>
+  </div>
+  <div>
+    <a class="cat-row reveal" href="systems.html"><span class="index-num">267</span><span class="index-name">Requisite Variety</span><span class="index-territory">Cybernetics</span></a>
+    <a class="cat-row reveal" href="systems.html"><span class="index-num">252</span><span class="index-name">Antifragility</span><span class="index-territory">Nassim Taleb</span></a>
+    <a class="cat-row reveal" href="systems.html"><span class="index-num">244</span><span class="index-name">Feedback Loops</span><span class="index-territory">Systems Theory</span></a>
+    <a class="cat-row reveal" href="systems.html"><span class="index-num">098</span><span class="index-name">OODA Loop</span><span class="index-territory">Military Strategy</span></a>
+    <a class="cat-row reveal" href="systems.html"><span class="index-num">093</span><span class="index-name">Apophatic Thinking</span><span class="index-territory">Theology / Philosophy</span></a>
+    <a class="cat-row reveal" href="systems.html"><span class="index-num">085</span><span class="index-name">Chesterton&rsquo;s Fence</span><span class="index-territory">Philosophy / Policy</span></a>
+  </div>
+</section>
 
-  <!-- Testimonials -->
-  <section class="section-wide">
-    <div class="section-label reveal">Testimonials</div>
-    <div class="section-title reveal">Words from the field</div>
-    <div class="testimonials-grid" style="margin-top: 40px;">
-      <div class="testimonial reveal">
-        <p class="testimonial-text">Matt has a rare ability to engage complex ideas with clarity, humility, and genuine care for the person in front of him. He brings conviction without hostility and depth without alienation—earning trust across real differences.</p>
-        <div class="testimonial-author">S. Michael Craven</div>
-        <div class="testimonial-role">National Director, Colson Fellows</div>
-      </div>
-      <div class="testimonial reveal reveal-delay-1">
-        <p class="testimonial-text">I am incredibly grateful for the transformative journey I embarked upon with Matt. His unwavering commitment to my well-being and growth has been nothing short of remarkable. Through his guidance, I have gained invaluable mental tools that have empowered me to navigate work and life's challenges with newfound strength and resilience.</p>
-        <div class="testimonial-author">Noah Weatherly</div>
-        <div class="testimonial-role">AVP, Frost Bank</div>
-      </div>
-      <div class="testimonial reveal reveal-delay-2">
-        <p class="testimonial-text">Matt has a rare ability to articulate the Christian worldview with clarity, intellectual integrity, and calm confidence. His work consistently builds confidence rooted in understanding, not performance.</p>
-        <div class="testimonial-author">J. Warner Wallace</div>
-        <div class="testimonial-role">Best-Selling Author</div>
-      </div>
+<!-- ═══ SUPERHUMAN OS ═══ -->
+<section class="os-band">
+  <div>
+    <div class="section-label reveal">What It Added Up To</div>
+    <h2 class="os-title reveal">Superhuman OS</h2>
+    <p class="os-body reveal">Twenty years of notes turned out to be one architecture — cybernetics, control theory, neuroscience and theology describing the same three nested feedback loops. It&rsquo;s the deep end of this site, and it&rsquo;s there when you want it.</p>
+    <a class="hero-link reveal" href="superhuman.html">See Where It&rsquo;s At So Far →</a>
+  </div>
+  <div class="os-quote reveal">&ldquo;Fix the comparator, and the system corrects itself.&rdquo;</div>
+</section>
+
+<!-- ═══ WORK WITH ME ═══ -->
+<section class="work-section">
+  <div>
+    <div class="section-label reveal">Work With Me</div>
+    <p class="work-body reveal">Coaching for men carrying more than they&rsquo;ve named. Speaking for rooms where easy answers no longer work. Consulting on AI infrastructure and automation. One page, all three.</p>
+    <div class="work-quote reveal">
+      <p>&ldquo;He brings conviction without hostility and depth without alienation — earning trust across real differences.&rdquo;</p>
+      <span>S. Michael Craven · National Director, Colson Fellows</span>
     </div>
-  </section>
+  </div>
+  <div>
+    <a class="work-row reveal" href="masterclass.html"><span class="index-name">Coaching — Formation &amp; Strategy</span><span class="arrow">→</span></a>
+    <a class="work-row reveal" href="speaking.html"><span class="index-name">Speaking — Conferences &amp; Retreats</span><span class="arrow">→</span></a>
+    <a class="work-row reveal" href="apply.html"><span class="index-name">Consulting — AI Visibility &amp; Automation</span><span class="arrow">→</span></a>
+  </div>
+</section>
 
-  <!-- Quote -->
-  <section class="section" style="text-align: center; padding: 80px 48px;">
-    <blockquote style="border-left: none; padding-left: 0; max-width: 680px; margin: 0 auto; font-family: var(--font-display); font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.5;" class="reveal">
-      "When your inner world is ordered, power compounds. When it isn't, weakness compounds."
-    </blockquote>
-    <p style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); margin-top: 24px;" class="reveal">— Matt Vincent Walker</p>
-  </section>
+<!-- ═══ SUBSCRIBE ═══ -->
+<section class="subscribe-band">
+  <div>
+    <h2 class="subscribe-title reveal">The notebook, made public. Once a week.</h2>
+    <p class="subscribe-sub reveal">No promotions, no funnels. One entry, one system, whatever I&rsquo;m actually working through.</p>
+  </div>
+  <div class="reveal">
+    <div class="subscribe-form" data-subscribe-form data-source="homepage">
+      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <button class="btn-primary">Subscribe</button>
+    </div>
+    <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
+  </div>
+</section>
 
-  <!-- CTA Banner -->
-  <section class="cta-banner">
-    <div class="section-label reveal">The Work</div>
-    <div class="section-title reveal">Where insight becomes implementation.</div>
-    <div class="section-subtitle reveal">Superhuman Systems is where I publish practical frameworks, essays, and tools for building a coherent life and work—without grinding yourself into the ground.</div>
-    <a href="newsletter.html" class="btn-primary reveal">Subscribe to Superhuman Systems</a>
-  </section>
-
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-left">© 2026 Matt Vincent Walker</div>
   <div class="footer-links">
@@ -172,5 +571,38 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Subscribing…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = 'Subscribed'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in. First issue coming your way."; status.style.display = 'block'; }
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
