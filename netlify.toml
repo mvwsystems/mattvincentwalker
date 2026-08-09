@@ -8,9 +8,34 @@
   status = 200
 
 [[redirects]]
-  from = "/apply"
-  to = "/apply.html"
+  from = "/consulting"
+  to = "/consulting.html"
   status = 200
+
+[[redirects]]
+  from = "/coaching"
+  to = "/coaching.html"
+  status = 200
+
+[[redirects]]
+  from = "/apply"
+  to = "/consulting"
+  status = 301
+
+[[redirects]]
+  from = "/apply.html"
+  to = "/consulting.html"
+  status = 301
+
+[[redirects]]
+  from = "/masterclass"
+  to = "/coaching"
+  status = 301
+
+[[redirects]]
+  from = "/masterclass.html"
+  to = "/coaching.html"
+  status = 301
 
 [[redirects]]
   from = "/superhuman"

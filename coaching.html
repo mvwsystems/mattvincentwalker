@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Coaching — Matt Vincent Walker</title>
+  <meta name="description" content="A 1-on-1 executive coaching engagement for founders and leaders who keep hitting the same ceiling — internal order and external leverage, rebuilt together.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── APPLY PAGE STYLES — all values from style.css variables ── */
+
+    /* HERO */
+    .apply-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 48px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .apply-hero::before {
+      content: '';
+      position: absolute;
+      top: 35%; left: 50%;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(200,147,90,0.05) 0%, transparent 68%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .apply-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .apply-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-expo) forwards 0.2s;
+    }
+
+    .apply-hero-eyebrow::before,
+    .apply-hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--amber-dim));
+    }
+
+    .apply-hero-eyebrow::after {
+      background: linear-gradient(to left, transparent, var(--amber-dim));
+    }
+
+    .apply-hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) forwards 0.4s;
+    }
+
+    .apply-hero-subline {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 5vw, 4.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: var(--amber);
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) forwards 0.55s;
+    }
+
+    .apply-hero-rule {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--amber), transparent);
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-expo) forwards 0.7s;
+    }
+
+    .apply-hero-sub {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      max-width: 520px;
+      margin: 0 auto 52px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) forwards 0.8s;
+    }
+
+    .apply-hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) forwards 1s;
+    }
+
+    /* PULLQUOTE */
+    .pullquote-wrap {
+      padding: 96px 48px;
+      background: var(--black);
+      border-top: 1px solid var(--stone);
+      border-bottom: 1px solid var(--stone);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pullquote-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(200,147,90,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pullquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--cream);
+      max-width: 720px;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonials-grid-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pullquote-attr {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* APPLY SECTIONS */
+    .apply-section {
+      padding: 96px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .apply-section-centered {
+      text-align: center;
+    }
+
+    .apply-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .apply-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+
+    .apply-title em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .apply-rule {
+      width: 56px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--amber-dim), transparent);
+      margin: 20px auto 40px;
+    }
+
+    .apply-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* PROBLEM CARDS */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .problem-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 18px;
+      opacity: 0.8;
+    }
+
+    /* PILLARS */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone);
+      border: 1px solid var(--stone);
+      margin-top: 56px;
+    }
+
+    .pillar {
+      background: var(--black-warm);
+      padding: 48px 36px;
+      transition: background 0.4s var(--ease-expo);
+    }
+
+    .pillar:hover { background: rgba(200,147,90,0.025); }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .pillar-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--warm-gray);
+      margin-bottom: 24px;
+    }
+
+    .pillar-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .pillar-list li {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      color: rgba(234,228,216,0.75);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .pillar-list li::before {
+      content: '—';
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* FIT GRID */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--stone);
+      border: 1px solid var(--stone);
+      margin-top: 56px;
+    }
+
+    .fit-card {
+      background: var(--black-warm);
+      padding: 48px 40px;
+    }
+
+    .fit-card-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .fit-card.yes .fit-card-label { color: var(--amber); }
+    .fit-card.no  .fit-card-label { color: var(--muted); }
+
+    .fit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .fit-list li {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--warm-gray);
+      display: flex;
+      gap: 14px;
+      line-height: 1.6;
+    }
+
+    .fit-mark {
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-family: var(--font-display);
+      font-size: 15px;
+    }
+
+    .fit-card.yes .fit-mark { color: var(--amber); }
+    .fit-card.no  .fit-mark { color: var(--stone-light); }
+
+    /* PROCESS */
+    .process-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 56px;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      border-top: 1px solid var(--stone);
+      padding: 44px 0;
+    }
+
+    .process-step:last-child { border-bottom: 1px solid var(--stone); }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 60px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(200,147,90,0.1);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      padding-top: 4px;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .step-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--warm-gray);
+    }
+
+    /* BIO */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 72px;
+      align-items: start;
+      margin-top: 56px;
+    }
+
+    .bio-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .bio-name-italic {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--warm-gray);
+      margin-bottom: 28px;
+    }
+
+    .bio-creds {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bio-cred {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bio-cred::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--amber-dim);
+      flex-shrink: 0;
+    }
+
+    .bio-prose p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      margin-bottom: 20px;
+    }
+
+    .bio-prose strong { color: var(--light); font-weight: 400; }
+
+    .bio-pull {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.6;
+      border-left: 1px solid var(--amber-dim);
+      padding-left: 20px;
+      margin-top: 28px;
+    }
+
+    /* APPLY FORM SECTION */
+    .apply-form-section {
+      background: var(--black);
+      border-top: 1px solid var(--stone);
+    }
+
+    .apply-form-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .apply-form-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .apply-form-subline {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--amber);
+      margin-bottom: 28px;
+    }
+
+    .apply-form-sub {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      margin-bottom: 48px;
+    }
+
+    #apply-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .apply-form-note {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    #apply-confirmation {
+      display: none;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid var(--amber-dim);
+      background: rgba(200,147,90,0.03);
+      margin-bottom: 20px;
+    }
+
+    #apply-confirmation p {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+
+    #apply-confirmation span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+    }
+
+    #apply-error {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--stone);
+      margin-bottom: 20px;
+    }
+
+    #apply-error p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--warm-gray);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .apply-hero         { padding: 120px 24px 80px; }
+      .pullquote-wrap          { padding: 72px 24px; }
+      .testimonials-grid-inner { grid-template-columns: 1fr; }
+      .apply-section      { padding: 72px 24px; }
+      .problem-grid       { grid-template-columns: 1fr; }
+      .pillars-grid       { grid-template-columns: 1fr; }
+      .fit-grid           { grid-template-columns: 1fr; }
+      .bio-grid           { grid-template-columns: 1fr; gap: 40px; }
+      .process-step       { grid-template-columns: 1fr; gap: 4px; }
+      .step-num           { font-family: var(--font-mono); font-size: 10px; font-style: normal; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); opacity: 1; padding-top: 0; }
+      .apply-hero-cta     { flex-direction: column; align-items: center; gap: 16px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Matt Vincent Walker",
+    "url": "https://mattvincentwalker.com",
+    "jobTitle": "Executive Coach and AI Consultant",
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Concordia University Irvine" },
+    "sameAs": ["https://6signal.co","https://superhumansystems.io","https://superhumansystems.substack.com","https://www.linkedin.com/in/mattvwalker/","https://www.youtube.com/@MattVincentWalker"]
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="articles.html">Newsletter</a></li>
+    <li><a href="work-with-me.html" class="active">Work With Me</a></li>
+    <li><a href="podcast.html">The Synthesis</a></li>
+    <li><a href="superhuman.html">Superhuman OS</a></li>
+    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="apply-hero">
+  <div class="apply-hero-inner">
+    <div class="apply-hero-eyebrow">Executive Coaching</div>
+    <h1 class="apply-hero-headline">The ceiling isn&rsquo;t<br>in your business.</h1>
+    <div class="apply-hero-subline">It&rsquo;s in the operating system running it.</div>
+    <div class="apply-hero-rule"></div>
+    <p class="apply-hero-sub">A private, 1-on-1 executive coaching engagement for founders and leaders who keep hitting the same ceiling — no matter how much the external machine improves. We rebuild the internal operating system and the external infrastructure at the same time, because working on only one of them is why the ceiling keeps coming back.</p>
+    <div class="apply-hero-cta">
+      <a href="#apply" class="btn-primary">Apply for the Engagement</a>
+      <a href="#engagement" class="btn-secondary">How it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT CLIENTS SAY ═══ -->
+<div class="pullquote-wrap">
+  <div class="section-label reveal" style="justify-content:center;text-align:center;margin-bottom:36px;">What Changes</div>
+  <div class="testimonials-grid" style="max-width:1000px;margin:0 auto;text-align:left;">
+    <div class="testimonial reveal">
+      <p class="testimonial-text">Went from $40K months with constant chaos to $60K months with a team that actually runs without me. The diagnostic in week one named something I&rsquo;d never been able to articulate.</p>
+      <div class="testimonial-author">Client</div>
+      <div class="testimonial-role">Founder, service business</div>
+    </div>
+    <div class="testimonial reveal reveal-delay-1">
+      <p class="testimonial-text">I&rsquo;d done therapy. I&rsquo;d done business coaching. This was the first time someone worked on both simultaneously and showed me how they were connected.</p>
+      <div class="testimonial-author">Client</div>
+      <div class="testimonial-role">Executive coach, solo practice</div>
+    </div>
+    <div class="testimonial reveal reveal-delay-2">
+      <p class="testimonial-text">The AI and automation audit alone was worth the investment. Matt built infrastructure I didn&rsquo;t know was possible at my scale.</p>
+      <div class="testimonial-author">Client</div>
+      <div class="testimonial-role">Founder, field services company</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ THE MOMENT ═══ -->
+<section class="apply-section apply-section-centered">
+  <span class="apply-eyebrow reveal">The Moment This Is Built For</span>
+  <h2 class="apply-title reveal">You&rsquo;ve hit your ceiling before.<br><em>This time it came back.</em></h2>
+  <div class="apply-rule reveal"></div>
+  <p class="apply-body reveal">You solved the external problem — better offer, better systems, better team. And it worked, for a while. But the ceiling returned, slightly higher, with a different face. You can feel that the bottleneck has moved inside. You don&rsquo;t have a name for it yet. But you know another strategy isn&rsquo;t the answer — because you&rsquo;re the one implementing the strategy, and something in you keeps interfering with it.</p>
+  <p class="apply-body reveal" style="margin-top:24px;"><strong style="font-weight:500;color:var(--cream);">That&rsquo;s the moment this engagement was designed for.</strong></p>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ THE ENGAGEMENT ═══ -->
+<section class="apply-section apply-section-centered" id="engagement">
+  <span class="apply-eyebrow reveal">The Engagement</span>
+  <h2 class="apply-title reveal">Twelve weeks.<br>One operator, rebuilt.</h2>
+  <div class="apply-rule reveal"></div>
+  <p class="apply-body reveal">Fully private and customized. Weekly 1-on-1 sessions. Not a course, not a mastermind — a formation environment with infrastructure attached.</p>
+
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <p class="pillar-num">I &middot; Diagnose</p>
+      <h3 class="pillar-title">Weeks 1&ndash;2<br>The Complete Audit</h3>
+      <p class="pillar-body">A full map of your current internal and external systems. Where your energy leaks. Where decision-making collapses. Where shame has quietly distorted your strategy. We don&rsquo;t guess — we map.</p>
+      <ul class="pillar-list">
+        <li>Internal operating system diagnostic</li>
+        <li>Business systems &amp; leverage audit</li>
+        <li>The pattern behind your recurring ceiling</li>
+      </ul>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">II &middot; Rebuild</p>
+      <h3 class="pillar-title">Weeks 3&ndash;8<br>The Operating System</h3>
+      <p class="pillar-body">Build your personal Superhuman OS — three nested feedback loops integrating identity, operations, and vision. Grounded in systems theory, neuroscience, and theology. Not a template — a living architecture.</p>
+      <ul class="pillar-list">
+        <li>Weekly 1:1 sessions (60 min)</li>
+        <li>Personal OS architecture build</li>
+        <li>Decision, energy &amp; standards systems</li>
+      </ul>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">III &middot; Deploy</p>
+      <h3 class="pillar-title">Weeks 9&ndash;12<br>The Infrastructure</h3>
+      <p class="pillar-body">Apply the OS to your real life — your calendar, your business, your relationships, your practice. Then install the external layer: an AI infrastructure audit and deployment matched to your operation.</p>
+      <ul class="pillar-list">
+        <li>Implementation with accountability</li>
+        <li>AI &amp; automation audit + deployment</li>
+        <li>Ongoing access &amp; support</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="apply-body reveal" style="margin-top:48px;">The only coaching engagement that addresses the internal operating system and the external technical infrastructure simultaneously. Investment: <strong style="font-weight:500;color:var(--cream);">$12,000</strong> for the twelve-week engagement.</p>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ RIGHT FIT ═══ -->
+<section class="apply-section apply-section-centered">
+  <span class="apply-eyebrow reveal">Right Fit</span>
+  <h2 class="apply-title reveal">This is not<br><em>for everyone.</em></h2>
+  <div class="apply-rule reveal"></div>
+  <div class="fit-grid" style="margin-top:56px;">
+    <div class="fit-card yes reveal">
+      <div class="fit-card-label">This is for you if</div>
+      <ul>
+        <li>You&rsquo;ve built something real — and hit the same ceiling more than once</li>
+        <li>You&rsquo;re willing to work on the operator, not just the operation</li>
+        <li>You can commit to weekly sessions and real implementation</li>
+        <li>You want infrastructure installed, not just insight delivered</li>
+      </ul>
+    </div>
+    <div class="fit-card no reveal reveal-delay-1">
+      <div class="fit-card-label">This is not for you if</div>
+      <ul>
+        <li>You&rsquo;re looking for hype, shortcuts, or someone to tell you you&rsquo;re amazing</li>
+        <li>You want tactics without touching what&rsquo;s underneath them</li>
+        <li>You need motivation more than orientation</li>
+        <li>You&rsquo;re not ready to invest at this level</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ THE ARCHITECT ═══ -->
+<section class="apply-section apply-section-centered">
+  <span class="apply-eyebrow reveal">The Architect</span>
+  <h2 class="apply-title reveal">Why this work exists</h2>
+  <div class="apply-rule reveal"></div>
+  <p class="apply-body reveal">This framework wasn&rsquo;t built in a think tank. It was built across two decades of working with people at the edge of their capacity — in pastoral ministry, executive coaching, Fortune 500 sales, and real-world operator environments. It draws on an M.A. in Executive Coaching from Concordia University Irvine under Dr. John Townsend — one of the foremost researchers on boundaries, identity, and human development — combined with applied systems architecture, neuroscience, theology, and direct field experience deploying AI infrastructure for service businesses.</p>
+  <p class="apply-body reveal" style="margin-top:24px;">Most coaches address the inner life or the outer systems. Very few have the formation to work both simultaneously. That&rsquo;s not a marketing claim — it&rsquo;s the reason <a href="superhuman.html" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">the architecture</a> is built the way it is.</p>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ PROCESS ═══ -->
+<section class="apply-section apply-section-centered">
+  <span class="apply-eyebrow reveal">The Process</span>
+  <h2 class="apply-title reveal">Simple. Deliberate.<br>Built for fit.</h2>
+  <div class="apply-rule reveal"></div>
+  <div style="max-width:720px;margin:56px auto 0;text-align:left;">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <div>
+        <p class="step-title">Apply below</p>
+        <p class="step-body">Ten minutes, honest answers. I review every application personally and respond within 48 hours if there&rsquo;s a fit.</p>
+      </div>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <div>
+        <p class="step-title">A real conversation</p>
+        <p class="step-body">A 45-minute call. No pitch deck, no pressure. We locate your ceiling and decide together whether this engagement is the right instrument for it.</p>
+      </div>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <div>
+        <p class="step-title">The engagement begins</p>
+        <p class="step-body">Twelve weeks, weekly sessions, full OS build, AI infrastructure deployed. I work with a small number of clients at a time — and only when there&rsquo;s a clear path to real change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPLICATION ═══ -->
+<div class="apply-form-section" id="apply">
+  <div class="apply-form-inner">
+    <h2 class="apply-form-headline reveal">Ready to name<br>the ceiling?</h2>
+    <p class="apply-form-subline reveal">Apply below.</p>
+    <p class="apply-form-sub reveal">I review every application personally and respond within 48 hours if there&rsquo;s a fit.</p>
+
+    <form class="apply-form reveal" id="coaching-form" onsubmit="handleCoaching(event)">
+      <div class="apply-form-row">
+        <span class="apply-form-num">01</span>
+        <div class="apply-form-pair">
+          <div class="apply-form-field">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" placeholder="Your first name" required>
+          </div>
+          <div class="apply-form-field">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" placeholder="Your last name">
+          </div>
+        </div>
+      </div>
+      <div class="apply-form-row">
+        <span class="apply-form-num">02</span>
+        <div class="apply-form-field">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="apply-form-row">
+        <span class="apply-form-num">03</span>
+        <div class="apply-form-field">
+          <label for="leads">What do you lead or build?</label>
+          <input id="leads" type="text" placeholder="Founder, executive, practice owner, ministry leader...">
+        </div>
+      </div>
+      <div class="apply-form-row">
+        <span class="apply-form-num">04</span>
+        <div class="apply-form-field">
+          <label for="ceiling">Where&rsquo;s the ceiling? What keeps coming back?</label>
+          <textarea id="ceiling" rows="3" placeholder="Be specific. What pattern have you hit more than once — no matter what you changed externally?"></textarea>
+        </div>
+      </div>
+      <div class="apply-form-row">
+        <span class="apply-form-num">05</span>
+        <div class="apply-form-field">
+          <label for="whyNow">Why now?</label>
+          <textarea id="whyNow" rows="2" placeholder="What shifted that made this the moment to address it?"></textarea>
+        </div>
+      </div>
+      <div class="apply-form-row">
+        <span class="apply-form-num">06</span>
+        <div class="apply-form-field">
+          <label for="readiness">Where are you on the investment? (be honest)</label>
+          <select id="readiness">
+            <option value="">Select your current reality...</option>
+            <option>Ready now — the timeline and investment level fit</option>
+            <option>Serious — I need to understand the fit first</option>
+            <option>Exploring — not yet ready to invest at this level</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="apply-submit" id="coaching-btn">
+        Submit Application — Executive Coaching
+      </button>
+    </form>
+    <p class="apply-form-note reveal">Your answers go directly to me. No list, no sequence, no pitch — just a real read and a real reply.</p>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+async function handleCoaching(e) {
+  e.preventDefault();
+  var btn = document.getElementById('coaching-btn');
+  var orig = btn.textContent;
+  btn.textContent = 'Submitting\u2026'; btn.disabled = true;
+  try {
+    var res = await fetch('/.netlify/functions/coaching-apply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        leads: document.getElementById('leads').value.trim(),
+        ceiling: document.getElementById('ceiling').value.trim(),
+        whyNow: document.getElementById('whyNow').value.trim(),
+        readiness: document.getElementById('readiness').value
+      })
+    });
+    if (!res.ok) throw new Error('failed');
+    btn.textContent = 'Received \u2014 I\u2019ll be in touch within 48 hours';
+  } catch (err) {
+    btn.textContent = orig; btn.disabled = false;
+    alert('Something went wrong \u2014 email me directly at mvw@mattvincentwalker.com');
+  }
+}
+</script>
+</body>
+</html>
