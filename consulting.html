@@ -879,6 +879,7 @@
       </div>
 
       <form class="apply-form reveal" id="application-form" onsubmit="handleApply(event)">
+        <input type="text" name="website" id="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;pointer-events:none;">
         <div class="apply-form-row">
           <span class="apply-form-num">01</span>
           <div class="apply-form-pair">
@@ -965,6 +966,8 @@
 
 <script src="js/main.js"></script>
 <script>
+  const PAGE_LOADED = Date.now();
+
   async function handleApply(e) {
     e.preventDefault();
 
@@ -985,7 +988,9 @@
       business:       document.getElementById('business').value.trim(),
       aiProblem:      document.getElementById('aiProblem').value.trim(),
       whyNow:         document.getElementById('whyNow').value.trim(),
-      investment:     document.getElementById('investment').value
+      investment:     document.getElementById('investment').value,
+      hp:             document.getElementById('hp-field').value,
+      ts:             PAGE_LOADED
     };
 
     try {

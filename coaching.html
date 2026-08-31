@@ -804,6 +804,7 @@
     <p class="apply-form-sub reveal">I review every application personally and respond within 48 hours if there&rsquo;s a fit.</p>
 
     <form class="apply-form reveal" id="coaching-form" onsubmit="handleCoaching(event)">
+      <input type="text" name="website" id="hp-coach" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;pointer-events:none;">
       <div class="apply-form-row">
         <span class="apply-form-num">01</span>
         <div class="apply-form-pair">
@@ -882,6 +883,7 @@
 
 <script src="js/main.js"></script>
 <script>
+var PAGE_LOADED = Date.now();
 async function handleCoaching(e) {
   e.preventDefault();
   var btn = document.getElementById('coaching-btn');
@@ -898,7 +900,9 @@ async function handleCoaching(e) {
         leads: document.getElementById('leads').value.trim(),
         ceiling: document.getElementById('ceiling').value.trim(),
         whyNow: document.getElementById('whyNow').value.trim(),
-        readiness: document.getElementById('readiness').value
+        readiness: document.getElementById('readiness').value,
+        hp: document.getElementById('hp-coach').value,
+        ts: PAGE_LOADED
       })
     });
     if (!res.ok) throw new Error('failed');

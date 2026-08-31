@@ -153,6 +153,7 @@
       <div class="section-title" style="text-align: left; margin-bottom: 8px;">Speaking Inquiry</div>
       <p class="section-subtitle" style="text-align: left; margin-bottom: 40px;">Each talk is shaped to the audience, context, and moment—never recycled or delivered on autopilot.</p>
       <div class="apply-form">
+        <input type="text" name="website" id="hp-speak" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;pointer-events:none;">
         <div class="apply-form-row">
           <span class="apply-form-num">01</span>
           <div class="apply-form-field">
@@ -262,6 +263,7 @@
 <script src="js/main.js"></script>
 <script>
   (function () {
+    var PAGE_LOADED = Date.now();
     var btn = document.getElementById('sp-submit');
     var status = document.getElementById('sp-status');
     if (!btn) return;
@@ -293,7 +295,9 @@
           speakingType: document.getElementById('sp-type').value,
           audienceSize: document.getElementById('sp-size').value,
           orgType: document.getElementById('sp-orgtype').value,
-          details: document.getElementById('sp-details').value.trim()
+          details: document.getElementById('sp-details').value.trim(),
+          hp: document.getElementById('hp-speak').value,
+          ts: PAGE_LOADED
         })
       })
         .then(function (res) {

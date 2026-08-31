@@ -29,6 +29,16 @@ export const handler = async (event) => {
   const orgType      = strip(body.orgType, 100);
   const details      = strip(body.details, 3000);
 
+  // ── SPAM GATE — silently accept and drop bot submissions ──
+  // Honeypot filled, submitted faster than a human can type, or
+  // dot-riddled gmail local part (classic bot alias pattern).
+  const elapsedMs = Date.now() - Number(body.ts || 0);
+  const localPart = String(body.email || '').split('@')[0];
+  if (body.hp || !body.ts || elapsedMs < 4000 || localPart.split('.').length > 5) {
+    console.warn('Spam gate dropped submission:', body.email);
+    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+  }
+
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { statusCode: 400, body: JSON.stringify({ ok: false, error: 'Invalid email address' }) };
   }
