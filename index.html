@@ -292,11 +292,36 @@
     }
     .subscribe-sub { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 480px; }
 
+    /* ── BIO BAND ── */
+    .bio-band {
+      display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+      gap: 72px; align-items: center;
+      padding: 110px 48px; max-width: 1140px; margin: 0 auto;
+      border-top: 1px solid rgba(74,70,67,0.25);
+    }
+    .bio-photo {
+      width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 15%;
+      filter: grayscale(1) contrast(1.03) brightness(0.94);
+      border: 1px solid var(--stone-light);
+    }
+    .bio-copy .section-label { margin-bottom: 20px; }
+    .bio-name {
+      font-family: var(--font-display); font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+      font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 22px;
+    }
+    .bio-text {
+      font-size: 14.5px; font-weight: 300; color: var(--warm-gray);
+      line-height: 1.85; margin-bottom: 16px;
+    }
+    .bio-text em { color: var(--cream); font-style: normal; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .feature-section, .catalogue-section, .work-section { padding: 80px 24px; }
-      .feature-grid, .catalogue-section, .os-band, .work-section, .subscribe-band { grid-template-columns: 1fr; gap: 56px; }
+      .feature-grid, .catalogue-section, .os-band, .work-section, .subscribe-band, .bio-band { grid-template-columns: 1fr; gap: 56px; }
       .os-band { padding: 80px 24px; }
+      .bio-band { padding: 80px 24px; }
+      .bio-photo { max-width: 320px; }
       .subscribe-band { padding: 80px 24px 100px; }
       .feature-side { border-left: none; padding-left: 0; border-top: 1px solid rgba(74,70,67,0.3); padding-top: 40px; }
       .os-quote { padding-left: 24px; }
@@ -481,6 +506,18 @@
     <a class="work-row reveal" href="coaching.html"><span class="index-name">Coaching — Formation &amp; Strategy</span><span class="arrow">→</span></a>
     <a class="work-row reveal" href="speaking.html"><span class="index-name">Speaking — Conferences &amp; Retreats</span><span class="arrow">→</span></a>
     <a class="work-row reveal" href="consulting.html"><span class="index-name">Consulting — AI Visibility &amp; Automation</span><span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ═══ BIO ═══ -->
+<section class="bio-band">
+  <img class="bio-photo reveal" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+  <div class="bio-copy">
+    <div class="section-label reveal">The Writer</div>
+    <h2 class="bio-name reveal">I&rsquo;m Matt Vincent Walker.</h2>
+    <p class="bio-text reveal">Executive coach, AI consultant, and the writer behind The Vincere Letter. I&rsquo;ve been a pastor and a Christian apologist. A marketer who broke an insurance company&rsquo;s every inbound record on a tenth of their ad budget. A Fortune 500 sales rep who tripled a territory&rsquo;s all-time record.</p>
+    <p class="bio-text reveal">Then came the years everything broke — and the architecture that rebuilt me, brick by brick, became the Superhuman OS. Today I run 6 Signal, coach founders and leaders whose ceiling isn&rsquo;t in their business, and publish what I learn as I go. I live in Fort Worth, Texas, with my wife and two kids. <em>Everything still starts in the notebook.</em></p>
+    <a class="hero-link reveal" href="about.html" style="display:inline-block;margin-top:14px;">Read the Full Story</a>
   </div>
 </section>
 
