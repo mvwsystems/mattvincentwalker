@@ -367,7 +367,7 @@
     <li><a href="work-with-me.html">Work With Me</a></li>
     <li><a href="podcast.html">The Synthesis</a></li>
     <li><a href="superhuman.html">Superhuman OS</a></li>
-    <li><a href="newsletter.html" class="nav-cta">Subscribe</a></li>
+    <li><a href="subscribe.html" class="nav-cta">Subscribe</a></li>
   </ul>
 </nav>
 
@@ -380,6 +380,14 @@
     <div class="hero-links">
       <a class="hero-link" href="https://superhumansystems.substack.com/p/why-ambition-can-quietly-replace" target="_blank" rel="noopener">Read the Latest Letter</a>
       <a class="hero-link secondary" href="articles.html">Enter the Notebook</a>
+    </div>
+    <div style="margin-top:44px;max-width:460px;opacity:0;animation:fadeUp 0.9s 0.95s var(--ease-expo) forwards;">
+      <div class="subscribe-form" data-subscribe-form data-source="hero" style="margin:0;">
+        <input type="email" class="subscribe-input" placeholder="your@email.com">
+        <button class="btn-primary">Get the Letter</button>
+      </div>
+      <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
+      <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:14px;">One system a week &middot; The Grounding Protocol free when you join</p>
     </div>
   </div>
   <div class="hero-portrait">
@@ -535,7 +543,7 @@
     <div class="section-label reveal">Work With Me</div>
     <p class="work-body reveal">Coaching for men carrying more than they&rsquo;ve named. Speaking for rooms where easy answers no longer work. Consulting on AI infrastructure and automation. One page, all three.</p>
     <div class="work-quote reveal">
-      <p>&ldquo;He brings conviction without hostility and depth without alienation — earning trust across real differences.&rdquo;</p>
+      <p>&ldquo;Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.&rdquo;</p>
       <span>S. Michael Craven · National Director, Colson Fellows</span>
     </div>
   </div>
@@ -598,7 +606,7 @@
         var data = await res.json();
         if (data.ok) {
           btn.textContent = 'Subscribed'; input.style.display = 'none';
-          if (status) { status.textContent = "You're in. First issue coming your way."; status.style.display = 'block'; }
+          if (status) { status.textContent = "You're in \u2014 The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
         } else { throw new Error(); }
       } catch (e) {
         btn.textContent = orig; btn.disabled = false; input.disabled = false;

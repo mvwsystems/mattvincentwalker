@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Vincere Letter — Subscribe</title>
+  <meta name="description" content="Get The Grounding Protocol free when you join The Vincere Letter — one letter a week on inner order, outer leverage, and real connection.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mattvincentwalker.com/subscribe">
+  <meta property="og:title" content="The Vincere Letter">
+  <meta property="og:description" content="Get The Grounding Protocol free when you join. One letter a week — timeless principles, modern systems, a life fully lived.">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── SUBSCRIBE — single-goal capture page ── */
+    .sub-wrap {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 80px 24px 60px; position: relative;
+    }
+    .sub-logo { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); }
+    .sub-logo img { height: 34px; opacity: 0.85; }
+    .sub-inner { max-width: 620px; }
+    .sub-portrait {
+      width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+      object-position: center 18%; filter: grayscale(1) contrast(1.03);
+      border: 1px solid var(--stone-light); margin: 0 auto 32px;
+    }
+    .sub-eyebrow {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--amber-dim); margin-bottom: 24px;
+    }
+    .sub-title {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 300; line-height: 1.15; color: var(--white);
+      letter-spacing: -0.01em; margin-bottom: 24px;
+    }
+    .sub-title em { font-style: italic; color: var(--amber); }
+    .sub-lede {
+      font-size: 15px; font-weight: 300; color: var(--warm-gray);
+      line-height: 1.85; max-width: 520px; margin: 0 auto 14px;
+    }
+    .sub-etym {
+      font-family: var(--font-display); font-style: italic; font-size: 15px;
+      color: var(--muted); margin-bottom: 40px;
+    }
+    .sub-quote {
+      border-top: 1px solid rgba(74,70,67,0.3); margin-top: 56px; padding-top: 32px;
+      max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+    .sub-quote p {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 300;
+      font-style: italic; line-height: 1.65; color: var(--cream); margin-bottom: 14px;
+    }
+    .sub-quote span {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .sub-footer {
+      padding: 24px; text-align: center;
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sub-wrap">
+  <a class="sub-logo" href="index.html"><img src="MV Signature small.png" alt="Matt Vincent Walker"></a>
+  <div class="sub-inner">
+    <img class="sub-portrait" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+    <div class="sub-eyebrow">The Vincere Letter</div>
+    <h1 class="sub-title">Get <em>The Grounding Protocol</em> — free.</h1>
+    <p class="sub-lede">A 25-page structural reset for identity, regulation, and action — $12 on the shelf, free when you join. Then one letter a week on inner order, outer leverage, and real connection. Timeless principles. Modern systems. A life fully lived.</p>
+    <p class="sub-etym">Vincere — Latin, &ldquo;to overcome.&rdquo; The root of my middle name, and the reason I write.</p>
+    <div class="subscribe-form" data-subscribe-form data-source="subscribe-page">
+      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <button class="btn-primary">Send Me the Protocol</button>
+    </div>
+    <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:14px;text-transform:uppercase;"></p>
+    <p style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:18px;">FREE &middot; ONE LETTER A WEEK &middot; UNSUBSCRIBE ANYTIME</p>
+
+    <div class="sub-quote">
+      <p>&ldquo;Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.&rdquo;</p>
+      <span>S. Michael Craven &middot; National Director, Colson Fellows</span>
+    </div>
+  </div>
+</div>
+
+<div class="sub-footer">Timeless principles. Modern systems. A life fully lived.</div>
+
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Sending…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = 'Sent'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in — The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
