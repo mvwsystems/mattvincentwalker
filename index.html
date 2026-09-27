@@ -80,31 +80,37 @@
       opacity: 0; animation: fadeIn 1.6s 0.3s var(--ease-expo) forwards;
     }
 
-    /* ── OPEN QUESTION BAND ── */
-    .question-band {
-      display: grid; grid-template-columns: 220px minmax(0, 1fr) auto;
-      gap: 48px; align-items: center;
-      padding: 64px 48px;
+    /* ── PROOF BAND ── */
+    .proof-band {
+      padding: 72px 48px;
       border-top: 1px solid rgba(74,70,67,0.25);
       border-bottom: 1px solid rgba(74,70,67,0.25);
       background: var(--black);
+      text-align: center;
     }
-    .question-meta {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--amber-dim); line-height: 2;
+    .proof-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--amber-dim); margin-bottom: 36px;
     }
-    .question-text {
-      font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 2rem);
-      font-weight: 300; line-height: 1.4; color: var(--cream); max-width: 720px;
+    .proof-card {
+      max-width: 760px; margin: 0 auto; padding: 44px 48px;
+      border: 1px solid rgba(200,147,90,0.22);
+      background: rgba(200,147,90,0.03);
+      box-shadow: 0 0 48px rgba(200,147,90,0.05);
+      position: relative; min-height: 190px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .question-prev {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--warm-gray);
-      padding-bottom: 8px; border-bottom: 1px solid var(--stone-light);
-      transition: color 0.3s, border-color 0.3s; white-space: nowrap;
+    .proof-slide { display: none; }
+    .proof-slide.active { display: block; animation: fadeIn 0.9s var(--ease-expo); }
+    .proof-slide blockquote {
+      font-family: var(--font-display); font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+      font-weight: 300; font-style: italic; line-height: 1.6;
+      color: var(--cream); margin: 0 0 18px; border: none; padding: 0;
     }
-    .question-prev:hover { color: var(--amber); border-color: var(--amber); }
-
+    .proof-slide figcaption {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+    }
     /* ── THE INDEX ── */
     .index-section { padding: 110px 48px 90px; max-width: 1240px; margin: 0 auto; }
     .index-header {
@@ -398,11 +404,27 @@
   </div>
 </section>
 
-<!-- ═══ OPEN QUESTION ═══ -->
-<section class="question-band reveal">
-  <div class="question-meta">Open Question № 037<br>Posted 21 Jul 2026</div>
-  <div class="question-text">What does a man owe the people who live downstream of his ambition?</div>
-  <a class="question-prev" href="articles.html">36 before it →</a>
+<!-- ═══ PROOF ═══ -->
+<section class="proof-band reveal">
+  <div class="proof-label">What Clients &amp; Peers Say</div>
+  <div class="proof-card" id="proofCard">
+    <figure class="proof-slide active">
+      <blockquote>&ldquo;I am incredibly grateful for the transformative journey I embarked upon with Matt Walker. His unwavering commitment to my well-being and growth has been nothing short of remarkable.&rdquo;</blockquote>
+      <figcaption>Noah Weatherly &middot; AVP, Frost Bank</figcaption>
+    </figure>
+    <figure class="proof-slide">
+      <blockquote>&ldquo;He combines transformational coaching with the truth of the Bible. He has helped me in so many ways change my mindset and chase after what God has created me for in life!&rdquo;</blockquote>
+      <figcaption>Lauren Harless &middot; Wellness Coach &amp; Founder, Healthy Living Hive</figcaption>
+    </figure>
+    <figure class="proof-slide">
+      <blockquote>&ldquo;Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.&rdquo;</blockquote>
+      <figcaption>S. Michael Craven &middot; National Director, Colson Fellows</figcaption>
+    </figure>
+    <figure class="proof-slide">
+      <blockquote>&ldquo;Matt Vincent Walker has the unique ability to articulate the Christian worldview in a way that provides confidence to his audience and to his community.&rdquo;</blockquote>
+      <figcaption>J. Warner Wallace &middot; Best-Selling Author, Cold-Case Christianity</figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- ═══ THE INDEX ═══ -->
@@ -508,7 +530,7 @@
   <div>
     <div class="section-label reveal">The Notebook</div>
     <h2 class="catalogue-title reveal">One system a week, worked through properly.</h2>
-    <p class="catalogue-body reveal">A running catalogue of the frameworks and mental models I actually use — pulled from whatever discipline had already solved the problem. Applied to life and business, one at a time, in order.</p>
+    <p class="catalogue-body reveal">A running catalogue of the frameworks and mental models I actually use — pulled from whatever discipline had already solved the problem. Applied to life and business, one at a time, in order — because let&rsquo;s stop pretending business has nothing to do with life. When I say <em>life</em>, I mean your work too.</p>
     <div class="catalogue-stats reveal">
       <div><span class="stat-label">Catalogued</span><span class="stat-num">624</span></div>
       <div><span class="stat-label">Disciplines</span><span class="stat-num">31</span></div>
@@ -543,8 +565,8 @@
     <div class="section-label reveal">Work With Me</div>
     <p class="work-body reveal">Coaching for men carrying more than they&rsquo;ve named. Speaking for rooms where easy answers no longer work. Consulting on AI infrastructure and automation. One page, all three.</p>
     <div class="work-quote reveal">
-      <p>&ldquo;Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.&rdquo;</p>
-      <span>S. Michael Craven · National Director, Colson Fellows</span>
+      <p>&ldquo;Matt Vincent Walker is a man that truly loves to help people discover the incredible truth of God&rsquo;s word. Hear him speak, and I&rsquo;m certain that you&rsquo;ll uncover truths that will change your life.&rdquo;</p>
+      <span>Jon Warren · Lead Pastor, Grace Point Church</span>
     </div>
   </div>
   <div>
@@ -584,6 +606,22 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+(function () {
+  var card = document.getElementById('proofCard');
+  if (!card) return;
+  var slides = card.querySelectorAll('.proof-slide');
+  var i = 0, paused = false;
+  card.addEventListener('mouseenter', function () { paused = true; });
+  card.addEventListener('mouseleave', function () { paused = false; });
+  setInterval(function () {
+    if (paused || slides.length < 2) return;
+    slides[i].classList.remove('active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('active');
+  }, 8000);
+})();
+</script>
 <script>
 (function () {
   document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
