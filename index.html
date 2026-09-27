@@ -120,6 +120,11 @@
     }
     .proof-slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .proof-slide.leaving { opacity: 0; transform: translateY(-12px); }
+    .proof-photo {
+      width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+      filter: grayscale(1) contrast(1.05); border: 1px solid rgba(200,147,90,0.35);
+      margin: 0 auto 20px;
+    }
     .proof-slide blockquote {
       font-family: var(--font-display); font-size: clamp(1.15rem, 1.9vw, 1.5rem);
       font-weight: 300; font-style: italic; line-height: 1.6;
@@ -413,18 +418,22 @@
   <div class="proof-card" id="proofCard">
     <div class="proof-slides" id="proofSlides">
       <figure class="proof-slide active">
+        <img class="proof-photo" src="images/noah-weatherly.jpg" alt="Noah Weatherly">
         <blockquote>I am incredibly grateful for the transformative journey I embarked upon with Matt Walker. His unwavering commitment to my well-being and growth has been nothing short of remarkable.</blockquote>
         <figcaption>Noah Weatherly &middot; AVP, Frost Bank</figcaption>
       </figure>
       <figure class="proof-slide">
+        <img class="proof-photo" src="images/lauren-harless.jpg" alt="Lauren Harless">
         <blockquote>He combines transformational coaching with the truth of the Bible. He has helped me in so many ways change my mindset and chase after what God has created me for in life!</blockquote>
         <figcaption>Lauren Harless &middot; Wellness Coach &amp; Founder, Healthy Living Hive</figcaption>
       </figure>
       <figure class="proof-slide">
+        <img class="proof-photo" src="images/michael-craven.jpg" alt="S. Michael Craven">
         <blockquote>Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.</blockquote>
         <figcaption>S. Michael Craven &middot; National Director, Colson Fellows</figcaption>
       </figure>
       <figure class="proof-slide">
+        <img class="proof-photo" src="images/j-warner-wallace.jpg" alt="J. Warner Wallace">
         <blockquote>Matt Vincent Walker has the unique ability to articulate the Christian worldview in a way that provides confidence to his audience and to his community.</blockquote>
         <figcaption>J. Warner Wallace &middot; Best-Selling Author, Cold-Case Christianity</figcaption>
       </figure>
@@ -498,6 +507,7 @@
     <div class="section-label reveal">Work With Me</div>
     <p class="work-body reveal">Coaching for men carrying more than they&rsquo;ve named. Speaking for rooms where easy answers no longer work. Consulting on AI infrastructure and automation. One page, all three.</p>
     <div class="work-quote reveal">
+      <img class="t-photo" src="images/jon-warren.jpg" alt="Jon Warren">
       <p>&ldquo;Matt Vincent Walker is a man that truly loves to help people discover the incredible truth of God&rsquo;s word. Hear him speak, and I&rsquo;m certain that you&rsquo;ll uncover truths that will change your life.&rdquo;</p>
       <span>Jon Warren · Lead Pastor, Grace Point Church</span>
     </div>

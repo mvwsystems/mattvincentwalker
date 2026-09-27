@@ -773,3 +773,10 @@ footer {
   .apply-form-row  { grid-template-columns: 28px minmax(0, 1fr); gap: 14px; }
   .apply-form-pair { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 }
+
+/* ═══ TESTIMONIAL HEADSHOTS ═══ */
+.t-photo {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+  filter: grayscale(1) contrast(1.05); border: 1px solid var(--stone-light);
+  margin-bottom: 18px; display: block;
+}
