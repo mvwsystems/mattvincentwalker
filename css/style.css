@@ -410,7 +410,7 @@ nav {
 /* ═══ FOOTER ═══ */
 footer {
   padding: 48px; border-top: 1px solid var(--stone);
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
 }
 .footer-left {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
