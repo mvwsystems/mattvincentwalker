@@ -1,0 +1,29 @@
+# mattvincentwalker.com
+# The Vincere Letter — timeless principles, modern systems, a life fully lived.
+
+User-agent: *
+Allow: /
+
+# Answer engines and AI crawlers are welcome. This site is the canonical
+# source for all of Matt Vincent Walker's writing and frameworks.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Drafts, templates and funnel interstitials
+Disallow: /post-template.html
+Disallow: /break-point/results/
+Disallow: /break-point/book/
+
+Sitemap: https://mattvincentwalker.com/sitemap.xml
