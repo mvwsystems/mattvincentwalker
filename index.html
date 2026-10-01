@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://mattvincentwalker.com/">
-  <title>Matt Vincent Walker — The Notebook</title>
+  <title>Matt Vincent Walker</title>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mattvincentwalker.com/">
-  <meta property="og:title" content="Matt Vincent Walker">
-  <meta property="og:description" content="Timeless principles. Modern systems. A life fully lived. Inner order, outer leverage, and real connection — from twenty years of notebooks.">
+  <meta property="og:title" content="Become the man they already think you are.">
+  <meta property="og:description" content="For men handling hard things and refusing to quit. One letter a week on inner order, real connection, and work that doesn't cost you your life.">
   <meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="description" content="Inner order, outer leverage, real connection — systems for a life fully lived, worked out in dotted Moleskine notebooks since 2006 and published as I go.">
+  <meta name="description" content="For men handling hard things and refusing to quit. One letter a week on inner order, real connection, and work that doesn't cost you your life — from a husband, father, and coach in Fort Worth, Texas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ── HOMEPAGE (notebook concept) — all values from style.css tokens ── */
+    /* ── HOMEPAGE — recognition → hope → trust → path → one step ── */
 
     /* ── HERO — split with portrait ── */
     .hero-split {
@@ -25,10 +25,7 @@
       display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
       align-items: center; overflow: hidden;
     }
-    .hero-copy {
-      position: relative; z-index: 2;
-      padding: 140px 24px 90px 48px; max-width: 720px;
-    }
+    .hero-copy { position: relative; z-index: 2; padding: 140px 24px 90px 48px; max-width: 720px; }
     .hero-overline {
       font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
       text-transform: uppercase; color: var(--amber-dim); margin-bottom: 36px;
@@ -44,12 +41,13 @@
     .hero-lede {
       font-family: var(--font-display); font-size: clamp(1.05rem, 1.5vw, 1.3rem);
       font-weight: 300; line-height: 1.75; color: var(--warm-gray);
-      max-width: 480px; margin-bottom: 48px;
+      max-width: 500px; margin-bottom: 44px;
       opacity: 0; animation: fadeUp 0.9s 0.55s var(--ease-expo) forwards;
     }
-    .hero-links {
-      display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 0.9s 0.75s var(--ease-expo) forwards;
+    .hero-form { max-width: 460px; opacity: 0; animation: fadeUp 0.9s 0.8s var(--ease-expo) forwards; }
+    .hero-micro {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted); margin-top: 14px;
     }
     .hero-link {
       font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
@@ -58,8 +56,6 @@
       transition: color 0.3s, border-color 0.3s;
     }
     .hero-link:hover { color: var(--amber); border-color: var(--amber); }
-    .hero-link.secondary { color: var(--warm-gray); border-color: var(--stone-light); }
-    .hero-link.secondary:hover { color: var(--cream); border-color: var(--warm-gray); }
     .hero-stats {
       position: absolute; left: 48px; bottom: 44px; z-index: 2;
       font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
@@ -68,10 +64,7 @@
       opacity: 0; animation: fadeIn 1.2s 1.1s var(--ease-expo) forwards;
     }
     .hero-stats span.dot { color: var(--amber-dim); }
-
-    .hero-portrait {
-      position: relative; z-index: 1; height: 100%; min-height: 94vh;
-    }
+    .hero-portrait { position: relative; z-index: 1; height: 100%; min-height: 94vh; }
     .hero-portrait img {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center 22%;
@@ -80,6 +73,63 @@
       mask-image: radial-gradient(ellipse 88% 92% at 62% 42%, #000 48%, transparent 76%);
       opacity: 0; animation: fadeIn 1.6s 0.3s var(--ease-expo) forwards;
     }
+
+    /* ── MIRROR — recognition ── */
+    .mirror { padding: 120px 48px; max-width: 1240px; margin: 0 auto; }
+    .mirror-lines { max-width: 760px; margin-top: 36px; }
+    .mirror-line {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+      font-weight: 300; line-height: 1.35; color: var(--cream);
+      padding: 22px 0; border-bottom: 1px solid rgba(74,70,67,0.2);
+    }
+    .mirror-line:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
+    .mirror-close {
+      font-family: var(--font-body); font-weight: 200;
+      font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--white); max-width: 640px; margin-top: 56px;
+    }
+    .mirror-close em { font-style: normal; color: var(--amber); }
+
+    /* ── TURN — hope ── */
+    .turn {
+      display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 90px; align-items: start;
+      padding: 120px 48px; background: var(--black);
+      border-top: 1px solid rgba(74,70,67,0.25);
+      border-bottom: 1px solid rgba(74,70,67,0.25);
+    }
+    .turn-inner { max-width: 1240px; margin: 0 auto; width: 100%; display: contents; }
+    .turn-title {
+      font-family: var(--font-display); font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 400; color: var(--white); margin: 18px 0 0; letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .turn-body p {
+      font-size: 15.5px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; margin-bottom: 22px; max-width: 560px;
+    }
+    .turn-body p.strong { color: var(--cream); }
+    .turn-why {
+      font-family: var(--font-display); font-size: clamp(1.3rem, 2vw, 1.7rem);
+      font-weight: 300; font-style: italic; line-height: 1.5; color: var(--cream);
+      border-left: 1px solid var(--amber-dim); padding-left: 32px; margin-top: 40px; max-width: 520px;
+    }
+
+    /* ── STORY — trust ── */
+    .bio-band {
+      display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+      gap: 72px; align-items: center;
+      padding: 120px 48px; max-width: 1140px; margin: 0 auto;
+    }
+    .bio-photo {
+      width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 15%;
+      filter: grayscale(1) contrast(1.03) brightness(0.94);
+    }
+    .bio-copy .section-label { margin-bottom: 20px; }
+    .bio-name {
+      font-family: var(--font-display); font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+      font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 22px;
+    }
+    .bio-text { font-size: 15px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; margin-bottom: 16px; }
+    .bio-text em { color: var(--cream); font-style: normal; }
 
     /* ── PROOF BAND — split portrait ── */
     .proof-band {
@@ -133,139 +183,31 @@
     .proof-num:hover { color: var(--warm-gray); }
     .proof-num.active { color: var(--amber); }
 
-    /* ── FEATURED LETTER ── */
-    .feature-section { padding: 110px 48px; max-width: 1240px; margin: 0 auto; }
-    .feature-head {
-      display: flex; align-items: center; gap: 28px; margin-bottom: 56px;
-    }
-    .feature-label {
-      font-family: var(--font-mono); font-size: 12px; letter-spacing: 5px;
-      text-transform: uppercase; color: var(--white); white-space: nowrap;
-    }
-    .feature-rule { flex: 1; height: 1px; background: rgba(74,70,67,0.4); }
-    .feature-meta {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--muted); white-space: nowrap;
-    }
-    .feature-grid {
-      display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.7fr);
-      gap: 90px; align-items: start;
-    }
-    .feature-title {
-      font-family: var(--font-display); font-size: clamp(2.4rem, 4vw, 3.8rem);
-      font-weight: 400; line-height: 1.15; color: var(--cream);
-      margin-bottom: 36px; letter-spacing: -0.01em;
-    }
-    .feature-lede {
-      font-family: var(--font-display); font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-      font-weight: 300; line-height: 1.75; color: var(--warm-gray);
-      max-width: 620px; margin-bottom: 48px;
-    }
-    .feature-side { border-left: 1px solid rgba(74,70,67,0.3); padding-left: 40px; }
-    .plate { margin-bottom: 36px; }
-    .plate-art {
-      aspect-ratio: 4 / 3; margin-bottom: 12px;
-      background:
-        radial-gradient(ellipse 130% 80% at 28% -5%, rgba(234,228,216,0.34) 0%, rgba(234,228,216,0.08) 40%, transparent 62%),
-        radial-gradient(ellipse 90% 60% at 80% 100%, rgba(200,147,90,0.10) 0%, transparent 60%),
-        linear-gradient(155deg, var(--stone-light) 0%, var(--charcoal) 50%, var(--black) 100%);
-      border: 1px solid var(--stone);
-    }
-    .plate-caption {
-      display: flex; justify-content: space-between;
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .side-block { padding: 22px 0; border-bottom: 1px solid rgba(74,70,67,0.2); }
-    .side-block:last-child { border-bottom: none; }
-    .side-label {
-      display: block; font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim);
-      margin-bottom: 10px;
-    }
-    .side-value {
-      display: block; font-family: var(--font-display); font-size: 1.15rem;
-      font-weight: 400; color: var(--cream); line-height: 1.6;
-    }
-    a.side-value:hover { color: var(--amber); }
-
-    /* ── NOTEBOOK CATALOGUE ── */
-    .catalogue-section {
-      display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-      gap: 90px; padding: 110px 48px; max-width: 1240px; margin: 0 auto;
-      align-items: start;
-    }
-    .catalogue-title {
-      font-family: var(--font-display); font-size: clamp(1.9rem, 2.8vw, 2.6rem);
-      font-weight: 400; line-height: 1.2; color: var(--cream); margin: 18px 0 28px;
-    }
-    .catalogue-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 44px; }
-    .catalogue-stats {
-      display: flex; gap: 48px; padding-top: 32px; margin-bottom: 40px;
-      border-top: 1px solid rgba(74,70,67,0.3);
-    }
-    .stat-label {
-      display: block; font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
-    }
-    .stat-num { font-family: var(--font-body); font-size: 1.7rem; font-weight: 500; color: var(--white); }
-    .cat-row {
-      display: grid; grid-template-columns: 56px minmax(0,1fr) auto;
-      gap: 28px; align-items: baseline; padding: 24px 0;
-      border-bottom: 1px solid rgba(74,70,67,0.2); border-top: 1px solid transparent;
-      text-decoration: none; color: inherit;
-      transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo);
-    }
-    .cat-row:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
-    .cat-row:hover { background: rgba(200,147,90,0.04); padding-left: 10px; padding-right: 10px; }
-    .cat-row .index-name { font-size: 1.25rem; }
-    .cat-row:hover .index-name { color: var(--amber); }
-
-    /* ── SUPERHUMAN OS BAND ── */
-    .os-band {
-      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 90px; align-items: center;
-      padding: 120px 48px; background: var(--black);
-      border-top: 1px solid rgba(74,70,67,0.25);
-      border-bottom: 1px solid rgba(74,70,67,0.25);
-    }
-    .os-inner { max-width: 1240px; margin: 0 auto; }
-    .os-title {
-      font-family: var(--font-display); font-size: clamp(2.6rem, 4.4vw, 4rem);
-      font-weight: 400; color: var(--white); margin: 18px 0 28px; letter-spacing: -0.01em;
-    }
-    .os-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 560px; margin-bottom: 44px; }
-    .os-quote {
-      font-family: var(--font-display); font-size: clamp(1.5rem, 2.4vw, 2rem);
-      font-weight: 300; font-style: italic; line-height: 1.5; color: var(--cream);
-      border-left: 1px solid var(--amber-dim); padding-left: 40px;
-    }
-
-    /* ── WORK WITH ME ── */
+    /* ── PATH — how I help ── */
     .work-section {
       display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 90px; padding: 110px 48px; max-width: 1240px; margin: 0 auto;
+      gap: 90px; padding: 120px 48px; max-width: 1240px; margin: 0 auto;
       align-items: start;
     }
-    .work-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; margin: 18px 0 44px; }
-    .work-quote { border-top: 1px solid rgba(74,70,67,0.3); padding-top: 36px; }
-    .work-quote p {
-      font-family: var(--font-display); font-size: 1.25rem; font-weight: 300;
-      font-style: italic; line-height: 1.6; color: var(--cream); margin-bottom: 18px;
+    .work-title {
+      font-family: var(--font-display); font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+      font-weight: 400; line-height: 1.2; color: var(--cream); margin: 18px 0 24px;
     }
-    .work-quote span {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
-      text-transform: uppercase; color: var(--muted);
-    }
+    .work-body { font-size: 15px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; margin: 0 0 32px; max-width: 480px; }
+    .work-aside { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 480px; }
+    .work-aside a { color: var(--cream); border-bottom: 1px solid var(--amber-dim); }
+    .work-aside a:hover { color: var(--amber); }
     .work-row {
-      display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+      display: grid; grid-template-columns: 40px minmax(0,1fr) auto; gap: 24px; align-items: baseline;
       padding: 30px 0; border-bottom: 1px solid rgba(74,70,67,0.2); border-top: 1px solid transparent;
       text-decoration: none; color: inherit;
       transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo);
     }
     .work-row:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
     .work-row:hover { background: rgba(200,147,90,0.04); padding-left: 10px; padding-right: 10px; }
-    .work-row .index-name { font-size: 1.3rem; }
+    .work-row .index-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--amber-dim); }
+    .work-row .index-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; color: var(--cream); display: block; }
+    .work-row .index-sub { display: block; font-size: 13.5px; font-weight: 300; color: var(--muted); margin-top: 6px; line-height: 1.6; }
     .work-row:hover .index-name { color: var(--amber); }
     .work-row .arrow { color: var(--amber-dim); font-size: 1rem; }
 
@@ -274,52 +216,29 @@
       display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
       gap: 90px; align-items: center;
       padding: 120px 48px 130px; max-width: 1240px; margin: 0 auto;
+      border-top: 1px solid rgba(74,70,67,0.25);
     }
     .subscribe-title {
       font-family: var(--font-display); font-size: clamp(2rem, 3.4vw, 3.1rem);
       font-weight: 400; line-height: 1.2; color: var(--white); margin-bottom: 24px; letter-spacing: -0.01em;
     }
-    .subscribe-sub { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 480px; }
-
-    /* ── BIO BAND ── */
-    .bio-band {
-      display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
-      gap: 72px; align-items: center;
-      padding: 110px 48px; max-width: 1140px; margin: 0 auto;
-      border-top: 1px solid rgba(74,70,67,0.25);
+    .subscribe-sub { font-size: 15px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; max-width: 500px; }
+    .subscribe-etym {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--amber-dim); margin-top: 20px;
     }
-    .bio-photo {
-      width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 15%;
-      filter: grayscale(1) contrast(1.03) brightness(0.94);
-      border: 1px solid var(--stone-light);
-    }
-    .bio-copy .section-label { margin-bottom: 20px; }
-    .bio-name {
-      font-family: var(--font-display); font-size: clamp(1.7rem, 2.6vw, 2.3rem);
-      font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 22px;
-    }
-    .bio-text {
-      font-size: 14.5px; font-weight: 300; color: var(--warm-gray);
-      line-height: 1.85; margin-bottom: 16px;
-    }
-    .bio-text em { color: var(--cream); font-style: normal; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .feature-section, .catalogue-section, .work-section { padding: 80px 24px; }
+      .mirror, .work-section, .bio-band { padding: 80px 24px; }
+      .turn { padding: 80px 24px; grid-template-columns: 1fr; gap: 40px; }
       .proof-band { padding: 72px 24px 64px; }
       .proof-slide { grid-template-columns: 1fr; gap: 28px; }
       .proof-photo { width: 132px; height: 158px; }
       .proof-nums { flex-wrap: wrap; gap: 10px 20px; justify-content: flex-start; }
-      .feature-grid, .catalogue-section, .os-band, .work-section, .subscribe-band, .bio-band { grid-template-columns: 1fr; gap: 56px; }
-      .os-band { padding: 80px 24px; }
-      .bio-band { padding: 80px 24px; }
+      .work-section, .subscribe-band, .bio-band { grid-template-columns: 1fr; gap: 56px; }
       .bio-photo { max-width: 320px; }
       .subscribe-band { padding: 80px 24px 100px; }
-      .feature-side { border-left: none; padding-left: 0; border-top: 1px solid rgba(74,70,67,0.3); padding-top: 40px; }
-      .os-quote { padding-left: 24px; }
-    }
-    @media (max-width: 900px) {
       .hero-split { grid-template-columns: 1fr; min-height: 0; padding-top: 84px; }
       .hero-portrait { order: -1; height: 48vh; min-height: 0; }
       .hero-portrait img {
@@ -327,16 +246,8 @@
         -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 55%, transparent 96%);
         mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 55%, transparent 96%);
       }
-      .hero-copy { padding: 12px 24px 60px; }
+      .hero-copy { padding: 12px 24px 48px; }
       .hero-stats { position: static; padding: 0 24px 56px; }
-      .question-band { grid-template-columns: 1fr; gap: 24px; padding: 56px 24px; }
-      .index-section { padding: 80px 24px 70px; }
-      .index-cols { display: none; }
-      .index-row { grid-template-columns: 44px minmax(0,1fr); grid-template-rows: auto auto; row-gap: 8px; }
-      .index-date, .index-territory { display: none; }
-      .index-form { grid-column: 2; }
-      .index-name { grid-column: 2; grid-row: 2; }
-      .index-num { grid-row: 2; }
     }
   </style>
   <script type="application/ld+json">
@@ -345,14 +256,15 @@
     "@type": "Person",
     "name": "Matt Vincent Walker",
     "url": "https://mattvincentwalker.com",
-    "jobTitle": "Executive Coach and AI Consultant",
-    "sameAs": ["https://6signal.co","https://superhumansystems.io","https://superhumansystems.substack.com","https://www.linkedin.com/in/mattvwalker/","https://www.youtube.com/@MattVincentWalker"]
+    "jobTitle": "Coach, Writer, and Systems Consultant",
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Concordia University Irvine" },
+    "knowsAbout": ["Executive Coaching", "Men's Formation", "Fatherhood", "AI Systems", "Systems Thinking", "Christian Theology"],
+    "sameAs": ["https://6signal.co","https://vinceresociety.com","https://www.linkedin.com/in/mattvwalker/","https://www.youtube.com/@MattVincentWalker"]
   }
   </script>
 </head>
 <body>
 
-<!-- ═══ NAVIGATION ═══ -->
 <nav>
   <div class="nav-logo">
     <a href="index.html">
@@ -365,38 +277,73 @@
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <ul class="nav-links" id="navLinks">
     <li><a href="about.html">About</a></li>
-    <li><a href="articles.html">Newsletter</a></li>
+    <li><a href="letter.html">The Letter</a></li>
+    <li><a href="the-synthesis.html">The Synthesis</a></li>
     <li><a href="work-with-me.html">Work With Me</a></li>
-    <li><a href="podcast.html">The Synthesis</a></li>
-    <li><a href="superhuman.html">Superhuman OS</a></li>
     <li><a href="subscribe.html" class="nav-cta">Subscribe</a></li>
   </ul>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- ═══ HERO — recognition ═══ -->
 <section class="hero-split">
   <div class="hero-copy">
-    <div class="hero-overline">Notebook 014 · Page 001</div>
-    <h1 class="hero-headline">Life isn’t meant to be <em>survived</em>.</h1>
-    <p class="hero-lede">Writing about inner order, outer leverage, and real connection — systems for a life fully lived, worked out in the same dotted Moleskine notebooks since 2006 and published as I go.</p>
-    <div class="hero-links">
-      <a class="hero-link" href="posts/four-achievement-patterns.html">Read the Latest Letter</a>
-      <a class="hero-link secondary" href="articles.html">Enter the Notebook</a>
-    </div>
-    <div style="margin-top:44px;max-width:460px;opacity:0;animation:fadeUp 0.9s 0.95s var(--ease-expo) forwards;">
+    <div class="hero-overline">For the man carrying weight</div>
+    <h1 class="hero-headline">Become the man they <em>already</em> think you are.</h1>
+    <p class="hero-lede">On the worst night of my life, my son still thought I was his hero. I decided to become the man he already saw. I write for men doing the same &mdash; handling hard things, holding onto faith, leading at home and at work, and refusing to quit.</p>
+    <div class="hero-form">
       <div class="subscribe-form" data-subscribe-form data-source="hero" style="margin:0;">
         <input type="email" class="subscribe-input" placeholder="your@email.com">
         <button class="btn-primary">Get the Letter</button>
       </div>
       <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
-      <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:14px;">One system a week &middot; The Grounding Protocol free when you join</p>
+      <p class="hero-micro">One letter a week &middot; The Grounding Protocol, free when you join</p>
     </div>
   </div>
   <div class="hero-portrait">
     <img src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
   </div>
   <div class="hero-stats">
-    <span>Same notebooks since 2006</span><span class="dot">·</span><span>624 systems catalogued</span><span class="dot">·</span><span>Published as I go</span>
+    <span>Husband</span><span class="dot">·</span><span>Father of two</span><span class="dot">·</span><span>Fort Worth, Texas</span>
+  </div>
+</section>
+
+<!-- ═══ MIRROR — recognition deepens ═══ -->
+<section class="mirror">
+  <div class="section-label reveal">If this is you</div>
+  <div class="mirror-lines">
+    <p class="mirror-line reveal">You&rsquo;re the one everyone leans on.</p>
+    <p class="mirror-line reveal">You haven&rsquo;t told anyone how tired you are.</p>
+    <p class="mirror-line reveal">You pray, and you keep going, and some nights you wonder if either one is working.</p>
+    <p class="mirror-line reveal">You love your family more than your own life &mdash; and they get what&rsquo;s left of you.</p>
+    <p class="mirror-line reveal">You&rsquo;ve built something real. You&rsquo;re not sure it&rsquo;s building you.</p>
+  </div>
+  <p class="mirror-close reveal">You&rsquo;re not weak. You&rsquo;re carrying real weight with nothing built underneath to hold it. <em>That part can change.</em></p>
+</section>
+
+<!-- ═══ TURN — hope ═══ -->
+<section class="turn">
+  <div>
+    <div class="section-label reveal">It can be different</div>
+    <h2 class="turn-title reveal">Alignment creates power.</h2>
+  </div>
+  <div class="turn-body">
+    <p class="reveal">I don&rsquo;t mean hustle. I mean the opposite. When the inside is in order &mdash; who you are, what you actually believe at 3 a.m., what you&rsquo;re standing on when the pressure comes &mdash; the outside stops costing so much. Work gets lighter. Home gets warmer. You stop surviving your life and start living it.</p>
+    <p class="reveal">That&rsquo;s not a mindset. It&rsquo;s a way of building. Structure that holds when you can&rsquo;t. Habits that don&rsquo;t need motivation. Systems, and where they help, AI, so the work stops eating the life. Enough room in your days for the people you&rsquo;re doing it all for.</p>
+    <p class="reveal strong">Freedom inside. Freedom at home. Freedom in your work. In that order.</p>
+    <p class="turn-why reveal">My kids are the why behind every bit of it. I savor them differently now. That&rsquo;s the whole point.</p>
+  </div>
+</section>
+
+<!-- ═══ STORY — trust ═══ -->
+<section class="bio-band">
+  <img class="bio-photo reveal" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+  <div class="bio-copy">
+    <div class="section-label reveal">My story</div>
+    <h2 class="bio-name reveal">I&rsquo;m Matt.</h2>
+    <p class="bio-text reveal">Husband, dad of two, forty-three, just west of Fort Worth. Nearly twenty years in pastoral ministry. Then Fortune 500 sales. Then AI and systems. I&rsquo;m a Christian &mdash; not the loud kind. The kind who had to find out what he actually believed at the bottom.</p>
+    <p class="bio-text reveal">Because there was a bottom. A territory cut took a third of my income the year we closed on the house we&rsquo;d built. Debt. Two jobs. Drinking to take the edge off. A marriage that nearly didn&rsquo;t survive. And one night I came closer to not being here than I ever intend to be again.</p>
+    <p class="bio-text reveal">What pulled me back was my son, who believed I was his hero. I decided to become the man he already thought I was. Not with a breakthrough &mdash; with a decision, and then structure, <em>one brick at a time.</em> The structure became a framework. The framework became this.</p>
+    <a class="hero-link reveal" href="about.html" style="display:inline-block;margin-top:14px;">Read the whole story</a>
   </div>
 </section>
 
@@ -418,16 +365,6 @@
       </div>
     </figure>
     <figure class="proof-slide">
-      <img class="proof-photo" src="images/j-warner-wallace.jpg" alt="J. Warner Wallace">
-      <div>
-        <blockquote>Matt Vincent Walker has the unique ability to articulate the Christian worldview in a way that provides confidence to his audience and to his community.</blockquote>
-        <figcaption>
-          <div class="proof-name">J. Warner Wallace</div>
-          <div class="proof-role">Best-Selling Author, Cold-Case Christianity</div>
-        </figcaption>
-      </div>
-    </figure>
-    <figure class="proof-slide">
       <img class="proof-photo" src="images/michael-craven.jpg" alt="S. Michael Craven">
       <div>
         <blockquote>Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.</blockquote>
@@ -443,7 +380,7 @@
         <blockquote>He combines transformational coaching with the truth of the Bible. He has helped me in so many ways change my mindset and chase after what God has created me for in life!</blockquote>
         <figcaption>
           <div class="proof-name">Lauren Harless</div>
-          <div class="proof-role">Wellness Coach &amp; Founder, Healthy Living Hive</div>
+          <div class="proof-role">Founder, Healthy Living Hive</div>
         </figcaption>
       </div>
     </figure>
@@ -452,111 +389,50 @@
   <div class="proof-nums" id="proofDots"></div>
 </section>
 
-<!-- ═══ FEATURED LETTER ═══ -->
-<section class="feature-section">
-  <div class="feature-head reveal">
-    <span class="feature-label">The Letter</span>
-    <span class="feature-rule"></span>
-    <span class="feature-meta">№ 004 · June 2026</span>
-  </div>
-  <div class="feature-grid">
-    <div>
-      <h2 class="feature-title reveal">The Four Achievement Patterns: Which One Is Keeping You Stuck?</h2>
-      <p class="feature-lede reveal">A mirror, not a manual. The Runner, the Fixer, the Fader, the Fighter — four coping architectures that once kept you safe and now function as ceilings. Read slowly. You will recognize yourself.</p>
-      <a class="hero-link reveal" href="posts/four-achievement-patterns.html">Continue Reading</a>
-    </div>
-    <aside class="feature-side reveal">
-      <div class="plate">
-        <div class="plate-art"></div>
-        <div class="plate-caption"><span>Plate II</span><span>Letter 004</span></div>
-      </div>
-      <div class="side-block">
-        <span class="side-label">Territory</span>
-        <span class="side-value">Formation</span>
-      </div>
-      <div class="side-block">
-        <span class="side-label">Related</span>
-        <a class="side-value" href="posts/shame-identity-nexus.html">Letter 002 · The Shame-Identity Nexus</a>
-        <a class="side-value" href="systems.html">System 267 · Requisite Variety</a>
-      </div>
-      <div class="side-block">
-        <span class="side-label">From</span>
-        <span class="side-value">The Vincere Letter</span>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<!-- ═══ THE NOTEBOOK — CATALOGUE ═══ -->
-<section class="catalogue-section">
-  <div>
-    <div class="section-label reveal">The Notebook</div>
-    <h2 class="catalogue-title reveal">One system a week, worked through properly.</h2>
-    <p class="catalogue-body reveal">A running catalogue of the frameworks and mental models I actually use — pulled from whatever discipline had already solved the problem. Applied to life and business, one at a time, in order — because let&rsquo;s stop pretending business has nothing to do with life. When I say <em>life</em>, I mean your work too.</p>
-    <div class="catalogue-stats reveal">
-      <div><span class="stat-label">Catalogued</span><span class="stat-num">624</span></div>
-      <div><span class="stat-label">Disciplines</span><span class="stat-num">31</span></div>
-      <div><span class="stat-label">Since</span><span class="stat-num">2006</span></div>
-    </div>
-    <a class="index-more reveal" href="systems.html" style="margin-top:0;">Open the Catalogue</a>
-  </div>
-  <div>
-    <a class="cat-row reveal" href="systems.html"><span class="index-num">267</span><span class="index-name">Requisite Variety</span><span class="index-territory">Cybernetics</span></a>
-    <a class="cat-row reveal" href="systems.html"><span class="index-num">252</span><span class="index-name">Antifragility</span><span class="index-territory">Nassim Taleb</span></a>
-    <a class="cat-row reveal" href="systems.html"><span class="index-num">244</span><span class="index-name">Feedback Loops</span><span class="index-territory">Systems Theory</span></a>
-    <a class="cat-row reveal" href="systems.html"><span class="index-num">098</span><span class="index-name">OODA Loop</span><span class="index-territory">Military Strategy</span></a>
-    <a class="cat-row reveal" href="systems.html"><span class="index-num">093</span><span class="index-name">Apophatic Thinking</span><span class="index-territory">Theology / Philosophy</span></a>
-    <a class="cat-row reveal" href="systems.html"><span class="index-num">085</span><span class="index-name">Chesterton&rsquo;s Fence</span><span class="index-territory">Philosophy / Policy</span></a>
-  </div>
-</section>
-
-<!-- ═══ WORK WITH ME ═══ -->
+<!-- ═══ PATH — how I help ═══ -->
 <section class="work-section">
   <div>
-    <div class="section-label reveal">Work With Me</div>
-    <p class="work-body reveal">Coaching for leaders carrying more than they&rsquo;ve named. Speaking for rooms where easy answers no longer work. Consulting on AI infrastructure and automation. One page, all three.</p>
-    <div class="work-quote reveal">
-      <img class="t-photo" src="images/michael-craven.jpg" alt="S. Michael Craven">
-      <p>&ldquo;Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.&rdquo;</p>
-      <span>S. Michael Craven · National Director, Colson Fellows</span>
-    </div>
+    <div class="section-label reveal">How I help</div>
+    <h2 class="work-title reveal">Three ways in. Same work.</h2>
+    <p class="work-body reveal">Everything I do is one job: help a man get his inside in order so his outside stops costing him what matters most. Sometimes that&rsquo;s a letter. Sometimes it&rsquo;s a season of coaching. Sometimes it&rsquo;s building the systems and AI that give him his evenings back.</p>
+    <p class="work-aside reveal">I also speak &mdash; retreats, conferences, churches &mdash; for rooms where easy answers have stopped working. <a href="speaking.html">Bring me in</a>.</p>
   </div>
   <div>
-    <a class="work-row reveal" href="coaching.html"><span class="index-name">Coaching — Formation &amp; Strategy</span><span class="arrow">→</span></a>
-    <a class="work-row reveal" href="speaking.html"><span class="index-name">Speaking — Conferences &amp; Retreats</span><span class="arrow">→</span></a>
-    <a class="work-row reveal" href="consulting.html"><span class="index-name">Consulting — AI Visibility &amp; Automation</span><span class="arrow">→</span></a>
+    <a class="work-row reveal" href="letter.html">
+      <span class="index-num">01</span>
+      <span><span class="index-name">The Vincere Letter</span><span class="index-sub">One letter a week. Free. The place to start.</span></span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="work-row reveal" href="coaching.html">
+      <span class="index-num">02</span>
+      <span><span class="index-name">Coaching for Men</span><span class="index-sub">Private, one-on-one. Inner order first, then leading at home and at work.</span></span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="work-row reveal" href="consulting.html">
+      <span class="index-num">03</span>
+      <span><span class="index-name">Business, AI &amp; Systems</span><span class="index-sub">Systems and AI built inside your business, so it runs without eating your life.</span></span>
+      <span class="arrow">→</span>
+    </a>
   </div>
 </section>
 
-<!-- ═══ BIO ═══ -->
-<section class="bio-band">
-  <img class="bio-photo reveal" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
-  <div class="bio-copy">
-    <div class="section-label reveal">The Writer</div>
-    <h2 class="bio-name reveal">I&rsquo;m Matt Vincent Walker.</h2>
-    <p class="bio-text reveal">Executive coach, AI consultant, and the writer behind The Vincere Letter. I&rsquo;ve been a pastor and a Christian apologist. A marketer who broke an insurance company&rsquo;s every inbound record on a tenth of their ad budget. A Fortune 500 sales rep who tripled a territory&rsquo;s all-time record.</p>
-    <p class="bio-text reveal">Then came the years everything broke — and the architecture that rebuilt me, brick by brick, became the Superhuman OS. Today I run 6 Signal, coach founders and leaders whose ceiling isn&rsquo;t in their business, and publish what I learn as I go. I live in Fort Worth, Texas, with my wife and two kids. <em>Everything still starts in the notebook.</em></p>
-    <a class="hero-link reveal" href="about.html" style="display:inline-block;margin-top:14px;">Read the Full Story</a>
-  </div>
-</section>
-
-<!-- ═══ SUBSCRIBE ═══ -->
+<!-- ═══ ONE NEXT STEP ═══ -->
 <section class="subscribe-band">
   <div>
-    <h2 class="subscribe-title reveal">The notebook, made public. Once a week.</h2>
-    <p class="subscribe-sub reveal">No promotions, no funnels. One entry, one system, whatever I&rsquo;m actually working through.</p>
-    <p class="reveal" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber-dim);margin-top:16px;">The Vincere Letter · vincere — Latin, “to overcome”</p>
+    <h2 class="subscribe-title reveal">One letter a week.<br>For the man who won&rsquo;t quit.</h2>
+    <p class="subscribe-sub reveal">Inner order. Real connection. Work that doesn&rsquo;t eat you alive. Faith, systems, and the honest stuff in between &mdash; whatever I&rsquo;m actually working through that week. When you join, I&rsquo;ll send you <em>The Grounding Protocol</em>: a short field manual for the moment what you&rsquo;re standing on can&rsquo;t hold your weight.</p>
+    <p class="subscribe-etym reveal">Vincere &middot; Latin, &ldquo;to overcome&rdquo; &middot; the root of my middle name</p>
   </div>
   <div class="reveal">
     <div class="subscribe-form" data-subscribe-form data-source="homepage">
       <input type="email" class="subscribe-input" placeholder="your@email.com">
-      <button class="btn-primary">Subscribe</button>
+      <button class="btn-primary">Get the Letter</button>
     </div>
     <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
+    <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:14px;">Free &middot; No daily drip &middot; Unsubscribe anytime</p>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-left">© 2026 Matt Vincent Walker</div>
   <div class="footer-links">
@@ -606,14 +482,10 @@
     void progress.offsetWidth;
     progress.classList.add('run');
   }
-  function restart() {
-    clearInterval(timer);
-    timer = setInterval(next, 8000);
-  }
+  function restart() { clearInterval(timer); timer = setInterval(next, 8000); }
 
   band.addEventListener('mouseenter', function () { band.classList.add('paused'); clearInterval(timer); });
   band.addEventListener('mouseleave', function () { band.classList.remove('paused'); restart(); });
-
   restart();
 })();
 </script>
@@ -630,7 +502,7 @@
         input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
       }
       var orig = btn.textContent;
-      btn.textContent = 'Subscribing…'; btn.disabled = true; input.disabled = true;
+      btn.textContent = 'Sending…'; btn.disabled = true; input.disabled = true;
       try {
         var res = await fetch('/.netlify/functions/newsletter-subscribe', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -638,8 +510,8 @@
         });
         var data = await res.json();
         if (data.ok) {
-          btn.textContent = 'Subscribed'; input.style.display = 'none';
-          if (status) { status.textContent = "You're in \u2014 The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
+          btn.textContent = 'Sent'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in — The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
         } else { throw new Error(); }
       } catch (e) {
         btn.textContent = orig; btn.disabled = false; input.disabled = false;

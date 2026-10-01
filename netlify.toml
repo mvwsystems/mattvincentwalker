@@ -43,11 +43,6 @@
   status = 301
 
 [[redirects]]
-  from = "/superhuman"
-  to = "/superhuman.html"
-  status = 200
-
-[[redirects]]
   from = "/architecture"
   to = "/architecture.html"
   status = 200
@@ -65,4 +60,64 @@
 [[redirects]]
   from = "/break-point/book"
   to = "/break-point/book/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/newsletter"
+  to = "/letter"
+  status = 301
+
+[[redirects]]
+  from = "/newsletter.html"
+  to = "/letter"
+  status = 301
+
+[[redirects]]
+  from = "/articles"
+  to = "/letter"
+  status = 301
+
+[[redirects]]
+  from = "/articles.html"
+  to = "/letter"
+  status = 301
+
+[[redirects]]
+  from = "/podcast"
+  to = "/the-synthesis"
+  status = 301
+
+[[redirects]]
+  from = "/podcast.html"
+  to = "/the-synthesis"
+  status = 301
+
+[[redirects]]
+  from = "/superhuman"
+  to = "/framework"
+  status = 301
+
+[[redirects]]
+  from = "/superhuman.html"
+  to = "/framework"
+  status = 301
+
+[[redirects]]
+  from = "/posts/what-is-the-superhuman-os"
+  to = "/posts/what-is-the-vincere-os"
+  status = 301
+
+[[redirects]]
+  from = "/posts/what-is-the-superhuman-os.html"
+  to = "/posts/what-is-the-vincere-os"
+  status = 301
+
+[[redirects]]
+  from = "/letter"
+  to = "/letter.html"
+  status = 200
+
+[[redirects]]
+  from = "/framework"
+  to = "/framework.html"
   status = 200

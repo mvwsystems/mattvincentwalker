@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mattvincentwalker.com/letter">
+  <title>The Vincere Letter — Matt Vincent Walker</title>
+  <meta name="description" content="One letter a week for men handling hard things and refusing to quit. Inner order, real connection, and work that doesn't eat your life. Vincere — Latin, 'to overcome.'">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mattvincentwalker.com/letter">
+  <meta property="og:title" content="The Vincere Letter">
+  <meta property="og:description" content="One letter a week for men handling hard things and refusing to quit.">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .letter-listen {
+      display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+      padding: 28px 0; border-top: 1px solid rgba(74,70,67,0.3); border-bottom: 1px solid rgba(74,70,67,0.3);
+      margin: 60px 0;
+    }
+    .letter-listen p { margin: 0; font-size: 14.5px; font-weight: 300; color: var(--warm-gray); line-height: 1.7; }
+    .letter-listen p strong { font-weight: 500; color: var(--cream); }
+    .letter-listen a {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cream); border-bottom: 1px solid var(--amber-dim); padding-bottom: 6px; white-space: nowrap;
+    }
+    .letter-listen a:hover { color: var(--amber); border-color: var(--amber); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Matt Vincent Walker",
+    "url": "https://mattvincentwalker.com",
+    "jobTitle": "Coach, Writer, and Systems Consultant",
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Concordia University Irvine" },
+    "sameAs": ["https://6signal.co","https://vinceresociety.com","https://www.linkedin.com/in/mattvwalker/","https://www.youtube.com/@MattVincentWalker"]
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="letter.html" class="active">The Letter</a></li>
+    <li><a href="the-synthesis.html">The Synthesis</a></li>
+    <li><a href="work-with-me.html">Work With Me</a></li>
+    <li><a href="subscribe.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+  <div class="page-header">
+    <div class="section-label">The Vincere Letter</div>
+    <div class="section-title">One letter a week.<br>For the man who won&rsquo;t quit.</div>
+    <p class="section-subtitle"><em>Vincere</em> &mdash; Latin, &ldquo;to overcome.&rdquo; The root of my middle name, and the reason I write.</p>
+  </div>
+
+  <section class="section">
+    <div class="prose" style="margin-bottom: 60px;">
+      <p class="lead">Every week I send one letter. Not tips. Not a content calendar. One thing I&rsquo;m actually working through &mdash; as a husband, a dad, a man of faith who still has to make payroll &mdash; and the structure underneath it that you can use too.</p>
+      <p>Everything I write moves along three lines. Business and life aren&rsquo;t separate for me, and I&rsquo;ve stopped pretending they are for you.</p>
+    </div>
+
+    <div class="cards-grid" style="margin-bottom: 60px;">
+      <div class="card reveal">
+        <div class="card-label">01</div>
+        <div class="card-title">Inner Order</div>
+        <p class="card-text">Who you are when the pressure&rsquo;s on. Identity, shame, faith &mdash; the stuff underneath the stuff. Alignment before output.</p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-label">02</div>
+        <div class="card-title">Real Connection</div>
+        <p class="card-text">Marriage. Fatherhood. Friendship. The part most systems guys skip &mdash; and the only part that makes the rest worth building.</p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-label">03</div>
+        <div class="card-title">Outer Leverage</div>
+        <p class="card-text">Decisions, systems, and AI that work underneath you &mdash; so the work stops eating the life.</p>
+      </div>
+    </div>
+
+    <div class="subscribe-block reveal">
+      <div class="section-title">Start here.</div>
+      <p class="section-subtitle">When you join, I&rsquo;ll send you <em>The Grounding Protocol</em> &mdash; a short field manual for the moment what you&rsquo;re standing on can&rsquo;t hold your weight. Then one letter a week.</p>
+      <div class="subscribe-form" data-subscribe-form data-source="letter">
+        <input type="email" class="subscribe-input" placeholder="your@email.com">
+        <button class="btn-primary">Get the Letter</button>
+      </div>
+      <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
+      <p style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:16px;">FREE · NO DAILY DRIP · UNSUBSCRIBE ANYTIME</p>
+    </div>
+
+    <div class="letter-listen reveal">
+      <p><strong>Prefer to listen?</strong> The Synthesis is the podcast &mdash; the same threads, out loud, with people who&rsquo;ve lived them.</p>
+      <a href="the-synthesis.html">The Synthesis →</a>
+    </div>
+
+    <div class="section-label reveal">From the archive</div>
+    <div class="section-title reveal" style="margin-bottom: 40px;">Letters worth starting with.</div>
+    <div id="articles-container" class="cards-grid"></div>
+  </section>
+
+  <script>
+  (function () {
+    const container = document.getElementById('articles-container');
+    const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
+    function render(posts) {
+      container.innerHTML = posts.map((post, i) => `
+          <div class="article-card reveal ${delays[i % delays.length]}">
+            <div class="article-body">
+              <div class="article-date">${post.date || ''}</div>
+              <div class="article-title">${post.title || ''}</div>
+              <p class="article-excerpt">${post.excerpt || ''}</p>
+              <a href="posts/${post.slug}.html" class="article-tag" style="text-decoration:none;">Read →</a>
+            </div>
+          </div>`).join('');
+      if (window.observeReveals) window.observeReveals();
+      else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+    fetch('posts/index.json')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(posts => { if (Array.isArray(posts) && posts.length) render(posts); else throw new Error(); })
+      .catch(() => { container.innerHTML = '<p style="color:var(--muted);font-size:14px;">New letters coming soon.</p>'; });
+  })();
+  </script>
+
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+  <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Timeless principles. Modern systems. A life fully lived.</div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Sending…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = 'Sent'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in — The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
