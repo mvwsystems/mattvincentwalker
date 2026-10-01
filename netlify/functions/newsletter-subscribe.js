@@ -1,6 +1,7 @@
 // General newsletter subscribe handler for mattvincentwalker.com
 // Receives: { email }
-// Actions: create/update Kit subscriber, apply KIT_NEWSLETTER_TAG_ID if set
+// Actions: create/update Kit subscriber, apply KIT_NEWSLETTER_TAG_ID if set,
+//          add to KIT_WELCOME_SEQUENCE_ID if set (delivers The Grounding Protocol)
 // Returns { ok: true } on both success and upstream failure — never breaks UX
 
 export const handler = async (event) => {
@@ -45,6 +46,19 @@ export const handler = async (event) => {
     const tagId = process.env.KIT_NEWSLETTER_TAG_ID;
     if (tagId && subscriberId) {
       await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({ subscriber_id: subscriberId })
+      });
+    }
+
+    // Add to the welcome sequence (sends The Grounding Protocol) if configured
+    const seqId = process.env.KIT_WELCOME_SEQUENCE_ID;
+    if (seqId && subscriberId) {
+      await fetch(`https://api.kit.com/v4/sequences/${seqId}/subscribers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
