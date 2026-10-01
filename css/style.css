@@ -364,19 +364,23 @@ nav {
 }
 
 /* ═══ TESTIMONIAL ═══ */
-.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 56px 48px; }
 .testimonial {
-  background: var(--charcoal); border: 1px solid var(--stone); padding: 36px;
-  position: relative;
+  background: none; border: none; padding: 0;
+  border-top: 1px solid rgba(74,70,67,0.3); padding-top: 28px;
+  position: relative; display: flex; flex-direction: column;
 }
-.testimonial::before {
-  content: '"'; font-family: var(--font-display); font-size: 80px;
-  color: var(--amber-dim); opacity: 0.3; position: absolute; top: 16px; left: 24px;
-  line-height: 1;
+.testimonial-text {
+  font-family: var(--font-body); font-weight: 200;
+  font-size: 1.05rem; line-height: 1.55; letter-spacing: -0.005em;
+  color: var(--cream); margin-bottom: 28px; flex: 1;
 }
-.testimonial-text { font-size: 14px; color: var(--light); line-height: 1.8; margin-bottom: 20px; position: relative; z-index: 1; }
-.testimonial-author { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--white); }
-.testimonial-role { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 2px; }
+.testimonial .t-photo { order: 2; margin: 0 0 14px; }
+.testimonial-author { order: 3; font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--white); }
+.testimonial-role {
+  order: 4; font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+  letter-spacing: 1.6px; text-transform: uppercase; margin-top: 5px;
+}
 
 /* ═══ SUBSCRIBE BLOCK ═══ */
 .subscribe-block {
@@ -584,7 +588,7 @@ footer {
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ═══ CARD SHINE SWEEP ═══ */
-.card, .article-card, .testimonial, .tier { position: relative; overflow: hidden; }
+.card, .article-card, .tier { position: relative; overflow: hidden; }
 .card .shine-layer, .article-card .shine-layer, .tier .shine-layer {
   position: absolute; inset: 0;
   background: linear-gradient(105deg, transparent 40%, rgba(200,147,90,0.04) 45%, rgba(200,147,90,0.06) 50%, rgba(200,147,90,0.04) 55%, transparent 60%);
@@ -624,9 +628,8 @@ footer {
 .numbered-row:hover::before { transform: scaleY(1); }
 
 /* ═══ TESTIMONIAL QUOTE FLOAT ═══ */
-.testimonial::before { transition: transform 0.6s var(--ease-expo), opacity 0.4s; }
-.testimonial:hover::before { transform: translateY(-6px) scale(1.15); opacity: 0.5; }
-.testimonial:hover { border-color: var(--stone-light); }
+.testimonial { transition: border-color 0.5s var(--ease-expo); }
+.testimonial:hover { border-top-color: rgba(200,147,90,0.45); }
 
 /* ═══ INPUT GLOW ═══ */
 .subscribe-input:focus, .form-input:focus, .form-select:focus, .form-textarea:focus {
@@ -776,7 +779,8 @@ footer {
 
 /* ═══ TESTIMONIAL HEADSHOTS ═══ */
 .t-photo {
-  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
-  filter: grayscale(1) contrast(1.05); border: 1px solid var(--stone-light);
+  width: 52px; height: 52px; border-radius: 0; object-fit: cover;
+  object-position: center 12%;
+  filter: grayscale(1) contrast(1.1) brightness(0.92); border: none;
   margin-bottom: 18px; display: block;
 }
