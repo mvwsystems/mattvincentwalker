@@ -144,9 +144,9 @@
 </nav>
 
 <div class="book-wrap">
-  <p class="book-eyebrow">The Break Point — Next Step</p>
+  <p class="book-eyebrow">The Break Point &mdash; Next Step</p>
   <h1 class="book-title">Now we<br>work with it.</h1>
-  <p class="book-confirm" id="book-confirm">Your full report is on its way to your inbox.</p>
+  <p class="book-confirm" id="book-confirm">Your field report is on its way to your inbox.</p>
 
   <div class="result-callout" id="result-callout" style="display:none;">
     <span class="result-callout-label">Your Result</span>
@@ -157,19 +157,13 @@
     <p>The audit is done. The score is real. And the number on that page means exactly nothing if it stays on a screen.</p>
     <p>The Break Point is built on one premise: <strong>shame's entire power supply is secrecy.</strong> The scoring engine just told you where the load lives. What it can't do — what no instrument can do — is close the gap between knowing and changing.</p>
     <p>That gap closes in one place: in the presence of a person who can hold the truth about you without flinching, and deliver it without contempt.</p>
-    <p>The next step is a single conversation. No commitment beyond showing up. <em>Bring your score. Bring your pattern. Bring the answer from Question 1 in Part VII — the first thing you thought of.</em></p>
+    <p>The next step is a single conversation. No commitment beyond showing up. <em>Bring your pattern. Bring your ground. Bring the first thing you thought of and didn&rsquo;t write down.</em></p>
   </div>
 
   <!-- Booking CTA -->
   <div class="book-cta-block">
-    <a href="TODO_BOOKING_URL" class="btn-primary" target="_blank" rel="noopener">Book a Session →</a>
-    <p class="book-cta-note">One conversation. No pressure beyond showing up honest.</p>
-  </div>
-
-  <!-- Booking embed (optional) -->
-  <div class="booking-embed-container" id="booking-embed-container">
-    <!-- Paste your Calendly / TidyCal embed here and remove the placeholder below -->
-    <p class="booking-embed-placeholder">Booking calendar loads here</p>
+    <a href="../../coaching.html#apply" class="btn-primary">Say What&rsquo;s Actually Going On →</a>
+    <p class="book-cta-note">One conversation with me. No pitch. No pressure beyond showing up honest.</p>
   </div>
 
   <div class="divider-with-label"><span>or</span></div>
@@ -179,11 +173,11 @@
     <span class="community-label">The Vincere Society</span>
     <h2 class="community-heading">The room where men do this work together.</h2>
     <p class="community-body">
-      The Break Point is one instrument inside a larger formation. The Vincere Society is where men who've done the audit — and decided to act on it — gather to do the ongoing work: frameworks, accountability, and the kind of honest company that makes the inner life survivable.
+      The Break Point is one instrument inside a larger formation. The Vincere Society is being built for men who've done the audit — and decided to act on it. Accountability, formation, and the kind of honest company that makes the inner life survivable. The Letter is the door; you're already through it.
       <br><br>
       <strong>Formation first. Everything else second.</strong>
     </p>
-    <a href="TODO_VINCERE_SOCIETY_URL" class="btn-secondary" target="_blank" rel="noopener">Enter The Vincere Society →</a>
+    <a href="../../society/" class="btn-secondary">The Vincere Society →</a>
   </div>
 
   <!-- Vincere footer mark -->
@@ -211,7 +205,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (firstName) {
     document.getElementById('book-confirm').textContent =
-      `Your full report is on its way to ${firstName}'s inbox.`;
+      `${firstName}, your field report is on its way to your inbox.`;
   }
 
   if (raw) {
@@ -219,7 +213,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const d = JSON.parse(raw);
       const callout = document.getElementById('result-callout');
       const text = document.getElementById('result-callout-text');
-      text.innerHTML = `You scored <strong>${d.shameLoad}/200</strong>. Your pattern is <strong>THE ${d.primaryPattern}</strong>. Bring both.`;
+      text.innerHTML = d.mode === 'fast' ? `You're <strong>THE ${d.primaryPattern}</strong>, standing on <strong>${(d.ground||'').replace('_',' ')}</strong>. Bring both.` : `You scored <strong>${d.shameLoad}/200</strong>. Your pattern is <strong>THE ${d.primaryPattern}</strong>. Bring both.`;
       callout.style.display = 'block';
     } catch(e) {}
   }

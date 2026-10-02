@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Break Point — A Vincere OS Shame Audit | Matt Vincent Walker</title>
-  <meta name="description" content="Every man breaks somewhere. The Break Point is a Vincere OS shame audit for men — 7 parts, scored, honest. From The Vincere Society.">
+  <title>The Break Point — Where You'll Break, and What You're Standing On | Matt Vincent Walker</title>
+  <meta name="description" content="Every man breaks somewhere. Fifteen honest answers, three minutes: your pattern under pressure, the false ground underneath it, and your first move — in a personal field report.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://mattvincentwalker.com/break-point/">
   <meta property="og:title" content="The Break Point — A Vincere OS Shame Audit">
@@ -299,13 +299,36 @@
       .scale-label { display: none; }
       .scale-btn { min-height: 48px; }
     }
+
+    /* ── FAST PATH additions ── */
+    .verdict-wrap { max-width: 760px; margin: 0 auto; padding: 120px 24px 80px; }
+    .verdict-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); margin-bottom: 28px; }
+    .verdict-line { font-family: var(--font-display); font-size: clamp(2rem, 4.6vw, 3.6rem); font-weight: 300; line-height: 1.15; color: var(--white); margin-bottom: 36px; }
+    .verdict-line em { font-style: italic; color: var(--amber); }
+    .verdict-block { border-top: 1px solid rgba(74,70,67,0.3); padding-top: 28px; margin-top: 36px; }
+    .verdict-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim); margin-bottom: 12px; }
+    .verdict-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; color: var(--cream); margin-bottom: 14px; }
+    .verdict-body p { font-size: 15.5px; line-height: 1.8; color: var(--light); margin-bottom: 14px; font-weight: 300; }
+    .verdict-body strong { color: var(--white); font-weight: 500; }
+    .verdict-body em { color: var(--cream); }
+    .verdict-locked { border: 1px dashed rgba(200,147,90,0.35); padding: 22px 24px; margin-top: 18px; font-size: 14px; color: var(--warm-gray); line-height: 1.7; }
+    .gate { margin-top: 56px; background: var(--charcoal); border: 1px solid var(--stone); padding: 44px 36px; }
+    .gate h2 { font-family: var(--font-display); font-size: 1.9rem; font-weight: 400; color: var(--white); margin-bottom: 14px; line-height: 1.2; }
+    .gate p { font-size: 14.5px; color: var(--warm-gray); line-height: 1.75; margin-bottom: 22px; font-weight: 300; }
+    .gate .form-row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; margin-bottom: 12px; }
+    .gate .form-input { background: var(--stone); border: 1px solid var(--ash); padding: 14px 18px; color: var(--white); font-family: var(--font-body); font-size: 14px; outline: none; width: 100%; }
+    .gate .form-input:focus { border-color: var(--amber-dim); }
+    .gate .form-error { display: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; color: var(--amber); margin: 10px 0 0; }
+    .gate .form-error.visible { display: block; }
+    .gate .form-privacy { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin: 16px 0 0; line-height: 1.8; }
+    @media (max-width: 640px) { .gate { padding: 32px 20px; } .gate .form-row { grid-template-columns: 1fr; } }
   </style>
+
 </head>
 <body>
 
 <div id="progress-rail"><div id="progress-fill"></div></div>
 
-<!-- ═══ NAV ═══ -->
 <nav>
   <div class="nav-logo">
     <a href="../index.html">
@@ -327,32 +350,22 @@
 
 <!-- ══ INTRO ══ -->
 <div id="screen-intro">
-
   <div class="bp-hero">
-    <p class="bp-eyebrow">The Vincere Society</p>
-    <h1 class="bp-title">THE BREAK<br>POINT</h1>
-    <p class="bp-subtitle">A Vincere OS Shame Audit for Men</p>
-    <p class="bp-tagline"><em>Every man breaks somewhere. This tells you where — before the pressure does.</em></p>
-    <button class="btn-primary" onclick="scrollToPreamble()">Begin the Audit</button>
-    <p class="bp-scroll-hint">↓ Read This First</p>
+    <p class="bp-eyebrow">The Break Point</p>
+    <h1 class="bp-title">WHERE YOU&rsquo;LL<br>BREAK</h1>
+    <p class="bp-subtitle">And what you&rsquo;re actually standing on.</p>
+    <p class="bp-tagline"><em>Every man breaks somewhere. Fifteen honest answers. Three minutes. This tells you where &mdash; before the pressure does.</em></p>
+    <button class="btn-primary" onclick="startQuiz()">Begin</button>
+    <p class="bp-scroll-hint">No result makes you look good. That&rsquo;s the point.</p>
   </div>
 
-  <div class="bp-preamble" id="preamble-start">
-    <p class="bp-eyebrow">Read This First — Or Don't Take the Quiz</p>
-
-    <p class="bp-opening">This is not a personality quiz.<br>There is no result that makes you look good.</p>
-
-    <p class="bp-body">This assessment is built on one premise: <strong>shame is a load-bearing failure in a man's operating system.</strong> You can out-earn it, out-train it, out-spiritualize it, and out-perform it — for a while. Then pressure arrives that exceeds your compensations, and you break exactly where the shame lives.</p>
-
-    <p class="bp-body">The men who break in their 40s didn't break in their 40s. They broke twenty years earlier and spent two decades building a life on top of the crack.</p>
-
-    <span class="bp-rules-label">Three Rules</span>
-
+  <div class="bp-preamble" id="preamble-start" style="padding-top:0;">
+    <span class="bp-rules-label">Two Rules</span>
     <div class="bp-rule-item">
       <span class="bp-rule-num">01</span>
       <div class="bp-rule-text">
-        <p class="bp-rule-title">Answer as you actually behave, not as you intend to behave.</p>
-        <p class="bp-rule-body">Your intentions are irrelevant to this instrument. Your last 90 days of actual conduct are the only admissible evidence.</p>
+        <p class="bp-rule-title">Answer as you actually behave, not as you intend to.</p>
+        <p class="bp-rule-body">Your last 90 days of conduct are the only admissible evidence.</p>
       </div>
     </div>
     <div class="bp-rule-item">
@@ -362,44 +375,18 @@
         <p class="bp-rule-body">The flattering answer is almost always the defended one.</p>
       </div>
     </div>
-    <div class="bp-rule-item">
-      <span class="bp-rule-num">03</span>
-      <div class="bp-rule-text">
-        <p class="bp-rule-title">Do not skip Part Seven.</p>
-        <p class="bp-rule-body">Men skip the written questions because writing it down makes it real. That instinct — <em>don't make it real</em> — is the exact thing we're auditing.</p>
-      </div>
-    </div>
-
-    <div class="bp-distinction">
-      <p class="bp-distinction-intro">One distinction before you start, because everything hangs on it:</p>
-
-      <div class="bp-distinction-item">
-        <span class="bp-distinction-tag">Guilt</span>
-        <p class="bp-distinction-quote">"I did something bad."</p>
-        <p class="bp-distinction-explanation">Guilt is <strong>data</strong>. It's correctable. It produces repair.</p>
-      </div>
-
-      <div class="bp-distinction-item">
-        <span class="bp-distinction-tag">Shame</span>
-        <p class="bp-distinction-quote">"I am something bad."</p>
-        <p class="bp-distinction-explanation">Shame is a <strong>verdict</strong>. It's not correctable by effort — which is why you've been trying so hard for so long and the feeling hasn't moved.</p>
-      </div>
-
-      <p class="bp-distinction-final">This quiz finds where the verdict is running your life — while you thought you were just <em>"being disciplined," "being a provider," or "being fine."</em></p>
-    </div>
-
-    <div style="text-align:center; margin-top: 64px;">
-      <button class="btn-primary" onclick="startQuiz()">I Understand — Begin the Audit</button>
-    </div>
+    <p class="bp-body" style="margin-top:36px;">What you get: your <strong>pattern</strong> &mdash; how you break under load &mdash; and your <strong>ground</strong> &mdash; the belief you&rsquo;re actually standing on when the pressure comes. Then a personal field report in your inbox with your first move. Men who want the full forty-statement audit can <a href="full/" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">take it here</a>.</p>
   </div>
-
-</div><!-- /screen-intro -->
+</div>
 
 <!-- ══ QUIZ ══ -->
 <div id="screen-quiz" style="display:none;">
-  <div class="quiz-wrap" id="quiz-container" data-roman="I">
-    <!-- Rendered by JS -->
-  </div>
+  <div class="quiz-wrap" id="quiz-container" data-roman="I"></div>
+</div>
+
+<!-- ══ VERDICT ══ -->
+<div id="screen-verdict" style="display:none;">
+  <div class="verdict-wrap" id="verdict-wrap"></div>
 </div>
 
 <footer>
@@ -413,390 +400,232 @@
 </footer>
 
 <script>
-// ═══════════════════════════════════════════════
-// QUIZ DATA — verbatim from the diagnostic document
-// ═══════════════════════════════════════════════
-const PARTS = [
-  {
-    num:1, roman:'I', title:'THE SHAME SIGNAL', subtitle:'Where failure fuses to identity', intro:null, type:'likert',
-    questions:[
-      {text:'When something I built fails, my first internal sentence is about what\'s wrong with <em>me</em>, not what went wrong with <em>it</em>.'},
-      {text:'I replay old failures — some of them years old — and feel the heat of them in my body like they happened this morning.'},
-      {text:'When someone criticizes my work, it takes me hours or days to separate the criticism from my worth.'},
-      {text:'There are moments from my past I have decided no one will ever know about.'},
-      {text:'I feel like a fraud who hasn\'t been found out yet, and success makes that feeling worse, not better.'},
-      {text:'When I apologize, I either grovel (too much) or defend (too little) — clean ownership without self-attack is rare for me.'},
-      {text:'I would rather be seen as angry, busy, or difficult than be seen as hurt.'},
-      {text:'Compliments make me uncomfortable. I deflect them, discount them, or immediately distrust the person giving them.'}
-    ]
-  },
-  {
-    num:2, roman:'II', title:'THE ARMOR CHECK', subtitle:'How you hide, and what the hiding costs',
-    intro:'Shame doesn\'t sit still. It arms itself. Brené Brown documented three shields men reach for — moving <strong>away</strong> (hide, withdraw, keep secrets), moving <strong>toward</strong> (please, appease, earn approval), and moving <strong>against</strong> (dominate, blame, use anger as anesthesia). You use all three. One of them is your primary weapon.',
-    type:'likert',
-    questions:[
-      {text:'When I\'m struggling, my instinct is to disappear — go quiet, get busy, stop returning texts — until I\'ve "handled it."'},
-      {text:'I have edited the truth about how I\'m actually doing — to my wife, my friends, or my mentor — within the last 30 days.'},
-      {text:'I say yes to things I resent saying yes to, because the momentary approval feels better than the conflict.'},
-      {text:'I perform a version of myself in rooms where the real version feels insufficient.'},
-      {text:'When I feel exposed or embarrassed, anger arrives within seconds — and it feels <em>better</em> than what it\'s covering.'},
-      {text:'I have made someone smaller — with sarcasm, criticism, or coldness — in a moment when I was actually feeling small myself.'},
-      {text:'My drive to achieve accelerates noticeably after moments of failure, rejection, or exposure.'},
-      {text:'If my hidden coping behaviors (what I scroll, drink, watch, eat, spend, or numb with at night) were projected on a screen in front of the men I respect, I would want to leave the room.'}
-    ]
-  },
-  {
-    num:3, roman:'III', title:'THE APPROVAL LEDGER', subtitle:'Whose voice is actually running you',
-    intro:'David Powlison asked the X-ray questions: not "do you have an idol?" but <em>what do you fear, what do you crave, and whose approval functions as oxygen?</em> Whatever answers those questions is what you actually worship — regardless of what you say you believe.',
-    type:'likert',
-    questions:[
-      {text:'There is a specific person — living or dead — whose imagined disapproval can still change my decisions.'},
-      {text:'I make choices based on how they\'ll be perceived before I evaluate whether they\'re right.'},
-      {text:'When I picture disappointing the people who believe in me, the feeling is closer to <em>dread</em> than to healthy responsibility.'},
-      {text:'My sense of being okay today rises and falls with metrics — revenue, followers, PRs, wins — more than I admit out loud.'},
-      {text:'I need to be needed. When no one requires anything of me, I feel unsettled rather than at rest.'},
-      {text:'I crave a moment of <em>arrival</em> — a level of success after which I\'ll finally feel like enough — and I\'ve been chasing it for years while it keeps moving.'},
-      {text:'I fear being ordinary more than I fear being wrong.'},
-      {text:'If I\'m honest, some of what I call "purpose" or "calling" is actually a shame-repayment plan — an attempt to earn back a verdict against me.'}
-    ]
-  },
-  {
-    num:4, roman:'IV', title:'THE OWNERSHIP AUDIT', subtitle:'Boundaries, or the absence of them',
-    intro:'Henry Cloud defines integrity as character equal to the demands of reality. Boundaries define what you own: your choices, your consequences, your yard. Shame scrambles ownership in both directions — you carry loads that were never yours, and you drop loads that were always yours.',
-    type:'likert',
-    questions:[
-      {text:'I carry responsibility for other people\'s emotions, outcomes, or failures that were never mine to carry.'},
-      {text:'I avoid necessary confrontations — with clients, family, or partners — long past the point where avoidance is costing me.'},
-      {text:'There is a "necessary ending" in my life right now — a project, relationship, commitment, or dead venture — that I know needs to end, and I have not ended it.'},
-      {text:'I say "it\'s fine" when it is not fine, and I\'ve done it so long that I sometimes don\'t know what I actually feel.'},
-      {text:'When something goes wrong that IS my fault, I reach for context, excuses, or blame before I reach for ownership.'},
-      {text:'I confuse being harsh with myself for holding myself accountable — my self-talk after failure is language I would never permit anyone to use on my son.'},
-      {text:'My commitments exceed my capacity, and I keep adding more because saying no feels like a character flaw.'},
-      {text:'I let people cross lines with me — my time, my dignity, my money — and then punish them silently instead of addressing it directly.'}
-    ]
-  },
-  {
-    num:5, roman:'V', title:'THE ISOLATION INDEX', subtitle:'Who actually knows you',
-    intro:'John Townsend\'s research is unambiguous: character does not grow in isolation. Grace and truth over time, delivered through <em>people</em>, is the only mechanism that changes men. Shame\'s first and most effective move is to convince you that you are the exception — that you\'ll handle it alone. Isolation is not a personality trait. It is a symptom.',
-    type:'likert',
-    questions:[
-      {text:'No living person knows the full, unedited truth about my inner life right now.'},
-      {text:'When I hit a genuine crisis, my instinct is to tell people <em>after</em> I\'ve resolved it — I present outcomes, never open wounds.'},
-      {text:'My friendships operate at the level of logistics, sports, and business — men I like, but who couldn\'t name my deepest fear.'},
-      {text:'I am the strong one in every relationship I\'m in, and I have arranged my life so that no other role is available to me.'},
-      {text:'I confuse my wife knowing my <em>schedule</em> with my wife knowing <em>me</em>.'},
-      {text:'Asking for help feels like withdrawing from an account I\'m not sure has funds — like I\'ll owe something I can\'t repay.'},
-      {text:'I have felt profoundly alone in a room full of people who love me — recently.'},
-      {text:'If I broke down tomorrow, I genuinely do not know who I would call first, and the question itself makes me uncomfortable.'}
-    ]
-  },
-  {
-    num:6, roman:'VI', title:'THE PRESSURE SCENARIOS', subtitle:'How you break: your Achievement Pattern under load',
-    intro:'Vincere OS identifies four patterns men default to when pressure exceeds capacity. These aren\'t personality types — they\'re <strong>failure signatures</strong>. Each one is a shame-management strategy that masquerades as a strength right up until it detonates.<br><br>For each scenario, choose the answer closest to what you <em>actually do</em> — not what you\'d coach someone else to do.',
-    type:'scenarios',
-    scenarios:[
-      {
-        prompt:'A project you staked your reputation on is publicly falling apart. Your first 48 hours look like:',
-        options:{A:'I immediately launch the next thing. Momentum is the answer. Standing still with this is not an option.',B:'I work around the clock to fix it personally — I don\'t delegate the rescue, I <em>am</em> the rescue.',C:'I go quiet. I minimize the stakes to others and to myself: "It wasn\'t that important anyway."',D:'I find who or what is responsible and I go at it hard — the vendor, the market, the partner, the critic.'}
-      },
-      {
-        prompt:'Someone you respect gives you direct, accurate criticism in front of others:',
-        options:{A:'I pivot fast — change the subject to what I\'m building next, where I\'m strong.',B:'I over-correct instantly and publicly, working overtime to repair how I\'m seen.',C:'I take it politely, then withdraw from that person and that room — sometimes for good.',D:'I counterattack. Their flaws, their record, their tone. The best defense has never been defense.'}
-      },
-      {
-        prompt:'Your marriage (or closest relationship) hits a cold stretch:',
-        options:{A:'I bury myself in the business. I tell myself I\'m providing. The distance is "a season."',B:'I try to fix her — solve the feelings, schedule the date nights, engineer the repair — without ever getting honest about my own contribution.',C:'I match the coldness. If she\'s distant, I can be more distant. I can outlast anyone.',D:'Small things become fights. The dishwasher, the tone, the schedule. Everything is suddenly a hill.'}
-      },
-      {
-        prompt:'You fail at something everyone watched you attempt:',
-        options:{A:'Announce the next venture within days. The story must keep moving.',B:'Personally make it right for every person affected, at unsustainable cost to myself.',C:'Decide the arena itself was beneath me and quietly exit it forever.',D:'Build a case for why the failure wasn\'t a real failure — and fight anyone who says otherwise.'}
-      },
-      {
-        prompt:'It\'s 11:40pm. The house is quiet. The feeling you\'ve outrun all day catches up. You:',
-        options:{A:'Open the laptop. There\'s always work. The grind is the most respectable anesthetic ever invented.',B:'Mentally cycle through everyone who might be upset with me and draft the repairs.',C:'Scroll, stream, snack, numb — anything that lowers the volume until sleep takes it.',D:'Rehearse arguments. Replay conflicts. Win fights in my head that ended years ago.'}
-      },
-      {
-        prompt:'A younger man asks you, sincerely: "How are you actually doing?"',
-        options:{A:'I give him the vision. The roadmap. Where we\'re headed. (Notice: that wasn\'t the question.)',B:'I flip it — within 90 seconds we\'re talking about <em>his</em> life and how I can help.',C:'"Good, man. Busy. You know how it is." Full stop. Wall intact.',D:'I\'m honest about frustrations — but only the ones where I\'m the wronged party.'}
-      },
-      {
-        prompt:'You\'re forced into two weeks of genuine rest. No work possible. By day four:',
-        options:{A:'I\'ve invented work. New plans, new projects, "just thinking on paper." I cannot not build.',B:'I\'ve found people to serve, problems to manage, needs to meet. Rest becomes a service opportunity.',C:'I\'ve gone flat. Not rested — <em>dimmed</em>. Low motivation, low presence, vaguely gone.',D:'I\'m irritable. Everyone around me can feel the static coming off me.'}
-      },
-      {
-        prompt:'The thought "you\'re not enough" surfaces with full force. Your system\'s automatic response:',
-        options:{A:'<em>Then do more.</em> Achievement is the only argument shame has ever pretended to listen to.',B:'<em>Then be more for others.</em> If I\'m indispensable, the verdict can\'t be true.',C:'<em>Then want less.</em> If I shrink the ambition, I shrink the exposure.',D:'<em>Then someone will pay.</em> The verdict gets converted to voltage and discharged at a target.'}
-      }
-    ]
-  },
-  {
-    num:7, roman:'VII', title:'THE NO-EXIT QUESTIONS', subtitle:'Written. By hand. No exceptions.',
-    intro:'You\'ve been scoring numbers. Numbers are still a hiding place. These require sentences, and sentences require the truth. Powlison built questions like these to X-ray the heart. Write your answers where you can\'t delete them.',
-    type:'written',
-    questions:[
-      {text:'What is the thing about you that, if the men you most respect knew it, you believe would change how they see you? <em>(You thought of it before you finished the sentence. Write that one — not the second, safer one you\'re negotiating toward right now.)</em>'},
-      {text:'Whose voice delivers the verdict when you fail? Name the person. Quote the sentence. <em>(Most men are still standing trial in a courtroom that adjourned twenty years ago.)</em>'},
-      {text:'What are you building right now — company, physique, reputation, ministry — that is at least partly a case for the defense? Finish this sentence honestly: <em>"If ______ succeeds, it will finally prove that I am not ______."</em>'},
-      {text:'What is the necessary ending you are refusing to execute, and what is the real reason? Not the logistical reason. The one about what ending it would say about you.'},
-      {text:'When did you last cry — actually — and who saw it? If the answer is "years" and "no one," don\'t write an explanation. Write what you\'re afraid would happen if someone did.'},
-      {text:'Read your six answers back. Now the final question: <strong>Who will see this page within 72 hours?</strong> Name the man. If your reflex is "no one needs to see this — the insight was the point": that reflex is shame, speaking in your voice, protecting itself. Insight that stays private changes nothing. That\'s not a motivational line; it\'s the mechanism. Shame\'s entire power supply is secrecy. You cut the power by being fully known by someone safe — a real friend, a mentor, a counselor, a pastor — and there is no workaround, no matter how disciplined you are.'}
-    ]
-  }
+// ═══ PART I — THE PRESSURE SCENARIOS (pattern) ═══
+const SCENARIOS = [
+  { prompt:'A project you staked your reputation on is publicly falling apart. Your first 48 hours look like:',
+    options:{A:'I immediately launch the next thing. Momentum is the answer. Standing still with this is not an option.',B:'I work around the clock to fix it personally — I don\'t delegate the rescue, I <em>am</em> the rescue.',C:'I go quiet. I minimize the stakes to others and to myself: "It wasn\'t that important anyway."',D:'I find who or what is responsible and I go at it hard — the vendor, the market, the partner, the critic.'} },
+  { prompt:'Someone you respect gives you direct, accurate criticism in front of others:',
+    options:{A:'I pivot fast — change the subject to what I\'m building next, where I\'m strong.',B:'I over-correct instantly and publicly, working overtime to repair how I\'m seen.',C:'I take it politely, then withdraw from that person and that room — sometimes for good.',D:'I counterattack. Their flaws, their record, their tone. The best defense has never been defense.'} },
+  { prompt:'Your marriage (or closest relationship) hits a cold stretch:',
+    options:{A:'I bury myself in the business. I tell myself I\'m providing. The distance is "a season."',B:'I try to fix her — solve the feelings, schedule the date nights, engineer the repair — without ever getting honest about my own contribution.',C:'I match the coldness. If she\'s distant, I can be more distant. I can outlast anyone.',D:'Small things become fights. The dishwasher, the tone, the schedule. Everything is suddenly a hill.'} },
+  { prompt:'You fail at something everyone watched you attempt:',
+    options:{A:'Announce the next venture within days. The story must keep moving.',B:'Personally make it right for every person affected, at unsustainable cost to myself.',C:'Decide the arena itself was beneath me and quietly exit it forever.',D:'Build a case for why the failure wasn\'t a real failure — and fight anyone who says otherwise.'} },
+  { prompt:'It\'s 11:40pm. The house is quiet. The feeling you\'ve outrun all day catches up. You:',
+    options:{A:'Open the laptop. There\'s always work. The grind is the most respectable anesthetic ever invented.',B:'Mentally cycle through everyone who might be upset with me and draft the repairs.',C:'Scroll, stream, snack, numb — anything that lowers the volume until sleep takes it.',D:'Rehearse arguments. Replay conflicts. Win fights in my head that ended years ago.'} },
+  { prompt:'A younger man asks you, sincerely: "How are you actually doing?"',
+    options:{A:'I give him the vision. The roadmap. Where we\'re headed. (Notice: that wasn\'t the question.)',B:'I flip it — within 90 seconds we\'re talking about <em>his</em> life and how I can help.',C:'"Good, man. Busy. You know how it is." Full stop. Wall intact.',D:'I\'m honest about frustrations — but only the ones where I\'m the wronged party.'} },
+  { prompt:'You\'re forced into two weeks of genuine rest. No work possible. By day four:',
+    options:{A:'I\'ve invented work. New plans, new projects, "just thinking on paper." I cannot not build.',B:'I\'ve found people to serve, problems to manage, needs to meet. Rest becomes a service opportunity.',C:'I\'ve gone flat. Not rested — <em>dimmed</em>. Low motivation, low presence, vaguely gone.',D:'I\'m irritable. Everyone around me can feel the static coming off me.'} },
+  { prompt:'The thought "you\'re not enough" surfaces with full force. Your system\'s automatic response:',
+    options:{A:'<em>Then do more.</em> Achievement is the only argument shame has ever pretended to listen to.',B:'<em>Then be more for others.</em> If I\'m indispensable, the verdict can\'t be true.',C:'<em>Then want less.</em> If I shrink the ambition, I shrink the exposure.',D:'<em>Then someone will pay.</em> The verdict gets converted to voltage and discharged at a target.'} }
 ];
+const PATTERN_OF = {A:'RUNNER',B:'FIXER',C:'FADER',D:'FIGHTER'};
 
+// ═══ PART II — THE GROUND (what you're actually standing on) ═══
+const GROUND_Q = [
+  { key:'PERFORMANCE',  text:'When I\'m not winning, I don\'t feel like I have the right to rest.' },
+  { key:'APPROVAL',     text:'I can feel my mood move on what someone thinks of me — before I\'ve decided what <em>I</em> think.' },
+  { key:'CONTROL',      text:'When I can\'t manage how something turns out, I get anxious out of all proportion to what\'s actually at stake.' },
+  { key:'COMPETENCE',   text:'Being wrong in front of people feels like something much worse than being wrong.' },
+  { key:'PRODUCTIVITY', text:'A day with nothing checked off feels like a day I didn\'t earn.' },
+  { key:'BEING_NEEDED', text:'If nobody needed me for a week, I\'m honestly not sure who I\'d be.' },
+  { key:'BEING_RIGHT',  text:'I\'d rather win the argument than stay close to the person.' }
+];
 const SCALE_LABELS = ['Never','Rarely','Sometimes','Often','Almost Always'];
+// tie-breaks: which grounds a pattern tends to stand on
+const AFFINITY = { RUNNER:['PRODUCTIVITY','PERFORMANCE'], FIXER:['BEING_NEEDED','APPROVAL'], FADER:['APPROVAL','COMPETENCE'], FIGHTER:['BEING_RIGHT','CONTROL'] };
 
-// ── STATE ──
-let currentPart = 0;
-let answers = [
-  new Array(8).fill(null), new Array(8).fill(null),
-  new Array(8).fill(null), new Array(8).fill(null),
-  new Array(8).fill(null), new Array(8).fill(null)
-  // Part 7: never stored — privacy by architecture
-];
-let p6SelectionOrder = [];
+const PATTERNS = {
+  RUNNER:  { name:'The Runner',  sub:'Velocity as anesthesia',
+    teaser:`Your armor is <strong>forward momentum</strong>. When shame loads, you build. When exposure arrives, you pivot. Movement is the most sophisticated anesthetic ever invented for this pattern, because it looks identical to ambition from the outside. The tell: your pace <em>accelerates after failure</em>.`,
+    breaks:`The Runner's break point is not a crash. It's a quiet Wednesday when there's nothing left to run toward — and the thing he's been running from has been sitting in the house the whole time.` },
+  FIXER:   { name:'The Fixer',   sub:'Indispensability as immunity',
+    teaser:`Your armor is <strong>service</strong> — not as love, as a system for keeping the verdict at bay. If you're solving problems and carrying people, you're not the problem; you're the solution, and solutions don't get put on trial. The tell: you flip the conversation to <em>their</em> needs within 90 seconds.`,
+    breaks:`The Fixer breaks when the person he's been holding up finally stands on their own — or when someone looks past the helping and asks what he actually needs. He hasn't thought about it in years.` },
+  FADER:   { name:'The Fader',   sub:'Smallness as safety',
+    teaser:`Your armor is <strong>disappearance</strong> — the slow, calibrated shrinking of the target. Want less, risk less, expect less, and you can fail less visibly. The tell: your ambitions have become more "realistic" in ways that track precisely to your exposures. The dreams are still there. They live behind glass now.`,
+    breaks:`The Fader breaks quietly. Not a blow-up — a dimming. A morning when the low-grade gone-ness has been present long enough that it's hard to remember what the light felt like.` },
+  FIGHTER: { name:'The Fighter', sub:'Offense as self-defense',
+    teaser:`Your armor is <strong>voltage</strong>. Shame isn't metabolized — it's converted. To anger, to criticism, to the electricity that makes rooms go quiet. The tell: your anger arrives faster than your hurt, and you've never fully lost an argument, even when you were wrong.`,
+    breaks:`The Fighter breaks when someone he needed to keep finally doesn't come back. Not from a fight — from a quiet decision. The violence of a closed door is particular to this pattern.` }
+};
+const GROUNDS = {
+  PERFORMANCE:  { name:'Performance',  belief:'I am what I produce.',               tell:'Burnout you call drive. Exhaustion you call discipline. Pressure finds you the day the results stop.' },
+  APPROVAL:     { name:'Approval',     belief:'I am what others think of me.',      tell:'Boundaries collapse. Yes blurs into resentment. Pressure finds you when the room turns.' },
+  CONTROL:      { name:'Control',      belief:'I am safe when I manage outcomes.',  tell:'Anxiety, micromanagement, more information than you can act on. Pressure finds you where the outcome is out of your hands.' },
+  COMPETENCE:   { name:'Competence',   belief:'I am my expertise.',                 tell:'Imposter dread. Defensive posturing. Pressure finds you in the room where you don\'t know — and can\'t admit it.' },
+  PRODUCTIVITY: { name:'Productivity', belief:'I am my output.',                    tell:'Workaholism. Guilt when you rest. Pressure finds you anywhere nothing can be done.' },
+  BEING_NEEDED: { name:'Being Needed', belief:'I am my usefulness.',                tell:'Over-functioning, carrying what isn\'t yours. Pressure finds you when the people you hold up stand on their own.' },
+  BEING_RIGHT:  { name:'Being Right',  belief:'I am my correctness.',               tell:'Trouble receiving correction. An isolation that looks like conviction. Pressure finds you when being right costs you someone.' }
+};
 
-function saveProgress() {
-  sessionStorage.setItem('breakpoint_progress', JSON.stringify({
-    currentPart, answers: answers.slice(0,6), p6SelectionOrder
-  }));
-}
-function loadProgress() {
-  const s = sessionStorage.getItem('breakpoint_progress');
-  if (!s) return false;
-  try {
-    const d = JSON.parse(s);
-    if (d.currentPart >= 1) {
-      currentPart = d.currentPart;
-      answers = d.answers.concat([new Array(8).fill(null)]);
-      p6SelectionOrder = d.p6SelectionOrder || [];
-      return true;
-    }
-  } catch(e) {}
-  return false;
-}
+// ─── STATE ───
+let part = 1;
+let scen = new Array(SCENARIOS.length).fill(null), scenOrder = [];
+let ground = new Array(GROUND_Q.length).fill(null);
 
-// ── NAV ──
-function scrollToPreamble() {
-  document.getElementById('preamble-start').scrollIntoView({ behavior:'smooth' });
-}
 function startQuiz() {
-  loadProgress();
   document.getElementById('screen-intro').style.display = 'none';
   document.getElementById('screen-quiz').style.display = 'block';
   document.querySelector('footer').style.display = 'none';
   document.getElementById('progress-rail').classList.add('visible');
-  if (currentPart < 1) currentPart = 1;
-  renderPart(currentPart);
-  window.scrollTo({ top:0 });
+  renderPart(1); window.scrollTo({ top: 0 });
 }
+function progress(p) { document.getElementById('progress-fill').style.width = (p === 1 ? 10 : p === 2 ? 55 : 100) + '%'; }
 
-// ── PROGRESS ──
-function updateProgress(n) {
-  document.getElementById('progress-fill').style.width = Math.round(((n-1)/7)*100)+'%';
-}
-
-// ── RENDER ──
 function renderPart(n) {
-  const part = PARTS[n-1];
+  part = n; progress(n);
   const c = document.getElementById('quiz-container');
-  c.setAttribute('data-roman', part.roman);
-  updateProgress(n);
-  window.scrollTo({ top:0 });
-
-  let html = `
-    <p class="part-indicator">Part ${part.roman} of VII — ${part.title}</p>
-    <h2 class="part-title">${part.title}</h2>
-    <p class="part-subtitle">${part.subtitle}</p>
-  `;
-
-  if (part.type === 'likert') {
-    html += part.intro
-      ? `<div class="part-intro">${part.intro}</div>`
-      : `<hr class="divider" style="margin:24px 0 40px;">`;
-    part.questions.forEach((q, qi) => {
-      const gn = (n-1)*8 + qi + 1;
-      html += `
-        <div class="question-block" id="qb-${n}-${qi}">
-          <span class="q-num">${gn}.</span>
-          <p class="q-text">${q.text}</p>
-          <div class="scale-row" id="sr-${n}-${qi}">
-            ${[1,2,3,4,5].map(v=>`
-              <button class="scale-btn" data-p="${n}" data-qi="${qi}" data-v="${v}" onclick="pickLikert(this)">
-                <span class="scale-num">${v}</span>
-                <span class="scale-label">${SCALE_LABELS[v-1]}</span>
-              </button>
-            `).join('')}
-          </div>
-        </div>`;
+  c.setAttribute('data-roman', n === 1 ? 'I' : 'II');
+  window.scrollTo({ top: 0 });
+  let html = '';
+  if (n === 1) {
+    html += `<p class="part-indicator">Part I of II — Under Pressure</p>
+      <h2 class="part-title">HOW YOU BREAK</h2>
+      <p class="part-subtitle">Eight scenarios. Choose what you <em>actually do</em> — not what you'd coach another man to do.</p>
+      <div class="part-intro-box">Four patterns men default to when pressure exceeds capacity. They aren't personality types — they're <strong>failure signatures</strong>. Each one is a shame-management strategy that masquerades as a strength right up until it detonates.</div>`;
+    SCENARIOS.forEach((s, si) => {
+      html += `<div class="scenario-block" id="sb-${si}">
+        <span class="scenario-num">${si+1} of ${SCENARIOS.length}</span>
+        <p class="scenario-prompt">${s.prompt}</p>
+        <div class="scenario-options">${Object.entries(s.options).map(([l,t]) => `
+          <button class="option-card${scen[si]===l?' selected':''}" data-si="${si}" data-l="${l}" onclick="pickScenario(this)">
+            <span class="option-letter">${l}</span><span class="option-text">${t}</span></button>`).join('')}
+        </div></div>`;
     });
-  } else if (part.type === 'scenarios') {
-    html += `<div class="part-intro-box">${part.intro}</div>`;
-    part.scenarios.forEach((s, si) => {
-      html += `
-        <div class="scenario-block" id="sb-${si}">
-          <span class="scenario-num">S${si+1} of 8</span>
-          <p class="scenario-prompt">${s.prompt}</p>
-          <div class="scenario-options">
-            ${Object.entries(s.options).map(([l,t])=>`
-              <button class="option-card" data-si="${si}" data-l="${l}" onclick="pickScenario(this)">
-                <span class="option-letter">${l}</span>
-                <span class="option-text">${t}</span>
-              </button>
-            `).join('')}
-          </div>
-        </div>`;
-    });
+    html += `<div class="quiz-nav"><p class="quiz-error" id="quiz-error"></p><button class="btn-primary" onclick="advance()" style="width:100%;">Continue to Part II</button></div>`;
   } else {
-    html += `<div class="part-intro">${part.intro}</div>`;
-    html += `<div class="written-notice"><strong>Your written answers never leave this device.</strong> Nothing you type here is stored, transmitted, or included in any report. Consider writing by hand first.</div>`;
-    part.questions.forEach((q, qi) => {
-      html += `
-        <div class="written-block">
-          <span class="written-q-num">Q${qi+1}</span>
-          <p class="written-q-text">${q.text}</p>
-          <textarea class="written-textarea" rows="4" placeholder="Write here, or in a notebook." autocomplete="off" data-private="true"></textarea>
-          <p class="written-hand-note">Consider writing this by hand first.</p>
-        </div>`;
+    html += `<p class="part-indicator">Part II of II — The Ground</p>
+      <h2 class="part-title">WHAT YOU'RE STANDING ON</h2>
+      <p class="part-subtitle">Seven statements. Your last ninety days, not your intentions.</p>
+      <div class="part-intro">Most men never chose their ground. They inherited it. Performance. Approval. Control. Competence. Productivity. Being needed. Being right. Those grounds work — until they don't. And when they fail, everything built on top of them shakes.</div>`;
+    GROUND_Q.forEach((q, qi) => {
+      html += `<div class="question-block" id="qb-${qi}">
+        <span class="q-num">${qi+1}.</span><p class="q-text">${q.text}</p>
+        <div class="scale-row" id="sr-${qi}">${[1,2,3,4,5].map(v => `
+          <button class="scale-btn${ground[qi]===v?' selected':''}" data-qi="${qi}" data-v="${v}" onclick="pickLikert(this)">
+            <span class="scale-num">${v}</span><span class="scale-label">${SCALE_LABELS[v-1]}</span></button>`).join('')}
+        </div></div>`;
     });
+    html += `<div class="quiz-nav"><p class="quiz-error" id="quiz-error"></p><button class="btn-primary" onclick="advance()" style="width:100%;">See Where You Break</button></div>`;
   }
-
-  const isLast = n === 7;
-  const nextLabel = isLast ? 'See Where You Break'
-    : n === 6 ? 'Continue to Part VII'
-    : `Continue to Part ${PARTS[n].roman}`;
-
-  html += `
-    <div class="quiz-nav">
-      <p class="quiz-error" id="quiz-error"></p>
-      <button class="btn-primary" onclick="advance()" style="width:100%;">${nextLabel}</button>
-    </div>`;
-
   c.innerHTML = html;
-  restoreAnswers(n);
-}
-
-// ── SELECTION ──
-function pickLikert(btn) {
-  const p = parseInt(btn.dataset.p), qi = parseInt(btn.dataset.qi), v = parseInt(btn.dataset.v);
-  document.getElementById(`sr-${p}-${qi}`).querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  const block = document.getElementById(`qb-${p}-${qi}`);
-  if (block) block.classList.remove('unanswered');
-  if (p <= 6) { answers[p-1][qi] = v; saveProgress(); }
 }
 function pickScenario(card) {
-  const si = parseInt(card.dataset.si), l = card.dataset.l;
+  const si = +card.dataset.si, l = card.dataset.l;
   document.getElementById(`sb-${si}`).querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-  card.classList.add('selected');
-  document.getElementById(`sb-${si}`).classList.remove('unanswered');
-  const prev = answers[5][si];
-  if (prev) { const i = p6SelectionOrder.lastIndexOf(prev); if(i>-1) p6SelectionOrder.splice(i,1); }
-  answers[5][si] = l;
-  p6SelectionOrder.push(l);
-  saveProgress();
+  card.classList.add('selected'); document.getElementById(`sb-${si}`).classList.remove('unanswered');
+  if (scen[si]) { const i = scenOrder.lastIndexOf(scen[si]); if (i > -1) scenOrder.splice(i, 1); }
+  scen[si] = l; scenOrder.push(l);
 }
-function restoreAnswers(n) {
-  if (n <= 5) {
-    answers[n-1].forEach((v, qi) => {
-      if (v !== null) {
-        const btn = document.querySelector(`.scale-btn[data-p="${n}"][data-qi="${qi}"][data-v="${v}"]`);
-        if (btn) btn.classList.add('selected');
-      }
-    });
-  } else if (n === 6) {
-    answers[5].forEach((l, si) => {
-      if (l !== null) {
-        const card = document.querySelector(`.option-card[data-si="${si}"][data-l="${l}"]`);
-        if (card) card.classList.add('selected');
-      }
-    });
-  }
+function pickLikert(btn) {
+  const qi = +btn.dataset.qi, v = +btn.dataset.v;
+  document.getElementById(`sr-${qi}`).querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected'); document.getElementById(`qb-${qi}`).classList.remove('unanswered');
+  ground[qi] = v;
 }
-
-// ── ADVANCE ──
 function advance() {
-  if (!validate()) return;
-  if (currentPart === 7) { score(); } else { currentPart++; renderPart(currentPart); saveProgress(); }
-}
-function validate() {
   const err = document.getElementById('quiz-error');
-  if (currentPart <= 5) {
-    const fi = answers[currentPart-1].indexOf(null);
-    if (fi !== -1) {
-      const b = document.getElementById(`qb-${currentPart}-${fi}`);
-      if (b) { b.classList.add('unanswered'); b.scrollIntoView({ behavior:'smooth', block:'center' }); }
-      err.textContent = 'Answer all statements before continuing.';
-      err.classList.add('visible'); return false;
-    }
-  } else if (currentPart === 6) {
-    const fi = answers[5].indexOf(null);
-    if (fi !== -1) {
-      const b = document.getElementById(`sb-${fi}`);
-      if (b) { b.classList.add('unanswered'); b.scrollIntoView({ behavior:'smooth', block:'center' }); }
-      err.textContent = 'Select a response for each scenario before continuing.';
-      err.classList.add('visible'); return false;
-    }
+  if (part === 1) {
+    const fi = scen.indexOf(null);
+    if (fi !== -1) { const b = document.getElementById(`sb-${fi}`); b.classList.add('unanswered'); b.scrollIntoView({ behavior:'smooth', block:'center' }); err.textContent = 'Choose a response for each scenario.'; err.classList.add('visible'); return; }
+    renderPart(2);
+  } else {
+    const fi = ground.indexOf(null);
+    if (fi !== -1) { const b = document.getElementById(`qb-${fi}`); b.classList.add('unanswered'); b.scrollIntoView({ behavior:'smooth', block:'center' }); err.textContent = 'Answer all seven before continuing.'; err.classList.add('visible'); return; }
+    score();
   }
-  err.classList.remove('visible');
-  return true;
 }
 
-// ── SCORING ENGINE ──
+// ─── SCORING ───
 function score() {
-  const p1 = answers[0].reduce((a,b)=>a+b,0), p2 = answers[1].reduce((a,b)=>a+b,0),
-        p3 = answers[2].reduce((a,b)=>a+b,0), p4 = answers[3].reduce((a,b)=>a+b,0),
-        p5 = answers[4].reduce((a,b)=>a+b,0);
-  const shameLoad = p1+p2+p3+p4+p5;
-
-  let band;
-  if      (shameLoad >= 160) band = 'CRITICAL LOAD';
-  else if (shameLoad >= 120) band = 'STRUCTURAL LOAD';
-  else if (shameLoad >= 80)  band = 'FUNCTIONAL LOAD';
-  else                       band = 'LIGHT LOAD';
-
-  const counts = {A:0,B:0,C:0,D:0};
-  answers[5].forEach(l => { if(l) counts[l]++; });
-  const MAP = {A:'RUNNER',B:'FIXER',C:'FADER',D:'FIGHTER'};
+  const counts = {A:0,B:0,C:0,D:0}; scen.forEach(l => counts[l]++);
   const letters = ['A','B','C','D'];
-  const max = Math.max(...letters.map(l=>counts[l]));
-  const top = letters.filter(l=>counts[l]===max);
-  let primaryLetter = top[0];
-  for (const s of p6SelectionOrder) { if(top.includes(s)){primaryLetter=s;break;} }
-  const primaryPattern = MAP[primaryLetter];
-
-  const rest = letters.filter(l=>l!==primaryLetter);
-  const sec = Math.max(...rest.map(l=>counts[l]));
-  const splitPattern = (max - sec) <= 2;
+  const max = Math.max(...letters.map(l => counts[l]));
+  const top = letters.filter(l => counts[l] === max);
+  let primaryLetter = top[0]; for (const s of scenOrder) if (top.includes(s)) { primaryLetter = s; break; }
+  const primaryPattern = PATTERN_OF[primaryLetter];
+  const rest = letters.filter(l => l !== primaryLetter);
+  const sec = Math.max(...rest.map(l => counts[l]));
   let secondaryPattern = null;
-  if (splitPattern) {
-    const secTop = rest.filter(l=>counts[l]===sec);
-    let sl = secTop[0];
-    for (const s of p6SelectionOrder) { if(secTop.includes(s)){sl=s;break;} }
-    secondaryPattern = MAP[sl];
-  }
+  if (max - sec <= 2) { const st = rest.filter(l => counts[l] === sec); let sl = st[0]; for (const s of scenOrder) if (st.includes(s)) { sl = s; break; } secondaryPattern = PATTERN_OF[sl]; }
 
-  // Breach: highest scoring part; tie → later; Part 5 outranks all
-  const scores = {1:p1,2:p2,3:p3,4:p4,5:p5};
-  const maxScore = Math.max(p1,p2,p3,p4,p5);
-  const tied = [1,2,3,4,5].filter(n=>scores[n]===maxScore);
-  const breach = tied.includes(5) ? 5 : Math.max(...tied);
+  const gmax = Math.max(...ground);
+  const gtop = GROUND_Q.map((q, i) => ground[i] === gmax ? q.key : null).filter(Boolean);
+  let g = gtop[0];
+  for (const k of AFFINITY[primaryPattern]) if (gtop.includes(k)) { g = k; break; }
+  const groundScores = {}; GROUND_Q.forEach((q, i) => groundScores[q.key] = ground[i]);
 
-  sessionStorage.setItem('breakpoint_results', JSON.stringify({
-    part1:p1, part2:p2, part3:p3, part4:p4, part5:p5,
-    shameLoad, band, patternCounts:counts, primaryPattern, secondaryPattern, splitPattern, breach
-  }));
-  sessionStorage.removeItem('breakpoint_progress');
-  window.location.href = '/break-point/results/';
+  const d = { mode:'fast', primaryPattern, secondaryPattern, ground: g, groundScores };
+  sessionStorage.setItem('breakpoint_fast', JSON.stringify(d));
+  renderVerdict(d);
 }
 
-// ── INIT ──
-window.addEventListener('load', () => {
-  const s = sessionStorage.getItem('breakpoint_progress');
-  if (s) { try { const d = JSON.parse(s); if(d.currentPart>=1) startQuiz(); } catch(e){} }
-});
+function renderVerdict(d) {
+  progress(3);
+  document.getElementById('screen-quiz').style.display = 'none';
+  document.getElementById('screen-verdict').style.display = 'block';
+  window.scrollTo({ top: 0 });
+  const P = PATTERNS[d.primaryPattern], G = GROUNDS[d.ground], S = d.secondaryPattern ? PATTERNS[d.secondaryPattern] : null;
+  document.getElementById('verdict-wrap').innerHTML = `
+    <p class="verdict-eyebrow">The Break Point &middot; Your Verdict</p>
+    <h1 class="verdict-line">You&rsquo;re <em>${P.name}</em>,<br>standing on <em>${G.name}</em>.</h1>
 
-// Debug: ?debug=SCORE,LETTER forces results page states (parsed on results page)
+    <div class="verdict-block">
+      <p class="verdict-label">Your pattern &middot; ${P.name}</p>
+      <p class="verdict-title">${P.sub}</p>
+      <div class="verdict-body"><p>${P.teaser}</p>${S ? `<p><strong>Split pattern:</strong> a close second — ${S.name}. They rotate. Both are load-bearing.</p>` : ''}</div>
+    </div>
+
+    <div class="verdict-block">
+      <p class="verdict-label">Your ground &middot; ${G.name}</p>
+      <p class="verdict-title">&ldquo;${G.belief}&rdquo;</p>
+      <div class="verdict-body"><p>${G.tell}</p><p>That&rsquo;s the thing you treat as most real when the pressure comes. Not what you say you believe. What you default to when the system is stressed.</p></div>
+    </div>
+
+    <div class="verdict-block">
+      <p class="verdict-label">In the field report</p>
+      <div class="verdict-locked">Where the pressure will find you. The full read on your pattern and your ground. <strong>Your first move</strong> &mdash; the one daily thing for ${P.name}. And the manual for your ground, The Grounding Protocol. In your inbox, with your name on it.</div>
+    </div>
+
+    <div class="gate">
+      <h2>Get your field report.</h2>
+      <p>First name and email. It&rsquo;s sent once, from me, and it&rsquo;s the only copy &mdash; this page won&rsquo;t be here when you come back.</p>
+      <form id="gate-form" onsubmit="submitGate(event)">
+        <div class="form-row">
+          <input type="text" id="f-first" class="form-input" placeholder="First name" required autocomplete="given-name">
+          <input type="email" id="f-email" class="form-input" placeholder="Email address" required autocomplete="email">
+        </div>
+        <button type="submit" class="btn-primary" id="gate-submit" style="width:100%;">Send My Field Report →</button>
+        <p class="form-error" id="gate-error"></p>
+        <p class="form-privacy">One letter a week after that &middot; No daily drip &middot; Unsubscribe anytime</p>
+      </form>
+    </div>`;
+}
+
+async function submitGate(e) {
+  e.preventDefault();
+  const btn = document.getElementById('gate-submit'), err = document.getElementById('gate-error');
+  const firstName = document.getElementById('f-first').value.trim(), email = document.getElementById('f-email').value.trim();
+  if (!firstName || !email) return;
+  btn.textContent = 'Sending…'; btn.disabled = true; err.classList.remove('visible');
+  const d = JSON.parse(sessionStorage.getItem('breakpoint_fast') || 'null'); if (!d) return;
+  try {
+    const res = await fetch('/.netlify/functions/break-point-report', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode:'fast', firstName, email, primaryPattern: d.primaryPattern, secondaryPattern: d.secondaryPattern, ground: d.ground })
+    });
+    const json = await res.json();
+    if (json.ok) {
+      sessionStorage.setItem('breakpoint_firstName', firstName);
+      sessionStorage.setItem('breakpoint_results', JSON.stringify({ primaryPattern: d.primaryPattern, ground: d.ground, mode:'fast' }));
+      window.location.href = '/break-point/book/';
+    } else throw new Error();
+  } catch {
+    btn.textContent = 'Send My Field Report →'; btn.disabled = false;
+    err.textContent = 'Something broke on our end — your verdict is still on this screen. Try again in a minute.'; err.classList.add('visible');
+  }
+}
 </script>
 <script src="../js/main.js"></script>
 </body>
