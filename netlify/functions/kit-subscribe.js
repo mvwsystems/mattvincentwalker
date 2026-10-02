@@ -128,7 +128,7 @@ export const handler = async (event) => {
       const tagRes = await fetch(`${KIT_BASE}/tags/${KIT_TAG_ID}/subscribers`, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ subscriber_id: subscriberId })
+        body: JSON.stringify({ email_address: email })
       });
       if (!tagRes.ok) {
         const errBody = await tagRes.text();
@@ -148,7 +148,7 @@ export const handler = async (event) => {
       const patRes = await fetch(`${KIT_BASE}/tags/${patternTagId}/subscribers`, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ subscriber_id: subscriberId })
+        body: JSON.stringify({ email_address: email })
       });
       if (!patRes.ok) {
         const errBody = await patRes.text();

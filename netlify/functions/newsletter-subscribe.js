@@ -50,43 +50,46 @@ export const handler = async (event) => {
     // Apply general newsletter tag if configured
     const tagId = process.env.KIT_NEWSLETTER_TAG_ID;
     if (tagId && subscriberId) {
-      await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers`, {
+      const r = await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Kit-Api-Key': apiKey,
           'Authorization': `Bearer ${apiKey}`
         },
-        body: JSON.stringify({ subscriber_id: subscriberId })
+        body: JSON.stringify({ email_address: String(email).trim() })
       });
+      if (!r.ok) console.error('[newsletter-subscribe] Kit tags add failed:', r.status, (await r.text()).slice(0, 200));
     }
 
     // Society door: add the society tag so we can see who came in that way
     const societyTagId = process.env.KIT_SOCIETY_TAG_ID;
     if (source === 'society' && societyTagId && subscriberId) {
-      await fetch(`https://api.kit.com/v4/tags/${societyTagId}/subscribers`, {
+      const r = await fetch(`https://api.kit.com/v4/tags/${societyTagId}/subscribers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Kit-Api-Key': apiKey,
           'Authorization': `Bearer ${apiKey}`
         },
-        body: JSON.stringify({ subscriber_id: subscriberId })
+        body: JSON.stringify({ email_address: String(email).trim() })
       });
+      if (!r.ok) console.error('[newsletter-subscribe] Kit tags add failed:', r.status, (await r.text()).slice(0, 200));
     }
 
     // Add to the welcome sequence (sends The Grounding Protocol) if configured
     const seqId = process.env.KIT_WELCOME_SEQUENCE_ID;
     if (seqId && subscriberId) {
-      await fetch(`https://api.kit.com/v4/sequences/${seqId}/subscribers`, {
+      const r = await fetch(`https://api.kit.com/v4/sequences/${seqId}/subscribers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Kit-Api-Key': apiKey,
           'Authorization': `Bearer ${apiKey}`
         },
-        body: JSON.stringify({ subscriber_id: subscriberId })
+        body: JSON.stringify({ email_address: String(email).trim() })
       });
+      if (!r.ok) console.error('[newsletter-subscribe] Kit sequences add failed:', r.status, (await r.text()).slice(0, 200));
     }
   } catch (err) {
     console.error('[newsletter-subscribe] Kit API error:', err.message || err);
