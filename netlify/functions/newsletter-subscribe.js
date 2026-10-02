@@ -1,5 +1,5 @@
 // General newsletter subscribe handler for mattvincentwalker.com
-// Receives: { email }
+// Receives: { email, source? }  — source 'society' also applies KIT_SOCIETY_TAG_ID
 // Actions: create/update Kit subscriber, apply KIT_NEWSLETTER_TAG_ID if set,
 //          add to KIT_WELCOME_SEQUENCE_ID if set (delivers The Grounding Protocol)
 // Returns { ok: true } on both success and upstream failure — never breaks UX
@@ -16,7 +16,7 @@ export const handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ ok: false }) };
   }
 
-  const { email } = body;
+  const { email, source } = body;
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email))) {
     return { statusCode: 400, body: JSON.stringify({ ok: false, error: 'Invalid email' }) };
@@ -46,6 +46,19 @@ export const handler = async (event) => {
     const tagId = process.env.KIT_NEWSLETTER_TAG_ID;
     if (tagId && subscriberId) {
       await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({ subscriber_id: subscriberId })
+      });
+    }
+
+    // Society door: add the society tag so we can see who came in that way
+    const societyTagId = process.env.KIT_SOCIETY_TAG_ID;
+    if (source === 'society' && societyTagId && subscriberId) {
+      await fetch(`https://api.kit.com/v4/tags/${societyTagId}/subscribers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

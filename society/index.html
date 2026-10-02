@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mattvincentwalker.com/society/">
+  <title>The Vincere Society — Renatus Vincere</title>
+  <meta name="description" content="The Vincere Society — a place of formation for men who have survived something, or who sense they were built for something they haven't found yet. Renatus Vincere: reborn to overcome. Begin with The Vincere Letter.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mattvincentwalker.com/society/">
+  <meta property="og:title" content="The Vincere Society — Renatus Vincere">
+  <meta property="og:description" content="Reborn to overcome. For the men the fire couldn't bury. Begin with The Vincere Letter.">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/vincere-shield.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── SOCIETY — the main design system, with the shield as the one Society mark ── */
+    .soc-hero {
+      min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 140px 24px 80px; position: relative;
+    }
+    .soc-shield { width: 96px; height: 96px; object-fit: contain; opacity: 0.9; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.9s 0.1s var(--ease-expo) forwards; }
+    .soc-eyebrow {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--amber-dim); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s 0.25s var(--ease-expo) forwards;
+    }
+    .soc-title {
+      font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300;
+      line-height: 1; letter-spacing: -0.01em; color: var(--white); margin-bottom: 22px;
+      opacity: 0; animation: fadeUp 0.9s 0.4s var(--ease-expo) forwards;
+    }
+    .soc-sub {
+      font-family: var(--font-display); font-style: italic; font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-weight: 300; color: var(--amber); margin-bottom: 14px;
+      opacity: 0; animation: fadeUp 0.9s 0.55s var(--ease-expo) forwards;
+    }
+    .soc-lede {
+      font-size: 15.5px; font-weight: 300; color: var(--warm-gray); line-height: 1.8; max-width: 520px; margin: 0 auto 44px;
+      opacity: 0; animation: fadeUp 0.9s 0.7s var(--ease-expo) forwards;
+    }
+    .soc-form { width: 100%; max-width: 460px; opacity: 0; animation: fadeUp 0.9s 0.85s var(--ease-expo) forwards; }
+    .soc-micro { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 16px; }
+
+    .soc-drift { padding: 120px 24px; text-align: center; border-top: 1px solid rgba(74,70,67,0.25); border-bottom: 1px solid rgba(74,70,67,0.25); background: var(--black); }
+    .soc-drift h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 28px; }
+    .soc-drift p { font-size: 15.5px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; max-width: 600px; margin: 0 auto; }
+
+    .soc-section { padding: 110px 48px; max-width: 1140px; margin: 0 auto; }
+    .soc-section .section-label { margin-bottom: 18px; }
+    .soc-h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 2.8rem); font-weight: 400; line-height: 1.15; color: var(--cream); margin-bottom: 28px; max-width: 18ch; }
+    .soc-prose p { font-size: 15.5px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; margin-bottom: 20px; max-width: 620px; }
+    .soc-prose p.strong { color: var(--cream); }
+    .soc-two { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 80px; align-items: start; }
+
+    .soc-enemy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 48px; }
+    .soc-enemy div { border-top: 1px solid rgba(74,70,67,0.3); padding-top: 24px; }
+    .soc-enemy h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+    .soc-enemy p { font-size: 14.5px; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+    .soc-doctrine { margin-top: 48px; }
+    .soc-step { display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 28px; padding: 28px 0; border-bottom: 1px solid rgba(74,70,67,0.2); }
+    .soc-step:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
+    .soc-step .num { font-family: var(--font-display); font-size: 1.6rem; color: var(--amber-dim); line-height: 1; }
+    .soc-step h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+    .soc-step p { font-size: 14.5px; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 560px; }
+
+    .soc-founder { display: grid; grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr); gap: 72px; align-items: center; }
+    .soc-founder img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 15%; filter: grayscale(1) contrast(1.03) brightness(0.94); }
+    .soc-founder blockquote { font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 2.2vw, 1.9rem); font-weight: 300; color: var(--cream); line-height: 1.4; margin: 0 0 24px; border: none; padding: 0; }
+
+    .soc-door { padding: 120px 24px 130px; text-align: center; border-top: 1px solid rgba(74,70,67,0.25); }
+    .soc-door .soc-shield { display: block; opacity: 0.9; animation: none; width: 64px; height: 64px; margin: 0 auto 28px; }
+    .soc-door h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 400; color: var(--white); margin-bottom: 20px; }
+    .soc-door p { font-size: 15px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; max-width: 520px; margin: 0 auto 36px; }
+    .soc-door .subscribe-form { margin: 0 auto; }
+
+    @media (max-width: 900px) {
+      .soc-section { padding: 80px 24px; }
+      .soc-two, .soc-founder { grid-template-columns: 1fr; gap: 40px; }
+      .soc-enemy { grid-template-columns: 1fr; gap: 28px; }
+      .soc-founder img { max-width: 300px; }
+      .soc-h2 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="../index.html">
+      <img src="../MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../letter.html">The Letter</a></li>
+    <li><a href="../the-synthesis.html">The Synthesis</a></li>
+    <li><a href="../work-with-me.html">Work With Me</a></li>
+    <li><a href="../subscribe.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="soc-hero">
+  <img class="soc-shield" src="../images/vincere-shield.png" alt="The Vincere Society">
+  <div class="soc-eyebrow">The Vincere Society</div>
+  <h1 class="soc-title">Renatus Vincere.</h1>
+  <p class="soc-sub">Reborn to overcome.</p>
+  <p class="soc-lede">For the men the fire couldn&rsquo;t bury. The Society is being built. The Letter is the door.</p>
+  <div class="soc-form">
+    <div class="subscribe-form" data-subscribe-form data-source="society">
+      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <button class="btn-primary">Begin With the Letter</button>
+    </div>
+    <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
+    <p class="soc-micro">No cost. No noise. The Letter, The Grounding Protocol, and word when the doors open.</p>
+  </div>
+</section>
+
+<!-- ═══ DRIFT ═══ -->
+<section class="soc-drift">
+  <h2 class="reveal">Most men do not fall.<br>They drift.</h2>
+  <p class="reveal">Not in one moment &mdash; but across a thousand small surrenders, until the man in the mirror has made peace with less than he was made for. The quiet breaking point that no one else can see.</p>
+</section>
+
+<!-- ═══ WHAT THIS IS ═══ -->
+<section class="soc-section soc-two">
+  <div>
+    <div class="section-label reveal">What This Is</div>
+    <h2 class="soc-h2 reveal">Not a course. Not a program. A place of formation.</h2>
+  </div>
+  <div class="soc-prose">
+    <p class="reveal">The Vincere Society exists for men who have survived something &mdash; or who sense they are built for something they haven&rsquo;t found yet.</p>
+    <p class="reveal">Not optimizers. Not men chasing the next system. Men who are done with the noise. Men who want to do the actual work of becoming who they were made to be &mdash; at home first, then everywhere else.</p>
+    <p class="reveal">Formation is not a weekend event. It is not a course you complete and a certificate you receive. It is what happens when a man stops drifting and stays &mdash; in the discipline, in the questions, in the work.</p>
+    <p class="reveal strong">That is what this is.</p>
+  </div>
+</section>
+
+<!-- ═══ THE ENEMY ═══ -->
+<section class="soc-section" style="border-top:1px solid rgba(74,70,67,0.25);">
+  <div class="section-label reveal">The Enemy Has a Name</div>
+  <h2 class="soc-h2 reveal">The Resistance.</h2>
+  <div class="soc-enemy">
+    <div class="reveal">
+      <h3>It works in the small things.</h3>
+      <p>Distraction. Mild comfort. Low-grade busyness that feels like progress but changes nothing. The inbox that is always full. The goals that are always almost ready to begin.</p>
+    </div>
+    <div class="reveal">
+      <h3>It speaks in your voice.</h3>
+      <p>The voice that says not yet. That says you&rsquo;ll start Monday. That says things are fine &mdash; even as something in you is slowly going dark. Even as you perform competence for everyone around you and run on vapor inside.</p>
+    </div>
+    <div class="reveal">
+      <h3>It wins by default.</h3>
+      <p>The Resistance does not need to defeat you outright. It only needs you to keep waiting. To keep starting over. To keep choosing the easier thing &mdash; just this once &mdash; until once becomes always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE DOCTRINE ═══ -->
+<section class="soc-section soc-two" style="border-top:1px solid rgba(74,70,67,0.25);">
+  <div>
+    <div class="section-label reveal">The Doctrine</div>
+    <h2 class="soc-h2 reveal">Peace precedes power.</h2>
+    <div class="soc-prose">
+      <p class="reveal">The world tells men that power comes first &mdash; earn it, take it, project it. The Society holds a different conviction.</p>
+      <p class="reveal">Order must come before peace, and peace before power. Not a motivational sequence. A description of how formation actually works.</p>
+      <p class="reveal">A man who skips order tries to wield power he cannot hold. He builds fast and collapses faster. He starts over, and over, and over. The Resistance loves this cycle. It is how decades disappear.</p>
+    </div>
+  </div>
+  <div class="soc-doctrine">
+    <div class="soc-step reveal">
+      <span class="num">I</span>
+      <div><h3>Order</h3><p>Establish the structure. Not dramatic gestures &mdash; the daily disciplines that hold a life together and make everything else possible.</p></div>
+    </div>
+    <div class="soc-step reveal">
+      <span class="num">II</span>
+      <div><h3>Peace</h3><p>The interior quiet that arrives when a man is living in alignment with what he knows to be true. Not comfort &mdash; clarity.</p></div>
+    </div>
+    <div class="soc-step reveal">
+      <span class="num">III</span>
+      <div><h3>Power</h3><p>Not force. Not performance. The compounding effect of a man who stopped restarting and started building &mdash; and did not stop.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS COMING ═══ -->
+<section class="soc-section soc-two" style="border-top:1px solid rgba(74,70,67,0.25);">
+  <div>
+    <div class="section-label reveal">What Is Coming</div>
+    <h2 class="soc-h2 reveal">The Society is being built.</h2>
+  </div>
+  <div class="soc-prose">
+    <p class="reveal">The Vincere Society does not yet have open doors. It is being formed the same way it asks its men to form their lives &mdash; with care, without rush, in the right order.</p>
+    <p class="reveal">What it will be: a place where men serious about formation can work together, hold each other to account, and go deeper than the Letter alone. Not a community of consumers. A cohort of builders.</p>
+    <p class="reveal">The details will reach Letter subscribers first. There is no other announcement channel.</p>
+    <p class="reveal strong">If you want to be among the first men in, The Letter is the door.</p>
+  </div>
+</section>
+
+<!-- ═══ THE FOUNDER ═══ -->
+<section class="soc-section soc-founder" style="border-top:1px solid rgba(74,70,67,0.25);">
+  <img class="reveal" src="../images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+  <div>
+    <div class="section-label reveal">The Founder</div>
+    <blockquote class="reveal">&ldquo;I built this for the man I used to be.&rdquo;</blockquote>
+    <div class="soc-prose">
+      <p class="reveal">I&rsquo;m Matt Vincent Walker. Husband, dad of two, coach. Nearly twenty years in pastoral ministry, then Fortune 500 sales, then systems and AI. Then the years everything broke &mdash; and the structure that rebuilt me, one brick at a time.</p>
+      <p class="reveal">The Society is not a theory. It is what I found on the other side of the hard questions &mdash; and what I&rsquo;m building so other men can find it without taking as long.</p>
+      <a class="reveal" href="../about.html" style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cream);border-bottom:1px solid var(--amber-dim);padding-bottom:6px;display:inline-block;">The whole story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE SINGLE FRONT DOOR ═══ -->
+<section class="soc-door" id="letter">
+  <img class="soc-shield reveal" src="../images/vincere-shield.png" alt="">
+  <h2 class="reveal">Begin with The Letter.</h2>
+  <p class="reveal">The Vincere Letter is free. One letter a week, <em>The Grounding Protocol</em> when you join, and the entry point into the Society when its doors open. There is no other way in &mdash; and no better place to start.</p>
+  <div class="reveal" style="max-width:460px;margin:0 auto;">
+    <div class="subscribe-form" data-subscribe-form data-source="society">
+      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <button class="btn-primary">Begin With the Letter</button>
+    </div>
+    <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
+    <p class="soc-micro">No cost. No noise. Word when the doors open.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker &middot; The Vincere Society</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+  <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Renatus Vincere &middot; Reborn to overcome</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    var source = wrapper.getAttribute('data-source') || '';
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Sending…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, source: source })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = "You're in"; input.style.display = 'none';
+          if (status) { status.textContent = "The Letter and The Grounding Protocol are on their way. You'll hear first when the doors open."; status.style.display = 'block'; }
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

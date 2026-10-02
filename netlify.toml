@@ -121,3 +121,38 @@
   from = "/framework"
   to = "/framework.html"
   status = 200
+
+# ── The Vincere Society lives here now ──
+[[redirects]]
+  from = "/vincere-society"
+  to = "/society/"
+  status = 301
+
+[[redirects]]
+  from = "/vincere-society.html"
+  to = "/society/"
+  status = 301
+
+[[redirects]]
+  from = "/society"
+  to = "/society/"
+  status = 301
+
+# vinceresociety.com is a domain alias of this site; send it to the Society page
+[[redirects]]
+  from = "https://vinceresociety.com/subscribe"
+  to = "https://mattvincentwalker.com/subscribe"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://vinceresociety.com/*"
+  to = "https://mattvincentwalker.com/society/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.vinceresociety.com/*"
+  to = "https://mattvincentwalker.com/society/:splat"
+  status = 301
+  force = true
