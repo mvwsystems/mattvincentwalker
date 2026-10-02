@@ -2,6 +2,26 @@
   publish = "."
   functions = "netlify/functions"
 
+# ── Domain-level rules first: path rules below match any host, so these must win ──
+# vinceresociety.com is a domain alias of this site; send it to the Society page
+[[redirects]]
+  from = "https://vinceresociety.com/subscribe"
+  to = "https://mattvincentwalker.com/subscribe"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://vinceresociety.com/*"
+  to = "https://mattvincentwalker.com/society/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.vinceresociety.com/*"
+  to = "https://mattvincentwalker.com/society/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/"
   to = "/index.html"
@@ -137,22 +157,3 @@
   from = "/society"
   to = "/society/"
   status = 301
-
-# vinceresociety.com is a domain alias of this site; send it to the Society page
-[[redirects]]
-  from = "https://vinceresociety.com/subscribe"
-  to = "https://mattvincentwalker.com/subscribe"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://vinceresociety.com/*"
-  to = "https://mattvincentwalker.com/society/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.vinceresociety.com/*"
-  to = "https://mattvincentwalker.com/society/:splat"
-  status = 301
-  force = true

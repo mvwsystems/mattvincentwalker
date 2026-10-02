@@ -73,6 +73,7 @@ export const handler = async (event) => {
   const KIT_BASE = 'https://api.convertkit.com/v4';
   const headers = {
     'Content-Type': 'application/json',
+    'X-Kit-Api-Key': KIT_API_KEY,
     'Authorization': `Bearer ${KIT_API_KEY}`
   };
 
