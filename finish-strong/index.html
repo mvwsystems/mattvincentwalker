@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="canonical" href="https://mattvincentwalker.com/finish-strong/">
+<title>Finish Strong — 90 Days, One Plan | Matt Vincent Walker</title>
+<meta name="description" content="A free 90-day plan to finish the year with order. Score yourself across six areas, find your leak, pick one goal, and leave with weekly targets — in about 90 minutes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mattvincentwalker.com/finish-strong/">
+<meta property="og:title" content="Finish Strong — 90 days, one plan">
+<meta property="og:description" content="Score yourself in 20 minutes, find your leak, leave with a 90-day plan. Free, from Matt Vincent Walker.">
+<meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  /* ── FINISH STRONG — the site's design system applied to a worksheet ── */
+  body { padding-top: env(safe-area-inset-top, 0px); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 120px 24px 80px; }
+  .fs-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); }
+  h1.fs-title { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5.4rem); font-weight: 300; line-height: 1; letter-spacing: -0.01em; color: var(--white); margin: 18px 0 20px; }
+  h2.fs-h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3.4vw, 2.4rem); font-weight: 400; line-height: 1.1; color: var(--cream); margin: 0; }
+  h3.fs-h3 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim); margin: 36px 0 12px; }
+  p { font-size: 15.5px; font-weight: 300; line-height: 1.8; color: var(--warm-gray); margin: 0 0 14px; max-width: 62ch; }
+  p.lede { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.3rem); color: var(--light); line-height: 1.7; }
+  .muted { color: var(--muted); }
+  .motto { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim); margin-top: 10px; }
+  /* hero: the countdown */
+  .fs-hero { padding: 0 0 36px; border-bottom: 1px solid rgba(74,70,67,0.3); margin-bottom: 36px; }
+  .days { font-family: var(--font-display); font-weight: 300; font-size: clamp(96px, 24vw, 170px); line-height: 0.9; color: var(--amber); margin-top: 18px; }
+  .days-label { font-family: var(--font-display); font-style: italic; font-size: 1.35rem; color: var(--light); margin: 22px 0 22px; }
+  .track { display: grid; gap: 4px; margin: 8px 0 8px; }
+  .tick { height: 30px; background: var(--stone); }
+  .tick.now { background: var(--amber); }
+  .tick.left { background: var(--stone-light); }
+  .track-legend { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  /* steps */
+  .stepnav { display: flex; gap: 6px; margin-bottom: 28px; }
+  .stepnav span { flex: 1; height: 2px; background: var(--stone-light); }
+  .stepnav span.on { background: var(--amber); }
+  .step { display: none; } .step.active { display: block; }
+  .step-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+  .step-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim); }
+  .step-time { margin-left: auto; font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .area { background: var(--charcoal); border: 1px solid var(--stone); padding: 16px 18px; margin-bottom: 10px; }
+  .area-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .area-name { font-family: var(--font-display); font-size: 1.25rem; color: var(--cream); }
+  .area-score { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--amber); min-width: 2ch; text-align: right; }
+  .area-q { font-size: 14px; color: var(--muted); margin: 2px 0 10px; font-weight: 300; }
+  input[type=range] { width: 100%; accent-color: var(--amber); height: 28px; }
+  label { display: block; font-family: var(--font-body); font-weight: 400; font-size: 14.5px; color: var(--cream); margin: 18px 0 8px; }
+  input[type=text], textarea, input[type=email] { width: 100%; font: 300 15px var(--font-body); color: var(--white); background: var(--stone); border: 1px solid var(--ash); padding: 12px 14px; outline: none; }
+  input[type=text]:focus, textarea:focus, input[type=email]:focus { border-color: var(--amber-dim); }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+  .checks label { display: flex; gap: 12px; align-items: flex-start; font-weight: 300; color: var(--light); margin: 10px 0; font-size: 15px; }
+  .checks input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--amber); flex: none; }
+  .hint { font-size: 13.5px; color: var(--muted); margin-top: 6px; font-weight: 300; line-height: 1.7; }
+  .nav { display: flex; gap: 12px; margin-top: 32px; align-items: center; }
+  .nav .btn-primary { margin-left: auto; }
+  .ghost { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--warm-gray); border-bottom: 1px solid var(--ash); padding: 0 0 4px; }
+  .ghost:hover { color: var(--white); border-color: var(--amber); }
+  .err { color: var(--amber); font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; margin-top: 12px; min-height: 1em; }
+  /* results */
+  .score-big { display: flex; align-items: baseline; gap: 10px; margin: 8px 0; }
+  .score-big b { font-family: var(--font-display); font-size: 4.5rem; font-weight: 300; color: var(--amber); line-height: 0.9; }
+  .verdict { font-family: var(--font-display); font-size: 1.9rem; font-weight: 400; color: var(--white); margin-bottom: 8px; }
+  .bars { margin: 18px 0 8px; }
+  .bar { display: grid; grid-template-columns: 130px 1fr 28px; gap: 12px; align-items: center; font-size: 14px; margin: 8px 0; color: var(--warm-gray); }
+  .bar i { display: block; height: 6px; background: var(--stone); overflow: hidden; }
+  .bar i em { display: block; height: 100%; background: var(--amber-dim); }
+  .bar.leak i em { background: var(--amber); }
+  .bar.leak span:first-child { color: var(--cream); font-weight: 400; }
+  .callout { border-left: 1px solid var(--amber-dim); background: var(--charcoal); padding: 16px 20px; margin: 18px 0; font-size: 15px; line-height: 1.75; color: var(--light); font-weight: 300; }
+  .callout b { color: var(--white); font-weight: 500; }
+  .goal { font-family: var(--font-display); font-style: italic; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; line-height: 1.25; color: var(--cream); margin: 6px 0 16px; }
+  .tbl { overflow-x: auto; border: 1px solid var(--stone); background: var(--charcoal); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--stone); vertical-align: top; color: var(--light); font-weight: 300; }
+  th { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+  td input { border: none; background: transparent; padding: 4px 0; }
+  tr.phase td { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber-dim); background: var(--black); }
+  .prompt { position: relative; background: var(--charcoal); border: 1px solid var(--stone); padding: 16px 18px 14px; margin: 10px 0; white-space: pre-wrap; font-size: 14px; color: var(--light); font-weight: 300; line-height: 1.7; }
+  .prompt b { color: var(--white); font-weight: 500; }
+  .prompt .ghost { float: right; margin: 0 0 8px 12px; }
+  .gate { background: var(--charcoal); border: 1px solid var(--stone); padding: 40px 32px; margin-top: 8px; }
+  .gate .row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; margin: 18px 0 12px; }
+  .cta { border-top: 1px solid rgba(74,70,67,0.3); padding-top: 36px; margin-top: 44px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 24px; align-items: center; }
+  @media (max-width: 640px) { .wrap { padding: 100px 20px 64px; } .bar { grid-template-columns: 96px 1fr 24px; } .gate { padding: 28px 20px; } .gate .row { grid-template-columns: 1fr; } }
+  @media print { nav, footer, .nav, .actions, .stepnav, .cta, .prompt .ghost { display: none !important; } body { background: #fff; color: #000; } .wrap { padding-top: 24px; } .fs-hero { border-color: #000; } }
+  @media (prefers-reduced-motion: no-preference) { .tick.now { animation: pulse 1.6s ease-in-out 2; } @keyframes pulse { 50% { opacity: .35; } } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="../index.html">
+      <img src="../MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../letter.html">The Letter</a></li>
+    <li><a href="../the-synthesis.html">The Synthesis</a></li>
+    <li><a href="../work-with-me.html">Work With Me</a></li>
+    <li><a href="../subscribe.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<header class="fs-hero">
+  <div class="fs-eyebrow">Vincere &middot; Finish Strong</div>
+  <div class="days" id="days">0</div>
+  <div class="days-label" id="daysLabel">days left in the year</div>
+  <div class="track" id="track"></div>
+  <div class="track-legend"><span id="wkStart">Day 1</span><span id="wkEnd">Dec 31</span></div>
+  <h1 class="fs-title">Finish Strong.</h1>
+  <p class="lede">Most men do not fall. They drift. This is a ninety-minute plan to close out the year with order: score yourself, pick one goal, and leave with a 90-day plan broken into weekly targets.</p>
+  <div class="motto">Renatus Vincere &middot; Reborn to overcome</div>
+</header>
+
+<div class="stepnav" id="stepnav"><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- Step 1 -->
+<section class="step active" data-step="0">
+  <div class="step-head"><span class="step-num">Step 1</span><h2 class="fs-h2">Assess</h2><span class="step-time">20 min</span></div>
+  <p>Score each area from 1 (broken) to 10 (dialed in). Go with your gut, not your intentions.</p>
+  <div id="areas"></div>
+  <h3 class="fs-h3">Three honest questions</h3>
+  <label for="q1">What am I proudest of this year?</label><input type="text" id="q1">
+  <label for="q2">What am I avoiding that I know I need to deal with?</label><input type="text" id="q2">
+  <label for="q3">If this year ended today, what would I regret?</label><input type="text" id="q3">
+</section>
+
+<!-- Step 2 -->
+<section class="step" data-step="1">
+  <div class="step-head"><span class="step-num">Step 2</span><h2 class="fs-h2">Focus</h2><span class="step-time">15 min</span></div>
+  <div class="callout" id="leakCallout"></div>
+  <label for="goal">By December 31, I will&hellip;</label>
+  <input type="text" id="goal" placeholder="Sign $30K in new work &middot; Be home for dinner four nights a week &middot; Finish the thing I keep not finishing">
+  <div class="hint" id="goalIdeas"></div>
+  <div class="checks">
+    <label><input type="checkbox" class="test"> It&rsquo;s specific: a number, or a clear yes/no</label>
+    <label><input type="checkbox" class="test"> I can hit it by December 31</label>
+    <label><input type="checkbox" class="test"> It depends on my actions, not luck</label>
+    <label><input type="checkbox" class="test"> Hitting it moves at least two of my six areas</label>
+  </div>
+  <label for="why">Why it matters (one sentence)</label><input type="text" id="why">
+  <h3 class="fs-h3">What I&rsquo;m stopping until January 1</h3>
+  <p class="hint">Low-margin jobs. Late-night scrolling. Meetings with no outcome. Chasing every lead. Admin a tool could handle. Saying yes to things you resent.</p>
+  <input type="text" id="stop1" placeholder="Stop #1"><br><br>
+  <input type="text" id="stop2" placeholder="Stop #2"><br><br>
+  <input type="text" id="stop3" placeholder="Stop #3">
+</section>
+
+<!-- Step 3 -->
+<section class="step" data-step="2">
+  <div class="step-head"><span class="step-num">Step 3</span><h2 class="fs-h2">Plan</h2><span class="step-time">30 min</span></div>
+  <p>Work backward. Where do you need to be at the end of each phase?</p>
+  <label for="ph1" id="ph1l">Build</label><input type="text" id="ph1" placeholder="40 past customers contacted, 10 estimates out">
+  <label for="ph2" id="ph2l">Push</label><input type="text" id="ph2" placeholder="6 jobs signed">
+  <label for="ph3" id="ph3l">Finish</label><input type="text" id="ph3" placeholder="Goal hit, January pipeline loaded">
+  <h3 class="fs-h3">Weekly targets</h3>
+  <p class="hint">One result you can check off by Friday. Holiday weeks are flagged &mdash; plan them light. Those weeks are for the people you&rsquo;re doing this for.</p>
+  <div class="tbl"><table><thead><tr><th>Week</th><th>Starts</th><th>Target</th></tr></thead><tbody id="weeks"></tbody></table></div>
+  <h3 class="fs-h3">Obstacles</h3>
+  <label for="ob1">If this happens&hellip; I will&hellip;</label><input type="text" id="ob1" placeholder="If a big job slips, I'll call 5 past customers that day">
+  <br><br><input type="text" id="ob2" placeholder="If I lose a week, I'll cut the next target in half, not skip it">
+</section>
+
+<!-- Step 4 -->
+<section class="step" data-step="3">
+  <div class="step-head"><span class="step-num">Step 4</span><h2 class="fs-h2">Rhythm</h2><span class="step-time">10 min</span></div>
+  <p><strong style="color:var(--cream);font-weight:500;">Daily 3-3-1.</strong> Three minutes each morning to pick today&rsquo;s one move and do it before email. Three minutes each night to check it and set tomorrow&rsquo;s. Plus one non-negotiable &mdash; the thing you do when you have nothing left.</p>
+  <label for="nn">My daily non-negotiable</label><input type="text" id="nn" placeholder="Walk through the gym doors &middot; Ten minutes of prayer &middot; One note to my wife">
+  <p style="margin-top:22px"><strong style="color:var(--cream);font-weight:500;">Friday 15.</strong> Every Friday, fifteen minutes: Did I hit the target? What worked? What&rsquo;s next week&rsquo;s target? Which area got neglected?</p>
+  <label for="fri">My Friday 15 time</label><input type="text" id="fri" placeholder="Friday 3:00 pm">
+  <label for="partner">The man who&rsquo;ll hold me to it</label><input type="text" id="partner" placeholder="Name">
+  <p class="hint">Text him your goal today and your Friday score every week. Shame&rsquo;s whole power supply is secrecy. This is how you cut it.</p>
+</section>
+
+<!-- Step 5: gate, then results -->
+<section class="step" data-step="4" id="results"></section>
+
+<div class="err" id="err" role="alert"></div>
+<div class="nav" id="nav">
+  <button class="ghost" id="back" type="button">Back</button>
+  <button class="btn-primary" id="next" type="button">Next</button>
+</div>
+
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+  </div>
+  <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Timeless principles. Modern systems. A life fully lived.</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function(){
+const PDF_URL = "../downloads/finish-strong.pdf";
+const AREAS = [
+ {k:"biz",n:"Business and revenue",q:"Am I on pace for my number? Is my pipeline full?",
+  fix:"Your business is the leak. Your Finish Line goal should be a revenue or pipeline number.",
+  ideas:"Ideas: sign $___ in new work · book ___ sales calls · raise prices on every new job"},
+ {k:"body",n:"Body and energy",q:"Do I have the energy to lead at work and at home?",
+  fix:"Your energy is the leak. Every other area runs on it, so start here.",
+  ideas:"Ideas: work out 4x a week for 90 days · in bed by 10:30 on weeknights · lose ___ lbs"},
+ {k:"fam",n:"Marriage and family",q:"Would my wife and kids say I've been present?",
+  fix:"Home is the leak. Wins at work feel empty when this one is low — and your kids are the why behind all of it.",
+  ideas:"Ideas: weekly date night through December · phone-free dinners · one-on-one time with each kid every week · home by 5:30 four nights a week"},
+ {k:"mind",n:"Mind and focus",q:"Am I running my day, or is my day running me?",
+  fix:"Focus is the leak. You're busy but not moving the needle.",
+  ideas:"Ideas: 90 focused minutes before email every weekday · cut screen time in half · plan every week on Sunday"},
+ {k:"faith",n:"Faith and purpose",q:"Do I know why I'm doing all this, and does it show?",
+  fix:"Purpose is the leak. Without a clear why, effort turns into grind.",
+  ideas:"Ideas: ten quiet minutes every morning for 90 days · write a one-page personal mission · serve once a month · read the Gospel of John through by Christmas"},
+ {k:"sys",n:"Systems and time",q:"Are my tools, habits and team working for me or against me?",
+  fix:"Systems are the leak. You're doing work a tool or a person should be doing — and it's coming out of your evenings.",
+  ideas:"Ideas: automate follow-ups and invoicing · hand off ___ to a hire or VA · document your top 3 processes"}
+];
+const $ = id => document.getElementById(id);
+const state = {step:0, scores:{}, sent:false};
+AREAS.forEach(a=>state.scores[a.k]=5);
+
+// Dates
+const today = new Date(); today.setHours(0,0,0,0);
+const yr = today.getFullYear();
+const end = new Date(yr,11,31);
+const daysLeft = Math.max(0, Math.round((end - today)/864e5));
+const totalDays = daysLeft + 1;
+const N = Math.min(90, totalDays);
+const weeksN = Math.max(1, Math.ceil(totalDays/7));
+const fmt = d => d.toLocaleDateString("en-US",{month:"short",day:"numeric"});
+const weeks = Array.from({length:weeksN},(_,i)=>{const d=new Date(today);d.setDate(d.getDate()+i*7);return d;});
+const d1 = Math.round(totalDays/3), d2 = Math.round(totalDays*2/3);
+const phaseOf = i => (i*7) < d1 ? 0 : ((i*7) < d2 ? 1 : 2);
+const dayDate = n => { const d=new Date(today); d.setDate(d.getDate()+n-1); return d; };
+const PH = ["Build","Push","Finish"];
+function holiday(d){ const e=new Date(d); e.setDate(e.getDate()+6);
+  const tg = (()=>{const n=new Date(yr,10,1); const off=(4-n.getDay()+7)%7; return new Date(yr,10,1+off+21);})();
+  const xm = new Date(yr,11,25);
+  if(tg>=d && tg<=e) return "Thanksgiving"; if(xm>=d && xm<=e) return "Christmas"; return ""; }
+
+// Hero
+$("days").textContent = daysLeft;
+$("daysLabel").textContent = (daysLeft===1?"day":"days")+" left in "+yr+". Your "+N+"-day sprint starts today.";
+const track = $("track");
+track.style.gridTemplateColumns = "repeat("+weeksN+",1fr)";
+for(let i=0;i<weeksN;i++){const t=document.createElement("div");t.className="tick "+(i===0?"now":"left");t.title="Week "+(i+1)+" · "+fmt(weeks[i]);track.appendChild(t);}
+
+// Areas
+$("areas").innerHTML = AREAS.map(a=>`<div class="area"><div class="area-top"><span class="area-name">${a.n}</span><span class="area-score" id="s_${a.k}">5</span></div><div class="area-q">${a.q}</div><input type="range" min="1" max="10" value="5" id="r_${a.k}" aria-label="${a.n} score"></div>`).join("");
+AREAS.forEach(a=>$("r_"+a.k).addEventListener("input",e=>{state.scores[a.k]=+e.target.value;$("s_"+a.k).textContent=e.target.value;save();}));
+
+// Weeks table
+$("ph1l").textContent = "Build · days 1–"+d1+" (ends "+fmt(dayDate(d1))+")";
+$("ph2l").textContent = "Push · days "+(d1+1)+"–"+d2+" (ends "+fmt(dayDate(d2))+")";
+$("ph3l").textContent = "Finish · days "+(d2+1)+"–"+totalDays+" (ends Dec 31)";
+let rows="";
+weeks.forEach((d,i)=>{ if(i===0||phaseOf(i)!==phaseOf(i-1)) rows+=`<tr class="phase"><td colspan="3">${PH[phaseOf(i)]}</td></tr>`;
+  const h=holiday(d); rows+=`<tr><td>${i+1}</td><td>${fmt(d)}${h?" ("+h+")":""}</td><td><input type="text" id="w${i}" aria-label="Week ${i+1} target" placeholder="${h?"Light week":"Target"}"></td></tr>`;});
+$("weeks").innerHTML = rows;
+
+// Persistence
+const FIELDS = ["q1","q2","q3","goal","why","stop1","stop2","stop3","ph1","ph2","ph3","ob1","ob2","nn","fri","partner",...weeks.map((_,i)=>"w"+i)];
+function save(){ try{ const data={scores:state.scores,step:state.step,sent:state.sent,f:{}}; FIELDS.forEach(f=>data.f[f]=$(f).value);
+  data.tests=[...document.querySelectorAll(".test")].map(c=>c.checked); localStorage.setItem("finishStrong90",JSON.stringify(data)); }catch(e){} }
+function load(){ try{ const d=JSON.parse(localStorage.getItem("finishStrong90")||"null"); if(!d) return;
+  Object.assign(state.scores,d.scores||{}); AREAS.forEach(a=>{$("r_"+a.k).value=state.scores[a.k];$("s_"+a.k).textContent=state.scores[a.k];});
+  FIELDS.forEach(f=>{ if(d.f && d.f[f]!=null && $(f)) $(f).value=d.f[f]; });
+  (d.tests||[]).forEach((v,i)=>{const c=document.querySelectorAll(".test")[i]; if(c) c.checked=v;});
+  state.sent = !!d.sent;
+  if(typeof d.step==="number") state.step=Math.min(d.step,4); }catch(e){} }
+document.addEventListener("input",e=>{ if(e.target.matches("input,textarea")) save(); });
+
+// Helpers
+const total = () => AREAS.reduce((s,a)=>s+state.scores[a.k],0);
+const leak = () => AREAS.reduce((m,a)=>state.scores[a.k]<state.scores[m.k]?a:m, AREAS[0]);
+function verdict(t){ if(t>=48) return ["Strong","You're aligned. Use the rest of the year to push one big lever."];
+  if(t>=36) return ["Solid, but leaking","One or two areas are dragging the rest. Fix the drag first."];
+  if(t>=24) return ["Stretched thin","You're working hard, not aligned. Simplify before you add anything."];
+  return ["Running on fumes","This stretch is about stabilizing, not scaling. That's still a win — and it's the honest one."]; }
+const esc = s => String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const v = id => $(id).value.trim();
+
+function prepFocus(){ const l=leak(); $("leakCallout").innerHTML=`<b>Your leak: ${l.n} (${state.scores[l.k]}/10).</b><br>${l.fix}`; $("goalIdeas").textContent=l.ideas; }
+
+function planPayload(firstName, email){
+  const l=leak(), t=total(), [vt]=verdict(t);
+  return { firstName, email, days: daysLeft, sprint: N,
+    scores: Object.fromEntries(AREAS.map(a=>[a.n, state.scores[a.k]])),
+    total: t, verdict: vt, leak: { name: l.n, score: state.scores[l.k], fix: l.fix },
+    answers: { proudest: v("q1"), avoiding: v("q2"), regret: v("q3") },
+    goal: v("goal"), why: v("why"), stops: ["stop1","stop2","stop3"].map(v).filter(Boolean),
+    phases: [["Build",$("ph1l").textContent,v("ph1")],["Push",$("ph2l").textContent,v("ph2")],["Finish",$("ph3l").textContent,v("ph3")]],
+    weeks: weeks.map((d,i)=>({ n:i+1, starts: fmt(d), holiday: holiday(d), phase: PH[phaseOf(i)], target: v("w"+i) })),
+    obstacles: [v("ob1"), v("ob2")].filter(Boolean),
+    rhythm: { nonNegotiable: v("nn"), friday: v("fri"), partner: v("partner") } };
+}
+
+function buildGate(){
+  $("results").innerHTML = `
+   <div class="step-head"><span class="step-num">Step 5</span><h2 class="fs-h2">Your plan</h2><span class="step-time">1 min</span></div>
+   <div class="gate">
+     <p class="lede" style="margin-bottom:6px;">Let me send it to you.</p>
+     <p>Your score, your leak, your goal, every weekly target &mdash; in your inbox, from me, so you still have it when this tab is gone and it&rsquo;s week six. Then your plan shows on this screen, and you can print it.</p>
+     <form id="gate-form">
+       <div class="row">
+         <input type="text" id="g-first" placeholder="First name" required autocomplete="given-name">
+         <input type="email" id="g-email" placeholder="Email address" required autocomplete="email">
+       </div>
+       <button type="submit" class="btn-primary" id="g-submit" style="width:100%;justify-content:center;">Email Me My Plan →</button>
+       <p class="err" id="g-err"></p>
+       <p class="hint" style="margin-top:14px;">One letter a week after that &middot; No daily drip &middot; Unsubscribe anytime</p>
+     </form>
+   </div>`;
+  $("gate-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const first=$("g-first").value.trim(), email=$("g-email").value.trim(), btn=$("g-submit"), err=$("g-err");
+    if(!first||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent="First name and a real email."; return; }
+    btn.textContent="Sending…"; btn.disabled=true; err.textContent="";
+    try{
+      const res=await fetch("/.netlify/functions/finish-strong-plan",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(planPayload(first,email))});
+      const j=await res.json(); if(!j.ok) throw new Error();
+      state.sent=true; save(); buildResults(first);
+    }catch(_){ btn.textContent="Email Me My Plan →"; btn.disabled=false; err.textContent="Something broke on our end — try again in a minute."; }
+  });
+}
+
+function buildResults(firstName){
+  const t=total(), [vt,vd]=verdict(t), l=leak();
+  const bars=AREAS.map(a=>`<div class="bar${a.k===l.k?" leak":""}"><span>${a.n.split(" and ")[0]}</span><i><em style="width:${state.scores[a.k]*10}%"></em></i><span>${state.scores[a.k]}</span></div>`).join("");
+  let wk=""; weeks.forEach((d,i)=>{ if(i===0||phaseOf(i)!==phaseOf(i-1)) wk+=`<tr class="phase"><td colspan="3">${PH[phaseOf(i)]}: ${esc(v("ph"+(phaseOf(i)+1)))||"—"}</td></tr>`;
+    wk+=`<tr><td>${i+1}</td><td>${fmt(d)}</td><td>${esc(v("w"+i))||'<span class="muted">—</span>'}</td></tr>`;});
+  const stops=["stop1","stop2","stop3"].map(v).filter(Boolean);
+  const scoresTxt=AREAS.map(a=>a.n.split(" and ")[0]+" "+state.scores[a.k]).join(", ");
+  const weeklyTxt=weeks.map((d,i)=>"Week "+(i+1)+" ("+fmt(d)+"): "+(v("w"+i)||"[target]")).join("\n");
+  const goal=v("goal")||"[goal]";
+  const prompts=[
+   ["Pressure-test the plan",`Act as a direct, honest coach. Here is my ${N}-day plan to finish the year strong.\n\nMy work: [what I do]\nMy scores (1-10): ${scoresTxt}\nMy weakest area: ${l.n}\nMy Finish Line goal: ${goal}\nPhase milestones: Build: ${v("ph1")||"[ ]"} | Push: ${v("ph2")||"[ ]"} | Finish: ${v("ph3")||"[ ]"}\nWeekly targets:\n${weeklyTxt}\n\nTell me the 3 biggest weaknesses in this plan, what I'm underestimating, and what you would change. Be blunt.`],
+   ["Find the hours",`My Finish Line goal is: ${goal}. These are the 5 tasks that eat the most time in my week: [list them].\nFor each, tell me how I could automate, delegate or eliminate it using AI or simple tools I can set up in under an hour — so the hours come back to my family, not just my business.`],
+   ["Build this week's game plan",`This week's target is: ${v("w0")||"[target]"}. I have about [X] hours of focused time.\nBreak it into a day-by-day plan for Monday through Friday, with the single most important action first each day.`],
+   ["Friday 15 debrief",`Here's my week: target was [target], result was [result], what got in the way: [obstacles].\nMy Finish Line goal is: ${goal}.\nAsk me 3 hard questions, then suggest next week's target based on where I am.`]
+  ];
+  $("results").innerHTML = `
+   <div class="step-head"><span class="step-num">Step 5</span><h2 class="fs-h2">Your Finish Strong plan</h2><span class="step-time">15 min</span></div>
+   ${firstName?`<div class="callout"><b>${esc(firstName)}, it&rsquo;s on its way to your inbox.</b> Read it again on a Friday. Everything below is also here to print.</div>`:""}
+   <div class="score-big"><b>${t}</b><span class="muted">/ 60</span></div>
+   <div class="verdict">${vt}</div><p>${vd}</p>
+   <div class="bars">${bars}</div>
+   <div class="callout"><b>Fix the leak first: ${l.n}.</b> ${l.fix}</div>
+   <h3 class="fs-h3">Finish Line goal</h3>
+   <div class="goal">By December 31, I will ${esc(v("goal"))||"…"}</div>
+   ${v("why")?`<p><b style="color:var(--cream);font-weight:500;">Why:</b> ${esc(v("why"))}</p>`:""}
+   ${stops.length?`<p><b style="color:var(--cream);font-weight:500;">Stopping until Jan 1:</b> ${stops.map(esc).join(" · ")}</p>`:""}
+   <h3 class="fs-h3">${N}-day sprint</h3>
+   <div class="tbl"><table><thead><tr><th>Week</th><th>Starts</th><th>Target</th></tr></thead><tbody>${wk}</tbody></table></div>
+   ${(v("ob1")||v("ob2"))?`<h3 class="fs-h3">If-then plans</h3><p>${[v("ob1"),v("ob2")].filter(Boolean).map(esc).join("<br>")}</p>`:""}
+   <h3 class="fs-h3">Rhythm</h3>
+   <p><b style="color:var(--cream);font-weight:500;">Daily 3-3-1</b>${v("nn")?", non-negotiable: "+esc(v("nn")):""}<br><b style="color:var(--cream);font-weight:500;">Friday 15:</b> ${esc(v("fri"))||"pick a time"}<br><b style="color:var(--cream);font-weight:500;">Accountability:</b> ${esc(v("partner"))||"pick one man"}</p>
+   <h3 class="fs-h3">AI boost</h3>
+   <p>These prompts are pre-filled with your answers. Copy one into Claude or ChatGPT and fill any brackets.</p>
+   ${prompts.map((p,i)=>`<div class="prompt"><button class="ghost" type="button" data-copy="${i}">Copy</button><b>${p[0]}</b>\n\n${esc(p[1])}</div>`).join("")}
+   <h3 class="fs-h3">Next 24 hours</h3>
+   <div class="checks">
+    <label><input type="checkbox"> Send my goal to ${esc(v("partner"))||"my accountability partner"}</label>
+    <label><input type="checkbox"> Put my Friday 15 on the calendar for every week</label>
+    <label><input type="checkbox"> Do Week 1&rsquo;s first move tomorrow, before email</label>
+   </div>
+   <div class="actions"><button class="btn-primary" type="button" id="print">Print or save as PDF</button><a class="ghost" href="${PDF_URL}" download>Download the field manual</a><button class="ghost" type="button" id="reset">Start over</button></div>
+   <div class="cta">
+     <div class="fs-eyebrow">Before the plan, the man</div>
+     <h2 class="fs-h2" style="margin:14px 0 12px;">A plan holds only as well as what it&rsquo;s standing on.</h2>
+     <p>Every man breaks somewhere. Fifteen honest answers, three minutes: your pattern under pressure and the false ground underneath it &mdash; with a field report in your inbox.</p>
+     <a class="btn-primary" href="../break-point/" style="margin-top:8px;">Find out where you&rsquo;ll break →</a>
+   </div>`;
+  $("results").querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{
+    const txt=prompts[+b.dataset.copy][1];
+    try{ await navigator.clipboard.writeText(txt); }catch(e){ const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(_){} ta.remove(); }
+    b.textContent="Copied"; setTimeout(()=>b.textContent="Copy",1500); }));
+  $("print").addEventListener("click",()=>window.print());
+  $("reset").addEventListener("click",()=>{ if(!confirm("Clear your answers and start over?")) return; try{localStorage.removeItem("finishStrong90");}catch(e){} location.reload(); });
+}
+
+function show(n){
+  state.step=n; document.querySelectorAll(".step").forEach(s=>s.classList.toggle("active",+s.dataset.step===n));
+  document.querySelectorAll("#stepnav span").forEach((s,i)=>s.classList.toggle("on",i<=n));
+  $("back").style.visibility = n===0?"hidden":"visible";
+  $("next").style.display = n===4?"none":"";
+  $("next").textContent = n===3?"See my plan":"Next";
+  $("err").textContent="";
+  if(n===1) prepFocus(); if(n===4) { if(state.sent) buildResults(); else buildGate(); }
+  save(); window.scrollTo({top: n===0?0:document.getElementById("stepnav").offsetTop-90, behavior:"smooth"});
+}
+$("next").addEventListener("click",()=>{
+  if(state.step===1 && !v("goal")){ $("err").textContent="Write your Finish Line goal to keep going."; $("goal").focus(); return; }
+  show(state.step+1); });
+$("back").addEventListener("click",()=>show(state.step-1));
+
+load(); show(state.step);
+})();
+</script>
+</body>
+</html>
