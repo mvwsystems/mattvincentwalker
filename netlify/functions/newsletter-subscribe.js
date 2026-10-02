@@ -34,13 +34,18 @@ export const handler = async (event) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Kit-Api-Key': apiKey,
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({ email_address: String(email).trim() })
     });
 
-    const subData = await subRes.json();
+    const subData = await subRes.json().catch(() => ({}));
     const subscriberId = subData?.subscriber?.id;
+    if (!subRes.ok || !subscriberId) {
+      console.error('[newsletter-subscribe] Kit rejected subscriber create:', subRes.status, JSON.stringify(subData).slice(0, 300));
+      return { statusCode: 200, body: JSON.stringify({ ok: true, recorded: false }) };
+    }
 
     // Apply general newsletter tag if configured
     const tagId = process.env.KIT_NEWSLETTER_TAG_ID;
@@ -49,6 +54,7 @@ export const handler = async (event) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Kit-Api-Key': apiKey,
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({ subscriber_id: subscriberId })
@@ -62,6 +68,7 @@ export const handler = async (event) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Kit-Api-Key': apiKey,
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({ subscriber_id: subscriberId })
@@ -75,6 +82,7 @@ export const handler = async (event) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Kit-Api-Key': apiKey,
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({ subscriber_id: subscriberId })
@@ -83,7 +91,8 @@ export const handler = async (event) => {
   } catch (err) {
     console.error('[newsletter-subscribe] Kit API error:', err.message || err);
     // Silent fail — return ok so the user sees success
+    return { statusCode: 200, body: JSON.stringify({ ok: true, recorded: false }) };
   }
 
-  return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+  return { statusCode: 200, body: JSON.stringify({ ok: true, recorded: true }) };
 };
