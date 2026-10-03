@@ -24,6 +24,7 @@ Allow: /
 # Drafts, templates and funnel interstitials
 Disallow: /post-template.html
 Disallow: /downloads/
+Disallow: /grounding-protocol/
 Disallow: /break-point/results/
 Disallow: /break-point/book/
 

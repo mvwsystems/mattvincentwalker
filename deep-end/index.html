@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mattvincentwalker.com/deep-end/">
+  <title>The Deep End — Matt Vincent Walker</title>
+  <meta name="description" content="For the men who think in systems: the Vincere OS in full, the 624-system library, the field architecture, the taxonomy of systems thinkers, and the full forty-statement Break Point audit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .de-intro { max-width: 640px; }
+    .de-intro p { font-size: 15.5px; font-weight: 300; color: var(--warm-gray); line-height: 1.85; }
+    .de-rows { max-width: 1000px; margin: 48px auto 0; }
+    .de-row { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 28px; align-items: baseline; padding: 30px 0; border-bottom: 1px solid rgba(74,70,67,0.2); text-decoration: none; color: inherit; transition: background 0.5s var(--ease-expo), padding 0.5s var(--ease-expo); }
+    .de-row:first-child { border-top: 1px solid rgba(74,70,67,0.2); }
+    .de-row:hover { background: rgba(200,147,90,0.04); padding-left: 10px; padding-right: 10px; }
+    .de-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--amber-dim); }
+    .de-name { display: block; font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--cream); }
+    .de-row:hover .de-name { color: var(--amber); }
+    .de-sub { display: block; font-size: 14px; font-weight: 300; color: var(--muted); margin-top: 6px; line-height: 1.7; max-width: 60ch; }
+    .de-arrow { color: var(--amber-dim); }
+    @media (max-width: 700px) { .de-row { grid-template-columns: 40px minmax(0,1fr); } .de-arrow { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="../index.html">
+      <img src="../MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../letter.html">The Letter</a></li>
+    <li><a href="../the-synthesis.html">The Synthesis</a></li>
+    <li><a href="../work-with-me.html">Work With Me</a></li>
+    <li><a href="../subscribe.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+  <div class="page-header">
+    <div class="section-label">The Deep End</div>
+    <div class="section-title">For the men who think in systems.</div>
+    <p class="section-subtitle">Everything on this site rests on structure I&rsquo;ve been building in notebooks since 2006. Most men don&rsquo;t need to see the scaffolding. Some of us can&rsquo;t help it. This is for us.</p>
+  </div>
+
+  <section class="section">
+    <div class="de-intro">
+      <p>Nothing here is required. The letter, the coaching, and the diagnostics all work without it. But if you want to know <em>why</em> they work &mdash; the cybernetics, the theology, the 624 systems I&rsquo;ve catalogued from thirty-one disciplines &mdash; the water is deep and you&rsquo;re welcome in it.</p>
+    </div>
+    <div class="de-rows">
+      <a class="de-row reveal" href="../framework.html">
+        <span class="de-num">01</span>
+        <span><span class="de-name">The Vincere OS</span><span class="de-sub">The framework underneath all of it. Alignment creates power: three nested feedback loops, the fifteen points of transformation, the comparator, and why fixing it fixes the rest.</span></span>
+        <span class="de-arrow">→</span>
+      </a>
+      <a class="de-row reveal" href="../systems.html">
+        <span class="de-num">02</span>
+        <span><span class="de-name">The Systems Library</span><span class="de-sub">624 systems, mental models, and frameworks from thirty-one disciplines, catalogued one at a time. The notebook, indexed.</span></span>
+        <span class="de-arrow">→</span>
+      </a>
+      <a class="de-row reveal" href="../architecture.html">
+        <span class="de-num">03</span>
+        <span><span class="de-name">The Field Architecture</span><span class="de-sub">The full map of the OS as a complex adaptive system &mdash; levels, loops, cascades, and the state vector that governs them.</span></span>
+        <span class="de-arrow">→</span>
+      </a>
+      <a class="de-row reveal" href="../map.html">
+        <span class="de-num">04</span>
+        <span><span class="de-name">The Taxonomy of Systems Thinkers</span><span class="de-sub">Who built what, and how the lineages connect &mdash; from Wiener and Ashby to Taleb and Meadows.</span></span>
+        <span class="de-arrow">→</span>
+      </a>
+      <a class="de-row reveal" href="../break-point/full/">
+        <span class="de-num">05</span>
+        <span><span class="de-name">The Break Point &mdash; Full Audit</span><span class="de-sub">Forty statements across five domains, eight scenarios, six written questions. Your load, your pattern, and exactly where the pressure gets in. Twenty minutes. Alone.</span></span>
+        <span class="de-arrow">→</span>
+      </a>
+      <a class="de-row reveal" href="../audit.html">
+        <span class="de-num">06</span>
+        <span><span class="de-name">The Internal Audit</span><span class="de-sub">Five questions that have stopped CEOs mid-sentence. Read them slowly.</span></span>
+        <span class="de-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+<footer>
+  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-links">
+    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+  </div>
+  <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Timeless principles. Modern systems. A life fully lived.</div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
