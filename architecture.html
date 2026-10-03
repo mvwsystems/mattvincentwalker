@@ -1168,14 +1168,6 @@ canvas { display: block; width: 100%; height: 100%; }
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-sig">Matt Vincent <span>Walker</span></div>
-  <div class="loader-sub">Vincere OS — Field Architecture</div>
-  <div class="loader-line"></div>
-  <div class="loader-status">// Initializing field model</div>
-</div>
-
 <!-- Hidden legacy stubs (JS compatibility — do not remove) -->
 <div id="chrome" style="display:none;visibility:hidden;"></div>
 <div id="title-block" style="display:none;visibility:hidden;"></div>
@@ -1677,7 +1669,7 @@ let isMobile = window.innerWidth <= 640;
 // ════════════════════════════════════════════
 window.addEventListener('load', () => {
   setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
+    var __l = document.getElementById('loader'); if (__l) __l.classList.add('hidden');
     document.getElementById('chrome').classList.add('visible');
     document.getElementById('title-block').classList.add('visible');
     document.getElementById('status-bar').classList.add('visible');
@@ -1686,7 +1678,7 @@ window.addEventListener('load', () => {
     document.getElementById('shame-panel').classList.add('visible');
     document.getElementById('nav').classList.add('visible');
     if (isMobile) buildArcView();
-  }, 2200);
+  }, 0);
 });
 
 // ════════════════════════════════════════════

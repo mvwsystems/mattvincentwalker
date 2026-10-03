@@ -1,0 +1,384 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>The Grounding Protocol — Matt Vincent Walker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F5F0EA;--warm:#ECE5D9;--ink:#1C1A17;--char:#2C2C2C;--gray:#5f5950;--gray2:#8f877b;--line:#CFC7BA;--amber:#c8935a;--amber-dim:#8a6a3e;--dark:#0c0a09;
+ --disp:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Garamond,Georgia,serif;--mono:"JetBrains Mono",Menlo,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#14110E;font-family:var(--body);color:var(--ink)}
+@page{size:letter;margin:0}
+.book{display:flex;flex-direction:column;align-items:center;gap:24px;padding:40px 0}
+@media print{.book{display:block;padding:0;gap:0}}
+.page{width:8.5in;height:11in;background:var(--paper);position:relative;overflow:hidden;flex:none;break-after:page;page-break-after:always;box-shadow:0 2px 24px rgba(0,0,0,.55)}
+@media print{.page{box-shadow:none}}
+.page.dark{background-color:var(--dark);color:#eae4d8;background-image:radial-gradient(ellipse 120% 90% at 50% 38%,rgba(64,56,46,.32) 0%,rgba(12,10,9,0) 62%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E")}
+.inner{position:relative;height:100%;padding:0.75in;display:flex;flex-direction:column}
+.inner.center{align-items:center;justify-content:center;text-align:center}
+.inner.grid{display:grid;grid-template-columns:150px minmax(0,1fr);column-gap:36px;padding:0.75in 0.75in 0.62in}
+.margin{display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:22px;font-family:var(--mono)}
+.m-part{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber-dim);line-height:1.8}
+.m-grow,.grow{flex:1}
+.m-note{font-family:var(--disp);font-style:italic;font-size:16px;line-height:1.45;color:var(--gray);text-wrap:pretty}
+.col{display:flex;flex-direction:column;min-width:0}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--amber-dim);margin-bottom:12px}
+h2.section{font-family:var(--disp);font-weight:500;font-size:40px;line-height:1.08;color:var(--ink);text-wrap:balance}
+hr.rule{width:52px;height:1px;background:var(--amber);border:0;margin:22px 0 22px}
+h3{font-family:var(--disp);font-weight:600;font-size:23px;line-height:1.2;color:var(--ink);margin:22px 0 10px;text-wrap:balance}
+h3:first-child{margin-top:0}
+p{font-size:16px;line-height:1.62;color:var(--char);margin-bottom:14px;text-wrap:pretty}
+p.lead{font-family:var(--disp);font-size:21px;line-height:1.45;color:var(--ink)}
+.formgroup .form{display:flex;gap:10px;align-items:baseline}.formgroup .form .blank{flex:1;width:auto !important}
+.mb{display:block}
+strong{color:var(--ink);font-weight:600}
+.pull{border-top:1px solid var(--amber);border-bottom:1px solid var(--amber);padding:20px 8px;margin:18px 0 22px}
+.pull blockquote{font-family:var(--disp);font-style:italic;font-weight:500;font-size:22px;line-height:1.4;color:var(--ink);text-wrap:pretty}
+ul,ol{margin:4px 0 16px 22px}
+li{font-size:16px;line-height:1.55;color:var(--char);margin-bottom:7px;text-wrap:pretty}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin:6px 0 18px}
+.checks label{display:flex;align-items:center;gap:12px;font-size:17px;color:var(--char)}
+.box{display:inline-block;width:16px;height:16px;border:1px solid var(--ink);flex:none}
+.blank{display:inline-block;border-bottom:1px solid var(--ink);height:14px;vertical-align:baseline;margin:0 2px}
+table.score{width:100%;border-collapse:collapse;margin:8px 0 18px;font-size:14.5px}
+table.score th{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gray2);font-weight:400;padding:6px 4px;text-align:center}
+table.score td{padding:9px 6px 9px 0;border-top:1px solid var(--line);color:var(--char);line-height:1.4;vertical-align:middle}
+table.score td:not(:first-child){text-align:center;width:38px}
+.form{font-size:15px;line-height:2.2;color:var(--char);border-bottom:1px solid var(--line);margin-bottom:8px}
+p.cite{font-size:13.5px;line-height:1.45;color:var(--char);margin-bottom:6px;padding-left:18px;text-indent:-18px}
+.foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray2);padding-top:14px}
+/* dark pages */
+.divider .inner{align-items:center;justify-content:center;text-align:center}
+.d-label{font-family:var(--mono);font-size:13px;letter-spacing:6px;text-transform:uppercase;color:var(--amber-dim)}
+.d-title{font-family:var(--disp);font-weight:500;font-size:72px;line-height:1;color:#f5f1e9;margin-top:34px;text-wrap:balance}
+hr.d-rule{width:56px;height:1px;background:var(--amber);border:0;margin:38px 0 28px}
+.d-sub{font-family:var(--disp);font-style:italic;font-size:26px;line-height:1.4;color:#a09a90;max-width:440px;text-wrap:balance}
+.cover .inner{align-items:center;text-align:center;padding:1in .75in .75in}
+.shield{width:92px;height:92px;object-fit:contain;opacity:.95}
+.shield-sm{width:56px;height:56px;object-fit:contain;opacity:.9}
+.c-os{font-family:var(--mono);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--amber-dim);margin-top:22px}
+.c-grow{flex:1}.c-grow2{flex:1.4}
+.c-the{font-family:var(--mono);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:#a09a90;margin-bottom:26px}
+.c-title{font-family:var(--disp);font-weight:600;font-size:92px;line-height:.98;letter-spacing:.02em;color:#f5f1e9;text-wrap:balance}
+.c-sub{font-family:var(--disp);font-style:italic;font-size:24px;line-height:1.4;color:var(--amber);max-width:480px;text-wrap:balance}
+.c-author{font-family:var(--mono);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:#a09a90}
+.belongs .name-line{width:300px;border-bottom:1px solid var(--amber-dim);margin:70px 0 26px}
+.b-note{font-family:var(--disp);font-style:italic;font-size:17px;line-height:1.5;color:var(--gray);max-width:360px;text-wrap:pretty}
+.b-note.left{max-width:480px;text-align:left}
+.toc-rows{margin-top:10px}
+.toc-row{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.toc-label{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber-dim);width:120px;flex:none}
+.toc-title{font-family:var(--disp);font-size:21px;color:var(--ink)}
+.toc-dots{flex:1}
+.toc-pg{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--gray2)}
+.back .inner{padding:1in .75in .75in}
+.bk-line{font-family:var(--disp);font-size:34px;line-height:1.3;color:#f5f1e9;max-width:560px;margin-bottom:26px;text-wrap:pretty}
+.bk-sub{font-family:var(--disp);font-style:italic;font-size:22px;line-height:1.45;color:#a09a90;max-width:520px;text-wrap:pretty}
+.bk-author{display:flex;gap:28px;align-items:center}
+.bk-author img{width:112px;height:136px;object-fit:cover;object-position:center 15%;filter:grayscale(1) contrast(1.05)}
+.bk-author p{font-size:16px;line-height:1.6;color:#d4cec4;max-width:420px;margin:8px 0 0;text-wrap:pretty}
+.bk-author .c-os{margin-top:0}
+hr.bk-rule{width:100%;height:1px;background:#2e2a22;border:0;margin:44px 0 28px}
+.bk-foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#a09a90;line-height:1.9}
+.amber{color:var(--amber)}
+.bk-vin{margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#5a5347}
+</style></head><body><div class="book">
+<div class="page dark cover">
+  <div class="inner">
+    <img class="shield" src="../images/vincere-shield.png" alt="Vincere">
+    <div class="c-os">Vincere OS</div>
+    <div class="c-grow"></div>
+    <div class="c-the">The</div>
+    <h1 class="c-title">Grounding<br>Protocol</h1>
+    <hr class="d-rule">
+    <p class="c-sub">What you&rsquo;re standing on &mdash; and what to do when it won&rsquo;t hold.</p>
+    <div class="c-grow2"></div>
+    <div class="c-author">Matt Vincent Walker</div>
+  </div></div>
+<div class="page belongs">
+  <div class="inner center">
+    <div class="kicker">This protocol belongs to</div>
+    <div class="name-line"></div>
+    <p class="b-note">Write your name in your own hand. It&rsquo;s the first of several things in these pages you&rsquo;ll have to write down to make real.</p>
+  </div></div>
+<div class="page toc">
+  <div class="inner">
+    <div class="kicker">Contents</div>
+    <h2 class="section">What&rsquo;s in here.</h2>
+    <hr class="rule">
+    <div class="toc-rows"><div class="toc-row"><span class="toc-label"></span><span class="toc-title">Before you start</span><span class="toc-dots"></span><span class="toc-pg">04</span></div><div class="toc-row"><span class="toc-label">Part I</span><span class="toc-title">The Diagnosis</span><span class="toc-dots"></span><span class="toc-pg">07</span></div><div class="toc-row"><span class="toc-label">Part II</span><span class="toc-title">The Science</span><span class="toc-dots"></span><span class="toc-pg">12</span></div><div class="toc-row"><span class="toc-label">Part III</span><span class="toc-title">The Faith</span><span class="toc-dots"></span><span class="toc-pg">15</span></div><div class="toc-row"><span class="toc-label">Part IV</span><span class="toc-title">The Move</span><span class="toc-dots"></span><span class="toc-pg">20</span></div><div class="toc-row"><span class="toc-label">Part V</span><span class="toc-title">Living on It</span><span class="toc-dots"></span><span class="toc-pg">25</span></div><div class="toc-row"><span class="toc-label">Part VI</span><span class="toc-title">The Protocol</span><span class="toc-dots"></span><span class="toc-pg">28</span></div><div class="toc-row"><span class="toc-label">Appendix A</span><span class="toc-title">The inventory</span><span class="toc-dots"></span><span class="toc-pg">33</span></div><div class="toc-row"><span class="toc-label">Appendix B</span><span class="toc-title">The research behind it</span><span class="toc-dots"></span><span class="toc-pg">37</span></div></div>
+    <div class="grow"></div>
+    <p class="b-note left">Read it with a pen. Part I takes an hour. Part VI takes four minutes a day for the rest of your life.</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Before you start</div><div class="m-grow"></div></aside>
+    <div class="col"><h2 class="section">Before you start</h2><hr class="rule"><p class="lead">I wrote this on the other side of the worst year of my life.</p><p>A territory cut took a third of my income the same year we closed on the house we&rsquo;d built. Then debt. Then two jobs. Then drinking to take the edge off and telling everyone we were fine. My marriage nearly didn&rsquo;t make it. And one night I came closer to not being here than I ever intend to be again.</p><p>Here&rsquo;s what I learned at the bottom that I could not have learned anywhere else. I had been standing on something for twenty years, and it wasn&rsquo;t what I said I believed. I said I believed in Jesus. I preached Him. What I actually trusted &mdash; the thing that held my weight when I was scared &mdash; was being the guy who produces. The provider. The one who fixes it. When that got taken away, I found out I&rsquo;d built a whole life on it.</p><p>That&rsquo;s what this is about. Not what you believe. What you&rsquo;re standing on.</p><h3>What &ldquo;ground&rdquo; means</h3><p>Every man is standing on something. It&rsquo;s the thing you treat as most real when the pressure comes. Not what you&rsquo;d say in a Bible study. Not what you post. What you default to at 3 a.m. when the email comes in, or the number&rsquo;s off, or she goes quiet.</p><p>Your ground answers questions you never ask out loud:</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>04</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Before you start</div><div class="m-grow"></div></aside>
+    <div class="col"><ul><li>What makes me worth anything?</li><li>What keeps me safe?</li><li>What gives me the right to rest, to want things, to take up space?</li><li>What happens to me if I fail?</li></ul><p>Most of us never chose our ground. We inherited it &mdash; from a father, a coach, a church, a company, a wound. And it works. Until it doesn&rsquo;t. Until the pressure exceeds what it can hold, and everything built on top of it shakes. We call that a breakdown. It&rsquo;s really a foundation finally being honest.</p><h3>What this is, and isn&rsquo;t</h3><p>This is not a mindset shift. You can&rsquo;t think your way onto new ground. Nobody reasons their way there. You get moved &mdash; usually by collapse, sometimes by confrontation. If you&rsquo;re reading this, one of those might be happening. Good. It means the old ground is loose enough to leave.</p><p>This is a protocol. A short, honest way to find out what you&rsquo;re actually standing on (Part I), understand why it keeps failing you (Parts II and III), move your weight somewhere that holds (Part IV), and build a daily practice of standing there (Parts V and VI).</p><p>I&rsquo;m a Christian, and this doesn&rsquo;t pretend otherwise. Part III says plainly where I think the only ground that holds is, and His name is Jesus. If you&rsquo;re not where I am on that, read it anyway. The diagnosis in Part I has been true for every man I&rsquo;ve ever sat across from, and the daily protocol works regardless of what you do with Part III.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>05</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Before you start</div><div class="m-grow"></div></aside>
+    <div class="col"><p>And it isn&rsquo;t just my opinion. There&rsquo;s a body of research behind every claim in here &mdash; neuroscience, psychology, and two thousand years of people thinking hard about God. I moved it to the back so it wouldn&rsquo;t get in the way. It&rsquo;s there when you want it.</p><p>One more thing. Don&rsquo;t read this on your phone in the truck between calls. Give it a quiet hour. Bring a pen.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>06</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part I</div>
+    <h2 class="d-title">The Diagnosis</h2>
+    <hr class="d-rule">
+    <p class="d-sub">What you&rsquo;re actually standing on</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">What you&rsquo;re actually standing on</div></aside>
+    <div class="col"><p class="lead">You can&rsquo;t find your ground by asking what you believe. You&rsquo;ll give the right answer. Everyone does.</p><p>You find it by asking a different question: <em>What am I most afraid of losing when things fall apart?</em></p><p>Whatever threatens your sense of being okay under pressure &mdash; that&rsquo;s your ground. That&rsquo;s not anxiety. That&rsquo;s a confession.</p><h3>Exercise 1 &mdash; The failure inventory</h3><p>Don&rsquo;t think. Check the one that lands hardest.</p><p><strong>When I fail, I&rsquo;m afraid of becoming:</strong></p><div class="checks"><label><span class="box"></span>Irrelevant</label><label><span class="box"></span>Exposed</label><label><span class="box"></span>Unlovable</label><label><span class="box"></span>Powerless</label><label><span class="box"></span>Unnecessary</label><label><span class="box"></span>Insignificant</label><label><span class="box"></span>Worthless</label><label><span class="box"></span>Invisible</label></div><p>The one you checked is the engine. Everything you do to make sure it never happens &mdash; that&rsquo;s your ground.</p><h3>Exercise 2 &mdash; The pressure map</h3><p>Think of the last three times you felt threatened, defensive, or anxious. Not the big ones. The ordinary ones &mdash; the text you reread four times, the meeting where your jaw tightened, the Saturday you couldn&rsquo;t stop working.</p><p>For each one, write:</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>08</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">What you&rsquo;re actually standing on</div></aside>
+    <div class="col"><ol><li>What happened?</li><li>What did I decide it meant about me?</li><li>What part of who I am was on the line?</li><li>What would it mean if that part turned out to be false?</li></ol><p>Three incidents. One pattern. The thing that keeps showing up as &ldquo;on the line&rdquo; is what you&rsquo;re standing on.</p><h3>The seven false grounds</h3><p>Most men stand on one or two of these. Each has a belief underneath it, and each breaks a specific way.</p><p><strong>Performance.</strong> <em>I am what I produce.</em> Breaks as burnout you call drive. You can&rsquo;t rest, and you&rsquo;ve mistaken that for work ethic.</p><p><strong>Approval.</strong> <em>I am what others think of me.</em> Breaks as a man who can&rsquo;t say no and resents everyone he said yes to. You edit yourself depending on who&rsquo;s in the room.</p><p><strong>Control.</strong> <em>I&rsquo;m safe when I manage the outcome.</em> Breaks as anxiety out of all proportion to the stakes. Micromanaging. Needing more information than you can use.</p><p><strong>Competence.</strong> <em>I am my expertise.</em> Breaks as the quiet dread of being found out. You can&rsquo;t admit you don&rsquo;t know, so you never learn in front of anyone.</p><p><strong>Productivity.</strong> <em>I am my output.</em> Breaks as guilt when you rest and a blankness in stillness. Vacation makes it worse, not better.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>09</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">What you&rsquo;re actually standing on</div></aside>
+    <div class="col"><p><strong>Being needed.</strong> <em>I am my usefulness.</em> Breaks as over-functioning, carrying what isn&rsquo;t yours, and a resentment you&rsquo;d never say out loud &mdash; until the people you hold up stand on their own and you don&rsquo;t know your place anymore.</p><p><strong>Being right.</strong> <em>I am my correctness.</em> Breaks as a man who wins the argument and loses the room. You can&rsquo;t receive correction, so nobody offers it anymore.</p><p>Mine was performance, with being needed close behind. I could have told you Jesus was my foundation on any given Sunday. Then the income went, and nearly the house, and I found out what was actually holding me up. It wasn&rsquo;t Him. It was the provider in me.</p><p>These aren&rsquo;t strategies. They&rsquo;re gods. And every god eventually demands a sacrifice. Usually it&rsquo;s your marriage, your body, or your kids&rsquo; memory of you.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>10</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">What you&rsquo;re actually standing on</div></aside>
+    <div class="col"><h3>Exercise 3 &mdash; Score the seven</h3><p>Rate each from 1 (never) to 5 (almost always). Your last ninety days, not your intentions.</p><table class="score"><thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody><tr><td>When I&rsquo;m not winning, I don&rsquo;t feel I have the right to rest.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr><tr><td>My mood moves on what someone thinks of me before I&rsquo;ve decided what I think.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr><tr><td>When I can&rsquo;t manage how something turns out, I get anxious out of proportion to what&rsquo;s at stake.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr><tr><td>Being wrong in front of people feels like something much worse than being wrong.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr><tr><td>A day with nothing checked off feels like a day I didn&rsquo;t earn.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr><tr><td>If nobody needed me for a week, I&rsquo;m not sure who I&rsquo;d be.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr><tr><td>I&rsquo;d rather win the argument than stay close to the person.</td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td><td><span class="box"></span></td></tr></tbody></table><p>Highest score is your ground. Write it here, in your own hand:</p><div class="form"><strong>I have been standing on <span class="blank" style="width:260px"></span>.</strong></div><p>Don&rsquo;t fix it yet. Part II is about why it keeps failing &mdash; and why trying harder has never once worked.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>11</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part II</div>
+    <h2 class="d-title">The Science</h2>
+    <hr class="d-rule">
+    <p class="d-sub">Why the ground you&rsquo;re on keeps failing you</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part II<br>The Science</div><div class="m-grow"></div><div class="m-note">Why the ground you&rsquo;re on keeps failing you</div></aside>
+    <div class="col"><p class="lead">Your brain is not broken. It&rsquo;s doing exactly what it was built to do. It just doesn&rsquo;t know the difference between a lion and a late invoice.</p><p>Here&rsquo;s the mechanism, plainly. The part of your brain that watches for threat doesn&rsquo;t sort threats by type. A danger to your body and a danger to your identity light up the same circuitry. So when your ground is conditional &mdash; when your worth depends on the number, the win, the approval, the outcome &mdash; every evaluation becomes a survival event. Every. One.</p><p>That&rsquo;s why criticism can feel like an attack. Why a failed project can feel like a death. Why her silence at dinner can feel like the end of the world. You&rsquo;re not being dramatic. Your nervous system is reading the situation correctly, given what you&rsquo;ve told it you&rsquo;re standing on.</p><h3>What it costs your body</h3><p>Conditional ground leaves a signature on a man. You might recognize it:</p><ul><li>A baseline of stress that never fully drops, even on vacation</li><li>A mind that goes dumb under pressure &mdash; the words you had in the shower vanish in the meeting</li><li>A constant scan for what&rsquo;s about to go wrong</li><li>Fight-or-flight as your resting state</li><li>Sleep that doesn&rsquo;t restore, because the system never stood down</li></ul><p>Men call this &ldquo;being wired tight.&rdquo; They say it like it&rsquo;s a personality. It&rsquo;s not. It&rsquo;s what happens to any nervous system that&rsquo;s been told its existence is on the line every day for twenty years.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>13</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part II<br>The Science</div><div class="m-grow"></div><div class="m-note">Why the ground you&rsquo;re on keeps failing you</div></aside>
+    <div class="col"><h3>The loop</h3><p>Here&rsquo;s why trying harder has never once fixed it:</p><ol><li>Conditional ground keeps you on alert.</li><li>Alert makes you perform, control, prove.</li><li>Performing works. Relief. For a while.</li><li>The relief fades. The alert comes back, same as before or worse.</li><li>So you perform harder.</li><li>Until something gives &mdash; burnout, blow-up, a forced stop.</li></ol><p>Every success inside that loop reinforces the thing that&rsquo;s killing you. You won, so the ground must be real. You rest, so the dread comes back. It&rsquo;s a treadmill with a trophy at the top of every incline and no top.</p><p>I ran that loop for twenty years. I tripled a territory&rsquo;s all-time sales record on it. I preached on it. I built a house on it. And it took one bad year to show me the whole thing had been standing on nothing.</p><div class="pull"><blockquote>Discipline doesn&rsquo;t fix unstable ground.<br>Success doesn&rsquo;t fix unstable ground.<br>Only moving your weight fixes unstable ground.</blockquote></div><p>You can&rsquo;t out-discipline a lie about who you are. Marcus Aurelius told himself every morning that he could leave life at any moment. He wasn&rsquo;t being morbid. He was refusing to stand on anything that death could take. That&rsquo;s the question in front of you: what are you standing on that a bad quarter could take?</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>14</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part III</div>
+    <h2 class="d-title">The Faith</h2>
+    <hr class="d-rule">
+    <p class="d-sub">The only ground that holds</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>The Faith</div><div class="m-grow"></div><div class="m-note">The only ground that holds</div></aside>
+    <div class="col"><p class="lead">Everyone lives by faith. Everyone. The atheist, the pastor, the guy who says he&rsquo;s &ldquo;not religious.&rdquo; The only question is where you&rsquo;ve put it.</p><p>Faith isn&rsquo;t optimism. It isn&rsquo;t a feeling. Faith is dependence &mdash; the thing you lean your weight on when you&rsquo;re scared. By that definition you&rsquo;ve had faith your whole life. You&rsquo;ve just been putting it in things that move.</p><p>The seven false grounds in Part I aren&rsquo;t neutral strategies. They&rsquo;re gods. Little ones. Functional ones. Scripture has a word for leaning your whole weight on something that can&rsquo;t hold it: idolatry. Not statues. Misplaced trust. Standing on ground that moves.</p><h3>The collapse is not punishment</h3><p>When the ground goes out &mdash; the income, the health, the marriage, the reputation &mdash; most men hear a verdict. <em>You failed. God is angry. You deserved it.</em></p><p>That&rsquo;s not what&rsquo;s happening.</p><p>Jesus told a story about two houses. The rain fell on both. The floods came to both. The wind beat on both. One stood. One fell. Not because of the storm. Because of what was under them.</p><p>The storm didn&rsquo;t destroy the house. It revealed the foundation.</p><p>If what you built has collapsed, or is cracking, the problem was never your effort. It was your footing. And the collapse &mdash; as much as it feels like the end &mdash; is the first honest thing that&rsquo;s happened to you in years. It&rsquo;s the floor telling the truth.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>16</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>The Faith</div><div class="m-grow"></div><div class="m-note">The only ground that holds</div></aside>
+    <div class="col"><p>So the question isn&rsquo;t <em>why is this happening to me?</em> The question is <em>what is this showing me about where I was standing?</em></p><h3>Why performance never holds</h3><p>Any ground that depends on outcomes, approval, control, or competence is conditional. And conditional ground produces a man who is anxious even when he&rsquo;s winning. Especially when he&rsquo;s winning. Because he knows the terms:</p><div class="pull"><blockquote>If I stop performing, I disappear.</blockquote></div><p>That&rsquo;s not strength. That&rsquo;s slavery with better branding.</p><p>Paul saw it two thousand years ago: everyone who tries to earn their standing is under a curse. Not because God is petty. Because conditional acceptance is structurally a curse. You have to perform perfectly, forever, or the whole thing comes down. No one can carry that. You&rsquo;ve been trying. Look at your sleep.</p><h3>The ground that doesn&rsquo;t move</h3><p>Here&rsquo;s the claim that Christianity makes, and that most Christian men have never actually tested with their weight:</p><ul><li>Your worth isn&rsquo;t earned.</li><li>Your place isn&rsquo;t achieved.</li><li>Your belonging isn&rsquo;t negotiated.</li><li>Your ground is <em>received.</em></li></ul><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>17</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>The Faith</div><div class="m-grow"></div><div class="m-note">The only ground that holds</div></aside>
+    <div class="col"><p>You were made in the image of God. That&rsquo;s not a compliment. It&rsquo;s a load-bearing fact. Your worth is built into what you are, before you&rsquo;ve produced anything, and it can&rsquo;t be increased by a win or decreased by a failure. Then the Gospel adds the part that saves your life: that image, which you&rsquo;ve spent years corrupting and defending, has been restored and secured in Jesus. Belonging comes before obedience. Love comes before change. Acceptance comes before performance.</p><p>I&rsquo;m not talking about God in general. I&rsquo;m talking about Jesus. A man who was tempted on every one of the seven grounds &mdash; bread, power, spectacle &mdash; and stood on none of them. He didn&rsquo;t perform His way to the Father&rsquo;s love. He had it at the river before He&rsquo;d done a single thing. &ldquo;This is my Son, whom I love.&rdquo; Then He went to work.</p><p>That order &mdash; loved, then working &mdash; is the whole protocol.</p><h3>Confidence, redefined</h3><p>Confidence isn&rsquo;t self-trust. Look at the word: <em>con fide.</em> With faith. The question was never whether you have confidence. It&rsquo;s whether what your confidence is standing on can hold your weight.</p><p>Self-confidence puts faith in a moving target &mdash; you, on a good day. Christ-anchored confidence puts faith in ground that doesn&rsquo;t shift when you do.</p><div class="pull"><blockquote>The only ground that holds under real weight is one that does not move when you do.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>18</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>The Faith</div><div class="m-grow"></div><div class="m-note">The only ground that holds</div></aside>
+    <div class="col"><p>If you&rsquo;re not where I am on Jesus, I&rsquo;m not going to pretend the next three parts work the same without Him. They&rsquo;ll help. The protocol is sound. But I&rsquo;d be lying if I told you there&rsquo;s another ground that meets all three tests in Part IV. I looked for twenty years. There isn&rsquo;t.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>19</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part IV</div>
+    <h2 class="d-title">The Move</h2>
+    <hr class="d-rule">
+    <p class="d-sub">How ground actually shifts</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>The Move</div><div class="m-grow"></div><div class="m-note">How ground actually shifts</div></aside>
+    <div class="col"><p class="lead">Nobody reasons their way onto new ground. Nobody.</p><p>Ground changes under collapse or confrontation. Something you trusted breaks. Something you leaned on gets exposed. Something you were sure was solid turns out to have been conditional the whole time. That&rsquo;s why real transformation feels violent. It is.</p><p>In that moment, you have two options:</p><p><strong>Option one:</strong> reinforce the broken ground. More discipline. More coping. More force. Get up earlier. Hit the gym harder. Read another book. Promise her it&rsquo;ll be different.</p><p><strong>Option two:</strong> move your weight somewhere else entirely.</p><p>Most men choose option one. They call it growth. It&rsquo;s usually just a man patching a foundation while the house is sliding off it.</p><h3>Step 1 &mdash; Take your weight off the false ground</h3><p>This feels like death because it is one. Not the end of you &mdash; the end of the version of you that was built to keep the verdict away. The provider. The fixer. The one who&rsquo;s never wrong.</p><p>You have to let the false ground fail without rescuing it. No reframing. No spiritual bypassing &mdash; quoting a verse so you don&rsquo;t have to feel it. No productivity pivot. Let the fear speak. Let the loss register. Sit in the room with it.</p><p>This is where most men abort. Don&rsquo;t.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>21</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>The Move</div><div class="m-grow"></div><div class="m-note">How ground actually shifts</div></aside>
+    <div class="col"><p>Do this, with a pen:</p><ol><li>Name it: <em>I have been standing on <span class="blank" style="width:196px"></span>.</em></li><li>Count what it&rsquo;s cost: <em>This ground has produced <span class="blank" style="width:196px"></span> in my marriage, <span class="blank" style="width:196px"></span> in my body, <span class="blank" style="width:196px"></span> in my kids.</em></li><li>Find the fear under it: <em>Without this ground, I&rsquo;m afraid I&rsquo;d be <span class="blank" style="width:196px"></span>.</em></li><li>Refuse to rescue it. When the urge to perform, prove, or control shows up this week &mdash; and it will &mdash; pause instead of act. Just once. Then again.</li><li>Tolerate the empty. There&rsquo;s a stretch where you don&rsquo;t know who you are without the old ground. That&rsquo;s not a crisis. That&rsquo;s the space where the new ground gets installed.</li></ol><p>Jordan Peterson says you have to let the old self die, and the old self fights for its life. He&rsquo;s right. It will. It&rsquo;ll tell you this is weakness, that real men push through, that you don&rsquo;t have time for this. That voice is the false ground talking. It&rsquo;s always had your voice.</p><h3>Step 2 &mdash; Put your weight on ground that holds</h3><p>New ground has to pass three tests, or it&rsquo;s just another false one with a better name:</p><ul><li><strong>Unconditional.</strong> It doesn&rsquo;t depend on outcomes.</li><li><strong>Outside you.</strong> You didn&rsquo;t make it, so you can&rsquo;t break it.</li><li><strong>Stable under failure.</strong> It doesn&rsquo;t take your belonging away when you fall.</li></ul><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>22</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>The Move</div><div class="m-grow"></div><div class="m-note">How ground actually shifts</div></aside>
+    <div class="col"><p>Only one thing I know of passes all three. Loved by God in Christ, before you did anything, in a way no failure can revoke. Identity before obedience. Belonging before behavior. Love before change.</p><p>That&rsquo;s not theology as an idea. That&rsquo;s theology as architecture. It&rsquo;s the slab under the house.</p><p>Do this:</p><ol><li>Memorize the ground statement. Say it out loud, in the truck, until it stops feeling strange: <em>My worth is received, not achieved. My belonging is secured, not earned.</em></li><li>Practice returning to it under pressure &mdash; before the spike, not after.</li><li>Notice the difference between believing it in your head and standing on it with your weight. Most men have the first. Almost none have the second. The second is what we&rsquo;re after.</li><li>Catch yourself reaching for the old ground. Every reach is a rep.</li></ol><h3>Step 3 &mdash; Change what pressure means</h3><p>Once your weight moves, pressure changes meaning.</p><p>It used to mean: <em>I&rsquo;m at risk.</em> Now it means: <em>I&rsquo;m being refined.</em></p><p>Same stimulus. Different ground. Different nervous system.</p><p>This is where courage stops being something you force and starts being something you have. Not because the stakes dropped. Because <em>you&rsquo;re</em> no longer the stakes.</p><p>When pressure arrives:</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>23</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>The Move</div><div class="m-grow"></div><div class="m-note">How ground actually shifts</div></aside>
+    <div class="col"><ol><li>Ask: <em>What is this actually threatening?</em></li><li>If the answer is my worth, my identity, my belonging &mdash; <em>that&rsquo;s a false alarm. Those are already settled.</em></li><li>Reframe: <em>This is about the task, not about me.</em></li><li>Act from the ground, not toward it.</li></ol><div class="pull"><blockquote>Transformation isn&rsquo;t becoming a better version of the same man.<br>It&rsquo;s becoming a different kind of man, built on different ground.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>24</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part V</div>
+    <h2 class="d-title">Living on It</h2>
+    <hr class="d-rule">
+    <p class="d-sub">How you know the ground has moved</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>Living on It</div><div class="m-grow"></div><div class="m-note">How you know the ground has moved</div></aside>
+    <div class="col"><p class="lead">When ground actually shifts, specific things change. Not goals. Evidence.</p><p><strong>Fear loses its leverage.</strong> Threats stop feeling existential. You can take a real risk without putting yourself on trial.</p><p><strong>Shame loses its authority.</strong> Failure becomes information instead of a sentence. A mistake is data, not a verdict.</p><p><strong>Hustle loses its moral high ground.</strong> Rest becomes legitimate. Stillness stops feeling like failure. You can sit on the porch.</p><p><strong>Approval stops being oxygen.</strong> Other people&rsquo;s opinions inform you. They don&rsquo;t determine you. Boundaries show up without a fight.</p><p><strong>Effort becomes selective.</strong> Work becomes expression, not compensation. You do less, and more of it lands.</p><p>None of that is because life got easier. It&rsquo;s because pressure stopped meaning you might not exist.</p><h3>The tell</h3><p>There&rsquo;s one test that tells you whether your ground has moved or you&rsquo;ve just learned to talk about it:</p><div class="pull"><blockquote>If pressure still threatens <em>who you are</em>, your ground hasn&rsquo;t changed.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>26</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>Living on It</div><div class="m-grow"></div><div class="m-note">How you know the ground has moved</div></aside>
+    <div class="col"><p>That&rsquo;s it. Not whether you feel stress &mdash; you will. Whether the stress carries existential weight. The project can fail without you failing. The deal can collapse without you collapsing. The kid can melt down in the restaurant without you being a bad father. That&rsquo;s the difference.</p><h3>Where it shows up</h3><p><strong>At work.</strong> Old ground: <em>I have to prove my value with output. Every project carries my identity. Rest is failure.</em> New ground: <em>My value is settled. Work is contribution, not compensation. A project can succeed or fail without it meaning anything about me. Rest is legitimate because worth isn&rsquo;t earned.</em></p><p><strong>At home.</strong> Old ground: <em>I need her to see me as the provider, the strong one. Conflict means I&rsquo;m failing. The kids get what&rsquo;s left.</em> New ground: <em>I don&rsquo;t need to be managed by anyone&rsquo;s approval, including my wife&rsquo;s. Conflict is about the issue, not about whether I&rsquo;m acceptable. My kids get the first of me, not the leftovers &mdash; because I&rsquo;m not spending myself proving something at the office.</em></p><p>I&rsquo;ll say this plainly, because it&rsquo;s the whole reason I wrote this. The night I decided to become the man my son already thought I was, I was standing on nothing. What rebuilt me wasn&rsquo;t ambition. It was structure built on ground that didn&rsquo;t need me to be impressive. I savor my kids differently now. That&rsquo;s not a nice side effect. That&rsquo;s the point.</p><p><strong>In decisions.</strong> Old ground: <em>I have to choose perfectly or pay for it. Paralysis. Regret out of proportion.</em> New ground: <em>No decision can touch my worth. Decide with what you have. Course-correct. That&rsquo;s not failure, that&rsquo;s steering.</em></p><p><strong>In failure.</strong> Old ground: <em>Failure proves I&rsquo;m not enough. Shame spiral. Recovery means earning my way back.</em> New ground: <em>Failure gives me information. My worth stays where it was. Recovery is about the task, not about regaining myself.</em></p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>27</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part VI</div>
+    <h2 class="d-title">The Protocol</h2>
+    <hr class="d-rule">
+    <p class="d-sub">The daily practice of standing somewhere else</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Protocol</div><div class="m-grow"></div><div class="m-note">The daily practice of standing somewhere else</div></aside>
+    <div class="col"><p class="lead">Ground doesn&rsquo;t stay moved by itself. The old ground has twenty years of grooves. You&rsquo;ll roll back into them every time you get tired, scared, or successful. So this is daily. Not because you&rsquo;re weak. Because you&rsquo;re a man, and that&rsquo;s how men stay standing.</p><h3>The morning check &mdash; four minutes</h3><p>Do it before your phone. Before email. Before anyone needs anything from you.</p><p><strong>1. Ground audit</strong> (two minutes). Ask:</p><ul><li>What am I standing on right now?</li><li>Is my identity tied to today&rsquo;s outcomes?</li><li>What would threaten my sense of worth today?</li></ul><p>If any answer reveals conditional ground, go to step 2.</p><p><strong>2. Ground statement</strong> (thirty seconds). Out loud:</p><ul><li><em>My worth is received, not achieved.</em></li><li><em>I am not what I produce.</em></li><li><em>My belonging is secured. Today&rsquo;s outcomes can&rsquo;t revoke it.</em></li></ul><p>This isn&rsquo;t affirmation. Affirmation is talking yourself into something. This is architecture &mdash; declaring what you&rsquo;re standing on before the weight arrives.</p><p><strong>3. Pressure forecast</strong> (one minute). Where&rsquo;s today going to push? For each spot:</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>29</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Protocol</div><div class="m-grow"></div><div class="m-note">The daily practice of standing somewhere else</div></aside>
+    <div class="col"><ul><li>Which false ground will it try to pull me onto?</li><li>What would standing on true ground look like there?</li><li>What response would prove I stayed put?</li></ul><h3>The pressure protocol &mdash; in the moment</h3><p>When it hits unexpectedly &mdash; the email, the number, the tone in her voice:</p><p><strong>Pause.</strong> Three seconds. Even three. The pause is itself a declaration: <em>I am not my reaction.</em></p><p><strong>Ground-check.</strong> <em>What&rsquo;s actually at stake here?</em> If the answer involves worth, identity, or belonging &mdash; false alarm. Those are settled.</p><p><strong>Reframe.</strong> Move it from identity-level to task-level:</p><ul><li>Not <em>Am I good enough?</em> → <em>How do I handle this?</em></li><li>Not <em>Will they reject me?</em> → <em>What does integrity look like here?</em></li><li>Not <em>Am I failing?</em> → <em>What&rsquo;s the next right move?</em></li></ul><p><strong>Act from ground.</strong> Do what a man whose identity is settled would do. You may not feel settled. Act from the truth, not the feeling. Feelings follow weight; they don&rsquo;t lead it.</p><h3>The evening debrief &mdash; three minutes</h3><ul><li>Where did I slide onto false ground today?</li><li>What triggered it?</li><li>When did I stand on true ground under pressure?</li><li>What pattern am I noticing?</li></ul><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>30</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Protocol</div><div class="m-grow"></div><div class="m-note">The daily practice of standing somewhere else</div></aside>
+    <div class="col"><p>Not self-criticism. Reconnaissance. You&rsquo;re mapping your own terrain so you can walk it better tomorrow.</p><h3>The minimum daily</h3><p>One more thing, and this one&rsquo;s mine. When I had nothing &mdash; no motivation, no money, no margin &mdash; I built something that didn&rsquo;t need any of those. A minimum daily. Walk through the gym doors, even if I don&rsquo;t train. Ten calls. One note to my wife. Every day, no matter what.</p><p>Pick yours. Three things, small enough that you can do them on the worst day of your year. That&rsquo;s the floor. Everything else is built on it. And put the note to your wife on the list. That one was the one that mattered.</p><h3>The weekly reset &mdash; fifteen minutes</h3><p>Once a week, sit down and ask:</p><ol><li>Of this week&rsquo;s pressure moments, how many hit my identity?</li><li>Is there a domain &mdash; work, home, money, body &mdash; where the false ground keeps winning?</li><li>Is the gap between knowing this and standing on it getting smaller?</li><li>What one practice would close it faster next week?</li></ol><div class="pull"><blockquote>Most men don&rsquo;t need better habits.<br>They need a different place to stand.<br>Everything else follows.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>31</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Protocol</div><div class="m-grow"></div><div class="m-note">The daily practice of standing somewhere else</div></aside>
+    <div class="col"><p>You will never outgrow the ground you&rsquo;re standing on. If your life feels fragile, it&rsquo;s not because you&rsquo;re weak. It&rsquo;s because something that cannot hold weight has been pretending to.</p><p>Move your weight. Then come back tomorrow and move it again.</p><p>— Matt</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>32</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Appendix A</div>
+    <h2 class="d-title">The inventory</h2>
+    <hr class="d-rule">
+    <p class="d-sub">Twenty statements, four grounds</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix A<br>The inventory</div><div class="m-grow"></div><div class="m-note">Twenty statements, four grounds</div></aside>
+    <div class="col"><p class="lead">A longer read on the four grounds that catch most men. Rate each from 1 (never) to 5 (always). Total each section. Your highest section is your primary ground &mdash; and where to aim the Protocol first.</p><p><strong>A. Performance</strong></p><ul><li>I feel anxious when I&rsquo;m not being productive.</li><li>My sense of worth goes up when I accomplish something significant.</li><li>Rest feels like wasted time unless I&rsquo;ve earned it.</li><li>I compare my output to other men&rsquo;s regularly.</li><li>A failed project affects how I see myself for days or longer.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>B. Approval</strong></p><ul><li>I change how I act significantly depending on who I&rsquo;m with.</li><li>Criticism affects my mood out of proportion.</li><li>I replay conversations looking for signs someone&rsquo;s disappointed in me.</li><li>I have trouble saying no even when I should.</li><li>I need positive feedback to feel confident about my work.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>C. Control</strong></p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>34</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix A<br>The inventory</div><div class="m-grow"></div><div class="m-note">Twenty statements, four grounds</div></aside>
+    <div class="col"><ul><li>Uncertainty makes me significantly anxious.</li><li>I have trouble delegating important things.</li><li>I plan heavily to reduce the chance of being surprised.</li><li>When things don&rsquo;t go to plan, I get noticeably distressed.</li><li>I feel safer with more information, even when I can&rsquo;t act on it.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>D. Competence</strong></p><ul><li>I avoid situations where I might look like I don&rsquo;t know what I&rsquo;m doing.</li><li>Being wrong in public feels catastrophic.</li><li>I over-prepare so I never look unprepared.</li><li>I feel threatened when someone knows more than I do in my area.</li><li>I have trouble admitting I don&rsquo;t know something.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>Reading it:</strong> 5–10, light attachment. 11–17, moderate &mdash; a vulnerability under pressure. 18–25, this is likely a primary ground.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>35</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix A<br>The inventory</div><div class="m-grow"></div><div class="m-note">Twenty statements, four grounds</div></aside>
+    <div class="col"><h3>The pressure log</h3><p>Track pressure moments for seven to fourteen days. The pattern will tell you what the quiz can&rsquo;t.</p><div class="formgroup"><div class="form">Date / time <span class="blank" style="width:154px"></span>  Situation <span class="blank" style="width:260px"></span></div><div class="form">What I felt in my body <span class="blank" style="width:260px"></span></div><div class="form">What I thought <span class="blank" style="width:260px"></span></div><div class="form">What felt threatened <span class="blank" style="width:260px"></span></div><div class="form">What I did <span class="blank" style="width:260px"></span></div><div class="form">Ground: false / true / mixed</div></div><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>36</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Appendix B</div>
+    <h2 class="d-title">The research behind it</h2>
+    <hr class="d-rule">
+    <p class="d-sub">So you know it isn&rsquo;t just my opinion</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix B<br>The research behind it</div><div class="m-grow"></div><div class="m-note">So you know it isn&rsquo;t just my opinion</div></aside>
+    <div class="col"><p class="lead">Everything in this book I learned the hard way first. But I&rsquo;m not asking you to take my word for it, and you shouldn&rsquo;t. Here&rsquo;s where the claims come from.</p><p><strong>That your brain treats identity threat like physical threat.</strong> Naomi Eisenberger&rsquo;s work at UCLA showed that social pain &mdash; rejection, exclusion, exposure &mdash; runs on the same neural circuitry as physical pain. Matthew Lieberman&rsquo;s <em>Social</em> lays out the same evidence for a general reader. This is why a critical email can feel like a punch. It is one, as far as your brain is concerned.</p><p><strong>That chronic threat leaves a physical signature.</strong> Bruce McEwen&rsquo;s decades of work on allostatic load describe exactly the cortisol baseline, the hypervigilance, and the sleep disruption in Part II. Stephen Porges&rsquo;s polyvagal theory explains why a nervous system that never stands down can&rsquo;t restore itself. Bessel van der Kolk&rsquo;s <em>The Body Keeps the Score</em> is the book most men have heard of; it&rsquo;s about trauma, but the mechanism is the same one running under conditional ground.</p><p><strong>That worth built on outcomes doesn&rsquo;t produce stability.</strong> Jennifer Crocker and Connie Wolfe&rsquo;s research on contingencies of self-worth found that people who stake their self-esteem on external domains show more emotional volatility, more depressive symptoms, and lower well-being &mdash; and that <em>success</em> in those domains doesn&rsquo;t fix it. It produces a treadmill. That finding is the whole of Part II&rsquo;s loop.</p><p><strong>That shame and guilt are different things.</strong> June Tangney and Ronda Dearing&rsquo;s <em>Shame and Guilt</em> established the distinction this book depends on &mdash; guilt as &ldquo;I did something bad,&rdquo; shame as &ldquo;I am something bad&rdquo; &mdash; and showed that shame, not guilt, drives the hiding, the anger, and the isolation. Brené Brown&rsquo;s work made it plain for a wider audience.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>38</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix B<br>The research behind it</div><div class="m-grow"></div><div class="m-note">So you know it isn&rsquo;t just my opinion</div></aside>
+    <div class="col"><p><strong>That men manage mortality by building projects.</strong> Terror management theory &mdash; Sheldon Solomon, Jeff Greenberg, and Tom Pyszczynski&rsquo;s <em>The Worm at the Core</em> &mdash; shows that we handle the fact of death by investing in structures of meaning, and that when those structures are threatened, we get defensive. Marcus Aurelius knew this without the data. So did Viktor Frankl, who found in a concentration camp that men with a reason to live survived what men with only outcomes didn&rsquo;t. Paul Tillich&rsquo;s <em>The Courage to Be</em> and Irvin Yalom&rsquo;s <em>Existential Psychotherapy</em> work the same ground from philosophy and from the clinic.</p><p><strong>That the ground has to be received, not earned.</strong> This is older than any study. Martin Luther, <em>The Freedom of a Christian</em>. Calvin&rsquo;s <em>Institutes</em>. Kierkegaard&rsquo;s <em>The Sickness Unto Death</em>, which is about exactly the despair of a self that is trying to be its own ground. Bonhoeffer on costly grace. C. S. Lewis, <em>Mere Christianity</em>. Tim Keller&rsquo;s <em>Counterfeit Gods</em> is the clearest modern treatment of the seven false grounds as functional idols, and if you read one book on this list, read that one.</p><p><strong>The scriptures this book stands on.</strong> Genesis 1:26–27 (made in the image of God). Matthew 3:17 and 4:1–11 (loved before the work; tested on every ground and standing on none). Matthew 7:24–27 (the two houses). Romans 5:1–2 and 8:1, 38–39 (standing secured, nothing can separate). Galatians 3:10–14 (the curse of earning). Ephesians 1:3–14 and 2:8–9 (received, not achieved). Philippians 3:7–11 (Paul moving his weight off achievement). Colossians 2:10 (complete in Him). 1 John 4:18 (perfect love casts out fear).</p><h3>Works cited</h3><p class="cite">Bonhoeffer, D. (1937/1995). <em>The Cost of Discipleship.</em> Touchstone.</p><p class="cite">Brown, B. (2012). <em>Daring Greatly.</em> Gotham.</p><p class="cite">Calvin, J. (1559/2008). <em>Institutes of the Christian Religion.</em> Hendrickson.</p><p class="cite">Crocker, J., &amp; Wolfe, C. T. (2001). Contingencies of self-worth. <em>Psychological Review,</em> 108(3), 593–623.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>39</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix B<br>The research behind it</div><div class="m-grow"></div><div class="m-note">So you know it isn&rsquo;t just my opinion</div></aside>
+    <div class="col"><p class="cite">Dweck, C. S. (2006). <em>Mindset.</em> Random House.</p><p class="cite">Eisenberger, N. I. (2012). The neural bases of social pain. <em>Psychosomatic Medicine,</em> 74(2), 126–135.</p><p class="cite">Frankl, V. E. (1959). <em>Man&rsquo;s Search for Meaning.</em> Beacon.</p><p class="cite">Keller, T. (2009). <em>Counterfeit Gods.</em> Dutton.</p><p class="cite">Kierkegaard, S. (1849/1980). <em>The Sickness Unto Death.</em> Princeton.</p><p class="cite">Lewis, C. S. (1952). <em>Mere Christianity.</em> Geoffrey Bles.</p><p class="cite">Lieberman, M. D. (2013). <em>Social: Why Our Brains Are Wired to Connect.</em> Crown.</p><p class="cite">Luther, M. (1520/2016). <em>The Freedom of a Christian.</em> Fortress.</p><p class="cite">McEwen, B. S. (2007). Physiology and neurobiology of stress and adaptation. <em>Physiological Reviews,</em> 87(3), 873–904.</p><p class="cite">Neff, K. D. (2011). Self-compassion, self-esteem, and well-being. <em>Social and Personality Psychology Compass,</em> 5(1), 1–12.</p><p class="cite">Porges, S. W. (2011). <em>The Polyvagal Theory.</em> Norton.</p><p class="cite">Seligman, M. E. P. (1975). <em>Helplessness.</em> Freeman.</p><p class="cite">Solomon, S., Greenberg, J., &amp; Pyszczynski, T. (2015). <em>The Worm at the Core.</em> Random House.</p><p class="cite">Tangney, J. P., &amp; Dearing, R. L. (2002). <em>Shame and Guilt.</em> Guilford.</p><p class="cite">Tillich, P. (1952). <em>The Courage to Be.</em> Yale.</p><p class="cite">van der Kolk, B. A. (2014). <em>The Body Keeps the Score.</em> Viking.</p><p class="cite">Yalom, I. D. (1980). <em>Existential Psychotherapy.</em> Basic Books.</p><div class="grow"></div>
+      <div class="foot"><span>The Grounding Protocol</span><span>40</span></div>
+    </div>
+  </div></div>
+<div class="page dark back">
+  <div class="inner">
+    <p class="bk-line">You will never outgrow the ground you&rsquo;re standing on.</p>
+    <p class="bk-sub">If your life feels fragile, it&rsquo;s not because you&rsquo;re weak. It&rsquo;s because something that cannot hold weight has been pretending to.</p>
+    <div class="c-grow"></div>
+    <div class="bk-author">
+      <img src="../images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+      <div><div class="c-os">Matt Vincent Walker</div><p>Husband, dad of two, coach. Nearly twenty years in pastoral ministry, then Fortune 500 sales, then systems and AI. Then the years everything broke &mdash; and the structure that rebuilt him, one brick at a time.</p></div>
+    </div>
+    <hr class="bk-rule">
+    <div class="bk-foot"><div>One letter a week<br><span class="amber">mattvincentwalker.com</span></div><img class="shield-sm" src="../images/vincere-shield.png" alt=""></div>
+    <div class="bk-vin">Vincere &middot; Latin, &ldquo;to overcome&rdquo;</div>
+  </div></div>
+</div></body></html>

@@ -9,7 +9,7 @@ I wrote this on the other side of the worst year of my life.
 
 A territory cut took a third of my income the same year we closed on the house we'd built. Then debt. Then two jobs. Then drinking to take the edge off and telling everyone we were fine. My marriage nearly didn't make it. And one night I came closer to not being here than I ever intend to be again.
 
-Here's what I learned at the bottom that I could not have learned anywhere else. I had been standing on something for twenty years, and it wasn't what I said I believed. I said I believed in God. I preached it. What I actually trusted — the thing that held my weight when I was scared — was being the guy who produces. The provider. The one who fixes it. When that got taken away, I found out I'd built a whole life on it.
+Here's what I learned at the bottom that I could not have learned anywhere else. I had been standing on something for twenty years, and it wasn't what I said I believed. I said I believed in Jesus. I preached Him. What I actually trusted — the thing that held my weight when I was scared — was being the guy who produces. The provider. The one who fixes it. When that got taken away, I found out I'd built a whole life on it.
 
 That's what this is about. Not what you believe. What you're standing on.
 
@@ -32,7 +32,7 @@ This is not a mindset shift. You can't think your way onto new ground. Nobody re
 
 This is a protocol. A short, honest way to find out what you're actually standing on (Part I), understand why it keeps failing you (Parts II and III), move your weight somewhere that holds (Part IV), and build a daily practice of standing there (Parts V and VI).
 
-I'm a Christian, and this doesn't pretend otherwise. Part III says plainly where I think the only ground that holds is. If you're not where I am on that, read it anyway. The diagnosis in Part I has been true for every man I've ever sat across from, and the daily protocol works regardless of what you do with Part III.
+I'm a Christian, and this doesn't pretend otherwise. Part III says plainly where I think the only ground that holds is, and His name is Jesus. If you're not where I am on that, read it anyway. The diagnosis in Part I has been true for every man I've ever sat across from, and the daily protocol works regardless of what you do with Part III.
 
 And it isn't just my opinion. There's a body of research behind every claim in here — neuroscience, psychology, and two thousand years of people thinking hard about God. I moved it to the back so it wouldn't get in the way. It's there when you want it.
 
@@ -55,8 +55,14 @@ Don't think. Check the one that lands hardest.
 
 **When I fail, I'm afraid of becoming:**
 
-☐ Irrelevant   ☐ Exposed   ☐ Unlovable   ☐ Powerless
-☐ Unnecessary   ☐ Insignificant   ☐ Worthless   ☐ Invisible
+☐ Irrelevant
+☐ Exposed
+☐ Unlovable
+☐ Powerless
+☐ Unnecessary
+☐ Insignificant
+☐ Worthless
+☐ Invisible
 
 The one you checked is the engine. Everything you do to make sure it never happens — that's your ground.
 
@@ -91,7 +97,7 @@ Most men stand on one or two of these. Each has a belief underneath it, and each
 
 **Being right.** *I am my correctness.* Breaks as a man who wins the argument and loses the room. You can't receive correction, so nobody offers it anymore.
 
-Mine was performance, with being needed close behind. I could have told you God was my foundation on any given Sunday. Then the income went, and nearly the house, and I found out what was actually holding me up. It wasn't Him. It was the provider.
+Mine was performance, with being needed close behind. I could have told you Jesus was my foundation on any given Sunday. Then the income went, and nearly the house, and I found out what was actually holding me up. It wasn't Him. It was the provider in me.
 
 These aren't strategies. They're gods. And every god eventually demands a sacrifice. Usually it's your marriage, your body, or your kids' memory of you.
 
