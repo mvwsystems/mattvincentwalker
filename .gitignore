@@ -7,3 +7,6 @@ zz-*.html
 images/* copy.*
 images/Noah*.jpg
 images/Noah*.jpeg
+
+# Protocol library PDFs are built locally (6MB each); drafts and book.html are the source of truth
+protocols/library/*/*.pdf

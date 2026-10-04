@@ -1,0 +1,475 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>The Boundary Protocol — Matt Vincent Walker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F5F0EA;--warm:#ECE5D9;--ink:#1C1A17;--char:#2C2C2C;--gray:#5f5950;--gray2:#8f877b;--line:#CFC7BA;--amber:#c8935a;--amber-dim:#8a6a3e;--dark:#0c0a09;
+ --disp:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Garamond,Georgia,serif;--mono:"JetBrains Mono",Menlo,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#14110E;font-family:var(--body);color:var(--ink)}
+@page{size:letter;margin:0}
+.book{display:flex;flex-direction:column;align-items:center;gap:24px;padding:40px 0}
+@media print{.book{display:block;padding:0;gap:0}}
+.page{width:8.5in;height:11in;background:var(--paper);position:relative;overflow:hidden;flex:none;break-after:page;page-break-after:always;box-shadow:0 2px 24px rgba(0,0,0,.55)}
+@media print{.page{box-shadow:none}}
+.page.dark{background-color:var(--dark);color:#eae4d8;background-image:radial-gradient(ellipse 120% 90% at 50% 38%,rgba(64,56,46,.32) 0%,rgba(12,10,9,0) 62%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E")}
+.inner{position:relative;height:100%;padding:0.75in;display:flex;flex-direction:column}
+.inner.center{align-items:center;justify-content:center;text-align:center}
+.inner.grid{display:grid;grid-template-columns:150px minmax(0,1fr);column-gap:36px;padding:0.75in 0.75in 0.62in}
+.margin{display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:22px;font-family:var(--mono)}
+.m-part{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber-dim);line-height:1.8}
+.m-grow,.grow{flex:1}
+.m-note{font-family:var(--disp);font-style:italic;font-size:16px;line-height:1.45;color:var(--gray);text-wrap:pretty}
+.col{display:flex;flex-direction:column;min-width:0}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--amber-dim);margin-bottom:12px}
+h2.section{font-family:var(--disp);font-weight:500;font-size:40px;line-height:1.08;color:var(--ink);text-wrap:balance}
+hr.rule{width:52px;height:1px;background:var(--amber);border:0;margin:22px 0 22px}
+h3{font-family:var(--disp);font-weight:600;font-size:23px;line-height:1.2;color:var(--ink);margin:22px 0 10px;text-wrap:balance}
+h3:first-child{margin-top:0}
+p{font-size:16px;line-height:1.62;color:var(--char);margin-bottom:14px;text-wrap:pretty}
+p.lead{font-family:var(--disp);font-size:21px;line-height:1.45;color:var(--ink)}
+.formgroup .form{display:flex;gap:10px;align-items:baseline}.formgroup .form .blank{flex:1;width:auto !important}
+.mb{display:block}
+strong{color:var(--ink);font-weight:600}
+.pull{border-top:1px solid var(--amber);border-bottom:1px solid var(--amber);padding:20px 8px;margin:18px 0 22px}
+.pull blockquote{font-family:var(--disp);font-style:italic;font-weight:500;font-size:22px;line-height:1.4;color:var(--ink);text-wrap:pretty}
+ul,ol{margin:4px 0 16px 22px}
+li{font-size:16px;line-height:1.55;color:var(--char);margin-bottom:7px;text-wrap:pretty}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin:6px 0 18px}
+.checks label{display:flex;align-items:center;gap:12px;font-size:17px;color:var(--char)}
+.box{display:inline-block;width:16px;height:16px;border:1px solid var(--ink);flex:none}
+.blank{display:inline-block;border-bottom:1px solid var(--ink);height:14px;vertical-align:baseline;margin:0 2px}
+table.score{width:100%;border-collapse:collapse;margin:8px 0 18px;font-size:14.5px}
+table.score th{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gray2);font-weight:400;padding:6px 4px;text-align:center}
+table.score td{padding:9px 6px 9px 0;border-top:1px solid var(--line);color:var(--char);line-height:1.4;vertical-align:middle}
+table.score td:not(:first-child){text-align:center;width:38px}
+.form{font-size:15px;line-height:2.2;color:var(--char);border-bottom:1px solid var(--line);margin-bottom:8px}
+p.cite{font-size:13.5px;line-height:1.45;color:var(--char);margin-bottom:6px;padding-left:18px;text-indent:-18px}
+.foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray2);padding-top:14px}
+/* dark pages */
+.divider .inner{align-items:center;justify-content:center;text-align:center}
+.d-label{font-family:var(--mono);font-size:13px;letter-spacing:6px;text-transform:uppercase;color:var(--amber-dim)}
+.d-title{font-family:var(--disp);font-weight:500;font-size:72px;line-height:1;color:#f5f1e9;margin-top:34px;text-wrap:balance}
+hr.d-rule{width:56px;height:1px;background:var(--amber);border:0;margin:38px 0 28px}
+.d-sub{font-family:var(--disp);font-style:italic;font-size:26px;line-height:1.4;color:#a09a90;max-width:440px;text-wrap:balance}
+.cover .inner{align-items:center;text-align:center;padding:1in .75in .75in}
+.shield{width:92px;height:92px;object-fit:contain;opacity:.95}
+.shield-sm{width:56px;height:56px;object-fit:contain;opacity:.9}
+.c-os{font-family:var(--mono);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--amber-dim);margin-top:22px}
+.c-grow{flex:1}.c-grow2{flex:1.4}
+.c-the{font-family:var(--mono);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:#a09a90;margin-bottom:26px}
+.c-title{font-family:var(--disp);font-weight:600;font-size:92px;line-height:.98;letter-spacing:.02em;color:#f5f1e9;text-wrap:balance}
+.c-sub{font-family:var(--disp);font-style:italic;font-size:24px;line-height:1.4;color:var(--amber);max-width:480px;text-wrap:balance}
+.c-author{font-family:var(--mono);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:#a09a90}
+.belongs .name-line{width:300px;border-bottom:1px solid var(--amber-dim);margin:70px 0 26px}
+.b-note{font-family:var(--disp);font-style:italic;font-size:17px;line-height:1.5;color:var(--gray);max-width:360px;text-wrap:pretty}
+.b-note.left{max-width:480px;text-align:left}
+.toc-rows{margin-top:10px}
+.toc-row{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.toc-label{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber-dim);width:120px;flex:none}
+.toc-title{font-family:var(--disp);font-size:21px;color:var(--ink)}
+.toc-dots{flex:1}
+.toc-pg{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--gray2)}
+.back .inner{padding:1in .75in .75in}
+.bk-line{font-family:var(--disp);font-size:34px;line-height:1.3;color:#f5f1e9;max-width:560px;margin-bottom:26px;text-wrap:pretty}
+.bk-sub{font-family:var(--disp);font-style:italic;font-size:22px;line-height:1.45;color:#a09a90;max-width:520px;text-wrap:pretty}
+.bk-author{display:flex;gap:28px;align-items:center}
+.bk-author img{width:112px;height:136px;object-fit:cover;object-position:center 15%;filter:grayscale(1) contrast(1.05)}
+.bk-author p{font-size:16px;line-height:1.6;color:#d4cec4;max-width:420px;margin:8px 0 0;text-wrap:pretty}
+.bk-author .c-os{margin-top:0}
+hr.bk-rule{width:100%;height:1px;background:#2e2a22;border:0;margin:44px 0 28px}
+.bk-foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#a09a90;line-height:1.9}
+.amber{color:var(--amber)}
+.bk-vin{margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#5a5347}
+</style></head><body><div class="book">
+<div class="page dark cover">
+  <div class="inner">
+    <img class="shield" src="../../../images/vincere-shield.png" alt="Vincere">
+    <div class="c-os">Vincere OS</div>
+    <div class="c-grow"></div>
+    <div class="c-the">The</div>
+    <h1 class="c-title">Boundary<br>Protocol</h1>
+    <hr class="d-rule">
+    <p class="c-sub">Where you end &mdash; and what to do about everything you&rsquo;ve been carrying that isn&rsquo;t yours.</p>
+    <div class="c-grow2"></div>
+    <div class="c-author">Matt Vincent Walker</div>
+  </div></div>
+<div class="page belongs">
+  <div class="inner center">
+    <div class="kicker">This protocol belongs to</div>
+    <div class="name-line"></div>
+    <p class="b-note">Write your name in your own hand. It&rsquo;s the first of several things in these pages you&rsquo;ll have to write down to make real.</p>
+  </div></div>
+<div class="page toc">
+  <div class="inner">
+    <div class="kicker">Contents</div>
+    <h2 class="section">What&rsquo;s in here.</h2>
+    <hr class="rule">
+    <div class="toc-rows"><div class="toc-row"><span class="toc-label"></span><span class="toc-title">Before you start</span><span class="toc-dots"></span><span class="toc-pg">04</span></div><div class="toc-row"><span class="toc-label">Part I</span><span class="toc-title">The Diagnosis</span><span class="toc-dots"></span><span class="toc-pg">07</span></div><div class="toc-row"><span class="toc-label">Part II</span><span class="toc-title">Why Trying Harder Fails</span><span class="toc-dots"></span><span class="toc-pg">13</span></div><div class="toc-row"><span class="toc-label">Part III</span><span class="toc-title">Love Has Limits</span><span class="toc-dots"></span><span class="toc-pg">18</span></div><div class="toc-row"><span class="toc-label">Part IV</span><span class="toc-title">Where You End</span><span class="toc-dots"></span><span class="toc-pg">24</span></div><div class="toc-row"><span class="toc-label">Part V</span><span class="toc-title">The Protocol</span><span class="toc-dots"></span><span class="toc-pg">28</span></div><div class="toc-row"><span class="toc-label">Part VI</span><span class="toc-title">The Words</span><span class="toc-dots"></span><span class="toc-pg">35</span></div><div class="toc-row"><span class="toc-label">Part VII</span><span class="toc-title">Holding It</span><span class="toc-dots"></span><span class="toc-pg">41</span></div><div class="toc-row"><span class="toc-label">Appendix A</span><span class="toc-title">The inventory</span><span class="toc-dots"></span><span class="toc-pg">46</span></div><div class="toc-row"><span class="toc-label">Appendix B</span><span class="toc-title">The research behind it</span><span class="toc-dots"></span><span class="toc-pg">50</span></div></div>
+    <div class="grow"></div>
+    <p class="b-note left">Read it with a pen. Part I will cost you an honest hour. Part VII takes two questions a night for the rest of your life.</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Before you start</div><div class="m-grow"></div></aside>
+    <div class="col"><h2 class="section">Before you start</h2><hr class="rule"><p class="lead">For nearly twenty years I was the man people called.</p><p>That&rsquo;s what a pastor is, if he&rsquo;s any good at it. The phone rings at two in the morning and you answer. Somebody&rsquo;s son is in a cell, somebody&rsquo;s wife has left, somebody&rsquo;s father is dying in a room that smells like bleach, and you go. I was good at it. I was proud of being good at it. If you&rsquo;d asked me what it cost, I&rsquo;d have told you it was the job, and the job was a calling, and a calling doesn&rsquo;t send invoices.</p><p>Here&rsquo;s what I didn&rsquo;t know. I wasn&rsquo;t carrying those people. I was carrying the feeling that I had to. There&rsquo;s a difference, and it took me losing almost everything to see it.</p><p>When my own year came, when the income went and the drinking started and my marriage was hanging by a thread, I found out I had no idea how to let anyone carry me. I had built my whole identity on being needed, and a man who is needed cannot afford to need. So I didn&rsquo;t. I went down alone, in a house full of people who loved me, because I had never learned where I ended and they began.</p><p>Afterward I went and studied it. I trained at the Townsend Institute, the school built on the work of Henry Cloud and John Townsend. Their book <em>Boundaries</em> has sold millions of copies, and I think I know why. Nobody teaches men this. We&rsquo;re taught to carry. Nobody tells us what&rsquo;s ours to carry and what isn&rsquo;t, and so we pick up everything, and then we wonder why we&rsquo;re tired in a way sleep doesn&rsquo;t fix.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>04</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Before you start</div><div class="m-grow"></div></aside>
+    <div class="col"><p>That&rsquo;s what this is about. Not how to be less kind. How to find the line.</p><h3>What a boundary is</h3><p>A boundary is a property line. It marks what&rsquo;s yours and what isn&rsquo;t. Inside the line: your thoughts, your feelings, your choices, your time, your body, your money, your consequences. Outside the line: everyone else&rsquo;s.</p><p>That&rsquo;s it. It isn&rsquo;t a wall. It isn&rsquo;t an ultimatum. It isn&rsquo;t a way of punishing someone. It&rsquo;s a line in the dirt that says <em>this is mine to tend, and that is yours.</em></p><p>Men without boundaries do two things, usually at the same time. They take on what isn&rsquo;t theirs: other people&rsquo;s moods, other people&rsquo;s problems, other people&rsquo;s consequences. And they give away what is: their time, their evenings, their right to want anything. They call this love. They call it leadership, or loyalty, or service.</p><p>It is none of those things. It&rsquo;s a failure to know where you end. And it will take everything you have, because it has no bottom.</p><h3>What this is, and isn&rsquo;t</h3><p>This isn&rsquo;t a book about becoming harder. If you&rsquo;re reading it, you&rsquo;re probably already carrying a quiet contempt for the men who seem to have no trouble saying no, and I&rsquo;m not asking you to become one of them. The men with walls are just as lost as the men with none. They&rsquo;ve solved the problem by leaving the room.</p><p>This is a protocol. A short, honest way to find out what you&rsquo;re actually carrying (Part I), understand why trying harder has never once worked (Parts II and III), see the line clearly (Part IV), draw it (Part V), say it out loud (Part VI), and hold it over years (Part VII).</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>05</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Before you start</div><div class="m-grow"></div></aside>
+    <div class="col"><p>I&rsquo;m a Christian, and Part III says so plainly. If you&rsquo;ve been told that a man who follows Jesus has no business setting limits, I want you to read what Jesus actually did. He walked away from crowds. He let people leave. He told Peter no to his face. If you&rsquo;re not where I am on Him, read it anyway. The diagnosis in Part I has been true for every exhausted, resentful, good man I&rsquo;ve ever sat across from, and the five moves in Part V work regardless of what you do with Part III.</p><p>The research is in the back, so you know it isn&rsquo;t just my opinion. Family systems theory, trauma research, the neuroscience of why &ldquo;no&rdquo; hurts. It&rsquo;s there when you want it.</p><p>One more thing. Don&rsquo;t skim this. The men who need it most are the ones who&rsquo;ll read it fast so they can get back to carrying something. Give it an hour. Bring a pen.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>06</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part I</div>
+    <h2 class="d-title">The Diagnosis</h2>
+    <hr class="d-rule">
+    <p class="d-sub">The weight that isn&rsquo;t yours</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">The weight that isn&rsquo;t yours</div></aside>
+    <div class="col"><p class="lead">You won&rsquo;t find your boundary problem by asking whether you have one. You&rsquo;ll say no. Every man does. You&rsquo;ll say you&rsquo;re just a hard worker, a good son, a loyal friend, the guy who shows up.</p><p>You find it by asking a different question: <em>Who am I quietly angry at, and what did I give them that I didn&rsquo;t want to give?</em></p><p>That&rsquo;s not bitterness. That&rsquo;s a map.</p><h3>The symptoms</h3><p>Check the ones that are true in the last ninety days. Not the ones you&rsquo;d admit to. The ones that are true.</p><div class="checks"><label><span class="box"></span>I feel guilty when I say no, even when no is obviously right</label><label><span class="box"></span>I&rsquo;m doing for other people what they should be doing for themselves</label><label><span class="box"></span>I resent someone I&rsquo;m helping</label><label><span class="box"></span>When someone close to me is upset, I feel like it&rsquo;s my job to fix it</label><label><span class="box"></span>I&rsquo;m not sure what I actually want anymore</label><label><span class="box"></span>I avoid conflict by agreeing, then do what I wanted anyway, or do nothing</label><label><span class="box"></span>I&rsquo;m tired in a way that a weekend doesn&rsquo;t touch</label><label><span class="box"></span>People take me for granted, and I can&rsquo;t say I&rsquo;ve ever told them not to</label></div><p>Three or more is a boundary problem. Six or more is a boundary collapse, and you&rsquo;re probably the last one to know, because everyone around you benefits from it.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>08</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">The weight that isn&rsquo;t yours</div></aside>
+    <div class="col"><p>These aren&rsquo;t signs that you love too much. They&rsquo;re signs that you&rsquo;ve lost the line, and nobody is going to give it back to you. You have to draw it.</p><h3>Resentment is the alarm</h3><p>Here is the single most useful thing I know about this subject. Resentment is never random. It is the precise feeling of having crossed your own line, and it points straight at the place you crossed it.</p><p>When you feel resentment toward someone you&rsquo;re helping, you have given past the point of real generosity. You&rsquo;ve moved from <em>I want to</em> into <em>I have to</em>, and your soul is protesting. The resentment isn&rsquo;t evidence that you&rsquo;re unloving. It&rsquo;s evidence that you abandoned yourself to manage someone else.</p><p>Most men treat resentment as something to be ashamed of, so they bury it, and then it leaks out sideways. Sarcasm. Coldness. A short temper with the kids over nothing. A drink. The thing you buried at the office comes home and bites your family.</p><p>Don&rsquo;t bury it. Read it. Resentment is the fee you pay for crossing your own boundaries. The cure isn&rsquo;t more giving. It&rsquo;s a better line.</p><h3>How you learned it</h3><p>Nobody is born without boundaries. They&rsquo;re taken from you, usually early, usually by people who meant well.</p><p>A father who used guilt as a steering wheel. A mother whose moods were the weather in the house, and you learned to read the sky before you learned to read. A home where having a need was treated as a betrayal, or where you were the one holding the adults together. A church that taught you that wanting anything for yourself was the first step toward hell.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>09</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">The weight that isn&rsquo;t yours</div></aside>
+    <div class="col"><p>You learned that love meant absorption. That saying no was leaving. That the way to be safe was to be necessary. And it worked. It got you through. Then you grew up and kept doing it, and now it&rsquo;s eating you.</p><p>I&rsquo;m not going to spend long here, because I don&rsquo;t think you need to understand your childhood in order to draw a line today. But you need to know this much: the thing that feels like your character is actually a strategy. Strategies can be replaced.</p><h3>Exercise 1 &mdash; The weight inventory</h3><p>Write down everything you&rsquo;re carrying right now. All of it. The project at work nobody else will touch. Your brother&rsquo;s finances. Your mother&rsquo;s loneliness. Your wife&rsquo;s mood. The friend who calls every week with the same problem and never takes the advice. The church thing you said yes to in a weak moment three years ago.</p><p>Ten items minimum. Then next to each one, write a single word: <em>mine</em>, <em>theirs</em>, or <em>ours</em>.</p><ol><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li><li><span class="blank" style="width:260px"></span>  mine / theirs / ours</li></ol><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>10</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">The weight that isn&rsquo;t yours</div></aside>
+    <div class="col"><p>Be honest about <em>ours</em>. Most men use it as a hiding place. If you&rsquo;re carrying ninety percent of it, it&rsquo;s not ours.</p><p>Now count the <em>theirs</em>. That number is the weight you&rsquo;re carrying that was never yours. It&rsquo;s also, roughly, the amount of your life you&rsquo;ll get back when you put it down.</p><h3>Exercise 2 &mdash; The resentment map</h3><p>Three people you resent. Not hate. Resent: the low, steady, tired kind. For each one, answer three questions in writing.</p><ol><li>What have I been giving this person that I didn&rsquo;t want to give?</li><li>What was I afraid would happen if I stopped?</li><li>Has it happened to anyone else who stopped? What actually happened to them?</li></ol><p>The third question is the one that matters. Almost always, the catastrophe you&rsquo;re preventing has happened to someone else, and they survived it, and in many cases they grew up because of it.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>11</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part I<br>The Diagnosis</div><div class="m-grow"></div><div class="m-note">The weight that isn&rsquo;t yours</div></aside>
+    <div class="col"><h3>The five fears</h3><p>Behind every boundary that doesn&rsquo;t get drawn, there&rsquo;s a fear. Mark the one that&rsquo;s yours. You can mark two. Don&rsquo;t mark five.</p><div class="checks"><label><span class="box"></span><strong>Rejection.</strong> If I set a limit, they&rsquo;ll leave.</label><label><span class="box"></span><strong>Conflict.</strong> If I say no, there&rsquo;ll be a fight, and I can&rsquo;t take the fight.</label><label><span class="box"></span><strong>Guilt.</strong> If something happens to them, I won&rsquo;t be able to live with myself.</label><label><span class="box"></span><strong>Being seen as selfish.</strong> What will people think of me?</label><label><span class="box"></span><strong>Losing myself.</strong> If I&rsquo;m not the one they need, I don&rsquo;t know who I am.</label></div><p>Mine was the last one. If you&rsquo;ve read <em>The Grounding Protocol</em>, you know being needed was one of the two false grounds I stood on for twenty years. A man who stands on being needed cannot set a boundary, because every boundary is a small step toward not being needed, and that feels like a small death.</p><p>It isn&rsquo;t. It&rsquo;s the opposite. But you don&rsquo;t find that out by thinking about it. You find it out by drawing one line and surviving.</p><p>Write it, in your own hand:</p><p><strong>I have been carrying <span class="blank" style="width:260px"></span> because I was afraid of <span class="blank" style="width:260px"></span>.</strong></p><p>Don&rsquo;t fix it yet. Part II is about why you&rsquo;ve never been able to simply decide to stop, and why that isn&rsquo;t your fault, and why it&rsquo;s still your responsibility.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>12</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part II</div>
+    <h2 class="d-title">Why Trying Harder Fails</h2>
+    <hr class="d-rule">
+    <p class="d-sub">What&rsquo;s actually happening in you when you can&rsquo;t say no</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part II<br>Why Trying Harder Fails</div><div class="m-grow"></div><div class="m-note">What&rsquo;s actually happening in you when you can&rsquo;t say no</div></aside>
+    <div class="col"><p class="lead">Every man who reads Part I makes the same decision. <em>Fine. I&rsquo;ll start saying no.</em> And then his mother calls, or his business partner gets that tone, or his daughter cries, and he folds like he always folds, and now he has the original problem plus the shame of having failed at the fix.</p><p>You didn&rsquo;t fail because you&rsquo;re weak. You failed because you tried to out-will your wiring. Here&rsquo;s the wiring.</p><h3>Why &ldquo;no&rdquo; hurts</h3><p>When you say no to someone and they&rsquo;re disappointed, your brain doesn&rsquo;t file that under <em>social awkwardness</em>. It files it under <em>injury</em>. The same circuit that lights up when you cut your hand, the anterior cingulate cortex, lights up when you&rsquo;re excluded, rejected, or disapproved of. This isn&rsquo;t a metaphor. It&rsquo;s the finding of a UCLA lab run by a woman named Naomi Eisenberger, replicated for twenty years.</p><p>So when you tell me that saying no &ldquo;feels like it&rsquo;s going to kill you,&rdquo; you&rsquo;re not being dramatic. Your nervous system is treating your mother&rsquo;s disappointment as a threat to your survival. It learned to do that early, when her disappointment actually was a threat, because you were four and she was the whole world.</p><p>You can&rsquo;t talk yourself out of a pain response. You can only build tolerance to it, the way you build tolerance to cold water. Slowly. By getting in.</p><h3>The fourth response</h3><p>You&rsquo;ve heard of fight, flight, and freeze. There&rsquo;s a fourth. A therapist named Pete Walker named it: fawn. The fawn response is appeasement. When threatened, the fawner doesn&rsquo;t attack or run or lock up. He gets agreeable. He reads the room, finds what will make the angry person calm, and becomes it.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>14</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part II<br>Why Trying Harder Fails</div><div class="m-grow"></div><div class="m-note">What&rsquo;s actually happening in you when you can&rsquo;t say no</div></aside>
+    <div class="col"><p>Most of the men I work with are fawners who look like leaders. They&rsquo;re competent, warm, reliable, and easy to be around. They are also quietly disappearing. They don&rsquo;t know what they want for dinner. They can&rsquo;t tell you what they&rsquo;d do with a free Saturday. They&rsquo;ve been managing other people&rsquo;s weather for so long that they&rsquo;ve forgotten they have their own.</p><p>Fawn was a brilliant strategy in a house where somebody&rsquo;s temper ran the show. It kept you safe. It&rsquo;s the same strategy that now makes you incapable of letting your brother bear the consequences of his own choices, and it will run until you recognize it and build something else.</p><h3>Differentiation, or the one skill that matters</h3><p>Murray Bowen, who more or less invented family therapy, built his whole theory around a single capacity he called differentiation of self. It&rsquo;s the ability to stay yourself while staying connected to people who are pulling on you.</p><p>Low differentiation produces one of two things. Fusion, where you lose yourself in other people&rsquo;s feelings and can&rsquo;t tell where you end. Or cutoff, where you protect yourself by leaving: physically, emotionally, or with a wall of sarcasm. Fusion is the man who can&rsquo;t say no. Cutoff is the man who can&rsquo;t say anything else. They look like opposites. They&rsquo;re the same failure.</p><p>High differentiation looks like this: a differentiated man can be in a room with an angry person and not become a different person. He can hear his wife&rsquo;s disappointment without either collapsing into it or defending against it. He stays warm. He stays himself. He doesn&rsquo;t need her to be okay before he can be okay.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>15</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part II<br>Why Trying Harder Fails</div><div class="m-grow"></div><div class="m-note">What&rsquo;s actually happening in you when you can&rsquo;t say no</div></aside>
+    <div class="col"><p>That&rsquo;s the target. Not harder. Not colder. Steadier. Marcus Aurelius put it in a sentence two thousand years ago: <em>You have power over your mind, not outside events. Realize this, and you will find strength.</em> He wasn&rsquo;t talking about boundaries, and he was talking about nothing else.</p><h3>The muscle underneath</h3><p>A boundary is only as strong as your ability to stand inside someone&rsquo;s displeasure without fixing it. Psychologists call it distress tolerance. I call it the muscle underneath, because everything else in this book sits on top of it.</p><p>Most men with boundary collapse have almost none. They collapse the limit not because they&rsquo;ve changed their minds but because they cannot bear another ten seconds of someone being unhappy with them. The fix lands, the unhappiness stops, the relief floods in, and the pattern gets one rep stronger.</p><p>The muscle gets built the same way any muscle gets built: with load you can barely handle, and then a little more. Not the big confrontation. The small one. Telling the waiter the order&rsquo;s wrong. Letting a text sit for an hour. Saying &ldquo;let me check and get back to you&rdquo; instead of yes. Those reps count. They&rsquo;re the only ones that do.</p><h3>The two beliefs you need</h3><p>Two more pieces of the wiring, briefly, because they decide whether any of this works.</p><p><strong>First: how you learned to attach.</strong> If connection in your childhood was unpredictable, you learned to work for it, and you&rsquo;ll trade any boundary to keep it. If depending on anyone was dangerous, you learned rigid walls and you&rsquo;ll struggle with the intimacy side instead. Neither is a life sentence. But knowing which one you are tells you which direction you&rsquo;re going to fall.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>16</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part II<br>Why Trying Harder Fails</div><div class="m-grow"></div><div class="m-note">What&rsquo;s actually happening in you when you can&rsquo;t say no</div></aside>
+    <div class="col"><p><strong>Second: whether you think your choices matter.</strong> A psychologist named Julian Rotter called it locus of control. If you believe what you do changes outcomes, you&rsquo;ll set a limit, because the limit protects something. If you believe outcomes are set by forces outside you, you won&rsquo;t bother, because what&rsquo;s the point. Boundary work requires the first belief. If you don&rsquo;t have it, you&rsquo;ll need to borrow it from me for a few weeks until you&rsquo;ve seen a line hold.</p><h3>What this means for you</h3><p>You cannot decide your way out of this. You build out of it, in reps, against pain that is real and that will not kill you. That&rsquo;s the honest version.</p><p>It&rsquo;s also the hopeful one. Because it means the thing that&rsquo;s felt like your character for forty years is actually a pattern, and patterns yield. Not to willpower. To practice, and to a reason strong enough to practice. Part III is the reason.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>17</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part III</div>
+    <h2 class="d-title">Love Has Limits</h2>
+    <hr class="d-rule">
+    <p class="d-sub">What God, and Jesus, actually do</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>Love Has Limits</div><div class="m-grow"></div><div class="m-note">What God, and Jesus, actually do</div></aside>
+    <div class="col"><p class="lead">Somewhere along the way, a lot of Christian men got the idea that a boundary is a failure of love. That the man who truly follows Jesus is endlessly available, never says no, carries everything, and dies tired. I believed it. I preached a version of it. And it nearly killed me.</p><p>So before you draw a single line, I want you to look at what the One we claim to follow actually does.</p><h3>God has boundaries</h3><p>God is holy. The word means set apart, distinct, not merged. He is in relationship with all of creation and He does not dissolve into it. He says yes and He says no. He makes promises and He keeps them. He warns of consequences and then He allows them. And He will not override a human will, even to rescue a man from himself. He stands at the door and knocks. He doesn&rsquo;t kick it in.</p><p>If the most loving being in existence maintains lines, then the man who refuses all lines isn&rsquo;t showing superior love. He&rsquo;s showing bad theology.</p><h3>Burdens and loads</h3><p>Paul says two things in Galatians 6 that sound like a contradiction, five sentences apart.</p><div class="pull"><blockquote>Bear one another&rsquo;s burdens, and so fulfill the law of Christ.<br>For each will have to bear his own load.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>19</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>Love Has Limits</div><div class="m-grow"></div><div class="m-note">What God, and Jesus, actually do</div></aside>
+    <div class="col"><p>In Greek they&rsquo;re different words. The burden in verse two is <em>baros</em>: a crushing weight, a boulder, the thing that falls on a man that no one could carry alone. A death. A diagnosis. A collapse. We carry those together. That&rsquo;s the law of Christ.</p><p>The load in verse five is <em>phortion</em>: a pack. The daily weight each man was built to carry himself. His choices. His feelings. His work. His consequences. It isn&rsquo;t transferable, and the Scripture says so.</p><p>Here is the whole boundary problem in one sentence. <strong>Love helps with burdens. Codependency carries loads.</strong> The man without boundaries picks up other people&rsquo;s packs and calls it Christianity. He solves problems they should solve, feels feelings they should feel, and absorbs consequences that were theirs to absorb. And he leaves them weaker for it, because a man who never carries his own pack never gets strong.</p><h3>What Jesus did</h3><p>Jesus loved perfectly. And He had limits that would get a pastor fired.</p><p>He walked away from crowds. <em>Rising very early in the morning, while it was still dark, he departed and went out to a desolate place</em> (Mark 1:35). People were looking for Him. Sick people. He went anyway. He did not heal everyone in Israel. He went where the Father sent Him and then He went to bed.</p><p>He let people leave. After a hard teaching, <em>many of his disciples turned back and no longer walked with him</em> (John 6:66). He didn&rsquo;t chase them. He didn&rsquo;t soften the message to get them back. He turned to the twelve and asked if they wanted to go too.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>20</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>Love Has Limits</div><div class="m-grow"></div><div class="m-note">What God, and Jesus, actually do</div></aside>
+    <div class="col"><p>He told the people closest to Him no. When Peter tried to talk Him out of the cross, Jesus called him Satan to his face. When His own mother and brothers came to collect Him, He kept teaching. When Martha demanded He make Mary help in the kitchen, He said no to Martha.</p><p>He let consequences land. He told the rich young ruler the truth and let him walk away sad. He told the story of a father who gave his son the inheritance, watched him leave, and did not go after him. He let the boy hit the pig trough. And then, when the boy came home on his own feet, he ran.</p><p>None of this diminished His love. It&rsquo;s what made His love sustainable and sharp. A Jesus with no boundaries would have been consumed by Galilee before He ever got to Jerusalem.</p><h3>Consequences are love</h3><p><em>For the Lord disciplines the one he loves</em> (Hebrews 12:6). <em>Whatever one sows, that will he also reap</em> (Galatians 6:7).</p><p>That second one isn&rsquo;t a threat. It&rsquo;s a description of how reality works, and God built it that way on purpose. Consequences are how people grow. When you stand between a person and the consequence of his own choice, you aren&rsquo;t protecting him. You&rsquo;re interrupting the one teacher who might have reached him.</p><p>I know this is the hardest part. I know because the person you&rsquo;re shielding is probably someone you love more than your own life. Your son. Your brother. Your wife. The shielding feels like the most loving thing you&rsquo;ve ever done. It&rsquo;s the opposite. It&rsquo;s a vote of no confidence in him, and in God&rsquo;s ability to meet him at the bottom.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>21</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>Love Has Limits</div><div class="m-grow"></div><div class="m-note">What God, and Jesus, actually do</div></aside>
+    <div class="col"><p>Allowing a consequence isn&rsquo;t cruelty. It&rsquo;s respect. You&rsquo;re treating him like a man.</p><h3>The idol of being needed</h3><p>For some of us, this goes deeper than habit. Being needed has become the thing we worship. We only feel alive when we&rsquo;re rescuing. Our worth is a function of how many people can&rsquo;t get along without us. I know, because I&rsquo;m describing myself.</p><p>Look at it honestly and it&rsquo;s ugly. It needs other people to stay broken so that we can keep fixing. It serves our identity, not their growth. Real love wants the other person to get strong, even if strong means they don&rsquo;t need us anymore. If you need them to need you, your love is about you.</p><p>Love without limits is not love. It&rsquo;s need wearing love&rsquo;s clothing.</p><h3>You are a steward</h3><p><em>You are not your own, for you were bought with a price</em> (1 Corinthians 6:19–20). Most men hear that as a reason to give everything away. It&rsquo;s the opposite. A steward manages what belongs to someone else, and he answers for it.</p><p>Your body, your hours, your energy, your family, your mind: these are God&rsquo;s, on loan to you. A steward who let anyone take anything off the estate wouldn&rsquo;t be generous. He&rsquo;d be negligent. The fence around the field isn&rsquo;t a failure of hospitality. It&rsquo;s what makes the harvest possible.</p><p>You cannot give what you have not protected. Boundaries are what make generosity sustainable instead of fatal.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>22</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part III<br>Love Has Limits</div><div class="m-grow"></div><div class="m-note">What God, and Jesus, actually do</div></aside>
+    <div class="col"><p>So draw the line. Not to keep people out. To make sure there&rsquo;s still a man here next year for them to come to.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>23</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part IV</div>
+    <h2 class="d-title">Where You End</h2>
+    <hr class="d-rule">
+    <p class="d-sub">The property lines</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>Where You End</div><div class="m-grow"></div><div class="m-note">The property lines</div></aside>
+    <div class="col"><p class="lead">Before you can draw a line, you have to be able to see it. Most men can&rsquo;t. They&rsquo;ve lived so long without one that the whole field looks like theirs, or none of it does.</p><p>So here it is, as plainly as I can put it.</p><h3>What&rsquo;s yours</h3><ul><li>Your thoughts</li><li>Your feelings</li><li>Your choices</li><li>Your values</li><li>Your time</li><li>Your body</li><li>Your money and your things</li><li>Your consequences</li></ul><h3>What isn&rsquo;t</h3><ul><li>Their thoughts</li><li>Their feelings</li><li>Their choices</li><li>Their values</li><li>Their time</li><li>Their bodies</li><li>Their money and their things</li><li>Their consequences</li></ul><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>25</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>Where You End</div><div class="m-grow"></div><div class="m-note">The property lines</div></aside>
+    <div class="col"><p>That&rsquo;s the whole map. Everything in the first list is yours to tend, and nobody gets to take it without your consent. Everything in the second is theirs, and you don&rsquo;t get to take it either, no matter how much you love them or how obviously they&rsquo;re about to drive into a wall.</p><h3>Responsible to, not for</h3><p>If you take one sentence out of this book, take this one. <strong>You are responsible to people. You are not responsible for them.</strong></p><p>Responsible <em>to</em> means: I owe you love. I owe you the truth. I owe you faithfulness, and the help I&rsquo;ve promised, and my presence when I&rsquo;ve said I&rsquo;ll be there.</p><p>Responsible <em>for</em> means: your feelings are my job. Your choices are my job. Your happiness, your growth, your outcomes, your sobriety, your mood on Tuesday. All mine.</p><p>The second one sounds like love and it&rsquo;s a prison for both of you. It makes you a manager and the other person a dependent. Nobody grows. Everybody&rsquo;s tired.</p><h3>What a boundary isn&rsquo;t</h3><p>Men who are new to this get it wrong in predictable ways, so let me save you some time.</p><p>A boundary isn&rsquo;t a wall. A wall keeps everything out. A boundary lets love in and keeps responsibility sorted. You can have a deep marriage with clear lines. In fact you can&rsquo;t have one without them.</p><p>A boundary isn&rsquo;t a punishment. &ldquo;I&rsquo;m setting a boundary&rdquo; is not a sentence you say to hurt someone. If it&rsquo;s aimed at them, it&rsquo;s a weapon, not a line.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>26</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part IV<br>Where You End</div><div class="m-grow"></div><div class="m-note">The property lines</div></aside>
+    <div class="col"><p>A boundary isn&rsquo;t an ultimatum. An ultimatum tries to control their behavior: <em>do this or else</em>. A boundary controls yours: <em>if that happens, this is what I&rsquo;ll do</em>. The difference is the whole thing.</p><p>A boundary isn&rsquo;t selfish. Selfishness takes what isn&rsquo;t yours. A boundary protects what is.</p><h3>Two directions</h3><p>Lines get crossed both ways. Other people cross into your field: taking your time without asking, telling you what to feel, holding you responsible for their moods. You know that one.</p><p>The other direction is the one men miss. You cross into theirs. You fix what they didn&rsquo;t ask you to fix. You carry a consequence that was theirs. You manage a feeling that belongs to them. It&rsquo;s almost always dressed as help. &ldquo;I&rsquo;m just trying to.&rdquo; But uninvited entry into another man&rsquo;s field is trespass, even with a casserole.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>27</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part V</div>
+    <h2 class="d-title">The Protocol</h2>
+    <hr class="d-rule">
+    <p class="d-sub">Five moves. In order.</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>The Protocol</div><div class="m-grow"></div><div class="m-note">Five moves. In order.</div></aside>
+    <div class="col"><p class="lead">Here&rsquo;s the system. Five moves, in sequence, each one standing on the last. Don&rsquo;t skip ahead to the conversation. The conversation is move five. Most men start there and wonder why it goes badly.</p><h3>Move 1 &mdash; Clarify what&rsquo;s yours</h3><p>You can&rsquo;t protect what you can&rsquo;t name. And if you&rsquo;ve been fawning for thirty years, you may genuinely not know what you think, want, or feel. That&rsquo;s not a character flaw. It&rsquo;s atrophy.</p><p>Start by asking, several times a day, four questions:</p><ol><li>What am I feeling right now? One word.</li><li>What do I actually want in this situation?</li><li>What matters to me here, not what matters to them?</li><li>What, in this, is actually mine to handle?</li></ol><p>If the answers won&rsquo;t come, start smaller. What do you want for dinner. Which chair. Which route home. Practice having preferences out loud. It sounds absurd, and it&rsquo;s how the muscle grows back.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>29</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>The Protocol</div><div class="m-grow"></div><div class="m-note">Five moves. In order.</div></aside>
+    <div class="col"><h3>Move 2 &mdash; Release what isn&rsquo;t</h3><p>Now the other side of the line. Go back to the weight inventory from Part I and look at everything you marked <em>theirs</em>. For each one, say the release statement out loud. Yes, out loud. Yes, alone in the truck.</p><ul><li>Their feelings are theirs to manage.</li><li>Their choices are theirs to make.</li><li>Their consequences are theirs to carry.</li><li>Their happiness is theirs to build.</li><li>I cannot control this. Only they can.</li></ul><p>Release isn&rsquo;t indifference. You still care. You&rsquo;re just no longer pretending that your care gives you the authority, or the obligation, to run their life. Write the three hardest ones here:</p><div class="formgroup"><div class="form">I release <span class="blank" style="width:260px"></span></div><div class="form">I release <span class="blank" style="width:260px"></span></div><div class="form">I release <span class="blank" style="width:260px"></span></div></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>30</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>The Protocol</div><div class="m-grow"></div><div class="m-note">Five moves. In order.</div></aside>
+    <div class="col"><h3>Move 3 &mdash; Draw the line</h3><p>A limit that isn&rsquo;t specific isn&rsquo;t a limit. It&rsquo;s a mood. Every real boundary has five parts:</p><ol><li><strong>What.</strong> The specific behavior or situation.</li><li><strong>Who.</strong> The person it applies to.</li><li><strong>When.</strong> Under what circumstances.</li><li><strong>How.</strong> What you will or won&rsquo;t do.</li><li><strong>Then.</strong> What happens if it&rsquo;s crossed. Not what they&rsquo;ll do. What you&rsquo;ll do.</li></ol><p>Three examples, so you can hear the shape:</p><div class="pull"><blockquote>I don&rsquo;t take work calls after seven. If someone calls, it goes to voicemail and I reply the next business day.</blockquote></div><div class="pull"><blockquote>When Mom criticizes how we&rsquo;re raising the kids, I&rsquo;ll say &ldquo;I&rsquo;m not open to feedback on this&rdquo; and change the subject. If she keeps going, I&rsquo;ll end the visit.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>31</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>The Protocol</div><div class="m-grow"></div><div class="m-note">Five moves. In order.</div></aside>
+    <div class="col"><div class="pull"><blockquote>I&rsquo;m not lending my brother money again. If he asks, I&rsquo;ll say no and offer to sit down with him and his budget.</blockquote></div><p>Notice what&rsquo;s missing. No explanation of why. No request for their agreement. No threat. Just what you&rsquo;ll do.</p><p>Write your three. The ones that have been sitting in your chest since Part I.</p><div class="formgroup"><div class="form">Limit 1 <span class="blank" style="width:260px"></span></div><div class="form">Limit 2 <span class="blank" style="width:260px"></span></div><div class="form">Limit 3 <span class="blank" style="width:260px"></span></div></div><p>Unwritten limits get renegotiated under pressure. Written ones hold.</p><h3>Move 4 &mdash; Let reality teach</h3><p>A boundary with no consequence is a suggestion. And the consequence is almost never something you do <em>to</em> them. It&rsquo;s something you stop doing <em>for</em> them.</p><p>If you yell, I&rsquo;ll leave the room. If you don&rsquo;t do your part, the project fails and that&rsquo;s yours. If you keep drinking, I won&rsquo;t call your boss for you. If this continues, I&rsquo;ll see you less.</p><p>The rescue is the thing that&rsquo;s been breaking everything. Every time you step between a man and the result of his choices, you teach him that results don&rsquo;t apply to him. You remove the one thing that might have changed him. You are, with the best intentions, keeping him exactly where he is.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>32</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>The Protocol</div><div class="m-grow"></div><div class="m-note">Five moves. In order.</div></aside>
+    <div class="col"><p>Letting it land means watching someone you love struggle and not moving. It is the hardest thing in this book. You will feel like a monster. You aren&rsquo;t. You didn&rsquo;t make the consequence. His choices did. You&rsquo;re just no longer standing in front of it.</p><h3>Move 5 &mdash; Hold it, kindly</h3><p>When you draw a new line, pushback is guaranteed. The people who benefited from your lack of boundaries will fight to get the old you back. Expect all of it:</p><ul><li>Guilt. &ldquo;After everything I&rsquo;ve done for you.&rdquo;</li><li>Anger. &ldquo;You&rsquo;re being selfish.&rdquo;</li><li>Threats. &ldquo;If you do this, I&rsquo;ll.&rdquo;</li><li>Victim. &ldquo;I can&rsquo;t believe you&rsquo;d treat me this way.&rdquo;</li><li>Bargaining. &ldquo;Just this once. I&rsquo;ll change.&rdquo;</li><li>Denial. &ldquo;You don&rsquo;t mean that.&rdquo;</li><li>Recruitment. Getting your mother, your wife, your pastor to lean on you.</li></ul><p>None of it is evidence that you&rsquo;re wrong. It&rsquo;s evidence that something is changing. Here&rsquo;s the hold, four lines, in order:</p><ol><li>Name their feeling. &ldquo;I understand this is hard for you.&rdquo;</li><li>Restate the line. &ldquo;And this is what I&rsquo;m able to do.&rdquo;</li><li>Decline the debate. &ldquo;I&rsquo;m not going to argue about it. My answer stands.&rdquo;</li><li>Leave if you need to. &ldquo;I&rsquo;m going to end this conversation now.&rdquo;</li></ol><p>Don&rsquo;t explain more than once. Explanation invites negotiation. Don&rsquo;t match their heat. Warm voice, straight spine. And don&rsquo;t apologize for the line. You can be sorry that it&rsquo;s hard for them. You are not sorry that you drew it.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>33</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part V<br>The Protocol</div><div class="m-grow"></div><div class="m-note">Five moves. In order.</div></aside>
+    <div class="col"><p>Clarify. Release. Limit. Allow. Hold.</p><p>That&rsquo;s the whole protocol. It&rsquo;s not complicated. It&rsquo;s just expensive, and you pay in reps.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>34</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part VI</div>
+    <h2 class="d-title">The Words</h2>
+    <hr class="d-rule">
+    <p class="d-sub">What to say when it&rsquo;s time</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Words</div><div class="m-grow"></div><div class="m-note">What to say when it&rsquo;s time</div></aside>
+    <div class="col"><p class="lead">The hardest part is usually the sentence. Men stall for months not because they don&rsquo;t know what the boundary is but because they can&rsquo;t find words that aren&rsquo;t either apologetic or cruel. So here are words. Say them in your own voice, but say them.</p><h3>Saying no</h3><div class="pull"><blockquote>No, that doesn&rsquo;t work for me.<br>I&rsquo;m not able to do that.<br>I understand this puts you in a spot, and the answer is still no.<br>I&rsquo;ve given you my answer. I&rsquo;m not going to explain further.</blockquote></div><p>No is a complete sentence. Every word you add after it is a handle for them to pull.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>36</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Words</div><div class="m-grow"></div><div class="m-note">What to say when it&rsquo;s time</div></aside>
+    <div class="col"><h3>Protecting your time</h3><div class="pull"><blockquote>I have a commitment then. (The commitment can be to your family, or to yourself. You don&rsquo;t have to say which.)<br>I&rsquo;m not available then. I could do Thursday.<br>I don&rsquo;t take calls after seven. I&rsquo;ll get back to you tomorrow.<br>Let me check and get back to you.</blockquote></div><p>That last one is the most useful sentence in this book. It buys you the time to decide without the pressure of their face.</p><h3>Unwanted advice</h3><div class="pull"><blockquote>I appreciate that you care. I&rsquo;m not looking for input on this.<br>I&rsquo;ve made my decision.<br>If I want advice, I&rsquo;ll ask for it.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>37</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Words</div><div class="m-grow"></div><div class="m-note">What to say when it&rsquo;s time</div></aside>
+    <div class="col"><h3>Criticism</h3><div class="pull"><blockquote>You&rsquo;re entitled to your opinion. I see it differently.<br>I hear that you&rsquo;re unhappy with it. I&rsquo;m at peace with it.<br>You don&rsquo;t have to agree with me.</blockquote></div><h3>Refusing to carry their feelings</h3><div class="pull"><blockquote>Your feelings make sense. I can&rsquo;t fix them for you.<br>I&rsquo;m sorry you&rsquo;re upset. What do you need to do to work through it?<br>I didn&rsquo;t make you feel that. You&rsquo;re having a reaction, and it&rsquo;s yours.<br>I can be here with you. I can&rsquo;t take it away.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>38</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Words</div><div class="m-grow"></div><div class="m-note">What to say when it&rsquo;s time</div></aside>
+    <div class="col"><h3>Letting a consequence land</h3><div class="pull"><blockquote>I&rsquo;m not going to rescue you from this. I think you can handle it.<br>This is the result of your choice. I trust you&rsquo;ll figure it out.<br>I love you too much to keep you from learning this.</blockquote></div><h3>Guilt trips</h3><div class="pull"><blockquote>I understand you&rsquo;re disappointed. My decision stands.<br>I can care about your feelings and still say no.<br>I&rsquo;m not responsible for how you feel about my boundary.</blockquote></div><h3>Ending it</h3><div class="pull"><blockquote>I&rsquo;ve said what I&rsquo;m going to say.<br>This isn&rsquo;t productive. I&rsquo;m going to stop here.<br>I&rsquo;m going to hang up now. We can talk when things are calmer.</blockquote></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>39</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VI<br>The Words</div><div class="m-grow"></div><div class="m-note">What to say when it&rsquo;s time</div></aside>
+    <div class="col"><h3>Announcing a new line</h3><p>When you&rsquo;re changing the rules in a relationship that&rsquo;s run the old way for years, don&rsquo;t spring it. Say it plainly, once:</p><ol><li>What you&rsquo;ve noticed. &ldquo;I&rsquo;ve realized I&rsquo;ve been taking on things that aren&rsquo;t mine.&rdquo;</li><li>What&rsquo;s changing. &ldquo;Going forward, I&rsquo;m going to.&rdquo;</li><li>Why, if you want to. &ldquo;This is what I need to be healthy in this relationship.&rdquo;</li><li>Room for their reaction, without budging. &ldquo;I know this is different. My decision&rsquo;s made.&rdquo;</li></ol><p>Say what you mean. Mean what you say. Don&rsquo;t say it mean.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>40</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Part VII</div>
+    <h2 class="d-title">Holding It</h2>
+    <hr class="d-rule">
+    <p class="d-sub">The daily audit and the long game</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VII<br>Holding It</div><div class="m-grow"></div><div class="m-note">The daily audit and the long game</div></aside>
+    <div class="col"><p class="lead">Drawing a line is a moment. Holding it is a life. The lines you set this month will drift by Christmas unless you check them, and the people who want the old you back are patient.</p><h3>The daily audit</h3><p>Five questions. At night, with a pen, two minutes:</p><ol><li>What did I take responsibility for today that wasn&rsquo;t mine?</li><li>Where did I say yes to avoid guilt or a fight?</li><li>What consequence am I keeping from reaching someone?</li><li>What line do I need to restate tomorrow?</li><li>Where did I hold? Where did I fold?</li></ol><p>The last one matters most. Men only log the failures. Log the holds. They&rsquo;re the proof the muscle is growing.</p><h3>The resentment check</h3><p>Any time resentment shows up, treat it as the alarm it is and go find the fire.</p><ul><li>What line got crossed?</li><li>Did they cross it, or did I?</li><li>What do I need that I&rsquo;m not getting?</li><li>What limit do I need to set, or set again?</li></ul><p>Don&rsquo;t silence the alarm. Don&rsquo;t pour a drink on it. Read it.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>42</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VII<br>Holding It</div><div class="m-grow"></div><div class="m-note">The daily audit and the long game</div></aside>
+    <div class="col"><h3>When you fold</h3><p>You will. Here&rsquo;s what to do when you do:</p><ol><li>Name it without shame. &ldquo;I folded. That&rsquo;s information, not identity.&rdquo;</li><li>Figure out what got you. Fear? Guilt? Habit? Tired?</li><li>Restate the line. To them, if it needs saying.</li><li>Write the next one. &ldquo;When X happens, I&rsquo;ll do Y.&rdquo;</li><li>Get back to work. One fold is a rep. Quitting is the only real failure.</li></ol><p>Progress isn&rsquo;t perfection. It&rsquo;s folding less often, catching it faster, and getting up quicker.</p><h3>The hard rooms</h3><p>Some relationships will test every line you draw.</p><p><strong>Your family of origin.</strong> This is where you learned it, and they&rsquo;ll fight hardest to keep it. Expect that. The guilt will be the most refined guilt you&rsquo;ll ever face. Stay the course. You can love your mother and not be managed by her.</p><p><strong>Your wife.</strong> Marriage isn&rsquo;t the abolition of the line. You&rsquo;re one flesh and you&rsquo;re still two people. Some of the worst boundary collapse I&rsquo;ve seen is between husbands and wives who thought love meant having no self left. Learn to love her with a self intact. She&rsquo;ll have more to love.</p><p><strong>Your kids.</strong> The line moves as they grow. The whole job is slowly handing them their own pack, one piece at a time, until they can carry it. A father who carries it for them at eighteen isn&rsquo;t loving them. He&rsquo;s keeping them small.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>43</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VII<br>Holding It</div><div class="m-grow"></div><div class="m-note">The daily audit and the long game</div></aside>
+    <div class="col"><p><strong>Work.</strong> Define what you will and won&rsquo;t do, when you&rsquo;re reachable, and what&rsquo;s outside your job. Nobody will do it for you, and the ones who benefit from your lack of a line will never bring it up.</p><p><strong>The one who won&rsquo;t respect any line.</strong> Some people will cross every boundary you draw, every time. With them, the line may be distance. Less contact. Sometimes none. That&rsquo;s not cruelty. For some relationships it&rsquo;s the only loving thing left, for both of you.</p><h3>The line you draw with yourself</h3><p>Boundaries aren&rsquo;t only about other people. The man who can&rsquo;t say no to himself will never hold a line with anyone else.</p><ul><li>A limit on acting the moment you want to. Eating, spending, speaking, reacting.</li><li>A limit on how long you&rsquo;ll stay in a spiral. Rumination has a clock, and you set it.</li><li>A limit on how long you&rsquo;ll sit in a dark mood before you move your body.</li><li>A limit that protects what you&rsquo;ve committed to against what you feel like at the moment.</li></ul><p>Self-governance is the foundation under all the rest. Aurelius again: <em>The first rule is to keep an untroubled spirit. The second is to look things in the face and know them for what they are.</em> That&rsquo;s internal boundary work, in two sentences, from an emperor.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>44</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Part VII<br>Holding It</div><div class="m-grow"></div><div class="m-note">The daily audit and the long game</div></aside>
+    <div class="col"><h3>What it looks like when it holds</h3><p>You&rsquo;ll know it&rsquo;s working not because the conflict is gone but because the resentment is. Give it ninety days and watch for this:</p><ul><li>The low anger toward the people you help fades, because you&rsquo;re no longer giving past the line.</li><li>Relationships get cleaner. Everyone knows whose job is whose.</li><li>Respect goes up. From them. From you.</li><li>Energy comes back. You weren&rsquo;t tired from the work. You were tired from the weight.</li><li>Love becomes something you choose instead of something you owe.</li><li>You know where you end. And it turns out there&rsquo;s a man there.</li></ul><p>This isn&rsquo;t selfishness. It&rsquo;s stewardship. Proper care of what&rsquo;s yours. Proper release of what isn&rsquo;t.</p><h3>The minimum</h3><p>If you do nothing else from this book, do this. Two questions, every night, out loud or on paper:</p><p><strong>What did I carry today that wasn&rsquo;t mine?</strong> <strong>What will I put down tomorrow?</strong></p><p>That&rsquo;s it. That&rsquo;s the whole protocol in two sentences. The rest of this book is just helping you answer them honestly.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>45</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Appendix A</div>
+    <h2 class="d-title">The inventory</h2>
+    <hr class="d-rule">
+    <p class="d-sub">Twenty statements, four patterns</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix A<br>The inventory</div><div class="m-grow"></div><div class="m-note">Twenty statements, four patterns</div></aside>
+    <div class="col"><p class="lead">A longer read on the four ways the line gets lost. Rate each from 1 (never) to 5 (always). Total each section. Your highest section is where to aim the Protocol first.</p><p><strong>A. Carrying</strong></p><ul><li>I feel responsible for how the people close to me are feeling.</li><li>When someone has a problem, I start solving it before they&rsquo;ve asked.</li><li>I&rsquo;m tired in a way rest doesn&rsquo;t fix.</li><li>I&rsquo;ve taken on a job, task, or role that someone else should be doing.</li><li>I feel anxious when I&rsquo;m not needed.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>B. Pleasing</strong></p><ul><li>I say yes and then regret it.</li><li>I change how I act depending on who&rsquo;s in the room.</li><li>I avoid conflict even when I know I&rsquo;m right.</li><li>I replay conversations looking for signs someone&rsquo;s upset with me.</li><li>I over-explain my decisions so people won&rsquo;t be mad.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>C. Rescuing</strong></p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>47</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix A<br>The inventory</div><div class="m-grow"></div><div class="m-note">Twenty statements, four patterns</div></aside>
+    <div class="col"><ul><li>I&rsquo;ve covered for someone&rsquo;s choices so they wouldn&rsquo;t face the fallout.</li><li>I&rsquo;ve lent money, time, or help I didn&rsquo;t want to give.</li><li>I&rsquo;d rather fix it myself than watch someone struggle.</li><li>I feel guilty when I let someone experience a consequence.</li><li>I have at least one relationship where I&rsquo;m doing most of the work.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>D. Self-governance</strong></p><ul><li>I act on impulses I&rsquo;d planned not to act on. Food, money, screens, words.</li><li>I stay in a bad mood longer than I mean to.</li><li>I let my feelings in the moment override commitments I&rsquo;ve made.</li><li>I say no to other people more easily than I say no to myself.</li><li>I ruminate on a problem long after thinking has stopped helping.</li></ul><div class="form">Section total: ___ / 25</div><p><strong>Reading it:</strong> 5–10, light. 11–17, moderate, and it shows up under pressure. 18–25, this is a primary pattern, and it&rsquo;s probably the one the people around you could have named for you.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>48</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix A<br>The inventory</div><div class="m-grow"></div><div class="m-note">Twenty statements, four patterns</div></aside>
+    <div class="col"><h3>The weight log</h3><p>For seven to fourteen days, every time you notice resentment, the urge to rescue, or a yes you didn&rsquo;t mean, write it down. The pattern will tell you what the inventory can&rsquo;t.</p><div class="formgroup"><div class="form">Date / time <span class="blank" style="width:154px"></span>  Who <span class="blank" style="width:260px"></span></div><div class="form">What they wanted, or what I jumped in to do <span class="blank" style="width:260px"></span></div><div class="form">What I felt in my body <span class="blank" style="width:260px"></span></div><div class="form">What I was afraid would happen if I didn&rsquo;t <span class="blank" style="width:260px"></span></div><div class="form">What I did <span class="blank" style="width:260px"></span></div><div class="form">Mine / theirs / ours</div></div><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>49</span></div>
+    </div>
+  </div></div>
+<div class="page dark divider">
+  <div class="inner">
+    <div class="d-label">Appendix B</div>
+    <h2 class="d-title">The research behind it</h2>
+    <hr class="d-rule">
+    <p class="d-sub">So you know it isn&rsquo;t just my opinion</p>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix B<br>The research behind it</div><div class="m-grow"></div><div class="m-note">So you know it isn&rsquo;t just my opinion</div></aside>
+    <div class="col"><p class="lead">Everything in this book I learned the hard way first. But I&rsquo;m not asking you to take my word for it, and you shouldn&rsquo;t. Here&rsquo;s where the claims come from.</p><p><strong>That boundaries are property lines, and that love requires them.</strong> The frame for this whole book comes from Henry Cloud and John Townsend, whose <em>Boundaries</em> (1992) is the book that put the word into the language. Their distinction between being responsible <em>to</em> and responsible <em>for</em>, and the burdens-and-loads reading of Galatians 6, is theirs. I trained under their institute. Cloud&rsquo;s <em>Necessary Endings</em> covers the hard rooms in Part VII.</p><p><strong>That &ldquo;no&rdquo; registers as pain.</strong> Naomi Eisenberger&rsquo;s lab at UCLA showed in 2003, and in two decades of follow-up, that social rejection activates the dorsal anterior cingulate cortex, the same region that processes the distress of physical pain. Matthew Lieberman&rsquo;s <em>Social</em> lays the evidence out for a general reader. This is why saying no &ldquo;feels like it&rsquo;ll kill you.&rdquo; Your brain is treating it that way.</p><p><strong>That appeasement is a trauma response.</strong> Pete Walker, in <em>Complex PTSD: From Surviving to Thriving</em> (2013), named the fawn response as a fourth survival strategy alongside fight, flight, and freeze. His description of the fawner, hypervigilant to others&rsquo; moods and absent to his own, is the man in Part II.</p><p><strong>That staying yourself under pressure is a skill, and it has a name.</strong> Murray Bowen&rsquo;s family systems theory, laid out in <em>Family Therapy in Clinical Practice</em> (1978), built everything around differentiation of self. Edwin Friedman carried it into leadership in <em>A Failure of Nerve</em> (2007), arguing that the differentiated leader, not the most empathetic one, is the one who keeps a family or an organization healthy. Fusion and cutoff as twin failures is Bowen&rsquo;s.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>51</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix B<br>The research behind it</div><div class="m-grow"></div><div class="m-note">So you know it isn&rsquo;t just my opinion</div></aside>
+    <div class="col"><p><strong>That the muscle underneath can be built.</strong> Distress tolerance as a trainable capacity is central to Marsha Linehan&rsquo;s dialectical behavior therapy (1993). The principle that tolerance grows under graded load, not avoidance, runs through the exposure literature going back to Joseph Wolpe in the 1950s.</p><p><strong>That how you learned to attach shapes how you hold a line.</strong> John Bowlby&rsquo;s attachment theory (1969 onward) and Mary Ainsworth&rsquo;s &ldquo;strange situation&rdquo; studies established the secure, anxious, and avoidant patterns. The adult-relationship application that Part II leans on is in Amir Levine and Rachel Heller&rsquo;s <em>Attached</em> (2010).</p><p><strong>That you have to believe your choices matter.</strong> Julian Rotter introduced locus of control in 1966. Decades of research since tie an internal locus to the willingness to act on one&rsquo;s own behalf, which is what a boundary is.</p><p><strong>That rescuing keeps people stuck.</strong> Melody Beattie&rsquo;s <em>Codependent No More</em> (1986) is the book that named the pattern for a general audience. The clinical literature on enabling in addiction treatment makes the same case: shielding a person from consequences predicts continued use.</p><p><strong>On burdens and loads.</strong> The two Greek words in Galatians 6:2 and 6:5 are <em>baros</em> and <em>phortion</em>. The distinction is standard in the lexicons (Bauer-Danker-Arndt-Gingrich) and in most commentaries on Galatians. It&rsquo;s not a trick of translation. Paul chose different words.</p><p><strong>On Jesus.</strong> Everything in Part III about what He did is in the text: Mark 1:35, Mark 3:31–35, Luke 10:38–42, Matthew 16:23, John 6:66–67, Mark 10:17–22, Luke 15:11–32.</p><p><strong>On Marcus Aurelius.</strong> Both lines are from the <em>Meditations</em>, in Gregory Hays&rsquo;s translation (2002).</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>52</span></div>
+    </div>
+  </div></div>
+<div class="page">
+  <div class="inner grid">
+    <aside class="margin"><div class="m-part">Appendix B<br>The research behind it</div><div class="m-grow"></div><div class="m-note">So you know it isn&rsquo;t just my opinion</div></aside>
+    <div class="col"><h3>Works cited</h3><p class="cite">Beattie, M. (1986). <em>Codependent No More</em>. Hazelden.</p><p class="cite">Bowen, M. (1978). <em>Family Therapy in Clinical Practice</em>. Jason Aronson.</p><p class="cite">Bowlby, J. (1969). <em>Attachment and Loss, Vol. 1: Attachment</em>. Basic Books.</p><p class="cite">Cloud, H. (2010). <em>Necessary Endings</em>. HarperBusiness.</p><p class="cite">Cloud, H., &amp; Townsend, J. (1992). <em>Boundaries: When to Say Yes, How to Say No to Take Control of Your Life</em>. Zondervan.</p><p class="cite">Eisenberger, N. I., Lieberman, M. D., &amp; Williams, K. D. (2003). Does rejection hurt? An fMRI study of social exclusion. <em>Science</em>, 302(5643), 290–292.</p><p class="cite">Friedman, E. H. (2007). <em>A Failure of Nerve: Leadership in the Age of the Quick Fix</em>. Seabury.</p><p class="cite">Levine, A., &amp; Heller, R. (2010). <em>Attached</em>. TarcherPerigee.</p><p class="cite">Lieberman, M. D. (2013). <em>Social: Why Our Brains Are Wired to Connect</em>. Crown.</p><p class="cite">Linehan, M. M. (1993). <em>Cognitive-Behavioral Treatment of Borderline Personality Disorder</em>. Guilford.</p><p class="cite">Marcus Aurelius. (2002). <em>Meditations</em> (G. Hays, Trans.). Modern Library.</p><p class="cite">Rotter, J. B. (1966). Generalized expectancies for internal versus external control of reinforcement. <em>Psychological Monographs</em>, 80(1), 1–28.</p><p class="cite">Walker, P. (2013). <em>Complex PTSD: From Surviving to Thriving</em>. Azure Coyote.</p><div class="grow"></div>
+      <div class="foot"><span>The Boundary Protocol</span><span>53</span></div>
+    </div>
+  </div></div>
+<div class="page dark back">
+  <div class="inner">
+    <p class="bk-line">You are responsible to people. You are not responsible for them.</p>
+    <p class="bk-sub">If you&rsquo;re exhausted and resentful and still can&rsquo;t say no, you don&rsquo;t have a love problem. You have a property-line problem. This is how you draw the line and hold it without becoming someone you&rsquo;d never want to be.</p>
+    <div class="c-grow"></div>
+    <div class="bk-author">
+      <img src="../../../images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+      <div><div class="c-os">Matt Vincent Walker</div><p>Husband, dad of two, coach. Nearly twenty years in pastoral ministry, then Fortune 500 sales, then systems and AI. Then the years everything broke &mdash; and the structure that rebuilt him, one brick at a time.</p></div>
+    </div>
+    <hr class="bk-rule">
+    <div class="bk-foot"><div>One letter a week<br><span class="amber">mattvincentwalker.com</span></div><img class="shield-sm" src="../../../images/vincere-shield.png" alt=""></div>
+    <div class="bk-vin">Vincere &middot; Latin, &ldquo;to overcome&rdquo;</div>
+  </div></div>
+</div></body></html>

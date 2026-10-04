@@ -157,3 +157,10 @@
   from = "/society"
   to = "/society/"
   status = 301
+
+# The protocol library sources (drafts, paged HTML, PDFs) are never served from the site.
+[[redirects]]
+  from = "/protocols/library/*"
+  to = "/404.html"
+  status = 404
+  force = true
