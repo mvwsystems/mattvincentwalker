@@ -25,6 +25,7 @@ Allow: /
 Disallow: /post-template.html
 Disallow: /downloads/
 Disallow: /grounding-protocol/
+Disallow: /labyrinth/
 Disallow: /break-point/results/
 Disallow: /break-point/book/
 

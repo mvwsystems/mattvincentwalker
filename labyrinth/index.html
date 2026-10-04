@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Vincere Labyrinth — private</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0a09; --bg2:#12100e; --stone:#2a2724; --stone-light:#3a3632;
+    --amber:#c8935a; --amber-dim:#8a6a42; --cream:#e8e0d4; --white:#f5f0ea;
+    --warm:#a8a099; --muted:#6b6560;
+    --display:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    --body:'Outfit','Helvetica Neue',Arial,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--body);font-weight:300;line-height:1.7;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding-block:56px 80px;padding-inline:24px}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--amber-dim)}
+  h1{font-family:var(--display);font-weight:300;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.1;letter-spacing:-.01em;color:var(--white);margin:14px 0 18px;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--amber)}
+  h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;color:var(--white);margin:0 0 10px;text-wrap:balance}
+  h3{font-family:var(--display);font-weight:500;font-size:1.25rem;color:var(--white);margin:0 0 6px}
+  p{margin:0 0 14px;max-width:62ch;color:var(--warm)}
+  p.lede{font-size:17px;color:var(--cream)}
+  section{padding-block:48px;border-top:1px solid rgba(74,70,67,.35)}
+  section:first-of-type{border-top:0;padding-top:0}
+  .sechead{display:flex;flex-direction:column;gap:4px;margin-bottom:28px}
+
+  /* labyrinth */
+  .lab{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:40px;align-items:center}
+  .lab svg{width:100%;height:auto;max-width:720px;display:block;margin:0 auto}
+  .ring-text{font-family:var(--mono);fill:var(--cream);font-size:12.5px;letter-spacing:2.5px;text-anchor:middle}
+  .ring-sub{font-family:var(--display);font-style:italic;fill:var(--warm);font-size:15px;text-anchor:middle;letter-spacing:0}
+  .ring-world{font-family:var(--mono);fill:var(--muted);font-size:9.5px;letter-spacing:3px;text-anchor:middle}
+  .legend{display:flex;flex-direction:column}
+  .leg{display:grid;grid-template-columns:18px 1fr auto;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(74,70,67,.35)}
+  .leg:first-child{border-top:1px solid rgba(74,70,67,.35)}
+  .sw{width:14px;height:14px;border-radius:50%;margin-top:5px;border:1px solid var(--amber-dim)}
+  .leg b{display:block;font-weight:400;color:var(--white);font-size:15px}
+  .leg small{display:block;color:var(--warm);font-size:13px;line-height:1.5}
+  .leg .hrs{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);text-align:right;white-space:nowrap;padding-top:4px}
+  .leg .hrs span{display:block;color:var(--muted);letter-spacing:1px;font-size:9px;text-transform:none}
+
+  /* ladder table */
+  .tablewrap{overflow-x:auto;border:1px solid rgba(74,70,67,.4)}
+  table{border-collapse:collapse;width:100%;min-width:960px;font-size:14px}
+  th{font-family:var(--mono);font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber-dim);text-align:left;padding:14px 16px;border-bottom:1px solid rgba(74,70,67,.5);background:var(--bg2);font-weight:400}
+  td{padding:16px;vertical-align:top;border-bottom:1px solid rgba(74,70,67,.3);color:var(--warm);line-height:1.55}
+  tr:last-child td{border-bottom:0}
+  td.name{color:var(--white);font-family:var(--display);font-size:18px;font-weight:500;white-space:nowrap}
+  td.name small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  td.price{font-family:var(--mono);font-size:12px;color:var(--amber);white-space:normal;min-width:150px;max-width:190px;letter-spacing:.5px;font-variant-numeric:tabular-nums;line-height:1.5}
+  td.price span{display:block;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:.3px}
+  td.hrs{font-family:var(--mono);font-size:11px;color:var(--cream);white-space:nowrap}
+  td.hrs.zero{color:var(--muted)}
+
+  /* compare */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px}
+  .col{border:1px solid rgba(74,70,67,.4);padding:28px}
+  .col.mine{border-color:rgba(200,147,90,.45);background:rgba(200,147,90,.03)}
+  .col .eyebrow{margin-bottom:16px;display:block}
+  ol.chain{list-style:none;margin:0;padding:0;counter-reset:n}
+  ol.chain li{position:relative;padding:10px 0 10px 40px;border-left:1px solid var(--stone-light);margin-left:9px;color:var(--cream)}
+  ol.chain li::before{counter-increment:n;content:counter(n);position:absolute;left:-10px;top:12px;width:19px;height:19px;border-radius:50%;background:var(--bg);border:1px solid var(--amber-dim);font-family:var(--mono);font-size:9px;color:var(--amber);display:flex;align-items:center;justify-content:center}
+  ol.chain li:last-child{border-left-color:transparent}
+  ol.chain li span{display:block;font-size:13px;color:var(--muted)}
+  ol.chain li.gap{color:var(--muted);font-style:italic;font-family:var(--display);font-size:16px}
+  ol.chain li.gap::before{border-style:dashed;color:var(--muted)}
+
+  .crit{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .crit ul{list-style:none;margin:0;padding:0}
+  .crit li{padding:14px 0;border-top:1px solid rgba(74,70,67,.35);color:var(--warm);font-size:14.5px}
+  .crit li b{color:var(--white);font-weight:400;display:block;margin-bottom:2px;font-family:var(--display);font-size:18px}
+
+  /* where things land */
+  .land{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(74,70,67,.35);border:1px solid rgba(74,70,67,.35)}
+  .land div{background:var(--bg);padding:22px}
+  .land div .eyebrow{display:block;margin-bottom:8px}
+  .land div p{font-size:14px;margin:0}
+  .rules{list-style:none;margin:0;padding:0;max-width:62ch}
+  .rules li{padding:12px 0 12px 28px;position:relative;border-top:1px solid rgba(74,70,67,.35);color:var(--cream)}
+  .rules li::before{content:'';position:absolute;left:0;top:22px;width:14px;height:1px;background:var(--amber)}
+  .foot{margin-top:60px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+
+  /* build plan */
+  .phases{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid rgba(74,70,67,.35)}
+  .phase{display:grid;grid-template-columns:260px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid rgba(74,70,67,.35)}
+  .ph-head h3{margin-top:6px}
+  .phase ul{list-style:none;margin:0;padding:0}
+  .phase li{padding:8px 0;color:var(--warm);font-size:14.5px;max-width:68ch}
+  .phase li b{color:var(--white);font-weight:400}
+  .decide{margin-top:36px;border:1px solid rgba(200,147,90,.45);background:rgba(200,147,90,.03);padding:24px 28px;max-width:620px}
+  .decide ul{list-style:none;margin:0;padding:0}
+  .decide li{padding:7px 0 7px 24px;position:relative;color:var(--cream);font-size:14.5px}
+  .decide li::before{content:'';position:absolute;left:0;top:17px;width:12px;height:1px;background:var(--amber)}
+  @media (max-width:820px){ .phase{grid-template-columns:1fr;gap:8px} }
+  @media (max-width:820px){
+    .lab,.compare,.crit{grid-template-columns:1fr}
+    .land{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .lab svg .path{stroke-dasharray:4 6;animation:walk 6s linear infinite}
+    @keyframes walk{to{stroke-dashoffset:-100}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-block:28px 0;max-width:1080px"><a href="/" style="display:inline-block"><img src="/MV Signature small.png" alt="Matt Vincent Walker" style="height:34px;opacity:.85"></a></div>
+
+
+<div class="wrap">
+
+<section>
+  <div class="eyebrow">Settled structure · 3 October 2026</div>
+  <h1>One labyrinth. <em>Six rings.</em> Every ring pays, and your presence rises as a man moves inward.</h1>
+  <p class="lede">Your original labyrinth, with money in every ring. The outer rings run without you. The Society is one hour a week that pays for everything else. The Order is one week a year that doubles it. The Codex waits at the center, and no one can buy it.</p>
+</section>
+
+<section>
+  <div class="lab">
+    <svg viewBox="0 0 760 760" role="img" aria-label="Six concentric rings: the world, the Letter, the Protocols, the OS, coaching, and at the center the Order and the Codex">
+      <defs>
+        <radialGradient id="g" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#c8935a" stop-opacity=".22"/>
+          <stop offset="1" stop-color="#c8935a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- the world -->
+      <circle cx="380" cy="380" r="372" fill="#0c0a09" stroke="#3a3632" stroke-width="1" stroke-dasharray="2 6"/>
+      <!-- rings, outside in -->
+      <circle cx="380" cy="380" r="320" fill="#120f0d" stroke="#8a6a42" stroke-opacity=".45" stroke-width="1"/>
+      <circle cx="380" cy="380" r="258" fill="#171310" stroke="#8a6a42" stroke-opacity=".55" stroke-width="1"/>
+      <circle cx="380" cy="380" r="196" fill="#1d1712" stroke="#8a6a42" stroke-opacity=".65" stroke-width="1"/>
+      <circle cx="380" cy="380" r="134" fill="#241b14" stroke="#8a6a42" stroke-opacity=".8" stroke-width="1"/>
+      <circle cx="380" cy="380" r="72" fill="#2c2016" stroke="#c8935a" stroke-width="1.2"/>
+      <circle cx="380" cy="380" r="72" fill="url(#g)"/>
+
+      <!-- the path inward -->
+      <line class="path" x1="643" y1="643" x2="380" y2="380" stroke="#c8935a" stroke-opacity=".55" stroke-width="1" stroke-dasharray="4 6"/>
+      <g fill="#0c0a09" stroke="#c8935a" stroke-width="1">
+        <circle cx="606" cy="606" r="4"/>
+        <circle cx="562" cy="562" r="4"/>
+        <circle cx="519" cy="519" r="4"/>
+        <circle cx="475" cy="475" r="4"/>
+        <circle cx="431" cy="431" r="4"/>
+      </g>
+      <text x="712" y="676" class="ring-world" style="text-anchor:end">a man enters here</text>
+
+      <!-- labels at 12 o'clock -->
+      <text x="380" y="52" class="ring-world">The world · social · the books · The Synthesis · search</text>
+
+      <text x="380" y="86" class="ring-text">THE VINCERE LETTER</text>
+      <text x="380" y="106" class="ring-sub">free · Break Point, Grounding Protocol, Finish Strong</text>
+
+      <text x="380" y="148" class="ring-text">THE VINCERE PROTOCOLS</text>
+      <text x="380" y="168" class="ring-sub">$147 · the library, read</text>
+
+      <text x="380" y="210" class="ring-text">THE VINCERE SOCIETY</text>
+      <text x="380" y="230" class="ring-sub">~$790 a year · the OS taught live · one call a week</text>
+
+      <text x="380" y="272" class="ring-text">ONE-ON-ONE</text>
+      <text x="380" y="292" class="ring-sub">$5,000 · twelve weeks · application only</text>
+
+      <text x="380" y="366" class="ring-text" style="fill:#c8935a">THE ORDER</text>
+      <text x="380" y="384" class="ring-sub" style="font-size:13px">invitation · once a year, far away</text>
+      <line x1="356" y1="394" x2="404" y2="394" stroke="#8a6a42" stroke-width="1"/>
+      <text x="380" y="412" class="ring-text" style="fill:#c8935a;font-size:11px">THE CODEX</text>
+      <text x="380" y="428" class="ring-sub" style="font-size:12px">given, never sold</text>
+
+      <text x="380" y="728" class="ring-world">nobody is pushed inward · the work moves him</text>
+    </svg>
+
+    <div class="legend">
+      <div class="leg"><span class="sw" style="background:#120f0d"></span><div><b>The Vincere Letter</b><small>One letter a week. Three doors in: Break Point, Finish Strong, the Grounding Protocol on every door.</small></div><div class="hrs">0 hrs<span>per man</span></div></div>
+      <div class="leg"><span class="sw" style="background:#171310"></span><div><b>The Vincere Protocols</b><small>All of them, as one library. Never sold one at a time. Read.</small></div><div class="hrs">0 hrs<span>per man</span></div></div>
+      <div class="leg"><span class="sw" style="background:#1d1712"></span><div><b>The Vincere Society</b><small>The paid room. One module a month taught live, one call a week. The recordings become the OS.</small></div><div class="hrs">90 min<span>a week, nothing else promised</span></div></div>
+      <div class="leg"><span class="sw" style="background:#241b14"></span><div><b>One-on-one</b><small>Twelve weeks. Application only. Capped at a few men at a time.</small></div><div class="hrs">~20 hrs<span>per man, per engagement</span></div></div>
+      <div class="leg"><span class="sw" style="background:#2c2016;border-color:#c8935a"></span><div><b>The Order · The Codex</b><small>Eight to twelve men. One assembly a year somewhere worth travelling to, a quarterly call, a private thread. The Codex arrives by mail, in premium packaging, once a man has accepted his invitation and paid.</small></div><div class="hrs">1 week<span>a year, + a few hours a quarter</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">The ladder, ring by ring</div>
+    <h2>What each ring is, what it costs, and what moves a man to the next one</h2>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Ring</th><th>Price</th><th>What it is</th><th>What's in it</th><th>Delivered by</th><th>Your hours</th><th>What moves him inward</th></tr></thead>
+      <tbody>
+        <tr><td class="name">The Letter<small>ring one · free</small></td><td class="price">$0</td><td>The outer ring. Every door gives the Grounding Protocol.</td><td>Break Point, Finish Strong, Grounding Protocol, one letter a week</td><td>Beehiiv + Resend, already live</td><td class="hrs zero">0</td><td>The Break Point names his false ground and the protocol written for it.</td></tr>
+        <tr><td class="name">The Protocols<small>ring two · read</small></td><td class="price">$147</td><td>The library. Nine protocols plus Quiet Theft and Anxiety, rewritten to the Grounding standard.</td><td>Boundary, Presence, Order, Consequence, Alignment, Recovery, Decision, Leverage, Grounding (free), Quiet Theft, Anxiety</td><td>Stripe link → Netlify function → Resend. Zero touch.</td><td class="hrs zero">0</td><td>Every protocol ends with the next move. The $147 credits toward the Society.</td></tr>
+        <tr><td class="name">The Society<small>ring three · the room</small></td><td class="price">~$79 / mo · ~$790 / yr<span>founding members pay less, forever</span></td><td>The paid community. One module of the OS taught live each month; one call a week; the chat is theirs, not yours.</td><td>Identity · Emotion · Relationships first. Then Health, Wealth (business + AI courses live here), Purpose, Faith. Recordings become the self-serve OS in year two.</td><td>Stripe subscription → gated site pages + community platform. Calls recorded.</td><td class="hrs">90 min / wk</td><td>A year in the room, and the coaching application at the end of every track.</td></tr>
+        <tr><td class="name">One-on-one<small>ring four · your hours</small></td><td class="price">$5,000 / 12 wk</td><td>The roof for a stranger. Shown only on the coaching page. Application, not checkout.</td><td>Twelve weeks, the OS as the curriculum, you as the man in the room</td><td>Calendly + Zoom. You. Capped.</td><td class="hrs">~20 / man</td><td>Finishing. Alumni are where Order invitations come from.</td></tr>
+        <tr><td class="name">The Order<small>center · invitation</small></td><td class="price">$12–20k / yr<span>the price is the dues; the invitation is the filter</span></td><td>Eight to twelve men. One assembly a year somewhere worth the journey, four days of deep work. Not on the nav, not in the ads.</td><td>Coaching alumni and the men who have shown up in the Society for a year</td><td>Annual assembly (venue or producer handles logistics) + quarterly call + private thread</td><td class="hrs">1 wk / yr + ~3 / qtr</td><td>Nothing. This is the center.</td></tr>
+        <tr><td class="name">The Codex<small>center · the object</small></td><td class="price">never sold</td><td>The bound, physical edition of the complete OS: every protocol and the field manual.</td><td>One print run a year, premium packaging</td><td>Members of the Order only. Mailed in premium packaging once a man has accepted his invitation and paid.</td><td class="hrs zero">0</td><td>It is the first thing the Order sends him, and the reason he tells someone else.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Your map, and this one</div>
+    <h2>Your map, three drafts in</h2>
+  </div>
+  <div class="compare">
+    <div class="col">
+      <span class="eyebrow">Your original</span>
+      <ol class="chain">
+        <li>The Vincere Letter <span>free</span></li>
+        <li>The Vincere Society <span>community · your time</span></li>
+        <li>The Vincere Codex <span>earned, not sold · no revenue</span></li>
+        <li>The Order <span>invitation only · your time</span></li>
+        <li>One-on-one <span>your time</span></li>
+      </ol>
+    </div>
+    <div class="col mine">
+      <span class="eyebrow">Settled · 3 October 2026</span>
+      <ol class="chain">
+        <li>The Vincere Letter <span>free · zero hours</span></li>
+        <li>The Vincere Protocols <span>$147 · zero hours</span></li>
+        <li>The Vincere Society <span>~$790 / yr · 90 minutes a week · builds the OS live</span></li>
+        <li>One-on-one <span>$5,000 · ~20 hours a man, capped</span></li>
+        <li>The Order, and the Codex at the center <span>$12–20k · one week a year + a quarterly call</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="crit">
+    <div>
+      <h3>The Society: rules that keep it survivable</h3>
+      <ul>
+        <li><b>One call a week. Nothing else promised.</b> Ninety minutes. The chat belongs to the members. The hours go to the chat if you let them, so don't.</li>
+        <li><b>Annual by default.</b> A monthly option priced to push men to annual. Monthly churn is a part-time job you didn't sign up for.</li>
+        <li><b>Four weeks off a year, announced in advance.</b> Record every call. Build the absence in before it becomes an apology.</li>
+        <li><b>The Society is the factory.</b> One module a month, taught live. The recordings become the OS. In year two the OS sells self-serve to the man who won't join.</li>
+        <li><b>Founding members pay less forever.</b> That is the only launch urgency you'll ever need.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>The Order: what to guard</h3>
+      <ul>
+        <li><b>The price is the dues. The invitation is the filter.</b> Keep them separate. The moment the Order is "whoever can pay," it's a retreat, not an Order.</li>
+        <li><b>A retreat is an events business.</b> Venue contracts, deposits, insurance, travel. A lodge or a producer handles all of it, or logistics eats more hours than the work.</li>
+        <li><b>Something in between.</b> A quarterly call and a private thread. A few hours a quarter, and the price holds for the other fifty-one weeks.</li>
+        <li><b>Four days, not seven. The Americas before an ocean.</b> Your reader has a family. Exotic can wait for year two.</li>
+        <li><b>It's built last.</b> It can't assemble before coaching has produced alumni. Realistically eighteen months out. That's right: it's the center.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Where everything you've sent me lands</div>
+    <h2>Nothing is wasted. Most of it is already written.</h2>
+  </div>
+  <div class="land">
+    <div><span class="eyebrow">Ring one · free</span><p>Break Point, Finish Strong, the Grounding Protocol, the Letter. Live today.</p></div>
+    <div><span class="eyebrow">Ring two · the Protocols</span><p>Boundary, Presence, Order, Consequence, Alignment, Recovery, Decision, Leverage, Quiet Theft, and one merged Anxiety Protocol. The $27 "Mastery System" is retired.</p></div>
+    <div><span class="eyebrow">Ring three · the Society</span><p>The ten OS boxes become the Society's curriculum, one module a month. Confidence folds into Identity. Ascend is retired as a name. The business and AI courses are the Wealth module.</p></div>
+    <div><span class="eyebrow">Outside the rings · the books</span><p><em>From the Desert to the Sea</em> first, on Amazon, as discovery. <em>Purpose Journey</em> and <em>Love Sin to Death</em> become the reading cores of the Purpose and Faith modules.</p></div>
+    <div><span class="eyebrow">The center · the Order and the Codex</span><p>The Codex is the bound edition of the complete OS, once the modules exist. It goes only to members of the Order, by mail, once they have accepted and paid. Not a separate thing to write.</p></div>
+    <div><span class="eyebrow">Retired brands</span><p>Walker Letters, Superhuman OS, Renatus Vincere, vincereletters.com, the "Premium Edition" register. Everything becomes Vincere in the rewrite.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">The rules that hold it together</div>
+    <h2>Five rules, so the labyrinth stays a labyrinth</h2>
+  </div>
+  <ul class="rules">
+    <li>Every door gives the Grounding Protocol. One gift, everywhere.</li>
+    <li>Rings one and two run at zero hours. The Society is ninety minutes a week and nothing else promised.</li>
+    <li>Price and your presence rise together, ring by ring. Never one without the other.</li>
+    <li>Nothing goes on a shelf until it has had the Grounding treatment: your voice, your reader, the research in the back.</li>
+    <li>The Order and the Codex are never advertised. A man hears about them from another man, and he cannot buy his way in.</li>
+  </ul>
+</section>
+
+<section id="build">
+  <div class="sechead">
+    <div class="eyebrow">What it takes to build</div>
+    <h2>Eighteen months, five phases, one ring at a time</h2>
+    <p>Everything below is listed as "built" (exists and is live), "to make," and who makes it. Claude drafts, builds, and wires. You review the voice, record the calls, write the Letter, finish the memoir, and make the decisions. Dates assume we start this week.</p>
+  </div>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="ph-head"><span class="eyebrow">Phase 0 · now to mid-October 2026</span><h3>Clear the ground</h3></div>
+      <ul>
+        <li><b>Your to-dos, still open.</b> Rename the Beehiiv publication, delete the test subscribers, Kit creator profile, Noah's headshot, re-export the Finish Strong PDF if it's off-brand, delete the old vincere-society Netlify site.</li>
+        <li><b>Stripe.</b> Open the account if you haven't, connect it to Netlify (webhook secret and keys as env vars), and settle the legal entity that gets paid.</li>
+        <li><b>The three boring pages.</b> Terms, privacy, refund policy. One page each. They must exist before the first sale.</li>
+        <li><b>The protocol builder.</b> Generalize the Grounding build script so every protocol is one markdown draft in, one paged PDF out, same cover system, same appendix for the research.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-head"><span class="eyebrow">Phase 1 · mid-October to December 2026</span><h3>Ring two: The Protocols</h3></div>
+      <ul>
+        <li><b>Rewrite ten protocols to the Grounding standard,</b> one a week, in this order: Boundary, Presence, Order, Consequence, Alignment, Recovery, Decision, Leverage, Quiet Theft, Anxiety (the two anxiety pieces merged, the invented numbers removed, Dispenza out of Alignment). Claude drafts in your voice; you mark it up; Claude rebuilds. Your time: an hour per protocol.</li>
+        <li><b>The sales page</b> at /protocols: one page, no hype, the library as one object, the price, the credit toward the Society.</li>
+        <li><b>Zero-touch delivery.</b> Stripe payment link → webhook → Netlify function → Resend email with the library and a Society credit code. Buyer recorded in Beehiiv by door. No login, no portal.</li>
+        <li><b>The Break Point names his protocol.</b> The field report already names his false ground; now it names the protocol written for it and links to the library. That is the whole funnel from free to paid.</li>
+        <li><b>Launch when six are done,</b> around mid-November. The remaining four arrive by email as they ship. Everyone who bought gets everything.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-head"><span class="eyebrow">Phase 2 · November 2026 to January 2027</span><h3>Ring three: The Society</h3></div>
+      <ul>
+        <li><b>Decision: the platform.</b> Circle (your brand, your subdomain, Stripe billing, courses and calls in one place) or Skool (simpler, cheaper, less yours). Recommendation is Circle at society.mattvincentwalker.com. This is the one decision that blocks everything else in this phase.</li>
+        <li><b>The curriculum.</b> Seven modules, one a month, four calls each: teach, workshop, questions, integration. Identity, Emotion, Relationships first; the matching protocols are the reading. The first three modules are outlined before launch; the rest are outlined a month ahead.</li>
+        <li><b>The room.</b> Spaces, welcome post, call calendar with the four weeks off already on it, Zoom link, recording pipeline (record → upload → post, done by Claude or a cheap VA, not you).</li>
+        <li><b>The /society page rewritten</b> from "not running yet" to the offer: what happens weekly, the founding price, annual by default, checkout.</li>
+        <li><b>The founding launch.</b> Four letters over four weeks in December, the Protocols buyers get their credit, doors open the first full week of January 2027. First call that week.</li>
+        <li><b>Onboarding without you.</b> Resend welcome email, the first module waiting, the Grounding Protocol as the first assignment.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-head"><span class="eyebrow">Phase 3 · January 2027 onward</span><h3>Ring four: one-on-one, and the weekly rhythm</h3></div>
+      <ul>
+        <li><b>The coaching page shows the structure:</b> twelve weeks, the OS as the curriculum, the price, the application. Capped at four men at a time; a waitlist when full. Agreement, intake, Calendly, and a Stripe invoice are prepared once and reused.</li>
+        <li><b>Your weekly footprint from here:</b> one Letter, one Society call, coaching sessions for the men you've taken. Nothing else on the calendar is promised to anyone.</li>
+        <li><b>Each month,</b> one module is taught and the recordings are filed. By December 2027 the OS exists without a single extra recording day.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-head"><span class="eyebrow">Phase 4 · September to December 2027</span><h3>The OS, the Codex, the memoir</h3></div>
+      <ul>
+        <li><b>The self-serve OS</b> is cut from the recordings and worksheets and sold one-time to the man who won't join the room. Same zero-touch delivery as the Protocols.</li>
+        <li><b>The Codex is compiled</b> from the complete protocols and the OS field manual, built with the same book pipeline, printed hardcover in a small run by a quality printer, in packaging worth the invitation it arrives with. Thirty copies, not three hundred.</li>
+        <li><b><em>From the Desert to the Sea</em> is finished</b> and on Amazon. This is your writing; Claude edits and structures. It is the thing that makes the price of the center believable to a stranger.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-head"><span class="eyebrow">Phase 5 · January to June 2028</span><h3>The center: The Order</h3></div>
+      <ul>
+        <li><b>Decisions: where, when, how much.</b> Location in the Americas for year one, four days, eight to twelve men, dues between twelve and twenty thousand. A lodge or a producer that runs the logistics end to end.</li>
+        <li><b>The invitation</b> is physical, from you, to coaching alumni and the men who have shown up in the Society for a year. Acceptance, payment by invoice, then the Codex goes in the mail.</li>
+        <li><b>The in-between.</b> A private space in the Society platform, a quarterly call on the calendar for the year.</li>
+        <li><b>The first assembly,</b> spring or early summer 2028.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="decide">
+    <h3>Decisions only you can make</h3>
+    <ul>
+      <li>Community platform: Circle or Skool.</li>
+      <li>Society price, final: the founding number and the full number.</li>
+      <li>Protocols launch at six or wait for ten.</li>
+      <li>Coaching cap: four at a time, or fewer.</li>
+      <li>The Order: location, month, dues.</li>
+      <li>Printer and packaging for the Codex.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="foot">Private · not linked, not indexed · Timeless principles. Modern systems. A life fully lived.</div>
+</div>
+
+</body>
+</html>
