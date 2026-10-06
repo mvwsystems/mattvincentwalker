@@ -35,7 +35,6 @@
       font-family: var(--font-display); font-size: clamp(2.6rem, 4.6vw, 4.4rem);
       font-weight: 300; line-height: 1.12; color: var(--white);
       margin-bottom: 36px; letter-spacing: -0.01em;
-      opacity: 0; animation: fadeUp 0.9s 0.35s var(--ease-expo) forwards;
     }
     .hero-headline em { font-style: italic; color: var(--white); }
     .hero-lede {
@@ -71,6 +70,7 @@
       filter: grayscale(1) contrast(1.03) brightness(0.9);
       -webkit-mask-image: radial-gradient(ellipse 88% 92% at 62% 42%, #000 48%, transparent 76%);
       mask-image: radial-gradient(ellipse 88% 92% at 62% 42%, #000 48%, transparent 76%);
+      transform: scale(1.06) translate3d(0, 0, 0);
       opacity: 0; animation: fadeIn 1.6s 0.3s var(--ease-expo) forwards;
     }
 
@@ -288,7 +288,7 @@
 <section class="hero-split">
   <div class="hero-copy">
     <div class="hero-overline">For the man carrying weight</div>
-    <h1 class="hero-headline">Become the man they <em>already</em> think you are.</h1>
+    <h1 class="hero-headline reveal-lines">Become the man they <em>already</em> think you are.</h1>
     <p class="hero-lede">On the worst night of my life, my son still thought I was his hero. I decided to become the man he already saw. I write for men doing the same &mdash; handling hard things, holding onto faith, leading at home and at work, and refusing to quit.</p>
     <div class="hero-form">
       <div class="subscribe-form" data-subscribe-form data-source="hero" style="margin:0;">
@@ -325,7 +325,7 @@
 <section class="turn">
   <div>
     <div class="section-label reveal">It can be different</div>
-    <h2 class="turn-title reveal">Alignment creates power.</h2>
+    <h2 class="turn-title reveal-lines">Alignment creates power.</h2>
   </div>
   <div class="turn-body">
     <p class="reveal">I don&rsquo;t mean hustle. I mean the opposite. When the inside is in order &mdash; who you are, what you actually believe at 3 a.m., what you&rsquo;re standing on when the pressure comes &mdash; the outside stops costing so much. Work gets lighter. Home gets warmer. You stop surviving your life and start living it.</p>

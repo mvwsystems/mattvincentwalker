@@ -1,3 +1,9 @@
+/* ═══ MOTION CAPABILITY FLAGS ═══ */
+const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const coarsePointerQuery = window.matchMedia('(pointer: coarse)');
+let prefersReduced = reduceMotionQuery.matches;
+const isCoarsePointer = coarsePointerQuery.matches;
+
 function toggleNav() {
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
@@ -22,8 +28,14 @@ function closeNav() {
 }
 
 // ═══ SCROLL REVEAL (enhanced with variants) ═══
+// .reveal-lines only joins once its words are wrapped, so the
+// per-line stagger has something to animate.
 function observeReveals() {
-  const els = document.querySelectorAll('.reveal:not(.visible), .reveal-up:not(.visible), .reveal-scale:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)');
+  const els = document.querySelectorAll(
+    '.reveal:not(.visible), .reveal-up:not(.visible), .reveal-scale:not(.visible),' +
+    '.reveal-left:not(.visible), .reveal-right:not(.visible),' +
+    '.reveal-lines.split:not(.visible)'
+  );
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -34,13 +46,91 @@ function observeReveals() {
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   els.forEach(el => observer.observe(el));
 }
-document.addEventListener('DOMContentLoaded', () => {
-  // On pages without the loader, show nav immediately
-  if (!document.getElementById('loader')) {
-    const nav = document.querySelector('nav');
-    if (nav) { nav.style.animation = 'none'; nav.style.opacity = '1'; }
+
+// ═══ MASKED LINE REVEAL ═══
+// Wraps every word in a clipped span, preserving inline markup
+// (<em>, <br>), then delays each word by the line it landed on.
+const LINE_STAGGER = 0.085;
+
+function wrapWords(el) {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+  const textNodes = [];
+  let node;
+  while ((node = walker.nextNode())) textNodes.push(node);
+
+  textNodes.forEach(textNode => {
+    if (!textNode.nodeValue.trim()) return;
+    const frag = document.createDocumentFragment();
+    textNode.nodeValue.split(/(\s+)/).forEach(part => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) {
+        frag.appendChild(document.createTextNode(part));
+        return;
+      }
+      const outer = document.createElement('span');
+      outer.className = 'w';
+      const inner = document.createElement('span');
+      inner.className = 'w-i';
+      inner.textContent = part;
+      outer.appendChild(inner);
+      frag.appendChild(outer);
+    });
+    textNode.parentNode.replaceChild(frag, textNode);
+  });
+}
+
+function assignLineDelays(el) {
+  let lineTop = null;
+  let line = -1;
+  el.querySelectorAll('.w').forEach(word => {
+    const top = word.offsetTop;
+    if (lineTop === null || Math.abs(top - lineTop) > 4) {
+      line++;
+      lineTop = top;
+    }
+    const inner = word.firstElementChild;
+    if (inner) inner.style.transitionDelay = (line * LINE_STAGGER).toFixed(3) + 's';
+  });
+}
+
+function splitLines(el) {
+  if (el.dataset.split === 'done') return;
+  wrapWords(el);
+  assignLineDelays(el);
+  el.dataset.split = 'done';
+  el.classList.add('split');
+}
+
+function initLineReveals() {
+  const els = document.querySelectorAll('.reveal-lines');
+  if (!els.length) return;
+  if (prefersReduced) return;
+
+  const run = () => {
+    els.forEach(splitLines);
+    // One frame between the hidden state and the reveal, so
+    // above-the-fold headings animate instead of snapping.
+    requestAnimationFrame(observeReveals);
+  };
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(run).catch(run);
+  } else {
+    run();
   }
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.querySelectorAll('.reveal-lines.split').forEach(assignLineDelays);
+    }, 200);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
   observeReveals();
+  initLineReveals();
   injectShineAndBtnLayers();
 });
 
@@ -62,64 +152,93 @@ function injectShineAndBtnLayers() {
   });
 }
 
-// ═══ NAV SCROLL ═══
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  if (window.scrollY > 100) {
-    nav.style.background = 'rgba(12,10,9,0.98)';
-  } else {
-    nav.style.background = 'linear-gradient(to bottom, rgba(12,10,9,0.95) 0%, rgba(12,10,9,0.7) 70%, transparent 100%)';
+// ═══ SCROLL (one rAF-batched handler for the whole page) ═══
+(function initScroll() {
+  let ticking = false;
+  let nav, portrait;
+
+  function frame() {
+    ticking = false;
+    const y = window.scrollY;
+
+    if (nav) nav.classList.toggle('scrolled', y > 100);
+
+    if (portrait && !prefersReduced) {
+      const vh = window.innerHeight;
+      if (y < vh) {
+        const drift = (y / vh) * 5;
+        portrait.style.transform = 'scale(1.06) translate3d(0, ' + drift.toFixed(2) + '%, 0)';
+      }
+    }
   }
-});
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(frame);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    nav = document.querySelector('nav');
+    portrait = document.querySelector('.hero-portrait img');
+    frame();
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 
 // ═══ CUSTOM CURSOR ═══
-const cursor = document.createElement('div');
-cursor.className = 'custom-cursor';
-document.body.appendChild(cursor);
-const dot = document.createElement('div');
-dot.className = 'cursor-dot';
-document.body.appendChild(dot);
+if (!prefersReduced && !isCoarsePointer) {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  const dot = document.createElement('div');
+  dot.className = 'cursor-dot';
+  document.body.appendChild(dot);
 
-let cx = 0, cy = 0, dx = 0, dy = 0;
-document.addEventListener('mousemove', e => {
-  dx = e.clientX; dy = e.clientY;
-  dot.style.left = dx + 'px'; dot.style.top = dy + 'px';
-});
+  let cx = 0, cy = 0, dx = 0, dy = 0;
+  document.addEventListener('mousemove', e => {
+    dx = e.clientX; dy = e.clientY;
+    dot.style.left = dx + 'px'; dot.style.top = dy + 'px';
+  });
 
-function animateCursor() {
-  cx += (dx - cx) * 0.12;
-  cy += (dy - cy) * 0.12;
-  cursor.style.left = cx + 'px';
-  cursor.style.top = cy + 'px';
-  requestAnimationFrame(animateCursor);
+  (function animateCursor() {
+    cx += (dx - cx) * 0.12;
+    cy += (dy - cy) * 0.12;
+    cursor.style.left = cx + 'px';
+    cursor.style.top = cy + 'px';
+    requestAnimationFrame(animateCursor);
+  })();
+
+  // Hover detection for cursor
+  const hoverTargets = 'a, button, .btn-primary, .btn-secondary, .card, .article-card, .testimonial, .tier, .numbered-row, .nav-toggle';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(hoverTargets)) cursor.classList.add('hovering');
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(hoverTargets)) cursor.classList.remove('hovering');
+  });
+
+  // Hide default cursor
+  document.body.style.cursor = 'none';
+  document.querySelectorAll('a, button, input, select, textarea').forEach(el => el.style.cursor = 'none');
 }
-animateCursor();
-
-// Hover detection for cursor
-const hoverTargets = 'a, button, .btn-primary, .btn-secondary, .card, .article-card, .testimonial, .tier, .numbered-row, .nav-toggle';
-document.addEventListener('mouseover', e => {
-  if (e.target.closest(hoverTargets)) cursor.classList.add('hovering');
-});
-document.addEventListener('mouseout', e => {
-  if (e.target.closest(hoverTargets)) cursor.classList.remove('hovering');
-});
-
-// Hide default cursor
-document.body.style.cursor = 'none';
-document.querySelectorAll('a, button, input, select, textarea').forEach(el => el.style.cursor = 'none');
 
 // ═══ MAGNETIC BUTTONS ═══
-document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+if (!prefersReduced && !isCoarsePointer) {
+  document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
   });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-  });
-});
+}
 
 // ═══ HERO PARTICLES ═══
 function createParticles() {
@@ -139,19 +258,7 @@ function createParticles() {
     hero.appendChild(p);
   }
 }
-createParticles();
-
-// ═══ PARALLAX ON SCROLL ═══
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  // Parallax hero elements
-  const heroName = document.querySelector('.hero-name');
-  const heroBadge = document.querySelector('.hero-badge');
-  if (heroName && scrollY < window.innerHeight) {
-    heroName.style.transform = `translateY(${scrollY * 0.08}px)`;
-    if (heroBadge) heroBadge.style.transform = `translateY(${scrollY * 0.04}px)`;
-  }
-});
+if (!prefersReduced) createParticles();
 
 // ═══ STAGGERED CHILDREN ANIMATION ═══
 function staggerChildren(selector, delay = 0.08) {
@@ -190,20 +297,22 @@ function animateCounters() {
   }, { threshold: 0.5 });
   document.querySelectorAll('.stat-num').forEach(el => observer.observe(el));
 }
-animateCounters();
-
-// ═══ SMOOTH SECTION LABEL LINES ═══
-// Handled by CSS .visible .section-label::before
+if (!prefersReduced) animateCounters();
 
 // ═══ TILT EFFECT ON CARDS ═══
-document.querySelectorAll('.card, .tier').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `translateY(-4px) perspective(600px) rotateX(${y * -3}deg) rotateY(${x * 3}deg)`;
+if (!prefersReduced && !isCoarsePointer) {
+  document.querySelectorAll('.card, .tier').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-4px) perspective(600px) rotateX(${y * -3}deg) rotateY(${x * 3}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
+}
+
+// Keep the live preference in sync if the OS setting changes mid-session.
+reduceMotionQuery.addEventListener('change', e => { prefersReduced = e.matches; });

@@ -49,8 +49,9 @@ img { max-width: 100%; display: block; }
 /* ═══ GRAIN OVERLAY ═══ */
 body::after {
   content: '';
-  position: fixed; inset: 0; z-index: 9999;
+  position: fixed; inset: -60px; z-index: 9999;
   pointer-events: none; opacity: 0.03;
+  animation: grainDrift 15s var(--ease-smooth) infinite alternate;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat; background-size: 200px;
 }
@@ -64,9 +65,11 @@ nav {
   padding: 20px 48px;
   display: flex; justify-content: space-between; align-items: center;
   background: linear-gradient(to bottom, rgba(12,10,9,0.95) 0%, rgba(12,10,9,0.7) 70%, transparent 100%);
-  opacity: 0; animation: fadeIn 0.8s 0.1s var(--ease-expo) forwards;
+  transition: background 0.45s var(--ease-smooth);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  view-transition-name: site-nav;
 }
+nav.scrolled { background: rgba(12,10,9,0.98); }
 .nav-logo {
   font-family: var(--font-display); font-size: 20px; font-weight: 500;
   color: var(--white); letter-spacing: 1px; cursor: pointer;
@@ -783,4 +786,92 @@ footer {
   object-position: center 12%;
   filter: grayscale(1) contrast(1.1) brightness(0.92); border: none;
   margin-bottom: 18px; display: block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOTION PASS
+   Cross-document view transitions, masked line reveals,
+   drifting grain, print + reduced-motion guards.
+   ═══════════════════════════════════════════════════════ */
+
+/* ═══ DRIFTING GRAIN ═══ */
+@keyframes grainDrift {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0.030; }
+  25%  { transform: translate3d(-9px, 7px, 0); opacity: 0.038; }
+  50%  { transform: translate3d(8px, -6px, 0); opacity: 0.032; }
+  75%  { transform: translate3d(-5px, -9px, 0); opacity: 0.040; }
+  100% { transform: translate3d(7px, 5px, 0); opacity: 0.033; }
+}
+
+/* ═══ CROSS-DOCUMENT VIEW TRANSITIONS ═══ */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+::view-transition-group(root) {
+  animation-duration: 460ms;
+  animation-timing-function: var(--ease-expo);
+}
+::view-transition-old(root) { animation-name: vtPageOut; }
+::view-transition-new(root) { animation-name: vtPageIn; }
+@keyframes vtPageOut {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+@keyframes vtPageIn {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+/* ═══ MASKED LINE REVEAL ═══
+   Words wrapped by js/main.js, clipped per word, released per line.
+   Container hides until split; a failsafe shows it if JS never runs. */
+.reveal-lines {
+  opacity: 0;
+  animation: rlFailsafe 1ms 2.5s linear forwards;
+}
+.reveal-lines.split { opacity: 1; animation: none; }
+@keyframes rlFailsafe { to { opacity: 1; } }
+
+.reveal-lines .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.08em 0.22em 0;
+  margin: 0 -0.08em -0.22em 0;
+}
+.reveal-lines .w-i {
+  display: inline-block;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 1.05s var(--ease-expo), opacity 0.8s var(--ease-expo);
+}
+.reveal-lines.visible .w-i { transform: translateY(0); opacity: 1; }
+
+/* ═══ PRINT ═══ */
+@media print {
+  body::after { display: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal, .reveal-up, .reveal-scale, .reveal-left, .reveal-right,
+  .reveal-lines, .reveal-lines .w-i {
+    opacity: 1 !important; transform: none !important;
+  }
+}
+
+/* ═══ REDUCED MOTION ═══
+   Near-zero durations rather than animation:none, so every
+   forwards-filled entrance still lands on its end state. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal, .reveal-up, .reveal-scale, .reveal-left, .reveal-right,
+  .reveal-lines, .reveal-lines .w-i {
+    opacity: 1 !important; transform: none !important;
+  }
+  .particle { display: none !important; }
+  .custom-cursor, .cursor-dot { display: none !important; }
+  .marquee-track { animation: none !important; }
 }
