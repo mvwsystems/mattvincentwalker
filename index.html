@@ -514,6 +514,8 @@
         if (data.ok) {
           btn.textContent = 'Sent'; input.style.display = 'none';
           if (status) { status.textContent = "You're in — The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
+          var src = wrapper.getAttribute('data-source') || '';
+          window.location.href = './welcome/' + (src ? '?from=' + encodeURIComponent(src) : '');
         } else { throw new Error(); }
       } catch (e) {
         btn.textContent = orig; btn.disabled = false; input.disabled = false;
