@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mattvincentwalker.com/the-hour/">
+  <title>The Hour — One hour a day, on the one thing | Matt Vincent Walker</title>
+  <meta name="description" content="One hour a day, every day, on the one thing you keep not getting to. A 30-day structure for men who are out of motivation and still intend to build.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mattvincentwalker.com/the-hour/">
+  <meta property="og:title" content="The Hour">
+  <meta property="og:description" content="One hour a day, every day, on the one thing. Thirty days. A structure that doesn't need motivation.">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── THE HOUR — the site's design system applied to a commitment page ── */
+    body { padding-top: env(safe-area-inset-top, 0px); }
+    .hr-wrap { max-width: 760px; margin: 0 auto; padding: 110px 24px 80px; }
+    .hr-logo { position: absolute; top: 26px; left: 50%; transform: translateX(-50%); }
+    .hr-logo img { height: 32px; opacity: 0.85; transition: opacity 0.3s; }
+    .hr-logo:hover img { opacity: 1; }
+
+    .hr-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); }
+    h1.hr-title { font-family: var(--font-display); font-size: clamp(3.2rem, 9vw, 6rem); font-weight: 300; line-height: 0.98; letter-spacing: -0.015em; color: var(--white); margin: 18px 0 22px; }
+    h1.hr-title em { font-style: italic; color: var(--amber); }
+    p.hr-lede { font-family: var(--font-display); font-size: clamp(1.1rem, 1.8vw, 1.35rem); color: var(--light); line-height: 1.7; max-width: 60ch; margin: 0 0 16px; }
+    p { font-size: 15.5px; font-weight: 300; line-height: 1.8; color: var(--warm-gray); margin: 0 0 14px; max-width: 62ch; }
+    p strong { color: var(--cream); font-weight: 400; }
+    h2.hr-h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3.2vw, 2.2rem); font-weight: 400; line-height: 1.15; color: var(--cream); margin: 0 0 16px; }
+    h3.hr-kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dim); margin: 0 0 14px; }
+
+    .hr-hero { padding-bottom: 40px; border-bottom: 1px solid rgba(74,70,67,0.3); margin-bottom: 44px; }
+    .hr-sec { padding: 0 0 46px; }
+    .hr-rule { height: 1px; background: rgba(74,70,67,0.3); margin: 0 0 46px; }
+
+    /* the story block */
+    .hr-story { border-left: 2px solid var(--amber-dim); padding: 4px 0 4px 24px; margin: 0 0 22px; }
+    .hr-story p { color: var(--light); }
+    .hr-story p:last-child { margin-bottom: 0; }
+
+    /* the rules */
+    .hr-rules { display: grid; gap: 1px; background: rgba(74,70,67,0.3); border: 1px solid rgba(74,70,67,0.3); margin: 8px 0 0; }
+    .hr-rule-row { background: var(--black-warm); padding: 22px 24px; display: grid; grid-template-columns: 40px 1fr; gap: 18px; align-items: start; }
+    .hr-rule-n { font-family: var(--font-mono); font-size: 11px; color: var(--amber); padding-top: 4px; }
+    .hr-rule-t { font-family: var(--font-display); font-size: 20px; color: var(--cream); margin-bottom: 6px; line-height: 1.3; }
+    .hr-rule-d { font-size: 14.5px; color: var(--muted); line-height: 1.7; margin: 0; max-width: none; }
+
+    /* the one thing field */
+    .hr-field { margin: 10px 0 0; }
+    .hr-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 10px; }
+    .hr-line { border: none; border-bottom: 1px solid var(--ash); background: transparent; color: var(--cream); font-family: var(--font-display); font-size: 21px; padding: 8px 0; width: 100%; outline: none; transition: border-color 0.3s; }
+    .hr-line:focus { border-color: var(--amber); }
+    .hr-line::placeholder { color: var(--ash); font-style: italic; }
+    .hr-two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+
+    /* tracker */
+    .hr-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin: 10px 0 14px; }
+    .hr-day { aspect-ratio: 1; border: 1px solid var(--stone-light); background: transparent; color: var(--ash); font-family: var(--font-mono); font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s var(--ease-expo); padding: 0; }
+    .hr-day:hover { border-color: var(--amber-dim); color: var(--muted); }
+    .hr-day.done { background: var(--amber); border-color: var(--amber); color: var(--black); }
+    .hr-count { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); }
+    .hr-count b { color: var(--amber); font-weight: 400; }
+
+    /* capture */
+    .hr-cap { border: 1px solid var(--stone-light); padding: 38px 32px; margin-top: 8px; }
+    .hr-cap h2 { margin-bottom: 12px; }
+    .hr-form { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+    .hr-input { flex: 1 1 240px; background: var(--charcoal); border: 1px solid var(--stone-light); color: var(--cream); font-family: var(--font-body); font-size: 15px; padding: 14px 16px; outline: none; transition: border-color 0.3s; }
+    .hr-input:focus { border-color: var(--amber-dim); }
+    .hr-micro { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
+
+    .hr-foot { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ash); text-align: center; margin-top: 60px; }
+
+    @media (max-width: 640px) {
+      .hr-wrap { padding: 96px 20px 64px; }
+      .hr-two { grid-template-columns: 1fr; gap: 22px; }
+      .hr-grid { grid-template-columns: repeat(6, 1fr); }
+      .hr-cap { padding: 28px 20px; }
+      .hr-rule-row { grid-template-columns: 28px 1fr; gap: 12px; padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="hr-logo" href="../index.html"><img src="../images/MV Signature small.png" alt="Matt Vincent Walker"></a>
+
+<div class="hr-wrap">
+
+  <!-- HERO -->
+  <div class="hr-hero">
+    <div class="hr-eyebrow">A 30-day structure</div>
+    <h1 class="hr-title">The <em>Hour</em>.</h1>
+    <p class="hr-lede">One hour a day. Every day. On the one thing you keep not getting to.</p>
+    <p>Not a productivity system. Not a morning routine. One hour, protected, pointed at the thing that would actually change your position if you kept at it.</p>
+  </div>
+
+  <!-- WHY -->
+  <div class="hr-sec">
+    <h3 class="hr-kicker">Why an hour</h3>
+    <h2 class="hr-h2">You don&rsquo;t need motivation. You need something that runs without it.</h2>
+    <p>Most men don&rsquo;t fail at the goal. They fail at the gap between the days they feel like it and the days they don&rsquo;t. Motivation covers maybe a third of them. Everything after that is structure, or nothing.</p>
+    <div class="hr-story">
+      <p>I found this out at the bottom. I had no motivation left, so I built something that didn&rsquo;t need any: a minimum daily. Walk through the gym doors, even if I don&rsquo;t train. Ten sales calls. One note to my wife, every day.</p>
+      <p>Brick by brick, the structure rebuilt the man.</p>
+    </div>
+    <p>An hour is the right size because it is small enough to survive a bad week and big enough to compound. Fifteen minutes is a gesture. Three hours collapses the first time a job runs long. An hour holds.</p>
+    <p><strong>Thirty days is thirty hours.</strong> Nobody has ever put thirty focused hours into one thing and had nothing to show for it.</p>
+  </div>
+
+  <div class="hr-rule"></div>
+
+  <!-- THE ONE THING -->
+  <div class="hr-sec">
+    <h3 class="hr-kicker">Step one</h3>
+    <h2 class="hr-h2">Name the one thing.</h2>
+    <p>Not three. One. If you cannot pick, pick the one you have avoided longest &mdash; that is usually the one that counts.</p>
+    <div class="hr-field">
+      <label class="hr-label" for="thing">For the next 30 days, my hour goes to</label>
+      <input class="hr-line" id="thing" type="text" placeholder="the thing you keep not getting to">
+    </div>
+    <div class="hr-two" style="margin-top:30px;">
+      <div class="hr-field">
+        <label class="hr-label" for="when">The hour is</label>
+        <input class="hr-line" id="when" type="text" placeholder="5:30&ndash;6:30am">
+      </div>
+      <div class="hr-field">
+        <label class="hr-label" for="where">Where</label>
+        <input class="hr-line" id="where" type="text" placeholder="desk, gym, truck, shop">
+      </div>
+    </div>
+    <p class="hr-micro" style="margin-top:18px;">A time and a place, or it won&rsquo;t happen. &ldquo;Sometime today&rdquo; is how it dies.</p>
+  </div>
+
+  <div class="hr-rule"></div>
+
+  <!-- RULES -->
+  <div class="hr-sec">
+    <h3 class="hr-kicker">Step two</h3>
+    <h2 class="hr-h2">Four rules. That&rsquo;s the whole thing.</h2>
+    <div class="hr-rules">
+      <div class="hr-rule-row">
+        <div class="hr-rule-n">01</div>
+        <div>
+          <div class="hr-rule-t">Same hour, same place</div>
+          <p class="hr-rule-d">You are not deciding every day. You decided once. The whole point is to stop spending willpower on when.</p>
+        </div>
+      </div>
+      <div class="hr-rule-row">
+        <div class="hr-rule-n">02</div>
+        <div>
+          <div class="hr-rule-t">Show up, even empty</div>
+          <p class="hr-rule-d">Walk through the doors even if you don&rsquo;t train. Sit down even if you write one bad paragraph. The streak is the asset, not the output.</p>
+        </div>
+      </div>
+      <div class="hr-rule-row">
+        <div class="hr-rule-n">03</div>
+        <div>
+          <div class="hr-rule-t">One thing, the whole hour</div>
+          <p class="hr-rule-d">Phone in another room. No email, no &ldquo;quick&rdquo; anything. An hour cut into pieces is not an hour, it is six interruptions.</p>
+        </div>
+      </div>
+      <div class="hr-rule-row">
+        <div class="hr-rule-n">04</div>
+        <div>
+          <div class="hr-rule-t">Miss one, never two</div>
+          <p class="hr-rule-d">You will miss a day. That is not failure, it is a Tuesday. Two in a row is how it ends, so the only rule that matters is the one about tomorrow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-rule"></div>
+
+  <!-- TRACKER -->
+  <div class="hr-sec">
+    <h3 class="hr-kicker">Step three</h3>
+    <h2 class="hr-h2">Mark the day.</h2>
+    <p>Tap a square when the hour is done. It saves on this device, so come back to the same page tomorrow.</p>
+    <div class="hr-grid" id="grid"></div>
+    <div class="hr-count"><b id="done">0</b> of 30 &middot; longest run <b id="streak">0</b></div>
+  </div>
+
+  <div class="hr-rule"></div>
+
+  <!-- CAPTURE -->
+  <div class="hr-sec">
+    <div class="hr-cap">
+      <h3 class="hr-kicker">Step four</h3>
+      <h2 class="hr-h2">Don&rsquo;t do it alone.</h2>
+      <p>Put your email in and I&rsquo;ll send you The Grounding Protocol now, then one letter a week while you&rsquo;re in the thirty days &mdash; one thing I&rsquo;m working through, and the structure underneath it.</p>
+      <p>Most men quit around day nine. It helps to hear from someone who has been there on day nine.</p>
+      <div class="subscribe-form hr-form" data-subscribe-form data-source="the-hour" style="margin:0;">
+        <input type="email" class="hr-input" placeholder="your@email.com">
+        <button class="btn-primary">Start the thirty</button>
+      </div>
+      <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:14px;text-transform:uppercase;"></p>
+      <div class="hr-micro">Free &middot; One letter a week &middot; Unsubscribe anytime</div>
+    </div>
+  </div>
+
+  <div class="hr-foot">Timeless principles. Modern systems. A life fully lived.</div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'mvw-the-hour';
+  var grid = document.getElementById('grid');
+  var doneEl = document.getElementById('done');
+  var streakEl = document.getElementById('streak');
+  var state;
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+  if (!state.days || state.days.length !== 30) state.days = new Array(30).fill(false);
+
+  // the text fields persist too, so the page is worth returning to
+  ['thing', 'when', 'where'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (state[id]) el.value = state[id];
+    el.addEventListener('input', function () { state[id] = el.value; save(); });
+  });
+
+  function longestRun() {
+    var best = 0, run = 0;
+    for (var i = 0; i < 30; i++) {
+      if (state.days[i]) { run++; if (run > best) best = run; } else { run = 0; }
+    }
+    return best;
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function paint() {
+    doneEl.textContent = state.days.filter(Boolean).length;
+    streakEl.textContent = longestRun();
+  }
+  for (var i = 0; i < 30; i++) {
+    (function (i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hr-day' + (state.days[i] ? ' done' : '');
+      b.textContent = i + 1;
+      b.setAttribute('aria-label', 'Day ' + (i + 1));
+      b.addEventListener('click', function () {
+        state.days[i] = !state.days[i];
+        b.classList.toggle('done', state.days[i]);
+        save(); paint();
+      });
+      grid.appendChild(b);
+    })(i);
+  }
+  paint();
+})();
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll('[data-subscribe-form]').forEach(function (wrapper) {
+    var input = wrapper.querySelector('input[type="email"]');
+    var btn = wrapper.querySelector('button');
+    var status = wrapper.parentElement.querySelector('[data-subscribe-status]');
+    if (!input || !btn) return;
+    btn.addEventListener('click', async function () {
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'var(--amber-dim)'; input.focus(); return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Sending…'; btn.disabled = true; input.disabled = true;
+      try {
+        var res = await fetch('/.netlify/functions/newsletter-subscribe', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, source: 'the-hour' })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          btn.textContent = 'Sent'; input.style.display = 'none';
+          if (status) { status.textContent = "You're in — The Grounding Protocol is on its way to your inbox."; status.style.display = 'block'; }
+          var src = wrapper.getAttribute('data-source') || '';
+          window.location.href = '../welcome/' + (src ? '?from=' + encodeURIComponent(src) : '');
+        } else { throw new Error(); }
+      } catch (e) {
+        btn.textContent = orig; btn.disabled = false; input.disabled = false;
+        input.style.borderColor = 'var(--amber-dim)';
+        if (status) { status.textContent = 'Something went wrong — try again.'; status.style.display = 'block'; }
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
