@@ -423,10 +423,11 @@ footer {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
   color: var(--muted);
 }
-.footer-links { display: flex; gap: 24px; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
 .footer-links a {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
   text-transform: uppercase; color: var(--muted); transition: color 0.3s;
+  white-space: nowrap;
 }
 .footer-links a:hover { color: var(--amber); }
 
@@ -521,7 +522,8 @@ footer {
   .numbered-row .row-arrow { display: none; }
   .form-grid { grid-template-columns: 1fr; }
   .subscribe-form { flex-direction: column; }
-  footer { flex-direction: column; gap: 20px; text-align: center; }
+  footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+  .footer-links { gap: 14px 18px; }
   .tiers-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .sponsor-stat { gap: 32px; }
