@@ -10,3 +10,17 @@ images/Noah*.jpeg
 
 # Protocol library PDFs are built locally (6MB each); drafts and book.html are the source of truth
 protocols/library/*/*.pdf
+
+# Source video and large design assets live in images/ but are NOT deployed.
+# Git keeps every version forever; the .mov alone is 83MB.
+images/*.mov
+images/*.mp4
+images/Purpose Journey.png
+images/RENATUS VINCERE (3).png
+images/Text.png
+images/Vincere Gold 2.png
+images/Vincere Letter.png
+images/Vincere_dark_moody_minimal_leverage_letter_*.png
+
+# macOS
+.DS_Store
