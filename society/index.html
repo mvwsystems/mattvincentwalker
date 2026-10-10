@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f0d0b">
   <link rel="canonical" href="https://mattvincentwalker.com/society/">
   <title>The Vincere Society — Renatus Vincere</title>
   <meta name="description" content="The Vincere Society — a place of formation for men who have survived something, or who sense they were built for something they haven't found yet. Renatus Vincere: reborn to overcome. Begin with The Vincere Letter.">
@@ -14,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <style>
     /* ── SOCIETY — the main design system, with the shield as the one Society mark ── */
@@ -92,9 +96,10 @@
 <nav>
   <div class="nav-logo">
     <a href="../index.html">
-      <img src="../images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+      <img width="200" height="52" src="../images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
     </a>
   </div>
+  <a class="nav-bar-cta" href="../subscribe.html">Get the Letter</a>
   <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
@@ -110,14 +115,14 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="soc-hero">
-  <img class="soc-shield" src="../images/vincere-shield.png" alt="The Vincere Society">
+  <picture><source type="image/webp" srcset="../images/vincere-shield.webp"><img width="800" height="800" class="soc-shield" src="../images/vincere-shield.png" alt="The Vincere Society"></picture>
   <div class="soc-eyebrow">The Vincere Society</div>
   <h1 class="soc-title">Renatus Vincere.</h1>
   <p class="soc-sub">Reborn to overcome.</p>
   <p class="soc-lede">For the men the fire couldn&rsquo;t bury. The Society is being built. The Letter is the door.</p>
   <div class="soc-form">
     <div class="subscribe-form" data-subscribe-form data-source="society">
-      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <input aria-label="Email address" autocomplete="email" type="email" class="subscribe-input" placeholder="your@email.com">
       <button class="btn-primary">Begin With the Letter</button>
     </div>
     <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
@@ -208,7 +213,7 @@
 
 <!-- ═══ THE FOUNDER ═══ -->
 <section class="soc-section soc-founder" style="border-top:1px solid rgba(74,70,67,0.25);">
-  <img class="reveal" src="../images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+  <picture><source type="image/webp" srcset="../images/mvw-portrait.webp"><img width="1773" height="1385" class="reveal" src="../images/mvw-portrait.jpeg" alt="Matt Vincent Walker"></picture>
   <div>
     <div class="section-label reveal">The Founder</div>
     <blockquote class="reveal">&ldquo;I built this for the man I used to be.&rdquo;</blockquote>
@@ -222,12 +227,12 @@
 
 <!-- ═══ THE SINGLE FRONT DOOR ═══ -->
 <section class="soc-door" id="letter">
-  <img class="soc-shield reveal" src="../images/vincere-shield.png" alt="">
+  <picture><source type="image/webp" srcset="../images/vincere-shield.webp"><img loading="lazy" decoding="async" width="800" height="800" class="soc-shield reveal" src="../images/vincere-shield.png" alt=""></picture>
   <h2 class="reveal">Begin with The Letter.</h2>
   <p class="reveal">The Vincere Letter is free. One letter a week, <em>The Grounding Protocol</em> when you join, and the entry point into the Society when its doors open. There is no other way in &mdash; and no better place to start.</p>
   <div class="reveal" style="max-width:460px;margin:0 auto;">
     <div class="subscribe-form" data-subscribe-form data-source="society">
-      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <input aria-label="Email address" autocomplete="email" type="email" class="subscribe-input" placeholder="your@email.com">
       <button class="btn-primary">Begin With the Letter</button>
     </div>
     <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
@@ -239,11 +244,11 @@
   <div class="footer-left">© 2026 Matt Vincent Walker &middot; The Vincere Society</div>
   <div class="footer-links">
     <a href="../deep-end/">The Deep End</a>
-    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
-    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
-    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
-    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
-    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+    <a href="https://twitter.com/mvwalker" target="_blank" rel="noopener">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank" rel="noopener">TikTok</a>
   </div>
   <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Renatus Vincere &middot; Reborn to overcome</div>
 </footer>

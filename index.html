@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f0d0b">
   <link rel="canonical" href="https://mattvincentwalker.com/">
   <title>Matt Vincent Walker</title>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mattvincentwalker.com/">
   <meta property="og:title" content="Become the man they already think you are.">
   <meta property="og:description" content="For men handling hard things and refusing to quit. One letter a week on inner order, real connection, and work that doesn't cost you your life.">
-  <meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/og-default.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="For men handling hard things and refusing to quit. One letter a week on inner order, real connection, and work that doesn't cost you your life — from a husband, father, and coach in Fort Worth, Texas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* ── HOMEPAGE — recognition → hope → trust → path → one step ── */
@@ -239,14 +243,23 @@
       .work-section, .subscribe-band, .bio-band { grid-template-columns: 1fr; gap: 56px; }
       .bio-photo { max-width: 320px; }
       .subscribe-band { padding: 80px 24px 100px; }
-      .hero-split { grid-template-columns: 1fr; min-height: 0; padding-top: 84px; }
-      .hero-portrait { order: -1; height: 48vh; min-height: 0; }
-      .hero-portrait img {
-        object-position: center top;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 55%, transparent 96%);
-        mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 55%, transparent 96%);
+      /* Mobile: the portrait sits behind the top of the copy instead of
+         above it, so the headline and the form land on the first screen. */
+      .hero-split { display: block; min-height: 0; padding-top: 0; }
+      .hero-portrait {
+        position: absolute; top: 0; left: 0; right: 0;
+        height: 56vh; min-height: 0; z-index: 0; pointer-events: none;
       }
-      .hero-copy { padding: 12px 24px 48px; }
+      .hero-portrait img {
+        object-position: center 0%;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 36%, transparent 76%);
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 36%, transparent 76%);
+      }
+      .hero-copy { padding: 34vh 24px 40px; max-width: none; }
+      .hero-overline { margin-bottom: 22px; }
+      .hero-headline { font-size: clamp(2.35rem, 10.5vw, 3rem); margin-bottom: 22px; }
+      .hero-lede { font-size: 1.05rem; line-height: 1.6; margin-bottom: 26px; }
+      .hero-micro { margin-top: 12px; }
       .hero-stats { position: static; padding: 0 24px 56px; }
     }
   </style>
@@ -268,9 +281,10 @@
 <nav>
   <div class="nav-logo">
     <a href="index.html">
-      <img src="images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+      <img width="200" height="52" src="images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
     </a>
   </div>
+  <a class="nav-bar-cta" href="subscribe.html">Get the Letter</a>
   <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
@@ -292,7 +306,7 @@
     <p class="hero-lede">On the worst night of my life, my son still thought I was his hero. I decided to become the man he already saw. I write for men doing the same &mdash; handling hard things, holding onto faith, leading at home and at work, and refusing to quit.</p>
     <div class="hero-form">
       <div class="subscribe-form" data-subscribe-form data-source="hero" style="margin:0;">
-        <input type="email" class="subscribe-input" placeholder="your@email.com">
+        <input aria-label="Email address" autocomplete="email" type="email" class="subscribe-input" placeholder="your@email.com">
         <button class="btn-primary">Get the Letter</button>
       </div>
       <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
@@ -300,7 +314,7 @@
     </div>
   </div>
   <div class="hero-portrait">
-    <img src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+    <picture><source type="image/webp" srcset="images/mvw-portrait.webp"><img fetchpriority="high" width="1773" height="1385" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker"></picture>
   </div>
   <div class="hero-stats">
     <span>Husband</span><span class="dot">·</span><span>Father of two</span><span class="dot">·</span><span>Fort Worth, Texas</span>
@@ -337,7 +351,7 @@
 
 <!-- ═══ STORY — trust ═══ -->
 <section class="bio-band">
-  <img class="bio-photo reveal" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker">
+  <picture><source type="image/webp" srcset="images/mvw-portrait.webp"><img loading="lazy" decoding="async" width="1773" height="1385" class="bio-photo reveal" src="images/mvw-portrait.jpeg" alt="Matt Vincent Walker"></picture>
   <div class="bio-copy">
     <div class="section-label reveal">My story</div>
     <h2 class="bio-name reveal">I&rsquo;m Matt.</h2>
@@ -356,7 +370,7 @@
   </div>
   <div class="proof-stage" id="proofSlides">
     <figure class="proof-slide active">
-      <img class="proof-photo" src="images/noah-weatherly.jpg" alt="Noah Weatherly">
+      <img loading="lazy" decoding="async" width="320" height="320" class="proof-photo" src="images/noah-weatherly.jpg" alt="Noah Weatherly">
       <div>
         <blockquote>I am incredibly grateful for the transformative journey I embarked upon with Matt Walker. His unwavering commitment to my well-being and growth has been nothing short of remarkable.</blockquote>
         <figcaption>
@@ -366,7 +380,7 @@
       </div>
     </figure>
     <figure class="proof-slide">
-      <img class="proof-photo" src="images/michael-craven.jpg" alt="S. Michael Craven">
+      <img loading="lazy" decoding="async" width="305" height="320" class="proof-photo" src="images/michael-craven.jpg" alt="S. Michael Craven">
       <div>
         <blockquote>Using sound insight, rational thought, and a gentle manner, he avoids the polemic that alienates and instead engages those with differing views in meaningful discourse.</blockquote>
         <figcaption>
@@ -376,7 +390,7 @@
       </div>
     </figure>
     <figure class="proof-slide">
-      <img class="proof-photo" src="images/lauren-harless.jpg" alt="Lauren Harless">
+      <img loading="lazy" decoding="async" width="320" height="320" class="proof-photo" src="images/lauren-harless.jpg" alt="Lauren Harless">
       <div>
         <blockquote>He combines transformational coaching with the truth of the Bible. He has helped me in so many ways change my mindset and chase after what God has created me for in life!</blockquote>
         <figcaption>
@@ -426,7 +440,7 @@
   </div>
   <div class="reveal">
     <div class="subscribe-form" data-subscribe-form data-source="homepage">
-      <input type="email" class="subscribe-input" placeholder="your@email.com">
+      <input aria-label="Email address" autocomplete="email" type="email" class="subscribe-input" placeholder="your@email.com">
       <button class="btn-primary">Get the Letter</button>
     </div>
     <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
@@ -438,11 +452,11 @@
   <div class="footer-left">© 2026 Matt Vincent Walker</div>
   <div class="footer-links">
     <a href="deep-end/">The Deep End</a>
-    <a href="https://twitter.com/mvwalker" target="_blank">X</a>
-    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank">LinkedIn</a>
-    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank">Instagram</a>
-    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank">YouTube</a>
-    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank">TikTok</a>
+    <a href="https://twitter.com/mvwalker" target="_blank" rel="noopener">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank" rel="noopener">TikTok</a>
   </div>
   <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Timeless principles. Modern systems. A life fully lived.</div>
 </footer>

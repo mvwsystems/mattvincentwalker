@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f0d0b">
   <link rel="canonical" href="https://mattvincentwalker.com/posts/what-is-the-vincere-os">
 
   <!--
@@ -18,12 +22,16 @@
   <meta name="description" content="The Vincere OS is a cybernetic performance framework built for founders and leaders navigating simultaneous internal disorder and external dysfunction. This essay defines the framework, its three nested feedback loops, and why most high-performer plateaus require more than strategy to break.">
   <meta property="og:title" content="What Is the Vincere OS?">
   <meta property="og:description" content="The Vincere OS is a cybernetic performance framework built for founders and leaders navigating simultaneous internal disorder and external dysfunction.">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/og-default.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="article">
   <meta name="publish-date" content="2026-06-04">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 
   <style>
@@ -350,9 +358,10 @@
 <nav>
   <div class="nav-logo">
     <a href="../index.html">
-      <img src="../images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+      <img width="200" height="52" src="../images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
     </a>
   </div>
+  <a class="nav-bar-cta" href="../subscribe.html">Get the Letter</a>
   <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
@@ -547,7 +556,7 @@
     <h3 class="post-subscribe-title">Essays like this, every week.</h3>
     <p class="post-subscribe-sub">AI, psychology, faith, and business — for people who want order and leverage without losing their humanity.</p>
     <div class="post-subscribe-form">
-      <input class="post-subscribe-input" type="email" placeholder="your@email.com">
+      <input aria-label="Email address" autocomplete="email" class="post-subscribe-input" type="email" placeholder="your@email.com">
       <button class="btn-primary" style="white-space:nowrap;">Subscribe →</button>
     </div>
   </div>
@@ -557,11 +566,11 @@
 <footer style="padding:48px;border-top:1px solid var(--stone);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
   <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--muted);">© 2026 Matt Vincent Walker</div>
   <div style="display:flex;gap:24px;">
-    <a href="https://twitter.com/mvwalker" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">X</a>
-    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
-    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
-    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">YouTube</a>
-    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">TikTok</a>
+    <a href="https://twitter.com/mvwalker" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">X</a>
+    <a href="https://www.linkedin.com/in/mattvwalker/" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+    <a href="https://www.instagram.com/mattvincentwalker/" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+    <a href="https://www.youtube.com/@MattVincentWalker" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">YouTube</a>
+    <a href="https://www.tiktok.com/@mattvincentwalker" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">TikTok</a>
   </div>
   <div style="width:100%;order:3;text-align:center;margin-top:20px;font-family:var(--font-mono),monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted,#7a756d);">Timeless principles. Modern systems. A life fully lived.</div>
 </footer>

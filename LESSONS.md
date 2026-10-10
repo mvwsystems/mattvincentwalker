@@ -34,7 +34,7 @@ Decisions made, corrections applied, and things the next build should know.
 
 7. **Paste booking embed** into `.booking-embed-container` in `/break-point/book/index.html`.
 
-8. **Replace `TODO_OG_IMAGE_URL`** on all three pages with a real Open Graph image (1200×630).
+8. ~~Replace `TODO_OG_IMAGE_URL` on all three pages with a real Open Graph image (1200×630).~~ Done: every page now uses `/images/og-default.jpg`.
 
 9. **Fix Vincere Society redirect loop.** The www ↔ non-www redirect loop on vinceresociety.com must be resolved in Netlify (force www or non-www canonically) before linking to it from this funnel.
 

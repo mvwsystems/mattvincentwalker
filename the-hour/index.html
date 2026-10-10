@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f0d0b">
   <link rel="canonical" href="https://mattvincentwalker.com/the-hour/">
   <title>The Hour — One hour a day, on the one thing | Matt Vincent Walker</title>
   <meta name="description" content="One hour a day, every day, on the one thing you keep not getting to. A 30-day structure for men who are out of motivation and still intend to build.">
@@ -10,19 +14,23 @@
   <meta property="og:url" content="https://mattvincentwalker.com/the-hour/">
   <meta property="og:title" content="The Hour">
   <meta property="og:description" content="One hour a day, every day, on the one thing. Thirty days. A structure that doesn't need motivation.">
-  <meta property="og:image" content="https://mattvincentwalker.com/images/mvw-portrait.jpeg">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/og-default.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <style>
     /* ── THE HOUR — the site's design system applied to a commitment page ── */
     body { padding-top: env(safe-area-inset-top, 0px); }
     .hr-wrap { max-width: 760px; margin: 0 auto; padding: 110px 24px 80px; }
-    .hr-logo { position: absolute; top: 26px; left: 50%; transform: translateX(-50%); }
-    .hr-logo img { height: 32px; opacity: 0.85; transition: opacity 0.3s; }
-    .hr-logo:hover img { opacity: 1; }
+    .hr-jump {
+      display: inline-block; margin-top: 10px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cream); padding-bottom: 8px; border-bottom: 1px solid var(--amber-dim);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .hr-jump:hover { color: var(--amber); border-color: var(--amber); }
 
     .hr-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); }
     h1.hr-title { font-family: var(--font-display); font-size: clamp(3.2rem, 9vw, 6rem); font-weight: 300; line-height: 0.98; letter-spacing: -0.015em; color: var(--white); margin: 18px 0 22px; }
@@ -86,7 +94,25 @@
 </head>
 <body>
 
-<a class="hr-logo" href="../index.html"><img src="../images/MV Signature small.png" alt="Matt Vincent Walker"></a>
+<nav>
+  <div class="nav-logo">
+    <a href="../index.html">
+      <img width="200" height="52" src="../images/MV Signature small.png" alt="Matt Vincent Walker" style="height:36px;width:auto;opacity:0.85;transition:opacity 0.3s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+    </a>
+  </div>
+  <a class="nav-bar-cta" href="../subscribe.html">Get the Letter</a>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../letter.html">The Letter</a></li>
+    <li><a href="../the-synthesis.html">The Synthesis</a></li>
+    <li><a href="../work-with-me.html">Work With Me</a></li>
+    <li><a href="../subscribe.html" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
 
 <div class="hr-wrap">
 
@@ -96,6 +122,7 @@
     <h1 class="hr-title">The <em>Hour</em>.</h1>
     <p class="hr-lede">One hour a day. Every day. On the one thing you keep not getting to.</p>
     <p>Not a productivity system. Not a morning routine. One hour, protected, pointed at the thing that would actually change your position if you kept at it.</p>
+    <a class="hr-jump" href="#start">Start the thirty &rarr;</a>
   </div>
 
   <!-- WHY -->
@@ -187,14 +214,14 @@
   <div class="hr-rule"></div>
 
   <!-- CAPTURE -->
-  <div class="hr-sec">
+  <div class="hr-sec" id="start">
     <div class="hr-cap">
       <h3 class="hr-kicker">Step four</h3>
       <h2 class="hr-h2">Don&rsquo;t do it alone.</h2>
       <p>Put your email in and I&rsquo;ll send you The Grounding Protocol now, then one letter a week while you&rsquo;re in the thirty days &mdash; one thing I&rsquo;m working through, and the structure underneath it.</p>
       <p>Most men quit around day nine. It helps to hear from someone who has been there on day nine.</p>
       <div class="subscribe-form hr-form" data-subscribe-form data-source="the-hour" style="margin:0;">
-        <input type="email" class="hr-input" placeholder="your@email.com">
+        <input aria-label="Email address" autocomplete="email" type="email" class="hr-input" placeholder="your@email.com">
         <button class="btn-primary">Start the thirty</button>
       </div>
       <p data-subscribe-status style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:14px;text-transform:uppercase;"></p>
@@ -292,5 +319,6 @@
 })();
 </script>
 
+<script src="../js/main.js"></script>
 </body>
 </html>

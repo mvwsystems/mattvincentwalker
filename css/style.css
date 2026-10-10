@@ -29,6 +29,9 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+/* Width/height attributes reserve space before load; CSS keeps the ratio intact. */
+img { max-width: 100%; height: auto; }
+img[src*="MV Signature"] { width: auto; }
 html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--ash) var(--black); overflow-x: hidden; }
 
 body {
@@ -877,3 +880,28 @@ footer {
   .custom-cursor, .cursor-dot { display: none !important; }
   .marquee-track { animation: none !important; }
 }
+
+/* ═══ NAV BAR CTA — visible on wide screens, lives in the drawer on mobile ═══ */
+.nav-bar-cta { display: none; }
+@media (min-width: 901px) {
+  .nav-bar-cta {
+    display: inline-block; margin-left: auto; margin-right: 36px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--black); background: var(--amber); padding: 11px 20px;
+    transition: background 0.4s var(--ease-expo), transform 0.4s var(--ease-expo);
+  }
+  .nav-bar-cta:hover { background: var(--amber-glow); }
+}
+
+/* ═══ FLOATING APPLY — appears once the hero is gone, hides when the form is on screen ═══ */
+.apply-float {
+  position: fixed; right: 24px; bottom: 24px; z-index: 900;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--black); background: var(--amber); padding: 15px 22px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  opacity: 0; transform: translateY(14px); pointer-events: none;
+  transition: opacity 0.5s var(--ease-expo), transform 0.5s var(--ease-expo), background 0.3s;
+}
+.apply-float.on { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.apply-float:hover { background: var(--amber-glow); }
+@media (max-width: 600px) { .apply-float { right: 16px; bottom: 16px; padding: 14px 18px; } }
