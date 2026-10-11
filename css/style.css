@@ -784,9 +784,10 @@ footer {
 
 /* ═══ TESTIMONIAL HEADSHOTS ═══ */
 .t-photo {
-  width: 52px; height: 52px; border-radius: 0; object-fit: cover;
+  width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
   object-position: center 12%;
   filter: grayscale(1) contrast(1.1) brightness(0.92); border: none;
+  box-shadow: 0 0 0 1px rgba(74,70,67,0.45);
   margin-bottom: 18px; display: block;
 }
 
