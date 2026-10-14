@@ -4,11 +4,600 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://mattvincentwalker.com/speaking">
-  <title>Speaking — Matt Vincent Walker</title>
+  <title>Speaking &mdash; Matt Vincent Walker</title>
+  <meta name="description" content="Keynotes and talks for executive retreats, churches, conferences, and universities. Truth without threat &mdash; naming what people are actually carrying, and restoring agency and orientation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── APPLY PAGE STYLES — all values from style.css variables ── */
+
+    /* HERO */
+    .apply-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 48px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .apply-hero::before {
+      content: '';
+      position: absolute;
+      top: 35%; left: 50%;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(200,147,90,0.05) 0%, transparent 68%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .apply-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .apply-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-expo) forwards 0.2s;
+    }
+
+    .apply-hero-eyebrow::before,
+    .apply-hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--amber-dim));
+    }
+
+    .apply-hero-eyebrow::after {
+      background: linear-gradient(to left, transparent, var(--amber-dim));
+    }
+
+    .apply-hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .apply-hero-subline {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 5vw, 4.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: var(--amber);
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) forwards 0.55s;
+    }
+
+    .apply-hero-rule {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--amber), transparent);
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-expo) forwards 0.7s;
+    }
+
+    .apply-hero-sub {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      max-width: 520px;
+      margin: 0 auto 52px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) forwards 0.8s;
+    }
+
+    .apply-hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) forwards 1s;
+    }
+
+    /* PULLQUOTE */
+    .pullquote-wrap {
+      padding: 96px 48px;
+      background: var(--black);
+      border-top: 1px solid var(--stone);
+      border-bottom: 1px solid var(--stone);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pullquote-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(200,147,90,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pullquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--cream);
+      max-width: 720px;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonials-grid-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pullquote-attr {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* APPLY SECTIONS */
+    .apply-section {
+      padding: 96px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .apply-section-centered {
+      text-align: center;
+    }
+
+    .apply-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .apply-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+
+    .apply-title em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .apply-rule {
+      width: 56px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--amber-dim), transparent);
+      margin: 20px auto 40px;
+    }
+
+    .apply-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* PROBLEM CARDS */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .problem-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 18px;
+      opacity: 0.8;
+    }
+
+    /* PILLARS */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone);
+      border: 1px solid var(--stone);
+      margin-top: 56px;
+    }
+
+    .pillar {
+      background: var(--black-warm);
+      padding: 48px 36px;
+      transition: background 0.4s var(--ease-expo);
+    }
+
+    .pillar:hover { background: rgba(200,147,90,0.025); }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .pillar-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--warm-gray);
+      margin-bottom: 24px;
+    }
+
+    .pillar-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .pillar-list li {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      color: rgba(234,228,216,0.75);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .pillar-list li::before {
+      content: '—';
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* FIT GRID */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--stone);
+      border: 1px solid var(--stone);
+      margin-top: 56px;
+    }
+
+    .fit-card {
+      background: var(--black-warm);
+      padding: 48px 40px;
+    }
+
+    .fit-card-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .fit-card.yes .fit-card-label { color: var(--amber); }
+    .fit-card.no  .fit-card-label { color: var(--muted); }
+
+    .fit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .fit-list li {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--warm-gray);
+      display: flex;
+      gap: 14px;
+      line-height: 1.6;
+    }
+
+    .fit-mark {
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-family: var(--font-display);
+      font-size: 15px;
+    }
+
+    .fit-card.yes .fit-mark { color: var(--amber); }
+    .fit-card.no  .fit-mark { color: var(--stone-light); }
+
+    /* PROCESS */
+    .process-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 56px;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      border-top: 1px solid var(--stone);
+      padding: 44px 0;
+    }
+
+    .process-step:last-child { border-bottom: 1px solid var(--stone); }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 60px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(200,147,90,0.1);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      padding-top: 4px;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .step-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--warm-gray);
+    }
+
+    /* BIO */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 72px;
+      align-items: start;
+      margin-top: 56px;
+    }
+
+    .bio-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .bio-name-italic {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--warm-gray);
+      margin-bottom: 28px;
+    }
+
+    .bio-creds {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bio-cred {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bio-cred::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--amber-dim);
+      flex-shrink: 0;
+    }
+
+    .bio-prose p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      margin-bottom: 20px;
+    }
+
+    .bio-prose strong { color: var(--light); font-weight: 400; }
+
+    .bio-pull {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.6;
+      border-left: 1px solid var(--amber-dim);
+      padding-left: 20px;
+      margin-top: 28px;
+    }
+
+    /* APPLY FORM SECTION */
+    .apply-form-section {
+      background: var(--black);
+      border-top: 1px solid var(--stone);
+    }
+
+    .apply-form-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .apply-form-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .apply-form-subline {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--amber);
+      margin-bottom: 28px;
+    }
+
+    .apply-form-sub {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--warm-gray);
+      margin-bottom: 48px;
+    }
+
+    #apply-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .apply-form-note {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    #apply-confirmation {
+      display: none;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid var(--amber-dim);
+      background: rgba(200,147,90,0.03);
+      margin-bottom: 20px;
+    }
+
+    #apply-confirmation p {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+
+    #apply-confirmation span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+    }
+
+    #apply-error {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--stone);
+      margin-bottom: 20px;
+    }
+
+    #apply-error p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--warm-gray);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .apply-hero         { padding: 120px 24px 80px; }
+      .pullquote-wrap          { padding: 72px 24px; }
+      .testimonials-grid-inner { grid-template-columns: 1fr; }
+      .apply-section      { padding: 72px 24px; }
+      .problem-grid       { grid-template-columns: 1fr; }
+      .pillars-grid       { grid-template-columns: 1fr; }
+      .fit-grid           { grid-template-columns: 1fr; }
+      .bio-grid           { grid-template-columns: 1fr; gap: 40px; }
+      .process-step       { grid-template-columns: 1fr; gap: 4px; }
+      .step-num           { font-family: var(--font-mono); font-size: 10px; font-style: normal; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-dim); opacity: 1; padding-top: 0; }
+      .apply-hero-cta     { flex-direction: column; align-items: center; gap: 16px; }
+    }
+  </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -21,14 +610,16 @@
       "name": "Concordia University Irvine"
     },
     "knowsAbout": [
+      "Public Speaking",
+      "Keynote Speaking",
       "Executive Coaching",
-      "AI Systems",
       "Leadership Formation",
+      "Shame and Responsibility",
       "Cybernetic Performance Frameworks"
     ],
     "sameAs": [
       "https://6signal.co",
-      "https://superhumansystems.io",
+      "https://vinceresociety.com",
       "https://www.linkedin.com/in/mattvwalker/",
       "https://www.youtube.com/@MattVincentWalker"
     ]
@@ -56,154 +647,242 @@
   </ul>
 </nav>
 
-  <div class="page-header">
-    <div class="section-label">Speaking</div>
-    <div class="section-title">Most audiences don't need<br>more motivation.</div>
-    <p class="section-subtitle">They need language for what they're already living.</p>
+<!-- ═══ HERO ═══ -->
+<section class="apply-hero">
+  <div class="apply-hero-inner">
+    <div class="apply-hero-eyebrow">Speaking</div>
+    <h1 class="apply-hero-headline reveal-lines">Most audiences don&rsquo;t<br>need more motivation.</h1>
+    <div class="apply-hero-subline">They need language for what they&rsquo;re already living.</div>
+    <div class="apply-hero-rule"></div>
+    <p class="apply-hero-sub">They&rsquo;re carrying responsibility, pressure, doubt, conflict, and unanswered questions &mdash; often while being expected to perform as if none of it exists. Over time, that weight fractures people quietly. My speaking work is built to do three things: tell the truth without creating threat, name what people are actually experiencing beneath the surface, and restore agency, responsibility, and orientation &mdash; without pressure or performance.</p>
+    <div class="apply-hero-cta">
+      <a href="#inquire" class="btn-primary">Inquire &thinsp;&darr;</a>
+      <a href="#themes" class="btn-secondary">What I speak on &rarr;</a>
+    </div>
   </div>
+</section>
 
-  <section class="section">
-    <div class="prose" style="margin-bottom: 60px;">
-      <p>They're carrying responsibility, pressure, doubt, conflict, and unanswered questions—often while being expected to perform as if none of it exists. Over time, that weight fractures people quietly.</p>
-
-      <p>My speaking work is designed to do three things: tell the truth without creating threat, name what people are actually experiencing beneath the surface, and restore agency, responsibility, and orientation—without pressure or performance.</p>
-
-      <p class="emphasis">I don't speak to impress. I speak to clarify.</p>
-
-      <p>My talks draw from psychology, systems thinking, faith, and lived experience, but always in service of the people in the room—not an ideology, agenda, or brand.</p>
+<!-- ═══ WHAT PEOPLE SAY ═══ -->
+<div class="pullquote-wrap">
+  <div class="section-label reveal" style="justify-content:center;text-align:center;margin-bottom:36px;">What People Say</div>
+  <div class="testimonials-grid" style="max-width:1100px;margin:0 auto;text-align:left;">
+    <div class="testimonial reveal">
+      <img class="t-photo" src="images/jon-warren.jpg" alt="Jon Warren">
+      <p class="testimonial-text">Matt Vincent Walker is a man that truly loves to help people discover the incredible truth of God&rsquo;s word. Hear him speak, and I&rsquo;m certain that you&rsquo;ll uncover truths that will change your life.</p>
+      <div class="testimonial-author">Jon Warren</div>
+      <div class="testimonial-role">Lead Pastor, Grace Point Church</div>
     </div>
+    <div class="testimonial reveal reveal-delay-1">
+      <img class="t-photo" src="images/j-warner-wallace.jpg" alt="J. Warner Wallace">
+      <p class="testimonial-text">Matt Vincent Walker has the unique ability to articulate the Christian worldview in a way that provides confidence to his audience and to his community.</p>
+      <div class="testimonial-author">J. Warner Wallace</div>
+      <div class="testimonial-role">Best-Selling Author, Cold Case Christianity</div>
+    </div>
+    <div class="testimonial reveal reveal-delay-2">
+      <img class="t-photo" src="images/ezra-boggs.jpg" alt="Ezra Boggs">
+      <p class="testimonial-text">The character of Christ permeates his entire being and is most evident in his thoroughly biblical defense of the Christian worldview always shared in humility, meekness, and love.</p>
+      <div class="testimonial-author">Ezra Boggs</div>
+      <div class="testimonial-role">President, The Bible &amp; Beer Consortium</div>
+    </div>
+  </div>
+</div>
 
-    <!-- Core Themes -->
-    <div class="section-label reveal">Core Themes</div>
-    <div class="section-title reveal-lines" style="margin-bottom: 40px;">What I speak on</div>
-    <div class="numbered-rows" style="margin-bottom: 60px;">
-      <div class="numbered-row reveal">
-        <div class="row-num">01</div>
-        <div class="row-title">Shame vs. Responsibility</div>
-        <div class="row-desc">How shame hijacks leadership, decision-making, and identity—and what it looks like to operate from responsibility instead of reactivity.</div>
-        <div class="row-arrow">→</div>
-      </div>
-      <div class="numbered-row reveal reveal-delay-1">
-        <div class="row-num">02</div>
-        <div class="row-title">Formation Before Performance</div>
-        <div class="row-desc">Why optimizing for output without internal order produces impressive ruins. What it means to build from the inside out.</div>
-        <div class="row-arrow">→</div>
-      </div>
-      <div class="numbered-row reveal reveal-delay-2">
-        <div class="row-num">03</div>
-        <div class="row-title">Order as a Condition for Freedom</div>
-        <div class="row-desc">Why the most liberated people are the most disciplined—and how to build systems that create freedom instead of constriction.</div>
-        <div class="row-arrow">→</div>
-      </div>
-      <div class="numbered-row reveal">
-        <div class="row-num">04</div>
-        <div class="row-title">Truth Without Threat</div>
-        <div class="row-desc">How to create environments where honesty is safe, accountability is welcomed, and people can grow without being diminished.</div>
-        <div class="row-arrow">→</div>
-      </div>
-      <div class="numbered-row reveal reveal-delay-1">
-        <div class="row-num">05</div>
-        <div class="row-title">Systems for Human Flourishing</div>
-        <div class="row-desc">The Vincere OS framework applied to teams, organizations, and leadership environments. Practical and grounded.</div>
-        <div class="row-arrow">→</div>
-      </div>
-      <div class="numbered-row reveal reveal-delay-2">
-        <div class="row-num">06</div>
-        <div class="row-title">Faith, Reason & Integrity</div>
-        <div class="row-desc">Navigating complex cultural and spiritual questions with intellectual seriousness, genuine humanity, and courage without theatrics.</div>
-        <div class="row-arrow">→</div>
+<!-- ═══ THE APPROACH ═══ -->
+<section class="apply-section apply-section-centered">
+  <span class="apply-eyebrow reveal">The Approach</span>
+  <h2 class="apply-title reveal-lines">I don&rsquo;t speak to impress.<br>I speak to <em>clarify.</em></h2>
+  <div class="apply-rule reveal"></div>
+  <p class="apply-body reveal">My talks draw from psychology, systems thinking, faith, and lived experience &mdash; but always in service of the people in the room, not an ideology, an agenda, or a brand.</p>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ CORE THEMES ═══ -->
+<section class="apply-section apply-section-centered" id="themes">
+  <span class="apply-eyebrow reveal">Core Themes</span>
+  <h2 class="apply-title reveal-lines">What I speak on.</h2>
+  <div class="apply-rule reveal"></div>
+  <p class="apply-body reveal">Six themes, each built to be taken home rather than applauded.</p>
+
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <p class="pillar-num">I</p>
+      <h3 class="pillar-title">Shame vs.<br>Responsibility</h3>
+      <p class="pillar-body">How shame hijacks leadership, decision-making, and identity &mdash; and what it looks like to operate from responsibility instead of reactivity.</p>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">II</p>
+      <h3 class="pillar-title">Formation Before<br>Performance</h3>
+      <p class="pillar-body">Why optimizing for output without internal order produces impressive ruins. What it means to build from the inside out.</p>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">III</p>
+      <h3 class="pillar-title">Order as a Condition<br>for Freedom</h3>
+      <p class="pillar-body">Why the most liberated people are the most disciplined &mdash; and how to build systems that create freedom instead of constriction.</p>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">IV</p>
+      <h3 class="pillar-title">Truth Without<br>Threat</h3>
+      <p class="pillar-body">How to create environments where honesty is safe, accountability is welcomed, and people can grow without being diminished.</p>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">V</p>
+      <h3 class="pillar-title">Systems for Human<br>Flourishing</h3>
+      <p class="pillar-body">The Vincere OS framework applied to teams, organizations, and leadership environments. Practical and grounded.</p>
+    </div>
+    <div class="pillar reveal">
+      <p class="pillar-num">VI</p>
+      <h3 class="pillar-title">Faith, Reason<br>&amp; Integrity</h3>
+      <p class="pillar-body">Navigating complex cultural and spiritual questions with intellectual seriousness, genuine humanity, and courage without theatrics.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ WHAT AUDIENCES EXPERIENCE ═══ -->
+<section class="apply-section apply-section-centered">
+  <span class="apply-eyebrow reveal">What Audiences Experience</span>
+  <h2 class="apply-title reveal-lines">Seen, <em>not managed.</em></h2>
+  <div class="apply-rule reveal"></div>
+  <p class="apply-body reveal">People often describe my talks as grounding, clarifying, disarming without being soft, honest without being hostile, and deep without being abstract. Many say they felt seen, not managed. Challenged, not shamed. Strengthened, not stirred up.</p>
+  <p class="apply-body reveal" style="margin-top:24px;"><strong style="font-weight:500;color:var(--cream);">That is intentional.</strong></p>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ VENUES ═══ -->
+<section class="apply-section apply-section-centered" id="venues">
+  <span class="apply-eyebrow reveal">Venue Types</span>
+  <h2 class="apply-title reveal-lines">Where I speak.</h2>
+  <div class="apply-rule reveal"></div>
+
+  <div class="problem-grid" style="grid-template-columns:repeat(2,1fr);max-width:900px;margin-left:auto;margin-right:auto;text-align:left;">
+    <div class="card reveal">
+      <div class="problem-num">I</div>
+      <div class="card-title">Executive Retreats</div>
+      <div class="card-text">Leadership teams navigating growth, transition, or internal misalignment.</div>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div class="problem-num">II</div>
+      <div class="card-title">Churches &amp; Faith Communities</div>
+      <div class="card-text">Congregations ready for intellectual seriousness and genuine formation.</div>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div class="problem-num">III</div>
+      <div class="card-title">Conferences &amp; Workshops</div>
+      <div class="card-text">Keynotes, breakouts, and panels where substance outweighs performance.</div>
+    </div>
+    <div class="card reveal reveal-delay-2">
+      <div class="problem-num">IV</div>
+      <div class="card-title">Universities &amp; Academic Settings</div>
+      <div class="card-text">Lectures and seminars on shame, systems, theology, and formation.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ PROCESS ═══ -->
+<section class="apply-section apply-section-centered" id="process">
+  <span class="apply-eyebrow reveal">How It Works</span>
+  <h2 class="apply-title reveal-lines">Shaped to the room.<br><em>Never recycled.</em></h2>
+  <div class="apply-rule reveal"></div>
+
+  <div class="process-list" style="max-width:720px;margin-left:auto;margin-right:auto;text-align:left;">
+    <div class="process-step reveal">
+      <div class="step-num">I</div>
+      <div>
+        <h3 class="step-title">Send the inquiry</h3>
+        <p class="step-body">The event, the audience, and what you&rsquo;re hoping it accomplishes. I read every inquiry myself and reply within 48 hours.</p>
       </div>
     </div>
-
-    <!-- What Audiences Experience -->
-    <div style="margin-bottom: 60px;">
-      <div class="section-label reveal">What Audiences Experience</div>
-      <div class="prose reveal" style="margin-top: 16px;">
-        <p>People often describe my talks as grounding, clarifying, disarming without being soft, honest without being hostile, and deep without being abstract. Many say they felt seen, not managed. Challenged, not shamed. Strengthened, not stirred up.</p>
-        <p>That is intentional.</p>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">II</div>
+      <div>
+        <h3 class="step-title">A real conversation</h3>
+        <p class="step-body">We talk about who is actually in the room and what they&rsquo;re carrying into it &mdash; not which talk from a list you&rsquo;d like to book.</p>
       </div>
     </div>
-
-    <!-- Venues -->
-    <div style="margin-bottom: 60px;">
-      <div class="section-label reveal">Venue Types</div>
-      <div class="section-title reveal-lines" style="margin-bottom: 24px;">Where I speak</div>
-      <div class="cards-grid">
-        <div class="card reveal">
-          <div class="card-title">Executive Retreats</div>
-          <p class="card-text">Leadership teams navigating growth, transition, or internal misalignment.</p>
-        </div>
-        <div class="card reveal reveal-delay-1">
-          <div class="card-title">Churches & Faith Communities</div>
-          <p class="card-text">Congregations ready for intellectual seriousness and genuine formation.</p>
-        </div>
-        <div class="card reveal reveal-delay-2">
-          <div class="card-title">Conferences & Workshops</div>
-          <p class="card-text">Keynotes, breakouts, and panels where substance outweighs performance.</p>
-        </div>
-        <div class="card reveal">
-          <div class="card-title">Universities & Academic Settings</div>
-          <p class="card-text">Lectures and seminars on shame, systems, theology, and formation.</p>
-        </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">III</div>
+      <div>
+        <h3 class="step-title">The talk, built for them</h3>
+        <p class="step-body">Each talk is shaped to the audience, context, and moment &mdash; never recycled or delivered on autopilot.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Inquiry Form -->
-    <div class="reveal" style="text-align: left; max-width: 720px; margin: 0 auto;">
-      <div class="section-title" style="text-align: left; margin-bottom: 8px;">Speaking Inquiry</div>
-      <p class="section-subtitle" style="text-align: left; margin-bottom: 40px;">Each talk is shaped to the audience, context, and moment—never recycled or delivered on autopilot.</p>
-      <div class="apply-form">
+<!-- ═══ INQUIRY ═══ -->
+<div class="apply-form-section" id="inquire">
+  <section class="apply-section">
+    <div class="apply-form-inner">
+      <span class="apply-eyebrow reveal">Speaking Inquiry</span>
+      <h2 class="apply-form-headline reveal-lines">Bring it to<br>your room.</h2>
+      <p class="apply-form-subline reveal">Tell me about the event.</p>
+      <p class="apply-form-sub reveal">Each talk is shaped to the audience, context, and moment &mdash; never recycled or delivered on autopilot. I read every inquiry myself and reply within 48 hours.</p>
+
+      <div id="apply-confirmation">
+        <p>Received — I'll be in touch within 48 hours.</p>
+        <span>Inquiries reviewed personally · Response within 48 hours</span>
+      </div>
+
+      <div id="apply-error">
+        <p>Something went wrong. Please try again or email me directly.</p>
+      </div>
+
+      <form class="apply-form reveal" id="speaking-form" onsubmit="handleSpeaking(event)">
         <input type="text" name="website" id="hp-speak" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;pointer-events:none;">
         <div class="apply-form-row">
           <span class="apply-form-num">01</span>
-          <div class="apply-form-field">
+          <div class="apply-form-field full">
             <label for="sp-name">Full Name</label>
-            <input type="text" id="sp-name" placeholder="Your name">
+            <input type="text" id="sp-name" placeholder="Your name" required>
           </div>
         </div>
         <div class="apply-form-row">
           <span class="apply-form-num">02</span>
-          <div class="apply-form-field">
-            <label for="sp-email">Email</label>
-            <input type="email" id="sp-email" placeholder="you@company.com">
+          <div class="apply-form-field full">
+            <label for="sp-email">Email Address</label>
+            <input type="email" id="sp-email" placeholder="you@company.com" required>
           </div>
         </div>
         <div class="apply-form-row">
           <span class="apply-form-num">03</span>
-          <div class="apply-form-field">
+          <div class="apply-form-field full">
             <label for="sp-org">Organization</label>
             <input type="text" id="sp-org" placeholder="Organization name">
           </div>
         </div>
         <div class="apply-form-row">
           <span class="apply-form-num">04</span>
-          <div class="apply-form-field">
-            <label for="sp-type">Speaking Type</label>
-            <select id="sp-type">
-              <option>Keynote / Main Stage</option>
-              <option>Breakout Session</option>
-              <option>Virtual</option>
-              <option>Panel Discussion</option>
-              <option>Other</option>
-            </select>
+          <div class="apply-form-pair">
+            <div class="apply-form-field">
+              <label for="sp-type">Speaking Type</label>
+              <select id="sp-type">
+                <option>Keynote / Main Stage</option>
+                <option>Breakout Session</option>
+                <option>Virtual</option>
+                <option>Panel Discussion</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="apply-form-field">
+              <label for="sp-size">Audience Size</label>
+              <select id="sp-size">
+                <option>1&ndash;100</option>
+                <option>101&ndash;350</option>
+                <option>351&ndash;500</option>
+                <option>501&ndash;1000</option>
+                <option>1000+</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="apply-form-row">
           <span class="apply-form-num">05</span>
-          <div class="apply-form-field">
-            <label for="sp-size">Audience Size</label>
-            <select id="sp-size">
-              <option>1–100</option>
-              <option>101–350</option>
-              <option>351–500</option>
-              <option>501–1000</option>
-              <option>1000+</option>
-            </select>
-          </div>
-        </div>
-        <div class="apply-form-row">
-          <span class="apply-form-num">06</span>
-          <div class="apply-form-field">
+          <div class="apply-form-field full">
             <label for="sp-orgtype">Organization Type</label>
             <select id="sp-orgtype">
               <option>Church / Non-Profit</option>
@@ -214,46 +893,24 @@
           </div>
         </div>
         <div class="apply-form-row">
-          <span class="apply-form-num">07</span>
-          <div class="apply-form-field">
+          <span class="apply-form-num">06</span>
+          <div class="apply-form-field full">
             <label for="sp-details">Additional Details</label>
             <textarea id="sp-details" rows="3" placeholder="Tell me about the event, audience, and what you're hoping to accomplish."></textarea>
           </div>
         </div>
-      </div>
-      <div style="text-align:center; margin-top: 36px;">
-        <button id="sp-submit" class="btn-primary">Submit Inquiry</button>
-        <p id="sp-status" style="display:none;font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:2px;margin-top:12px;text-transform:uppercase;"></p>
-      </div>
-    </div>
+        <div style="text-align:center; margin-top: 36px;">
+          <button type="submit" class="btn-primary" id="sp-submit">Submit Inquiry</button>
+        </div>
+      </form>
 
-    <!-- Speaking Testimonials -->
-    <div style="margin-top: 60px;">
-      <div class="testimonials-grid">
-        <div class="testimonial reveal">
-          <img class="t-photo" src="images/jon-warren.jpg" alt="Jon Warren">
-      <p class="testimonial-text">Matt Vincent Walker is a man that truly loves to help people discover the incredible truth of God's word. Hear him speak, and I'm certain that you'll uncover truths that will change your life.</p>
-          <div class="testimonial-author">Jon Warren</div>
-          <div class="testimonial-role">Lead Pastor, Grace Point Church</div>
-        </div>
-        <div class="testimonial reveal reveal-delay-1">
-          <img class="t-photo" src="images/j-warner-wallace.jpg" alt="J. Warner Wallace">
-      <p class="testimonial-text">Matt Vincent Walker has the unique ability to articulate the Christian worldview in a way that provides confidence to his audience and to his community.</p>
-          <div class="testimonial-author">J. Warner Wallace</div>
-          <div class="testimonial-role">Best-Selling Author, Cold Case Christianity</div>
-        </div>
-        <div class="testimonial reveal reveal-delay-2">
-          <img class="t-photo" src="images/ezra-boggs.jpg" alt="Ezra Boggs">
-      <p class="testimonial-text">The character of Christ permeates his entire being and is most evident in his thoroughly biblical defense of the Christian worldview always shared in humility, meekness, and love.</p>
-          <div class="testimonial-author">Ezra Boggs</div>
-          <div class="testimonial-role">President, The Bible & Beer Consortium</div>
-        </div>
-      </div>
+      <p class="apply-form-note reveal">Inquiries reviewed personally &middot; Response within 48 hours</p>
     </div>
   </section>
+</div>
 
 <footer>
-  <div class="footer-left">© 2026 Matt Vincent Walker</div>
+  <div class="footer-left">&copy; 2026 Matt Vincent Walker</div>
   <div class="footer-links">
     <a href="deep-end/">The Deep End</a>
     <a href="https://twitter.com/mvwalker" target="_blank">X</a>
@@ -267,56 +924,50 @@
 
 <script src="js/main.js"></script>
 <script>
-  (function () {
-    var PAGE_LOADED = Date.now();
-    var btn = document.getElementById('sp-submit');
-    var status = document.getElementById('sp-status');
-    if (!btn) return;
+  const PAGE_LOADED = Date.now();
 
-    function show(msg) {
-      status.textContent = msg;
-      status.style.display = 'block';
-    }
+  async function handleSpeaking(e) {
+    e.preventDefault();
 
-    btn.addEventListener('click', function () {
-      var name = document.getElementById('sp-name').value.trim();
-      var email = document.getElementById('sp-email').value.trim();
+    const btn = document.getElementById('sp-submit');
+    const form = document.getElementById('speaking-form');
+    const confirmation = document.getElementById('apply-confirmation');
+    const errorBox = document.getElementById('apply-error');
 
-      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        show('Please enter your name and a valid email.');
-        return;
-      }
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    errorBox.style.display = 'none';
 
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
+    const payload = {
+      fullName:     document.getElementById('sp-name').value.trim(),
+      email:        document.getElementById('sp-email').value.trim(),
+      organization: document.getElementById('sp-org').value.trim(),
+      speakingType: document.getElementById('sp-type').value,
+      audienceSize: document.getElementById('sp-size').value,
+      orgType:      document.getElementById('sp-orgtype').value,
+      details:      document.getElementById('sp-details').value.trim(),
+      hp:           document.getElementById('hp-speak').value,
+      ts:           PAGE_LOADED
+    };
 
-      fetch('/.netlify/functions/speaking-inquiry', {
+    try {
+      const res = await fetch('/.netlify/functions/speaking-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: name,
-          email: email,
-          organization: document.getElementById('sp-org').value.trim(),
-          speakingType: document.getElementById('sp-type').value,
-          audienceSize: document.getElementById('sp-size').value,
-          orgType: document.getElementById('sp-orgtype').value,
-          details: document.getElementById('sp-details').value.trim(),
-          hp: document.getElementById('hp-speak').value,
-          ts: PAGE_LOADED
-        })
-      })
-        .then(function (res) {
-          if (!res.ok) throw new Error('Request failed');
-          btn.textContent = 'Inquiry Sent';
-          show('Received. I read every inquiry personally — expect a reply within 48 hours.');
-        })
-        .catch(function () {
-          btn.disabled = false;
-          btn.textContent = 'Submit Inquiry';
-          show('Something went wrong. Email me directly at mvw@mattvincentwalker.com.');
-        });
-    });
-  })();
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) throw new Error('Request failed');
+
+      form.style.display = 'none';
+      confirmation.style.display = 'block';
+    } catch (err) {
+      errorBox.style.display = 'block';
+      errorBox.querySelector('p').textContent = 'Something went wrong. Please try again or email me directly at mvw@mattvincentwalker.com.';
+      btn.disabled = false;
+      btn.textContent = 'Submit Inquiry';
+    }
+  }
 </script>
 </body>
 </html>
