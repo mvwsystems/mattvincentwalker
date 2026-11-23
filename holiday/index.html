@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <script>document.documentElement.classList.add('js')</script>
+  <meta name="theme-color" content="#1f3b2d">
+  <link rel="canonical" href="https://mattvincentwalker.com/holiday/">
+  <title>The Ultimate Holiday Prompt Pack | Matt Vincent Walker</title>
+  <meta name="description" content="61 copy-and-paste AI prompts to plan, pack, cook, gift, host, celebrate, reflect, and start the year strong. Works with ChatGPT, Claude, Gemini, and any AI assistant.">
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://mattvincentwalker.com/holiday/">
+  <meta property="og:title" content="The Ultimate Holiday Prompt Pack">
+  <meta property="og:description" content="Magic without the meltdown. 61 copy-and-paste AI prompts for Christmas and the New Year. $27.">
+  <meta property="og:image" content="https://mattvincentwalker.com/images/og-holiday.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..700&family=Karla:ital,wght@0,300..800;1,300..800&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    /* ══ HOLIDAY — a standalone design system, taken from the Prompt Pack itself ══
+       Pine green, antique gold, cream paper, berry red.
+       Playfair Display for display, Pinyon Script for the hand, Karla for the reading. */
+    :root {
+      --pine: #1f3b2d;
+      --pine-deep: #172e23;
+      --pine-glow: #2c5442;
+      --pine-ink: #1d3528;
+      --gold: #d4b466;
+      --gold-text: #c9a75a;
+      --gold-dim: #a88a45;
+      --cream: #f5efe3;
+      --cream-line: #e6d7b6;
+      --paper: #ffffff;
+      --ivory: #f4ecdc;
+      --berry: #7c1f2d;
+      --berry-deep: #651824;
+      --text: #2a2a26;
+      --muted: #57524a;
+      --display: 'Playfair Display', 'Didot', Georgia, serif;
+      --script: 'Pinyon Script', 'Snell Roundhand', cursive;
+      --body: 'Karla', 'Helvetica Neue', Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--text); font-family: var(--body); font-size: 17px; font-weight: 450; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* type */
+    .eyebrow { font-family: var(--body); font-weight: 700; font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-text); }
+    .script { font-family: var(--script); font-weight: 400; color: var(--gold); line-height: 1; }
+    h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; }
+    h2.sec-title { font-size: clamp(2.1rem, 4.4vw, 3.3rem); line-height: 1.12; color: var(--pine-ink); letter-spacing: -0.01em; }
+    .sec-lede { font-size: 18px; color: var(--muted); font-style: italic; margin: 14px auto 0; max-width: 60ch; }
+    .center { text-align: center; }
+
+    /* buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--body); font-weight: 700; font-size: 15px; letter-spacing: 0.26em; text-transform: uppercase; text-decoration: none; color: var(--pine-ink); background: linear-gradient(180deg, #ddc07a 0%, var(--gold) 55%, #c4a359 100%); padding: 22px 44px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.35); transition: transform 0.2s ease, box-shadow 0.2s ease; border: 0; cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.35); }
+    .btn:focus-visible { outline: 3px solid var(--cream); outline-offset: 4px; }
+    .btn-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 18px; margin-top: 22px; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-text); }
+    .btn-meta s { color: rgba(245,239,227,0.55); }
+    .btn-meta .dot { color: var(--gold-dim); }
+
+    /* ══ HERO ══ */
+    .hero { position: relative; background: radial-gradient(ellipse 70% 55% at 50% 48%, var(--pine-glow) 0%, var(--pine) 55%, var(--pine-deep) 100%); color: var(--cream); padding: 56px 0 72px; overflow: hidden; }
+    .hero-frame { position: absolute; inset: 22px; border: 1px solid rgba(212,180,102,0.42); border-radius: 10px; pointer-events: none; }
+    .hero-inner { position: relative; text-align: center; }
+    .hero .brand { display: inline-block; font-family: var(--script); font-size: 26px; color: var(--cream); text-decoration: none; opacity: 0.85; margin-bottom: 34px; }
+    .hero .script { font-size: clamp(2.6rem, 6.5vw, 4.6rem); display: block; margin-bottom: 4px; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 5.3rem); font-weight: 500; line-height: 1.02; letter-spacing: 0.01em; color: var(--ivory); text-transform: uppercase; }
+    .edition { display: flex; align-items: center; justify-content: center; gap: 22px; margin: 26px auto 0; }
+    .edition::before, .edition::after { content: ''; width: 72px; height: 1px; background: var(--gold); }
+    .edition span { font-weight: 700; font-size: 13px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-text); }
+    .hero-sub { font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.6; color: rgba(245,239,227,0.92); max-width: 46ch; margin: 22px auto 0; }
+    .hero-sub em { display: block; font-size: 0.82em; color: rgba(245,239,227,0.68); margin-top: 6px; }
+
+    /* the product cluster — built in CSS so it stays sharp and editable */
+    .stage-wrap { position: relative; margin: 34px auto 6px; width: 100%; }
+    .stage { position: absolute; left: 50%; top: 0; width: 940px; height: 560px; transform-origin: top center; transform: translateX(-50%) scale(var(--s, 1)); }
+    .m-page { position: absolute; width: 250px; height: 360px; background: var(--paper); border-radius: 4px; box-shadow: 0 24px 50px rgba(0,0,0,0.42); padding: 22px 16px; color: var(--text); text-align: left; overflow: hidden; }
+    .m-band { background: var(--pine); color: var(--ivory); border-radius: 4px; padding: 12px 14px 14px; }
+    .m-band small { display: block; font-weight: 700; font-size: 6.5px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+    .m-band b { font-family: var(--display); font-weight: 500; font-size: 19px; line-height: 1.15; }
+    .m-ph { font-family: var(--display); font-size: 13.5px; color: var(--pine-ink); margin: 16px 0 6px; }
+    .m-ph i { font-family: var(--body); font-style: normal; font-weight: 700; font-size: 7px; color: var(--berry); margin-right: 4px; }
+    .m-box { background: var(--cream); border: 1px solid var(--cream-line); border-radius: 4px; padding: 8px 9px; font-size: 7.2px; line-height: 1.6; color: #3a3833; }
+    .m-a { left: 70px; top: 120px; transform: rotate(-10deg); }
+    .m-b { left: 215px; top: 70px; transform: rotate(-4deg); }
+
+    .m-cover { position: absolute; left: 352px; top: 22px; width: 330px; height: 446px; background: var(--pine); border-radius: 6px; box-shadow: 0 30px 70px rgba(0,0,0,0.5); transform: rotate(1.5deg); padding: 14px; z-index: 3; }
+    .m-cover-in { height: 100%; border: 1px solid rgba(212,180,102,0.75); border-radius: 3px; text-align: center; padding: 30px 22px 20px; display: flex; flex-direction: column; align-items: center; }
+    .m-cover .t1 { font-weight: 700; font-size: 7.5px; letter-spacing: 0.34em; color: var(--gold-text); }
+    .m-cover .t2 { font-family: var(--script); color: var(--gold); font-size: 34px; margin: 22px 0 2px; }
+    .m-cover .t3 { font-family: var(--display); font-weight: 500; color: var(--ivory); font-size: 48px; line-height: 0.98; letter-spacing: 0.01em; }
+    .m-cover .t4 { font-weight: 700; font-size: 7px; letter-spacing: 0.34em; color: var(--gold-text); margin-top: 18px; }
+    .m-cover .t5 { font-size: 9.5px; line-height: 1.55; color: rgba(245,239,227,0.9); margin-top: 14px; }
+    .m-cover .t6 { background: var(--berry); color: var(--ivory); font-weight: 700; font-size: 6.4px; letter-spacing: 0.2em; line-height: 1.7; padding: 7px 10px; border-radius: 2px; margin-top: auto; width: 100%; }
+    .m-cover .t7 { font-family: var(--script); color: var(--ivory); font-size: 18px; margin-top: 12px; }
+
+    .m-phone { position: absolute; left: 690px; top: 70px; width: 216px; height: 430px; background: #121212; border-radius: 36px; padding: 10px; box-shadow: 0 28px 60px rgba(0,0,0,0.5); transform: rotate(7deg); z-index: 2; }
+    .m-screen { height: 100%; background: var(--paper); border-radius: 28px; padding: 46px 14px 14px; position: relative; text-align: left; color: var(--text); overflow: hidden; }
+    .m-screen::before { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 70px; height: 20px; background: #121212; border-radius: 12px; }
+    .m-screen .m-band { background: var(--berry); }
+    .m-screen .m-band b { font-size: 15px; }
+    .m-use { font-size: 7.5px; color: var(--muted); margin: 10px 0 7px; }
+    .m-use b { color: var(--berry); }
+
+    .m-badge { position: absolute; left: 40px; top: 8px; width: 170px; height: 170px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px var(--pine), 0 0 0 7px var(--gold), 0 18px 40px rgba(0,0,0,0.4); z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--pine-ink); transform: rotate(-6deg); }
+    .m-badge s { font-family: var(--display); font-size: 20px; color: var(--berry); }
+    .m-badge strong { font-family: var(--display); font-weight: 600; font-size: 58px; line-height: 0.95; }
+    .m-badge small { font-weight: 700; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 6px; }
+
+    .m-addon { position: absolute; left: 640px; top: 430px; width: 280px; background: var(--berry); color: var(--ivory); border-radius: 8px; padding: 18px 20px; box-shadow: 0 22px 46px rgba(0,0,0,0.45); transform: rotate(-3deg); z-index: 6; text-align: left; }
+    .m-addon small { font-weight: 700; font-size: 9px; letter-spacing: 0.3em; color: var(--gold); }
+    .m-addon b { display: block; font-family: var(--display); font-weight: 400; font-size: 23px; line-height: 1.15; margin: 4px 0 4px; }
+    .m-addon span { font-size: 11px; opacity: 0.9; }
+    .m-addon em { display: block; font-family: var(--display); font-style: normal; color: var(--gold); font-size: 15px; margin-top: 6px; }
+
+    .hero-cta { position: relative; z-index: 2; margin-top: 18px; }
+
+    /* ══ SECTIONS ══ */
+    section { padding: 104px 0; }
+    .paper { background: var(--paper); }
+    .cream-bg { background: var(--cream); }
+    .pine-bg { background: radial-gradient(ellipse 80% 60% at 50% 40%, var(--pine-glow) 0%, var(--pine) 60%, var(--pine-deep) 100%); color: var(--cream); }
+    .pine-bg h2.sec-title { color: var(--ivory); }
+    .pine-bg .sec-lede { color: rgba(245,239,227,0.75); }
+
+    /* promise */
+    .promise .script { font-size: clamp(2.4rem, 5vw, 3.4rem); color: var(--gold-dim); display: block; margin-bottom: 6px; }
+    .promise p.big { font-family: var(--body); font-weight: 450; font-size: clamp(1.12rem, 2vw, 1.3rem); line-height: 1.75; color: #33312b; margin: 26px auto 0; max-width: 58ch; }
+    .promise p.big em { font-family: var(--display); font-weight: 500; font-size: 1.08em; color: var(--berry); }
+    .scenes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+    .scene { border-top: 1px solid var(--cream-line); padding-top: 18px; }
+    .scene b { display: block; font-family: var(--display); font-weight: 600; font-size: 21px; color: var(--pine-ink); margin-bottom: 6px; }
+    .scene p { margin: 0; font-size: 15.5px; color: var(--muted); }
+
+    /* steps */
+    .steps { display: grid; gap: 30px; margin-top: 54px; }
+    .step { display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; }
+    .step-n { font-family: var(--display); font-size: 50px; line-height: 0.9; color: var(--gold-dim); }
+    .step h3 { font-size: 24px; color: var(--pine-ink); margin-bottom: 6px; }
+    .step p { margin: 0; color: #36342e; }
+
+    /* what's inside */
+    .grid-sec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+    .card-sec { background: var(--paper); border: 1px solid var(--cream-line); border-radius: 6px; padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+    .card-sec .band { background: var(--pine); color: var(--ivory); padding: 18px 20px 16px; }
+    .card-sec.alt .band { background: var(--berry); }
+    .card-sec .band small { display: flex; justify-content: space-between; font-weight: 700; font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); }
+    .card-sec .band h3 { font-size: 23px; line-height: 1.15; margin-top: 6px; }
+    .card-sec .tag { font-style: italic; font-size: 14.5px; color: var(--muted); padding: 14px 20px 4px; margin: 0; }
+    .card-sec ul { list-style: none; margin: 0; padding: 6px 20px 20px; }
+    .card-sec li { font-family: var(--display); font-weight: 500; font-size: 16px; color: var(--pine-ink); padding: 7px 0; border-bottom: 1px dashed var(--cream-line); }
+    .card-sec li:last-child { border-bottom: 0; }
+    .card-sec li i { font-family: var(--body); font-style: normal; font-weight: 700; font-size: 11px; color: var(--berry); margin-right: 6px; }
+    .grid-note { text-align: center; font-size: 14px; color: var(--muted); font-style: italic; margin-top: 26px; }
+
+    /* sample prompt */
+    .sample-head { display: flex; align-items: baseline; gap: 12px; margin-top: 46px; }
+    .sample-head i { font-style: normal; font-weight: 700; font-size: 13px; color: var(--berry); }
+    .sample-head h3 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--pine-ink); }
+    .sample-use { font-size: 15.5px; margin: 6px 0 16px; color: var(--muted); font-style: italic; }
+    .sample-use b { color: var(--berry); font-style: normal; }
+    .prompt-box { position: relative; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 8px; padding: 30px 30px 26px; font-size: 16.5px; line-height: 1.85; color: #262521; }
+    .prompt-box .br { background: rgba(124,31,45,0.08); color: var(--berry); padding: 1px 3px; border-radius: 3px; font-weight: 500; }
+    .copy-btn { position: absolute; top: -16px; right: 20px; font-family: var(--body); font-weight: 700; font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; background: var(--pine); color: var(--ivory); border: 0; border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+    .copy-btn:hover { background: var(--pine-ink); }
+    .copy-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+    .protip { font-size: 15.5px; color: #36342e; margin-top: 16px; }
+    .protip b { font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: var(--gold-dim); margin-right: 8px; }
+
+    /* bonuses */
+    .bonus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
+    .bonus { background: var(--ivory); color: var(--pine-ink); border-radius: 8px; padding: 30px 26px; box-shadow: 0 18px 40px rgba(0,0,0,0.3); }
+    .bonus:nth-child(1) { transform: rotate(-1.2deg); }
+    .bonus:nth-child(3) { transform: rotate(1.2deg); }
+    .bonus .script { font-size: 30px; color: var(--gold-dim); }
+    .bonus h3 { font-size: 26px; line-height: 1.12; margin: 8px 0 12px; }
+    .bonus p { margin: 0; font-size: 15.5px; color: #3d3a33; }
+
+    /* the bump preview */
+    .bump { background: var(--berry); color: var(--ivory); border-radius: 12px; padding: 54px 52px; position: relative; overflow: hidden; }
+    .bump::after { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(212,180,102,0.4); border-radius: 6px; pointer-events: none; }
+    .bump .eyebrow { color: var(--gold); }
+    .bump h2 { font-size: clamp(2rem, 4.4vw, 3rem); line-height: 1.08; margin: 12px 0 8px; color: var(--ivory); }
+    .bump .quote { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--gold); margin: 0 0 18px; }
+    .bump p { color: rgba(245,239,227,0.9); max-width: 64ch; }
+    .stack { list-style: none; padding: 0; margin: 28px 0 0; border-top: 1px solid rgba(245,239,227,0.2); }
+    .stack li { display: grid; grid-template-columns: 1fr auto; gap: 6px 20px; padding: 16px 0; border-bottom: 1px solid rgba(245,239,227,0.2); }
+    .stack b { font-family: var(--display); font-weight: 500; font-size: 20px; }
+    .stack .v { font-weight: 700; font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); white-space: nowrap; align-self: center; }
+    .stack span.d { grid-column: 1 / -1; font-size: 15px; color: rgba(245,239,227,0.78); }
+    .bump-total { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 28px; margin-top: 26px; }
+    .bump-total .was { font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,239,227,0.7); }
+    .bump-total .was s { color: rgba(245,239,227,0.9); }
+    .bump-total .now { font-family: var(--display); font-size: 34px; color: var(--gold); }
+    .bump-fine { font-size: 14.5px; color: rgba(245,239,227,0.75); margin-top: 10px; }
+
+    /* offer */
+    .offer { background: var(--paper); color: var(--text); border-radius: 12px; padding: 14px; box-shadow: 0 30px 70px rgba(0,0,0,0.4); max-width: 640px; margin: 0 auto; }
+    .offer-in { border: 1px solid var(--cream-line); border-radius: 6px; padding: 44px 40px 40px; text-align: center; }
+    .offer .script { font-size: 38px; color: var(--gold-dim); }
+    .offer h3 { font-size: clamp(1.8rem, 4vw, 2.4rem); color: var(--pine-ink); text-transform: uppercase; line-height: 1.05; margin-top: 2px; }
+    .offer ul { list-style: none; padding: 0; margin: 28px 0 30px; text-align: left; }
+    .offer li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--cream-line); font-size: 16px; }
+    .offer li::before { content: '✦'; color: var(--gold-dim); font-size: 13px; padding-top: 3px; }
+    .price { display: flex; align-items: baseline; justify-content: center; gap: 16px; margin-bottom: 24px; }
+    .price s { font-family: var(--display); font-size: 26px; color: var(--berry); }
+    .price strong { font-family: var(--display); font-weight: 600; font-size: 72px; line-height: 1; color: var(--pine-ink); }
+    .offer .btn { width: 100%; padding: 22px 20px; }
+    .offer-fine { font-size: 13.5px; color: var(--muted); margin-top: 16px; }
+
+    /* faq */
+    .faq { margin-top: 44px; border-top: 1px solid var(--cream-line); }
+    .faq details { border-bottom: 1px solid var(--cream-line); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; font-family: var(--display); font-weight: 500; font-size: 21px; color: var(--pine-ink); }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; font-family: var(--body); font-size: 24px; line-height: 1; color: var(--gold-dim); transition: transform 0.2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .faq p { margin: 0 0 22px; color: #36342e; max-width: 64ch; }
+
+    /* close */
+    .last { text-align: center; }
+    .last .script { font-size: clamp(2.6rem, 5vw, 3.4rem); }
+    .last p { font-size: clamp(1.15rem, 2vw, 1.35rem); line-height: 1.7; color: rgba(245,239,227,0.92); max-width: 50ch; margin: 18px auto 0; }
+    .last .rule { width: 60px; height: 1px; background: var(--gold); margin: 30px auto 18px; }
+    .last .sig { font-family: var(--script); font-size: 36px; color: var(--ivory); }
+
+    footer { background: var(--pine-deep); color: rgba(245,239,227,0.55); text-align: center; padding: 34px 24px 40px; font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; }
+    footer a { text-decoration: none; color: rgba(245,239,227,0.7); }
+    footer a:hover { color: var(--gold); }
+    footer .star { color: var(--gold-dim); margin: 0 12px; }
+
+    /* sticky buy bar (mobile, after the hero) */
+    .buybar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(23,46,35,0.97); border-top: 1px solid rgba(212,180,102,0.4); padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); display: none; align-items: center; justify-content: space-between; gap: 14px; transform: translateY(110%); transition: transform 0.3s ease; }
+    .buybar.show { transform: none; }
+    .buybar .bb-t { color: var(--ivory); font-family: var(--display); font-size: 17px; line-height: 1.2; }
+    .buybar .bb-t s { color: rgba(245,239,227,0.5); font-size: 14px; margin-left: 6px; }
+    .buybar .btn { padding: 14px 20px; font-size: 12.5px; letter-spacing: 0.2em; white-space: nowrap; }
+
+    @media (max-width: 900px) {
+      .grid-sec, .bonus-grid { grid-template-columns: 1fr 1fr; }
+      .scenes { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      section { padding: 76px 0; }
+      .hero { padding: 44px 0 60px; }
+      .hero-frame { inset: 10px; }
+      .hero .brand { margin-bottom: 24px; }
+      .edition { gap: 12px; }
+      .edition::before, .edition::after { width: 28px; }
+      .edition span { font-size: 11px; letter-spacing: 0.3em; }
+      .btn { padding: 20px 28px; font-size: 13.5px; letter-spacing: 0.2em; }
+      .grid-sec, .bonus-grid { grid-template-columns: 1fr; }
+      .bonus { transform: none !important; }
+      .bump { padding: 40px 24px; }
+      .offer-in { padding: 34px 20px 28px; }
+      .prompt-box { padding: 30px 20px 22px; font-size: 15.5px; }
+      .step { grid-template-columns: 44px 1fr; }
+      .step-n { font-size: 40px; }
+      .buybar { display: flex; }
+      footer { padding-bottom: 100px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .buybar { transition: none; }
+    }
+    /* ══ MOTION ══ — everything below is decoration; prefers-reduced-motion turns it all off */
+    .progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; transform-origin: 0 50%; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, var(--gold-dim), var(--gold), #f0dca4); z-index: 60; pointer-events: none; }
+    .dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+    /* hero entrance */
+    @keyframes rise { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes lineUp { from { transform: translateY(108%); } to { transform: none; } }
+    @keyframes ruleGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes inkIn { from { opacity: 0; clip-path: inset(-40% 100% -60% -10%); } to { opacity: 1; clip-path: inset(-40% -10% -60% -10%); } }
+    .hero .brand { animation: fadeIn 1.2s ease both; }
+    .hero .script { animation: inkIn 1.6s cubic-bezier(.6,0,.2,1) 0.15s both; }
+    .hero h1 .ln { display: block; overflow: hidden; padding: 0.04em 0; }
+    .hero h1 .ln > span { display: inline-block; animation: lineUp 1.1s cubic-bezier(.2,.8,.2,1) both; }
+    .hero h1 .ln:nth-child(1) > span { animation-delay: 0.35s; }
+    .hero h1 .ln:nth-child(2) > span { animation-delay: 0.5s; }
+    .edition span { animation: fadeIn 1s ease 0.9s both; }
+    .edition::before { transform-origin: 100% 50%; animation: ruleGrow 1s cubic-bezier(.6,0,.2,1) 0.8s both; }
+    .edition::after { transform-origin: 0 50%; animation: ruleGrow 1s cubic-bezier(.6,0,.2,1) 0.8s both; }
+    .hero-sub { animation: rise 1s cubic-bezier(.2,.8,.2,1) 1s both; }
+    .hero-cta { animation: rise 1s cubic-bezier(.2,.8,.2,1) 1.45s both; }
+
+    /* product stack: flies in, then bobs and follows the cursor */
+    @keyframes pcIn { from { opacity: 0; translate: var(--fx, 0) var(--fy, 60px); } to { opacity: 1; } }
+    @keyframes bob { 0%, 100% { margin-top: 0; } 50% { margin-top: -9px; } }
+    .pc { translate: calc(var(--mx, 0) * var(--z, 10) * 1px) calc(var(--my, 0) * var(--z, 10) * 1px); transition: translate 0.9s cubic-bezier(.2,.8,.2,1); animation: pcIn 1.3s cubic-bezier(.2,.8,.2,1) var(--d, 0ms) backwards, bob 7s ease-in-out calc(var(--d, 0ms) + 1.4s) infinite; }
+    .m-page.m-b { animation-duration: 1.3s, 8s; }
+    .m-phone { animation-duration: 1.3s, 6.2s; }
+    .m-addon { animation-duration: 1.3s, 5.6s; }
+    @keyframes badgeIn { from { opacity: 0; scale: 0.3; rotate: -50deg; } 70% { scale: 1.08; } to { opacity: 1; scale: 1; rotate: 0deg; } }
+    @keyframes pulseRing { 0% { box-shadow: 0 0 0 5px var(--pine), 0 0 0 7px var(--gold), 0 0 0 7px rgba(212,180,102,0.55), 0 18px 40px rgba(0,0,0,0.4); } 100% { box-shadow: 0 0 0 5px var(--pine), 0 0 0 7px var(--gold), 0 0 0 30px rgba(212,180,102,0), 0 18px 40px rgba(0,0,0,0.4); } }
+    .m-badge { animation: badgeIn 1.1s cubic-bezier(.2,.8,.2,1) var(--d) backwards, pulseRing 2.6s ease-out 2.6s infinite; }
+    .m-badge:hover { scale: 1.06; }
+    .m-cover::after { content: ''; position: absolute; inset: 0; border-radius: 6px; background: linear-gradient(115deg, transparent 35%, rgba(255,240,200,0.16) 48%, transparent 60%); background-size: 260% 100%; background-position: 130% 0; animation: sheen 7s ease-in-out 2.4s infinite; pointer-events: none; }
+    @keyframes sheen { 0%, 70% { background-position: 130% 0; } 100% { background-position: -130% 0; } }
+
+    /* buttons: lift, press, shimmer */
+    .btn { position: relative; overflow: hidden; isolation: isolate; }
+    .btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%); transform: translateX(-120%); z-index: -1; transition: transform 0s; }
+    .btn:hover::after { transform: translateX(120%); transition: transform 0.85s ease; }
+    .btn:active { transform: translateY(0) scale(0.98); }
+    .btn-glow::after { animation: shimmer 4.5s ease-in-out 3s infinite; }
+    @keyframes shimmer { 0%, 78% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+    .btn .arr { display: inline-block; transition: transform 0.3s ease; }
+    .btn:hover .arr { transform: translateX(5px); }
+
+    /* scroll reveals (classes added by JS, so the page reads fine without it) */
+    .js .rv { opacity: 0; translate: 0 34px; transition: opacity 0.9s cubic-bezier(.2,.7,.2,1) var(--rd, 0ms), translate 0.9s cubic-bezier(.2,.7,.2,1) var(--rd, 0ms), scale 0.9s cubic-bezier(.2,.7,.2,1) var(--rd, 0ms); }
+    .js .rv.rv-l { translate: -40px 0; }
+    .js .rv.rv-s { translate: 0 20px; scale: 0.94; }
+    .js .rv.in { opacity: 1; translate: 0 0; scale: 1; }
+    .js .eyebrow.rv { letter-spacing: 0.7em; transition: opacity 0.9s ease, translate 0.9s cubic-bezier(.2,.7,.2,1), letter-spacing 1.2s cubic-bezier(.2,.7,.2,1); }
+    .js .eyebrow.rv.in { letter-spacing: 0.32em; }
+
+    /* scene rules draw in */
+    .scene { border-top: 0; position: relative; }
+    .scene::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--gold); transform-origin: 0 50%; transform: scaleX(1); transition: transform 1.2s cubic-bezier(.6,0,.2,1) calc(var(--rd, 0ms) + 200ms); }
+    .js .scene.rv::before { transform: scaleX(0); }
+    .js .scene.rv.in::before { transform: scaleX(1); }
+
+    /* steps */
+    .step-n { transition: color 0.4s ease, transform 0.5s cubic-bezier(.2,.8,.2,1); }
+    .step:hover .step-n { color: var(--berry); transform: scale(1.12) rotate(-4deg); }
+    .step h3 { transition: color 0.3s; }
+    .step:hover h3 { color: var(--berry); }
+
+    /* stats */
+    .stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px 54px; margin-top: 38px; }
+    .stats div { text-align: center; }
+    .stats b { display: block; font-family: var(--display); font-weight: 600; font-size: 46px; line-height: 1; color: var(--pine-ink); font-variant-numeric: lining-nums tabular-nums; }
+    .stats span { display: block; font-weight: 700; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dim); margin-top: 8px; }
+
+    /* section cards */
+    .card-sec { transition: transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s ease, border-color 0.3s; }
+    .card-sec:hover { transform: translateY(-8px); box-shadow: 0 26px 50px rgba(31,59,45,0.16); border-color: var(--gold); }
+    .card-sec .band { position: relative; overflow: hidden; }
+    .card-sec .band::after { content: ''; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; transition: transform 0.5s cubic-bezier(.6,0,.2,1); }
+    .card-sec:hover .band::after { transform: scaleX(1); }
+    .card-sec li { transition: padding-left 0.3s ease, color 0.3s; }
+    .card-sec li:hover { padding-left: 6px; color: var(--berry); }
+
+    /* sample prompt: brackets light up in a wave */
+    .prompt-box { transition: box-shadow 0.5s ease, border-color 0.5s; }
+    .prompt-box.flash { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(212,180,102,0.3); }
+    .js .prompt-box .br { background-size: 0% 100%; background-image: linear-gradient(rgba(124,31,45,0.12), rgba(124,31,45,0.12)); background-repeat: no-repeat; background-color: transparent; transition: background-size 0.6s ease var(--bd, 0ms); }
+    .js .prompt-box.lit .br { background-size: 100% 100%; }
+    .copy-btn { transition: background 0.3s, transform 0.25s cubic-bezier(.2,.8,.2,1), color 0.3s; }
+    .copy-btn:hover { transform: translateY(-2px); }
+    .copy-btn.ok { background: var(--gold); color: var(--pine-ink); transform: scale(1.06); }
+
+    /* bonuses */
+    .bonus { transition: transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.5s ease; }
+    .bonus:hover { transform: rotate(0deg) translateY(-10px) scale(1.02) !important; box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+    .bonus .script { display: inline-block; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
+    .bonus:hover .script { transform: rotate(-4deg) scale(1.08); }
+
+    /* bump */
+    .stack li { transition: background 0.3s, padding-left 0.3s; }
+    .stack li:hover { background: rgba(245,239,227,0.05); padding-left: 10px; }
+    .stack .v { transition: transform 0.3s; }
+    .stack li:hover .v { transform: scale(1.1); }
+    .bump .now { display: inline-block; animation: glowPulse 3s ease-in-out infinite; }
+    @keyframes glowPulse { 0%, 100% { text-shadow: 0 0 0 rgba(212,180,102,0); } 50% { text-shadow: 0 0 22px rgba(212,180,102,0.55); } }
+
+    /* strikes draw across */
+    s.strike { text-decoration: none; position: relative; }
+    s.strike::after { content: ''; position: absolute; left: -4%; top: 52%; height: 2px; width: 108%; background: currentColor; transform-origin: 0 50%; transform: scaleX(1); transition: transform 0.7s cubic-bezier(.6,0,.2,1) 0.3s; }
+    .js .rv s.strike::after, .js .rv-host s.strike::after { transform: scaleX(0); }
+    .js .rv.in s.strike::after, .js .rv-host.in s.strike::after { transform: scaleX(1); }
+
+    /* offer */
+    .offer { transition: transform 0.6s cubic-bezier(.2,.8,.2,1), box-shadow 0.6s; }
+    .offer:hover { transform: translateY(-6px); box-shadow: 0 40px 90px rgba(0,0,0,0.5); }
+    .offer li::before { transition: transform 0.5s cubic-bezier(.2,.8,.2,1); display: inline-block; }
+    .offer li:hover::before { transform: rotate(180deg) scale(1.3); }
+
+    /* faq */
+    .faq summary { transition: color 0.3s, padding-left 0.3s; }
+    .faq summary:hover { color: var(--berry); padding-left: 6px; }
+    .faq details[open] p { animation: rise 0.5s cubic-bezier(.2,.8,.2,1) both; }
+
+    /* signature writes itself */
+    .js .last .sig.rv { opacity: 1; translate: 0 0; clip-path: inset(-40% 100% -60% -10%); transition: clip-path 2s cubic-bezier(.6,0,.2,1) 0.3s; }
+    .js .last .sig.rv.in { clip-path: inset(-40% -10% -60% -10%); }
+    .last .rule { transform-origin: 50% 50%; }
+    .js .last .rule.rv { opacity: 1; translate: 0 0; transform: scaleX(0); transition: transform 1s cubic-bezier(.6,0,.2,1); }
+    .js .last .rule.rv.in { transform: scaleX(1); }
+
+    footer a { transition: color 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .js .rv { opacity: 1 !important; translate: 0 0 !important; scale: 1 !important; clip-path: none !important; transform: none; }
+      .js .scene.rv::before, .js .last .rule.rv { transform: none !important; }
+      .dust { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ══ HERO ══ -->
+  <header class="hero">
+    <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+    <div class="hero-frame" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <a class="brand" href="/">Matt Vincent Walker</a>
+      <span class="script">Magic without the meltdown</span>
+      <h1><span class="ln"><span>The Ultimate</span></span><span class="ln"><span>Holiday Prompt Pack</span></span></h1>
+      <div class="edition"><span>Christmas &amp; New Year Edition</span></div>
+      <p class="hero-sub">61 copy-and-paste AI prompts to plan, pack, cook, gift, host, celebrate, reflect, and start the year strong.<em>Works with ChatGPT, Claude, Gemini, and any AI assistant.</em></p>
+
+      <div class="stage-wrap" id="stageWrap" aria-hidden="true">
+        <div class="stage" id="stage">
+          <div class="m-badge pc" style="--d:1250ms;--z:22;--fx:-40px;--fy:-60px"><s>$67</s><strong>$27</strong><small>Christmas price</small></div>
+
+          <div class="m-page m-a pc" style="--d:700ms;--z:8;--fx:-160px;--fy:40px">
+            <div class="m-band"><small>Section 3 of 11</small><b>Gifts Without the Guesswork</b></div>
+            <div class="m-ph"><i>#12</i>Gift Brainstorm by Person</div>
+            <div class="m-box">Suggest 10 gift ideas for [NAME], age [AGE], who is into [INTERESTS AND HOBBIES]. Budget: [$___]. Mix the list: 3 practical, 3 fun, 2 experience gifts, 2 under $25.</div>
+            <div class="m-ph"><i>#14</i>Stocking Stuffer Generator</div>
+            <div class="m-box">Build a stocking stuffer list for [NAME, AGE], budget [$___] total. Give me 12 small ideas: a mix of useful, tasty, funny, and one small wow item.</div>
+          </div>
+
+          <div class="m-page m-b pc" style="--d:820ms;--z:12;--fx:-90px;--fy:60px">
+            <div class="m-band"><small>Section 4 of 11</small><b>Food &amp; Hosting</b></div>
+            <div class="m-ph"><i>#19</i>Christmas Dinner Menu Builder</div>
+            <div class="m-box">Build me a Christmas dinner menu for [NUMBER] people. Main dish preference: [HAM / TURKEY / BEEF / VEGETARIAN]. Which dishes can be made ahead, and which shortcuts are worth it.</div>
+            <div class="m-ph"><i>#21</i>Cooking Timeline, Backwards</div>
+            <div class="m-box">Dinner is served at [TIME]. Build me a backwards cooking timeline starting two days before, with an hour-by-hour run for the final four hours.</div>
+          </div>
+
+          <div class="m-cover pc" style="--d:560ms;--z:16;--fx:0px;--fy:90px">
+            <div class="m-cover-in">
+              <div class="t1">61 COPY-AND-PASTE AI PROMPTS</div>
+              <div class="t2">The Ultimate</div>
+              <div class="t3">HOLIDAY<br>PROMPT<br>PACK</div>
+              <div class="t4">CHRISTMAS &amp; NEW YEAR EDITION</div>
+              <div class="t5">61 copy-and-paste AI prompts to plan, pack, cook, gift, host, celebrate, reflect, and start the year strong.</div>
+              <div class="t6">INSIDE: 11 SECTIONS · 3 STACKING RECIPES · COUNTDOWN CHECKLIST · EMERGENCY KIT</div>
+              <div class="t7">Matt Vincent Walker</div>
+            </div>
+          </div>
+
+          <div class="m-phone pc" style="--d:940ms;--z:20;--fx:160px;--fy:50px">
+            <div class="m-screen">
+              <div class="m-band"><small>Start here</small><b>The Holiday HQ Master Prompt</b></div>
+              <div class="m-use"><b>Use it when:</b> Run this once at the start of the season.</div>
+              <div class="m-box">You are my holiday planning assistant from now until January 2. Here is my household: [NAMES AND AGES OF EVERYONE IN THE FAMILY]. We live in [CITY, STATE]. Our Christmas plans: [STAYING HOME / TRAVELING / HOSTING]. Our total holiday budget is [$___]. Our style is [COZY AND SIMPLE / BIG AND FESTIVE]. Confirm you understand and repeat my plan back to me as a short summary.</div>
+            </div>
+          </div>
+
+          <div class="m-addon pc" style="--d:1100ms;--z:28;--fx:120px;--fy:120px"><small>+ ADD-ON</small><b>Muse Holiday Setup</b><span>Let Muse run the prompts for you.</span><em>+ $47 at checkout</em></div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-glow js-buy" href="#offer">Get the pack · $27</a>
+        <div class="btn-meta"><s>$67</s><span class="dot">·</span><span>61 prompts</span><span class="dot">·</span><span>Instant PDF</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ THE PROMISE ══ -->
+  <section class="paper promise" id="why">
+    <div class="narrow center">
+      <span class="script">Every December</span>
+      <h2 class="sec-title">The season is supposed to be the gift. Somehow it became the job.</h2>
+      <p class="big">Lists, menus, shipping cutoffs, a packed car, a dozen people to buy for, and a calendar that was full before it started. This pack hands the logistics to the machine, so <em>you keep the moments for yourself.</em></p>
+    </div>
+    <div class="wrap">
+      <div class="scenes">
+        <div class="scene"><b>Packing lists in ninety seconds</b><p>One checklist per person, with quantities, built for your actual trip and your actual weather.</p></div>
+        <div class="scene"><b>Dinner that lands hot at six</b><p>A full menu, a grocery list in the order you walk the store, and a cooking timeline that runs backwards from the table.</p></div>
+        <div class="scene"><b>A January that starts clean</b><p>A budget you can track against, a calm plan for the bills, and a fresh start built before the resolutions die.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <section class="cream-bg" id="how">
+    <div class="narrow">
+      <div class="center">
+        <div class="eyebrow">How it works</div>
+        <h2 class="sec-title" style="margin-top:12px">No tech skills. Just brackets.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div><h3>Start with the Master Prompt</h3><p>Run the Holiday HQ Master Prompt once. It teaches your AI assistant who is in your family, your dates, your budget, and your style, so every prompt after it comes back personalized instead of generic.</p></div></div>
+        <div class="step"><div class="step-n">2</div><div><h3>Copy, customize, paste</h3><p>Every prompt is ready for ChatGPT, Claude, Gemini, or any AI assistant. Replace the words in [BRACKETS] with your details. Leave a bracket out if it does not apply.</p></div></div>
+        <div class="step"><div class="step-n">3</div><div><h3>Stack prompts for bigger jobs</h3><p>The result of one prompt feeds the next. Three ready-made chains take you from a trip, to a hosted dinner, to a fresh start on January 1.</p></div></div>
+        <div class="step"><div class="step-n">4</div><div><h3>Print what matters</h3><p>Packing lists, cooking timelines, and countdown calendars work best on paper. Everything else lives happily in your phone.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHAT'S INSIDE ══ -->
+  <section class="paper" id="inside">
+    <div class="wrap">
+      <div class="center">
+        <div class="eyebrow">What's inside</div>
+        <h2 class="sec-title" style="margin-top:12px">Eleven sections. One quiet December.</h2>
+        <p class="sec-lede">Every prompt comes with a "use it when" line, so you know exactly which one to reach for.</p>
+        <div class="stats"><div><b data-count="61">61</b><span>Prompts</span></div><div><b data-count="11">11</b><span>Sections</span></div><div><b data-count="3">3</b><span>Stacking recipes</span></div><div><b data-count="3">3</b><span>Bonuses</span></div></div>
+      </div>
+      <div class="grid-sec">
+        <article class="card-sec alt"><div class="band"><small><span>Start here</span><span>1 prompt</span></small><h3>The Holiday HQ Master Prompt</h3></div><p class="tag">One prompt before all the others.</p><ul><li>Your household, dates, budget, and traditions, loaded once and used all season.</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 1</span><span>5 prompts</span></small><h3>Plan It: The Season at a Glance</h3></div><p class="tag">Get the whole season out of your head and into one plan.</p><ul><li><i>#1</i>Holiday Command Center</li><li><i>#3</i>The Not-To-Do List</li><li><i>#4</i>Holiday Budget Builder</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 2</span><span>6 prompts</span></small><h3>Travel &amp; Packing</h3></div><p class="tag">Lists built for your actual family and your actual trip.</p><ul><li><i>#6</i>Custom Packing List Generator</li><li><i>#8</i>Road Trip Planner</li><li><i>#11</i>Leaving the House Checklist</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 3</span><span>7 prompts</span></small><h3>Gifts Without the Guesswork</h3></div><p class="tag">Ideas matched to the person, the budget, and the days you have left.</p><ul><li><i>#13</i>The Impossible Person</li><li><i>#14</i>Stocking Stuffer Generator</li><li><i>#18</i>Gift Tracker &amp; Thank-You Keeper</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 4</span><span>7 prompts</span></small><h3>Food &amp; Hosting</h3></div><p class="tag">Menus, timelines, and grocery lists that run themselves.</p><ul><li><i>#19</i>Christmas Dinner Menu Builder</li><li><i>#21</i>Cooking Timeline, Backwards</li><li><i>#24</i>Leftover Remix</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 5</span><span>4 prompts</span></small><h3>Home for the Holidays</h3></div><p class="tag">Guest-ready and cozy, without a renovation or a breakdown.</p><ul><li><i>#26</i>Guest-Ready in a Weekend</li><li><i>#27</i>Decor Plan From What I Own</li><li><i>#29</i>Cozy on a Budget</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 6</span><span>6 prompts</span></small><h3>Kids &amp; Family Magic</h3></div><p class="tag">The traditions they will talk about when they are grown.</p><ul><li><i>#30</i>Advent Activity Calendar</li><li><i>#31</i>Santa Letter Studio</li><li><i>#35</i>School Break Survival Plan</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 7</span><span>5 prompts</span></small><h3>Words That Work</h3></div><p class="tag">Cards, toasts, and thank-yous in your voice, in minutes.</p><ul><li><i>#36</i>Christmas Card Message Writer</li><li><i>#37</i>Family Year-in-Review Letter</li><li><i>#39</i>Toast &amp; Blessing Writer</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 8</span><span>4 prompts</span></small><h3>Money &amp; Sanity</h3></div><p class="tag">Protect the budget and the person carrying it.</p><ul><li><i>#41</i>January Without the Hangover</li><li><i>#43</i>Say No Nicely</li><li><i>#44</i>The 15-Minute Reset</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 9</span><span>3 prompts</span></small><h3>Faith &amp; Reflection</h3></div><p class="tag">Slow down on purpose in the loudest month of the year.</p><ul><li><i>#45</i>Advent Reading Plan</li><li><i>#46</i>Gratitude at the Table</li><li><i>#47</i>Year-in-Review Journal</li></ul></article>
+        <article class="card-sec"><div class="band"><small><span>Section 10</span><span>8 prompts</span></small><h3>New Year: The Fresh Start</h3></div><p class="tag">Skip the resolutions that die by January 20th.</p><ul><li><i>#49</i>Word of the Year</li><li><i>#50</i>Goals That Stick: The 90-Day Plan</li><li><i>#52</i>The January Reset Weekend</li></ul></article>
+        <article class="card-sec alt"><div class="band"><small><span>Section 11</span><span>5 prompts</span></small><h3>The Emergency Kit</h3></div><p class="tag">Rescue prompts for the moments the season goes sideways.</p><ul><li><i>#56</i>The Forgotten Gift Rescue</li><li><i>#57</i>Dinner Disaster Fix</li><li><i>#59</i>Travel Gone Wrong</li></ul></article>
+      </div>
+      <p class="grid-note">A sample of the prompts in each section. All 61 are in the pack.</p>
+    </div>
+  </section>
+
+  <!-- ══ TRY ONE ══ -->
+  <section class="cream-bg" id="sample">
+    <div class="narrow">
+      <div class="center">
+        <div class="eyebrow">Try one free</div>
+        <h2 class="sec-title" style="margin-top:12px">The prompt that started it all.</h2>
+        <p class="sec-lede">Copy it, fill in the brackets, and paste it into your AI assistant before your next trip.</p>
+      </div>
+      <div class="sample-head"><i>#6</i><h3>Custom Packing List Generator</h3></div>
+      <p class="sample-use"><b>Use it when:</b> Before any holiday trip. This is the prompt that inspired this whole pack.</p>
+      <div class="prompt-box" style="background:var(--paper)">
+        <button class="copy-btn" type="button" id="copyBtn">Copy prompt</button>
+        <div id="samplePrompt">Make a printable packing checklist for each person on our trip. Trip: <span class="br">[DESTINATION]</span>, <span class="br">[NUMBER]</span> nights, leaving <span class="br">[DATE]</span>. Travelers: <span class="br">[NAME, AGE]</span> for each person. Weather will be <span class="br">[FORECAST OR CLIMATE]</span>. Activities: <span class="br">[LIST, LIKE HIKING, A NICE DINNER, SWIMMING, CHURCH]</span>. We are driving / flying and luggage space is <span class="br">[DETAILS]</span>. Give each person their own list with quantities for every item, grouped into clothes, shoes and outerwear, toiletries, gear, and comfort items. Add three columns next to every item: Have, Need to Buy, Packed. Finish with one shared family list (chargers, first aid, snacks, documents) and a short do-not-forget list of the items people most often leave behind for this kind of trip.</div>
+      </div>
+      <p class="protip"><b>PRO TIP</b>Print one copy per person. Run the Have column today, shop the Buy column tomorrow, check Packed as it goes in the bag.</p>
+      <p class="center" style="margin-top:40px"><a class="btn js-buy" href="#offer">Get all 61 · $27</a></p>
+    </div>
+  </section>
+
+  <!-- ══ BONUSES ══ -->
+  <section class="pine-bg" id="bonuses">
+    <div class="wrap">
+      <div class="center">
+        <div class="eyebrow">Included free</div>
+        <h2 class="sec-title" style="margin-top:12px">Three bonuses that tie it together.</h2>
+      </div>
+      <div class="bonus-grid">
+        <div class="bonus"><span class="script">Bonus One</span><h3>Prompt Stacking Recipes</h3><p>Three ready-made chains where each result feeds the next: The Trip Chain, The Hosting Chain, and The Fresh Start Chain.</p></div>
+        <div class="bonus"><span class="script">Bonus Two</span><h3>The 6-Week Countdown</h3><p>What to run and when, from six weeks out through Christmas week and into New Year's week. Paced, not crammed.</p></div>
+        <div class="bonus"><span class="script">Bonus Three</span><h3>My Holiday Details Worksheet</h3><p>Every [BRACKET] in the pack, gathered in one place. Fill it once and it becomes the raw material for the Master Prompt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ THE ADD-ON (order bump preview) ══ -->
+  <section class="paper" id="muse">
+    <div class="wrap">
+      <div class="bump">
+        <div class="eyebrow">Optional add-on · offered at checkout</div>
+        <h2>Muse Holiday Setup</h2>
+        <p class="quote">"Do not just read the prompts. Let Muse run them for you."</p>
+        <p>The Prompt Pack gives you the words. This gives you the worker. We set up Muse, Meta's personal AI agent, load the entire pack into it with your own family details, and complete your first three holiday jobs with you, live. From then on, Muse does not hand you a prompt to copy. It builds the packing lists, tracks the gifts, watches the deadlines, and checks in before things slip.</p>
+        <ul class="stack">
+          <li><b>Guided Muse setup, done with you</b><span class="v">$75 value</span><span class="d">A 30-minute setup session, or a 48-hour async setup if you prefer. Muse installed, signed in, and configured around your household.</span></li>
+          <li><b>Holiday HQ loaded with your details</b><span class="v">$40 value</span><span class="d">The Master Prompt built from your family, dates, budget, and traditions, so every answer all season is personal, not generic.</span></li>
+          <li><b>First three jobs done live</b><span class="v">$60 value</span><span class="d">Before the session ends you have your packing checklists as a printable PDF, your gift tracker with budget caps, and your countdown calendar with the hard deadlines marked.</span></li>
+          <li><b>Deadline watch through January 2</b><span class="v">$40 value</span><span class="d">Muse checks in on the dates that matter: shipping cutoffs, wrapping, grocery runs, and the January reset.</span></li>
+          <li><b>Ask-anything season pass</b><span class="v">$35 value</span><span class="d">Menus, grocery lists, thank-you notes, toast drafts, leftover plans. The pack's 61 prompts, executed for you.</span></li>
+        </ul>
+        <div class="bump-total"><span class="was">Total value <s class="strike">$250</s></span><span class="now">+ $47 at checkout</span></div>
+        <p class="bump-fine">One payment, no subscription. Tick the box at checkout to add it. Limited to 25 setups per week so every buyer gets a real session.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ OFFER ══ -->
+  <section class="pine-bg" id="offer">
+    <div class="wrap">
+      <div class="offer">
+        <div class="offer-in">
+          <span class="script">The Ultimate</span>
+          <h3>Holiday Prompt Pack</h3>
+          <ul>
+            <li>61 copy-and-paste AI prompts across 11 sections</li>
+            <li>The Holiday HQ Master Prompt that personalizes every answer</li>
+            <li>The Emergency Kit for gifts, dinners, and travel gone wrong</li>
+            <li>Bonus: Prompt Stacking Recipes, the 6-Week Countdown, and the Details Worksheet</li>
+            <li>Works with ChatGPT, Claude, Gemini, and any AI assistant</li>
+            <li>Instant PDF download, printable</li>
+          </ul>
+          <div class="price"><s class="strike">$67</s><strong id="priceNow">$27</strong></div>
+          <a class="btn js-buy" href="#offer">Get the pack · $27</a>
+          <p class="offer-fine">Secure checkout. The Muse Holiday Setup is offered as an optional add-on before you pay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="paper" id="faq">
+    <div class="narrow">
+      <div class="center">
+        <div class="eyebrow">Questions</div>
+        <h2 class="sec-title" style="margin-top:12px">Before you check out.</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Which AI do I need?</summary><p>Any of them. Every prompt works in ChatGPT, Claude, Gemini, or any AI assistant, including the free versions. You paste the prompt in and replace the words in [BRACKETS] with your details.</p></details>
+        <details><summary>I am not technical. Will I be able to use this?</summary><p>Yes. If you can copy and paste a text message, you can use this pack. The Master Prompt does the setup work once, and every other prompt is a fill-in-the-blank.</p></details>
+        <details><summary>How do I get it?</summary><p>Instantly. As soon as checkout is complete you get the PDF to download, print, or keep on your phone.</p></details>
+        <details><summary>Is it only for Christmas?</summary><p>It runs from the first week of planning through January 2. The New Year section, the Year-in-Review Journal, and the January Reset Weekend carry you into the next year.</p></details>
+        <details><summary>Is the faith content required?</summary><p>No. Section 9, Faith &amp; Reflection, is there for families who want it, and several prompts let you choose a faith-centered tone. Every other section stands on its own.</p></details>
+        <details><summary>What is the Muse Holiday Setup?</summary><p>An optional $47 add-on offered at checkout. We set up Muse around your family, load the whole pack into it, and finish your first three holiday jobs with you, live on a call or async within 48 hours. You do not need it to use the pack.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ONE LAST THING ══ -->
+  <section class="pine-bg last">
+    <div class="narrow">
+      <span class="script">One last thing</span>
+      <p>The best holiday is not the most impressive one. It is the one you were actually present for. Use this pack to hand the logistics to the machine, and keep the moments for yourself.</p>
+      <div class="rule"></div>
+      <div class="sig">Matt Vincent Walker</div>
+      <p style="margin-top:40px"><a class="btn js-buy" href="#offer">Get the pack · $27</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/">Matt Vincent Walker</a><span class="star">✦</span>The Ultimate Holiday Prompt Pack<span class="star">✦</span>© <span id="yr">2026</span>
+  </footer>
+
+  <div class="buybar" id="buybar">
+    <div class="bb-t">Holiday Prompt Pack <s>$67</s></div>
+    <a class="btn js-buy" href="#offer">Get it · $27</a>
+  </div>
+
+  <script>
+    /* ── CHECKOUT ── Paste the Gumroad product URL here. Every buy button points at it.
+       Leave it empty and the buttons fall back to scrolling to the offer box. */
+    var CHECKOUT_URL = 'https://superhumansystems.gumroad.com/l/cvttfb';
+
+    (function () {
+      if (CHECKOUT_URL) {
+        document.querySelectorAll('.js-buy').forEach(function (a) {
+          a.href = CHECKOUT_URL;
+          a.setAttribute('data-gumroad-overlay-checkout', 'true');
+        });
+        var s = document.createElement('script');
+        s.src = 'https://gumroad.com/js/gumroad.js';
+        s.async = true;
+        document.body.appendChild(s);
+      }
+
+      // scale the product cluster to fit the column
+      var wrap = document.getElementById('stageWrap');
+      var stage = document.getElementById('stage');
+      function fit() {
+        var w = wrap.clientWidth;
+        var s = Math.min(1, w / 960);
+        stage.style.setProperty('--s', s);
+        wrap.style.height = (560 * s) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+
+      // copy the sample prompt
+      var btn = document.getElementById('copyBtn');
+      btn.addEventListener('click', function () {
+        var text = document.getElementById('samplePrompt').innerText.trim();
+        var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy prompt'; }, 1800); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+        } else { fallback(text); done(); }
+      });
+      function fallback(t) {
+        var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+      }
+
+      // sticky buy bar after the hero, hidden over the offer box
+      var bar = document.getElementById('buybar');
+      var hero = document.querySelector('.hero');
+      var offer = document.getElementById('offer');
+      function onScroll() {
+        var past = hero.getBoundingClientRect().bottom < 0;
+        var r = offer.getBoundingClientRect();
+        var atOffer = r.top < window.innerHeight && r.bottom > 0;
+        bar.classList.toggle('show', past && !atOffer);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* ══ MOTION ══ */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // scroll progress
+      var prog = document.getElementById('progress');
+      function onProg() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        prog.style.setProperty('--p', h > 0 ? Math.min(1, window.scrollY / h) : 0);
+      }
+      window.addEventListener('scroll', onProg, { passive: true }); onProg();
+
+      // tag reveal targets, staggering siblings
+      function tag(sel, cls, step, mod) {
+        document.querySelectorAll(sel).forEach(function (el) {
+          el.classList.add('rv'); if (cls) el.classList.add(cls);
+          var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.matches(sel); });
+          var i = sibs.indexOf(el); if (mod) i = i % mod;
+          el.style.setProperty('--rd', (i * (step || 0)) + 'ms');
+        });
+      }
+      tag('section .eyebrow', null, 0);
+      tag('section h2.sec-title, section .sec-lede, .promise .script, .promise p.big', null, 120);
+      tag('.scene', null, 140);
+      tag('.step', 'rv-l', 120);
+      tag('.stats > div', 'rv-s', 110);
+      tag('.card-sec', null, 110, 3);
+      tag('.grid-note, .sample-head, .sample-use, .protip', null, 0);
+      tag('.prompt-box', 'rv-s', 0);
+      tag('.bonus', null, 150);
+      tag('.bump', 'rv-s', 0);
+      tag('.stack li', 'rv-l', 110);
+      tag('.bump-total, .bump-fine', null, 120);
+      tag('.offer', 'rv-s', 0);
+      tag('.offer li', 'rv-l', 80);
+      tag('.price', null, 0);
+      tag('.faq details', null, 70);
+      tag('.last .script, .last p, .last .rule, .last .sig', null, 150);
+
+      var counted = false;
+      function onIn(el) {
+        el.classList.add('in');
+        if (el.matches('.stats > div')) countUp(el.querySelector('b'));
+        if (el.matches('.prompt-box')) setTimeout(function () { el.classList.add('lit'); }, 500);
+        if (el.matches('.price') && !counted) { counted = true; priceDrop(); }
+      }
+      if (!('IntersectionObserver' in window) || reduce) {
+        document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in', 'lit'); });
+        document.querySelectorAll('.prompt-box').forEach(function (el) { el.classList.add('lit'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { onIn(e.target); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+      }
+
+      // bracket wave delays
+      document.querySelectorAll('.prompt-box .br').forEach(function (b, i) { b.style.setProperty('--bd', (i * 140) + 'ms'); });
+
+      function countUp(b) {
+        if (!b || reduce) return;
+        var end = +b.getAttribute('data-count'), t0 = null, dur = 1300;
+        function f(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / dur); b.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); }
+        requestAnimationFrame(f);
+      }
+      function priceDrop() {
+        var el = document.getElementById('priceNow'); if (!el || reduce) return;
+        var t0 = null, dur = 1400;
+        function f(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / dur); el.textContent = '$' + Math.round(67 - 40 * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); }
+        setTimeout(function () { requestAnimationFrame(f); }, 500);
+      }
+
+      // copy flash
+      btn.addEventListener('click', function () {
+        btn.classList.add('ok');
+        var box = btn.closest('.prompt-box'); box.classList.add('flash');
+        setTimeout(function () { btn.classList.remove('ok'); box.classList.remove('flash'); }, 1600);
+      });
+
+      // arrows on buy buttons
+      document.querySelectorAll('.js-buy').forEach(function (a) { a.insertAdjacentHTML('beforeend', ' <span class="arr" aria-hidden="true">→</span>'); });
+
+      // product stack follows the cursor
+      var heroEl = document.querySelector('.hero');
+      if (!reduce && window.matchMedia('(hover: hover)').matches) {
+        heroEl.addEventListener('mousemove', function (e) {
+          var r = heroEl.getBoundingClientRect();
+          stage.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+          stage.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+        });
+        heroEl.addEventListener('mouseleave', function () { stage.style.setProperty('--mx', 0); stage.style.setProperty('--my', 0); });
+      }
+
+      // gold dust drifting through the hero
+      var cv = document.getElementById('dust');
+      if (cv && !reduce && cv.getContext) {
+        var ctx = cv.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1), W = 0, H = 0, parts = [], running = true;
+        function size() { W = heroEl.clientWidth; H = heroEl.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+        function mk(y) { return { x: Math.random() * W, y: y == null ? Math.random() * H : y, r: 0.6 + Math.random() * 1.8, vy: 0.12 + Math.random() * 0.35, vx: (Math.random() - 0.5) * 0.2, ph: Math.random() * 6.28, tw: 0.01 + Math.random() * 0.03 }; }
+        size();
+        var n = Math.round(Math.min(90, W / 14));
+        for (var i = 0; i < n; i++) parts.push(mk());
+        window.addEventListener('resize', size);
+        new IntersectionObserver(function (es) { running = es[0].isIntersecting; if (running) requestAnimationFrame(draw); }).observe(heroEl);
+        function draw() {
+          if (!running) return;
+          ctx.clearRect(0, 0, W, H);
+          parts.forEach(function (p) {
+            p.y += p.vy; p.x += p.vx + Math.sin(p.ph) * 0.15; p.ph += p.tw;
+            if (p.y > H + 5) { var q = mk(-5); p.x = q.x; p.y = q.y; }
+            var a = 0.25 + 0.45 * (0.5 + 0.5 * Math.sin(p.ph * 2));
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+            ctx.fillStyle = 'rgba(232,206,140,' + a.toFixed(3) + ')'; ctx.fill();
+          });
+          requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+      }
+
+      document.getElementById('yr').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
