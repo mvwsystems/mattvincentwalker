@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0c0a09">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1200px; height:630px; overflow:hidden; }
+  body {
+    background:#0c0a09; color:#f5f1e9; position:relative;
+    font-family:'Cormorant Garamond', Georgia, serif;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  }
+  /* amber glow behind the mark */
+  .glow { position:absolute; left:50%; top:46%; width:900px; height:900px; transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(200,147,90,0.16) 0%, rgba(200,147,90,0.05) 32%, rgba(12,10,9,0) 60%); }
+  /* faint vignette for depth */
+  .vig { position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%); }
+  /* hairline frame */
+  .frame { position:absolute; inset:28px; border:1px solid rgba(200,147,90,0.28); }
+  .frame::before, .frame::after { content:""; position:absolute; width:22px; height:22px; border-color:#c8935a; border-style:solid; }
+  .frame::before { left:-1px; top:-1px; border-width:1px 0 0 1px; }
+  .frame::after { right:-1px; bottom:-1px; border-width:0 1px 1px 0; }
+  .inner { position:relative; z-index:2; transform:translateY(-14px); display:flex; flex-direction:column; align-items:center; }
+  .shield { width:132px; height:132px; object-fit:contain; margin-bottom:30px; filter: drop-shadow(0 0 28px rgba(200,147,90,0.35)); }
+  .eyebrow { font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:6px; text-transform:uppercase; color:#8a6a3e; margin-bottom:26px; }
+  .title { font-size:112px; font-weight:300; line-height:0.95; letter-spacing:-0.01em; color:#f5f1e9; margin-bottom:18px; }
+  .sub { font-style:italic; font-size:40px; font-weight:300; color:#c8935a; line-height:1.1; }
+  .rule { width:56px; height:1px; background:#8a6a3e; margin:30px 0 24px; }
+  .lede { font-size:25px; font-weight:300; color:#a09a90; letter-spacing:0.01em; }
+  .url { position:absolute; bottom:52px; left:0; right:0; text-align:center; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:4px; text-transform:uppercase; color:#7a756d; z-index:2; }
+</style></head>
+<body>
+  <div class="glow"></div><div class="vig"></div><div class="frame"></div>
+  <div class="inner">
+    <img class="shield" src="vincere-shield.png" alt="">
+    <div class="eyebrow">The Vincere Society</div>
+    <div class="title">Renatus Vincere.</div>
+    <div class="sub">Reborn to overcome.</div>
+    <div class="rule"></div>
+    <div class="lede">For the men the fire couldn&rsquo;t bury.</div>
+  </div>
+  <div class="url">mattvincentwalker.com/society</div>
+</body></html>
