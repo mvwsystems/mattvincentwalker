@@ -236,6 +236,9 @@
     .last p { font-size: clamp(1.15rem, 2vw, 1.35rem); line-height: 1.7; color: rgba(245,239,227,0.92); max-width: 50ch; margin: 18px auto 0; }
     .last .rule { width: 60px; height: 1px; background: var(--gold); margin: 30px auto 18px; }
     .last .sig { font-family: var(--script); font-size: 36px; color: var(--ivory); }
+    .guarantee { max-width: 30rem; margin: 44px auto 0; padding: 22px 26px; border: 1px solid rgba(212,180,102,0.45); border-radius: 8px; }
+    .guarantee .g-t { font-family: var(--display); font-weight: 500; font-size: 22px; color: var(--gold); }
+    .last .guarantee p { font-size: 15.5px; line-height: 1.6; color: rgba(245,239,227,0.82); margin: 8px auto 0; }
 
     footer { background: var(--pine-deep); color: rgba(245,239,227,0.55); text-align: center; padding: 34px 24px 40px; font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; }
     footer a { text-decoration: none; color: rgba(245,239,227,0.7); }
@@ -588,9 +591,7 @@
           <li><b>The Deadline Watch Kit, through January&nbsp;2</b><span class="v">$40 value</span></li>
           <li><b>The Holiday Troubleshooting Guide</b><span class="v">$35 value</span><span class="d">The 25 fixes for everything that goes sideways.</span></li>
         </ul>
-        <div class="bump-total"><span class="was">Total value <s class="strike">$250</s></span><span class="now">Add it at checkout for $47</span></div>
-        <p class="bump-fine"><b>30-day money-back guarantee.</b> If it doesn't earn its place in your holiday, ask for a refund within 30 days and you get every dollar back.</p>
-      </div>
+        <div class="bump-total"><span class="was">Total value <s class="strike">$250</s></span><span class="now">Add it at checkout for $47</span></div>      </div>
     </div>
   </section>
 
@@ -643,6 +644,10 @@
       <div class="rule"></div>
       <div class="sig">Matt Vincent Walker</div>
       <p style="margin-top:40px"><a class="btn js-buy" href="#offer">Get the pack · $27</a></p>
+      <div class="guarantee">
+        <div class="g-t">30-Day Money-Back Guarantee</div>
+        <p>If it doesn't earn its place in your holiday, ask for a refund within 30 days and you get every dollar back.</p>
+      </div>
     </div>
   </section>
 
@@ -748,6 +753,7 @@
       tag('.price', null, 0);
       tag('.faq details', null, 70);
       tag('.last .script, .last p, .last .rule, .last .sig', null, 150);
+      tag('.guarantee', null, 0);
 
       var counted = false;
       function onIn(el) {
