@@ -671,20 +671,25 @@
   </div>
 
   <script>
-    /* ── CHECKOUT ── Paste the Gumroad product URL here. Every buy button points at it.
+    /* ── CHECKOUT ── Every buy button points at this URL.
+       Own checkout (Stripe):  '/holiday/checkout/'
+       Gumroad:                'https://mvw.gumroad.com/l/cvttfb'  (opens Gumroad's overlay)
        Leave it empty and the buttons fall back to scrolling to the offer box. */
     var CHECKOUT_URL = 'https://mvw.gumroad.com/l/cvttfb';
 
     (function () {
       if (CHECKOUT_URL) {
+        var gumroad = /gumroad\.com/.test(CHECKOUT_URL);
         document.querySelectorAll('.js-buy').forEach(function (a) {
           a.href = CHECKOUT_URL;
-          a.setAttribute('data-gumroad-overlay-checkout', 'true');
+          if (gumroad) a.setAttribute('data-gumroad-overlay-checkout', 'true');
         });
-        var s = document.createElement('script');
-        s.src = 'https://gumroad.com/js/gumroad.js';
-        s.async = true;
-        document.body.appendChild(s);
+        if (gumroad) {
+          var s = document.createElement('script');
+          s.src = 'https://gumroad.com/js/gumroad.js';
+          s.async = true;
+          document.body.appendChild(s);
+        }
       }
 
       // scale the product cluster to fit the column

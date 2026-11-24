@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#1f3b2d">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Checkout | The Ultimate Holiday Prompt Pack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://js.stripe.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..700&family=Karla:ital,wght@0,300..800;1,300..800&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/holiday/shop.css">
+  <style>
+    .band { padding: 34px 24px 40px; }
+    .band .eyebrow { display: block; margin-top: 14px; }
+    .band h1 { font-size: clamp(1.7rem, 4.2vw, 2.5rem); line-height: 1.1; color: var(--ivory); text-transform: uppercase; letter-spacing: 0.01em; margin-top: 6px; }
+    .band .script { font-size: clamp(1.8rem, 4vw, 2.5rem); display: block; margin-top: 10px; }
+
+    .testmode { background: var(--berry); color: var(--ivory); text-align: center; font-size: 13.5px; padding: 9px 16px; letter-spacing: 0.02em; }
+    .testmode b { color: var(--gold); }
+
+    .co { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 32px; align-items: start; }
+    .card { background: var(--paper); border-radius: 12px; box-shadow: 0 1px 0 var(--cream-line), 0 18px 40px rgba(31,59,45,0.08); }
+
+    /* the form */
+    .form { padding: 34px 34px 30px; min-width: 0; }
+    .step { display: flex; align-items: baseline; gap: 12px; margin: 0 0 16px; }
+    .step .n { font-family: var(--display); font-size: 15px; color: var(--paper); background: var(--pine); width: 28px; height: 28px; border-radius: 50%; display: inline-grid; place-items: center; flex: none; transform: translateY(-2px); }
+    .step h2 { font-size: 22px; color: var(--pine-ink); }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 30px; }
+    .field label { display: block; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .field input { width: 100%; font: inherit; font-size: 16px; color: var(--text); background: var(--paper); border: 1px solid var(--cream-line); border-radius: 8px; padding: 12px 13px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .field input:focus { outline: none; border-color: var(--pine); box-shadow: 0 0 0 3px rgba(212,180,102,0.35); }
+    .field input[aria-invalid="true"] { border-color: var(--error); }
+    .field small { display: block; font-size: 13px; color: var(--muted); margin-top: 5px; }
+    .pay-wrap { min-height: 120px; position: relative; margin-bottom: 26px; }
+    .skeleton { display: grid; gap: 12px; }
+    .skeleton span { display: block; height: 46px; border-radius: 8px; background: linear-gradient(90deg, var(--cream) 0%, #fbf7ef 50%, var(--cream) 100%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+    .skeleton span:nth-child(2) { width: 60%; }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+    .notice { background: var(--cream); border: 1px solid var(--cream-line); border-radius: 8px; padding: 16px 18px; font-size: 15px; color: var(--muted); }
+
+    /* the order bump */
+    .bump { position: relative; border: 2px dashed var(--berry); border-radius: 12px; background: #fbf6ee; margin: 0 0 26px; overflow: hidden; transition: background 0.3s, border-color 0.3s, box-shadow 0.3s; }
+    .bump.on { border-style: solid; background: #fff9f0; box-shadow: 0 10px 30px rgba(124,31,45,0.14); }
+    .bump-head { display: flex; align-items: center; gap: 14px; background: var(--berry); color: var(--ivory); padding: 14px 18px; cursor: pointer; user-select: none; }
+    .bump-head .point { color: var(--gold); font-size: 22px; line-height: 1; animation: nudge 1.4s ease-in-out infinite; }
+    .bump.on .bump-head .point { animation: none; opacity: 0.4; }
+    @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+    .check { position: relative; flex: none; width: 26px; height: 26px; }
+    .check input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+    .check .box { position: absolute; inset: 0; border: 2px solid var(--gold); border-radius: 5px; background: rgba(255,255,255,0.08); display: grid; place-items: center; transition: background 0.2s, transform 0.2s; }
+    .check .box svg { width: 16px; height: 16px; stroke: var(--pine-ink); stroke-width: 3.2; fill: none; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 0.3s ease 0.05s; }
+    .check input:checked + .box { background: var(--gold); transform: scale(1.06); }
+    .check input:checked + .box svg { stroke-dashoffset: 0; }
+    .check input:focus-visible + .box { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .bump-head .yes { font-weight: 700; font-size: 15.5px; letter-spacing: 0.02em; line-height: 1.35; }
+    .bump-head .yes b { color: var(--gold); }
+    .bump-body { padding: 16px 20px 18px; font-size: 15px; color: var(--text); }
+    .bump-body .q { font-family: var(--display); font-style: italic; font-size: 18px; color: var(--berry); margin: 0 0 6px; }
+    .bump-body p { margin: 0; }
+    .bump-body .val { margin-top: 10px; font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-ink); }
+    .bump-body .val s { color: var(--muted); }
+
+    .total-row { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--cream-line); padding-top: 18px; margin-bottom: 18px; }
+    .total-row span { font-weight: 700; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .total-row strong { font-family: var(--display); font-weight: 600; font-size: 32px; color: var(--pine-ink); }
+    .bump-pop { animation: pop 0.45s cubic-bezier(.2,.9,.3,1.3); display: inline-block; }
+    @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.12); color: var(--berry); } 100% { transform: scale(1); } }
+    .pay { width: 100%; padding: 22px 24px; font-size: 15.5px; }
+    .err { color: var(--error); font-size: 15px; margin: 14px 0 0; min-height: 1px; }
+    .trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 18px; font-size: 13.5px; color: var(--muted); }
+    .trust span { display: inline-flex; align-items: center; gap: 7px; }
+    .trust svg { width: 15px; height: 15px; stroke: var(--gold-ink); fill: none; stroke-width: 2; }
+    .fine { text-align: center; font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+    .fine a { color: var(--muted); }
+
+    /* the summary */
+    .summary { position: sticky; top: 24px; background: radial-gradient(ellipse 90% 60% at 50% 0%, var(--pine-glow) 0%, var(--pine) 60%, var(--pine-deep) 100%); color: var(--cream); border-radius: 12px; padding: 30px 28px; box-shadow: 0 24px 50px rgba(23,46,35,0.25); }
+    .summary .eyebrow { margin-bottom: 18px; display: block; }
+    .item { display: grid; grid-template-columns: 64px minmax(0,1fr) auto; gap: 14px; align-items: center; padding: 0 0 18px; }
+    .item + .item { padding-top: 18px; border-top: 1px solid rgba(212,180,102,0.22); }
+    .thumb { width: 64px; height: 84px; border-radius: 4px; background: var(--pine-deep); border: 1px solid rgba(212,180,102,0.7); box-shadow: 0 10px 20px rgba(0,0,0,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6px; }
+    .thumb i { font-family: var(--script); font-style: normal; color: var(--gold); font-size: 13px; line-height: 1; }
+    .thumb b { font-family: var(--display); font-weight: 500; color: var(--ivory); font-size: 9.5px; line-height: 1.05; text-transform: uppercase; margin-top: 3px; }
+    .thumb.berry { background: var(--berry); }
+    .item .nm { font-family: var(--display); font-size: 17px; line-height: 1.25; color: var(--ivory); }
+    .item .meta { font-size: 13px; color: rgba(245,239,227,0.7); margin-top: 3px; }
+    .item .pr { text-align: right; font-family: var(--display); font-size: 19px; color: var(--gold); white-space: nowrap; }
+    .item .pr s { display: block; font-family: var(--body); font-size: 13px; color: rgba(245,239,227,0.5); }
+    .item.add { animation: slideIn 0.45s cubic-bezier(.2,.8,.2,1); }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+    .sum-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(212,180,102,0.45); padding-top: 16px; margin-top: 2px; }
+    .sum-total span { font-weight: 700; font-size: 12.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,239,227,0.75); }
+    .sum-total strong { font-family: var(--display); font-weight: 600; font-size: 30px; color: var(--ivory); }
+    .incl { list-style: none; padding: 0; margin: 22px 0 0; font-size: 14.5px; color: rgba(245,239,227,0.88); display: grid; gap: 7px; }
+    .incl li { display: flex; gap: 10px; }
+    .incl li::before { content: '✦'; color: var(--gold); font-size: 11px; transform: translateY(4px); }
+    .seal { display: flex; gap: 14px; align-items: center; margin-top: 24px; padding: 16px; border: 1px solid rgba(212,180,102,0.45); border-radius: 8px; }
+    .seal .ring { flex: none; width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--gold); display: grid; place-items: center; font-family: var(--display); color: var(--gold); font-size: 18px; line-height: 1; text-align: center; }
+    .seal .ring small { display: block; font-family: var(--body); font-weight: 700; font-size: 7px; letter-spacing: 0.18em; }
+    .seal p { margin: 0; font-size: 13.5px; line-height: 1.5; color: rgba(245,239,227,0.85); }
+    .seal p b { color: var(--ivory); font-weight: 700; }
+
+    @media (max-width: 920px) {
+      .co { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 22px; }
+      .summary { position: static; order: -1; padding: 24px 22px; }
+      .incl, .seal { display: none; }
+    }
+    @media (max-width: 560px) {
+      .co { padding-left: 16px; padding-right: 16px; }
+      .form { padding: 26px 20px 24px; }
+      .fields { grid-template-columns: 1fr; }
+      .bump-head { padding: 13px 14px; gap: 11px; }
+      .bump-head .point { display: none; }
+      .bump-body { padding: 14px 16px 16px; }
+      .pay { font-size: 14px; letter-spacing: 0.12em; padding: 20px 16px; gap: 8px; }
+      footer { padding-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="testmode" id="testmode" hidden>Test mode. Use card <b>4242 4242 4242 4242</b>, any future date, any CVC. No real charge.</div>
+
+  <header class="band">
+    <div class="band-frame"></div>
+    <a class="brand" href="/holiday/">Matt Vincent Walker</a>
+    <span class="eyebrow">Secure checkout</span>
+    <span class="script">The Ultimate</span>
+    <h1>Holiday Prompt Pack</h1>
+  </header>
+
+  <main class="co">
+    <form class="card form rise" id="form" novalidate>
+      <div class="step"><span class="n">1</span><h2>Where should we send it?</h2></div>
+      <div class="fields">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
+          <small>Your downloads are emailed here.</small>
+        </div>
+      </div>
+
+      <div class="step"><span class="n">2</span><h2>Payment</h2></div>
+      <div class="pay-wrap">
+        <div class="skeleton" id="skeleton"><span></span><span></span><span></span></div>
+        <div id="payment-element"></div>
+        <div class="notice" id="notReady" hidden>Card checkout is being set up and opens shortly. In the meantime you can get the pack from <a href="/holiday/">the Holiday Prompt Pack page</a>.</div>
+      </div>
+
+      <div class="bump" id="bump">
+        <label class="bump-head" for="bumpCheck">
+          <span class="point" aria-hidden="true">&rarr;</span>
+          <span class="check"><input type="checkbox" id="bumpCheck"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span></span>
+          <span class="yes">Yes! Add the Muse Holiday Setup for just <b>$47</b></span>
+        </label>
+        <div class="bump-body">
+          <p class="q">Don't just read the prompts. Let Muse run them for you.</p>
+          <p>The complete walkthrough that takes you from never having used Muse to a Muse that knows your family: set up, personalized with your details, the whole pack loaded in, and your first three holiday jobs done along the way. Plus the Deadline Watch Kit and the Holiday Troubleshooting Guide.</p>
+          <div class="val"><s>$250 value</s> &middot; Instant delivery &middot; No calls, no subscription</div>
+        </div>
+      </div>
+
+      <div class="total-row"><span>Today's total</span><strong id="total">$27</strong></div>
+      <button class="btn pay" id="payBtn" type="submit" disabled>
+        <span id="payLabel">Complete my order &middot; $27</span><span class="arr" aria-hidden="true">&rarr;</span>
+      </button>
+      <p class="err" id="err" role="alert"></p>
+
+      <div class="trust">
+        <span><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Encrypted payment, processed by Stripe</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>30-day money-back guarantee</span>
+      </div>
+      <p class="fine">By completing your order you agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</p>
+    </form>
+
+    <aside class="summary rise rise-2" aria-label="Order summary">
+      <span class="eyebrow">Your order</span>
+      <div class="item">
+        <div class="thumb"><i>The Ultimate</i><b>Holiday Prompt Pack</b></div>
+        <div><div class="nm">The Ultimate Holiday Prompt Pack</div><div class="meta">61 prompts &middot; instant PDF</div></div>
+        <div class="pr"><s>$67</s>$27</div>
+      </div>
+      <div class="item add" id="sumBump" hidden>
+        <div class="thumb berry"><i>Add-on</i><b>Muse Holiday Setup</b></div>
+        <div><div class="nm">Muse Holiday Setup</div><div class="meta">Guided walkthrough &middot; instant PDF</div></div>
+        <div class="pr"><s>$250</s>$47</div>
+      </div>
+      <div class="sum-total"><span>Total</span><strong id="sumTotal">$27</strong></div>
+      <ul class="incl">
+        <li>61 copy-and-paste prompts across 11 sections</li>
+        <li>The Holiday HQ Master Prompt</li>
+        <li>The Emergency Kit for gifts, dinners, and travel</li>
+        <li>Prompt Stacking Recipes, the 6-Week Countdown, and the Details Worksheet</li>
+        <li>Works with ChatGPT, Claude, Gemini, and any AI assistant</li>
+      </ul>
+      <div class="seal">
+        <div class="ring">30<small>DAYS</small></div>
+        <p><b>30-day money-back guarantee.</b> If it doesn't earn its place in your holiday, ask for a refund and you get every dollar back.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <a href="/">Matt Vincent Walker</a><span class="star">✦</span>The Ultimate Holiday Prompt Pack
+    <div class="legal">
+      <p>This site is not a part of the Facebook&trade; website or Meta Platforms, Inc., and is not endorsed by Meta in any way. FACEBOOK&trade; is a trademark of Meta Platforms, Inc.</p>
+      <p class="legal-links"><a href="/privacy">Privacy Policy</a><span class="sep">·</span><a href="/terms">Terms of Service</a><span class="sep">·</span><span>Contact: <a href="mailto:mvw@mattvincentwalker.com">mvw@mattvincentwalker.com</a></span></p>
+      <p>&copy; <span class="yr">2026</span> Superhuman LLC</p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var PACK = 2700, BUMP = 4700;
+    var $ = function (id) { return document.getElementById(id); };
+    var form = $('form'), payBtn = $('payBtn'), errEl = $('err'), check = $('bumpCheck');
+    var stripe = null, elements = null, ready = false, busy = false;
+    document.querySelectorAll('.yr').forEach(function (n) { n.textContent = new Date().getFullYear(); });
+
+    var money = function (c) { return '$' + (c % 100 ? (c / 100).toFixed(2) : c / 100); };
+    var total = function () { return PACK + (check.checked ? BUMP : 0); };
+
+    function render(animate) {
+      var t = money(total());
+      $('total').textContent = t;
+      $('sumTotal').textContent = t;
+      $('payLabel').textContent = 'Complete my order · ' + t;
+      $('bump').classList.toggle('on', check.checked);
+      $('sumBump').hidden = !check.checked;
+      if (animate) ['total', 'sumTotal'].forEach(function (id) {
+        var el = $(id); el.classList.remove('bump-pop'); void el.offsetWidth; el.classList.add('bump-pop');
+      });
+      if (elements) elements.update({ amount: total() });
+    }
+    if (new URLSearchParams(location.search).get('add') === 'muse') check.checked = true;
+    check.addEventListener('change', function () { render(true); });
+    render(false);
+
+    function showErr(msg) { errEl.textContent = msg || ''; }
+    function setBusy(on) {
+      busy = on;
+      payBtn.disabled = on || !ready;
+      $('payLabel').textContent = on ? 'Processing…' : 'Complete my order · ' + money(total());
+    }
+    function notReady() {
+      $('skeleton').hidden = true;
+      $('notReady').hidden = false;
+      payBtn.disabled = true;
+    }
+
+    function loadStripe() {
+      return new Promise(function (res, rej) {
+        if (window.Stripe) return res();
+        var s = document.createElement('script');
+        s.src = 'https://js.stripe.com/v3/';
+        s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+
+    fetch('/.netlify/functions/holiday-config', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : { ready: false }; })
+      .catch(function () { return { ready: false }; })
+      .then(function (cfg) {
+        if (!cfg.ready) return notReady();
+        if (cfg.mode === 'test') $('testmode').hidden = false;
+        return loadStripe().then(function () {
+          stripe = Stripe(cfg.publishableKey);
+          elements = stripe.elements({
+            mode: 'payment',
+            amount: total(),
+            currency: 'usd',
+            fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&display=swap' }],
+            appearance: {
+              theme: 'stripe',
+              variables: {
+                colorPrimary: '#1f3b2d', colorText: '#2a2a26', colorTextSecondary: '#57524a',
+                colorDanger: '#9b1c2c', colorBackground: '#ffffff', colorIcon: '#a88a45',
+                fontFamily: 'Karla, "Helvetica Neue", Arial, sans-serif', fontSizeBase: '16px',
+                borderRadius: '8px', spacingUnit: '4px'
+              },
+              rules: {
+                '.Input': { border: '1px solid #e6d7b6', boxShadow: 'none', padding: '12px 13px' },
+                '.Input:focus': { border: '1px solid #1f3b2d', boxShadow: '0 0 0 3px rgba(212,180,102,0.35)' },
+                '.Tab': { border: '1px solid #e6d7b6', boxShadow: 'none' },
+                '.Tab:hover': { borderColor: '#a88a45' },
+                '.Tab--selected': { borderColor: '#1f3b2d', boxShadow: '0 0 0 1px #1f3b2d' },
+                '.Label': { fontWeight: '700', fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#57524a' }
+              }
+            }
+          });
+          var pe = elements.create('payment', {
+            layout: { type: 'tabs' },
+            fields: { billingDetails: { name: 'never', email: 'never' } }
+          });
+          pe.on('ready', function () { $('skeleton').hidden = true; ready = true; setBusy(false); });
+          pe.on('loaderror', notReady);
+          pe.mount('#payment-element');
+        });
+      })
+      .catch(notReady);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (busy || !ready) return;
+      showErr('');
+      var name = $('name').value.trim(), email = $('email').value.trim();
+      var okName = !!name, okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+      $('name').setAttribute('aria-invalid', String(!okName));
+      $('email').setAttribute('aria-invalid', String(!okEmail));
+      if (!okName) { $('name').focus(); return showErr('Please enter your name.'); }
+      if (!okEmail) { $('email').focus(); return showErr('Please enter a valid email so we can send your downloads.'); }
+
+      setBusy(true);
+      elements.submit().then(function (r) {
+        if (r.error) throw r.error;
+        return fetch('/.netlify/functions/holiday-intent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, bump: check.checked })
+        }).then(function (res) { return res.json(); });
+      }).then(function (d) {
+        if (!d || !d.ok) throw new Error((d && d.error) || 'Something went wrong. Please try again.');
+        return stripe.confirmPayment({
+          elements: elements,
+          clientSecret: d.clientSecret,
+          confirmParams: {
+            return_url: location.origin + d.returnPath,
+            receipt_email: email,
+            payment_method_data: { billing_details: { name: name, email: email } }
+          }
+        });
+      }).then(function (r) {
+        // Only reached when the payment could not be confirmed; success redirects.
+        if (r && r.error) throw r.error;
+      }).catch(function (err) {
+        showErr(err && err.message ? err.message : 'Your payment did not go through. Please try again.');
+        setBusy(false);
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
