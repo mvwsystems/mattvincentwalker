@@ -1,7 +1,7 @@
-// GET /holiday/download?pi=pi_…&f=pack|muse&t=<token>   (rewritten here by netlify.toml)
-// Streams a purchased PDF. The token ties the link to one order and one file;
+// GET /holiday/download?pi=pi_…&f=<file id from FILES>&t=<token>   (rewritten here by netlify.toml)
+// Streams a purchased file (PDF or EPUB). The token ties the link to one order and one file;
 // the order is re-checked with Stripe so refunded orders stop downloading.
-import { getIntent, entitlements, verifyDownloadToken, readPrivateFile, isRefunded, FILES } from '../lib/holiday.mjs';
+import { getIntent, canDownload, verifyDownloadToken, readPrivateFile, isRefunded, FILES } from '../lib/holiday.mjs';
 
 const page = (status, msg) => ({
   statusCode: status,
@@ -16,13 +16,13 @@ export const handler = async (event) => {
   const q = event.queryStringParameters || {};
   const piId = String(q.pi || '');
   const f = String(q.f || '');
-  if (!/^pi_[A-Za-z0-9]+$/.test(piId) || !FILES[f] || !verifyDownloadToken(piId, f, String(q.t || ''))) {
+  if (!/^pi_[A-Za-z0-9]+$/.test(piId) || !Object.hasOwn(FILES, f) || !verifyDownloadToken(piId, f, String(q.t || ''))) {
     return page(403, 'That download link is not valid.');
   }
 
   let pi;
   try { pi = await getIntent(piId); } catch { return page(404, 'We could not find that order.'); }
-  if (pi.status !== 'succeeded' || !entitlements(pi).includes(f)) return page(403, 'That download is not part of this order.');
+  if (pi.status !== 'succeeded' || !canDownload(pi, f)) return page(403, 'That download is not part of this order.');
   if (isRefunded(pi)) return page(410, 'This order was refunded, so the download is closed.');
 
   try {
@@ -30,7 +30,7 @@ export const handler = async (event) => {
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/pdf',
+        'Content-Type': FILES[f].type,
         'Content-Disposition': `attachment; filename="${FILES[f].download}"`,
         'Cache-Control': 'private, no-store',
         'X-Robots-Tag': 'noindex',

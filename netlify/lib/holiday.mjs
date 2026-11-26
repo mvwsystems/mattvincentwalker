@@ -21,9 +21,19 @@ export const BUMP = { id: 'muse', name: 'Muse Holiday Setup', amount: 4700 };
 
 // Private files: AES-256-GCM encrypted (the repo is public), bundled with the download
 // function (netlify.toml included_files), and blocked from public URLs by the /netlify/* rule.
+// File ids are baked into download tokens already emailed to buyers, so never rename
+// 'pack' or 'muse'; add new formats under new ids.
+const PDF = 'application/pdf';
+const EPUB = 'application/epub+zip';
 export const FILES = {
-  pack: { file: 'holiday-prompt-pack.pdf.enc', download: 'The Ultimate Holiday Prompt Pack.pdf', label: 'The Ultimate Holiday Prompt Pack', sub: '61 prompts · PDF' },
-  muse: { file: 'muse-holiday-setup.pdf.enc', download: 'Muse Holiday Setup - The Guided Walkthrough.pdf', label: 'Muse Holiday Setup', sub: 'The guided walkthrough · PDF' },
+  pack: { product: 'pack', format: 'PDF', type: PDF, file: 'holiday-prompt-pack.pdf.enc', download: 'The Ultimate Holiday Prompt Pack.pdf' },
+  'pack-epub': { product: 'pack', format: 'EPUB', type: EPUB, file: 'holiday-prompt-pack.epub.enc', download: 'The Ultimate Holiday Prompt Pack.epub' },
+  muse: { product: 'muse', format: 'PDF', type: PDF, file: 'muse-holiday-setup.pdf.enc', download: 'Muse Holiday Setup - The Guided Walkthrough.pdf' },
+  'muse-epub': { product: 'muse', format: 'EPUB', type: EPUB, file: 'muse-holiday-setup.epub.enc', download: 'Muse Holiday Setup - The Guided Walkthrough.epub' },
+};
+export const PRODUCTS = {
+  pack: { label: 'The Ultimate Holiday Prompt Pack', sub: '61 prompts · PDF to print, EPUB for e-readers' },
+  muse: { label: 'Muse Holiday Setup', sub: 'The guided walkthrough · PDF to print, EPUB for e-readers' },
 };
 
 export const json = (statusCode, body) => ({
@@ -71,11 +81,12 @@ export async function stripe(method, endpoint, params) {
 export const getIntent = (id) =>
   stripe('GET', `payment_intents/${encodeURIComponent(id)}`, { expand: ['latest_charge'] });
 
-// What a paid intent unlocks.
+// What a paid intent unlocks (products, not files).
 export function entitlements(pi) {
   if (!pi || pi.metadata?.product !== PRODUCT_TAG) return [];
   return pi.metadata?.bump === '1' ? ['muse', 'pack'] : ['pack'];
 }
+export const canDownload = (pi, fileId) => Boolean(FILES[fileId]) && entitlements(pi).includes(FILES[fileId].product);
 
 export const isRefunded = (pi) => Boolean(pi?.latest_charge && typeof pi.latest_charge === 'object' && pi.latest_charge.refunded);
 
@@ -91,13 +102,16 @@ export function verifyDownloadToken(piId, file, token) {
   const expected = downloadToken(piId, file);
   return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(token));
 }
+const fileUrl = (pi, f, base) => `${base}/holiday/download?pi=${encodeURIComponent(pi.id)}&f=${f}&t=${downloadToken(pi.id, f)}`;
+
+// One entry per product, each with its formats (PDF first). `url` stays the PDF link.
 export function downloadLinks(pi, base = SITE) {
-  return entitlements(pi).map((f) => ({
-    id: f,
-    label: FILES[f].label,
-    sub: FILES[f].sub,
-    url: `${base}/holiday/download?pi=${encodeURIComponent(pi.id)}&f=${f}&t=${downloadToken(pi.id, f)}`,
-  }));
+  return entitlements(pi).map((p) => {
+    const formats = Object.entries(FILES)
+      .filter(([, v]) => v.product === p)
+      .map(([f, v]) => ({ format: v.format, url: fileUrl(pi, f, base) }));
+    return { id: p, label: PRODUCTS[p].label, sub: PRODUCTS[p].sub, url: formats[0].url, formats };
+  });
 }
 
 export function readPrivateFile(name) {
@@ -143,12 +157,14 @@ export function receiptEmail(pi) {
     ? 'Your Holiday Prompt Pack + Muse Holiday Setup'
     : 'Your Holiday Prompt Pack is here';
 
+  const fmtBtn = (x) => `<a href="${x.url}" style="display:inline-block;background:#d4b466;color:#1f3b2d;border-radius:999px;padding:11px 20px;margin:0 8px 8px 0;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;letter-spacing:2px;text-decoration:none;">DOWNLOAD ${esc(x.format)}</a>`;
   const btn = (l) => `
       <tr><td style="padding:0 0 14px;">
-        <a href="${l.url}" style="display:block;background:#1f3b2d;border:1px solid #d4b466;border-radius:10px;padding:18px 22px;text-decoration:none;">
+        <div style="background:#1f3b2d;border:1px solid #d4b466;border-radius:10px;padding:18px 22px 10px;">
           <span style="display:block;font-family:Georgia,'Times New Roman',serif;font-size:19px;color:#f4ecdc;">${esc(l.label)}</span>
-          <span style="display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#d4b466;margin-top:4px;">Download &middot; ${esc(l.sub).replace(/·/g, '&middot;')}</span>
-        </a>
+          <span style="display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#d4b466;margin:4px 0 14px;">${esc(l.sub).replace(/·/g, '&middot;')}</span>
+          ${l.formats.map(fmtBtn).join('')}
+        </div>
       </td></tr>`;
 
   const start = bump
@@ -190,7 +206,7 @@ export function receiptEmail(pi) {
     `Thank you${first ? `, ${first}` : ''}.`,
     '',
     'Your downloads (the links work any time):',
-    ...links.map((l) => `- ${l.label}: ${l.url}`),
+    ...links.flatMap((l) => l.formats.map((x) => `- ${l.label} (${x.format}): ${x.url}`)),
     '',
     `Total paid: ${total}`,
     '30-day money-back guarantee: just reply to this email.',

@@ -1,2 +1,3 @@
-# Plain PDFs never get committed (the repo is public). Only the encrypted .enc copies ship.
+# Plain product files never get committed (the repo is public). Only the encrypted .enc copies ship.
 *.pdf
+*.epub

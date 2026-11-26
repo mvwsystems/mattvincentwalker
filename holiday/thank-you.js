@@ -45,7 +45,9 @@
             return '<div class="dl-item' + (isLead ? ' lead' : '') + '">' + (THUMB[x.id] || '') +
               '<div>' + (isLead ? '<span class="dl-tag">Start here</span>' : '') +
               '<div class="dl-name">' + esc(x.label) + '</div><div class="dl-sub">' + esc(x.sub) + '</div></div>' +
-              '<a class="btn" href="' + esc(x.url) + '">' + ICON + 'Download</a></div>';
+              '<div class="dl-btns">' + (x.formats || [{ format: 'PDF', url: x.url }]).map(function (f, i) {
+                return '<a class="btn' + (i ? ' alt' : '') + '" href="' + esc(f.url) + '">' + ICON + esc(f.format) + '</a>';
+              }).join('') + '</div></div>';
           }).join('');
           return show('ok');
         }
